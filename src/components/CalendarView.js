@@ -29,14 +29,11 @@ class CalendarView extends React.Component {
   render() {
     return (
         <ImageBackground style={styles.homeImage} source={require('../../assets/images/homeBlur.png')}>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{flex: 9 }}>
-                <ScrollView style={styles.container}>
-                    <Calendar
+            <Calendar
                     style={styles.calendar}
                     theme={{
                         backgroundColor: '#ffffff',
-                        calendarBackground: '#ffffff99',
+                        calendarBackground: '#ffffff',
                         todayTextColor: '#00adf5',
                         dayTextColor: '#2d4150',
                         textDisabledColor: '#d9e1e8',
@@ -55,11 +52,15 @@ class CalendarView extends React.Component {
                         '2018-03-09': {dots: [{key: 'vacation', color: '#8ACE91', selectedColor: 'red'}, {key: 'massage', color: '#D4B870', selectedColor: 'blue'}], disabled: false}
                     }}
                     hideArrows={true}
-                    />
-                    <TouchableHighlight style={ {alignItems: 'center', justifyContent: 'center',backgroundColor: '#FFFFFF95', position: 'absolute', top: 335, left: width/2 -15 , borderRadius: 50, width: 30, height: 30}}>
-                        <Image style={{ width: 60, height: 60, transform: [{ rotateX: this.state.rotate }], }} source={require('../../assets/icons/little_arrow_grey.png')} />
-                    </TouchableHighlight>
-                    <View style={{flex: 1, justifyContent: 'center',}}>
+            />
+
+            <TouchableHighlight style={ {alignItems: 'center', justifyContent: 'center',backgroundColor: '#FFFFFF95', position: 'absolute', top: 335, left: width/2 -15 , borderRadius: 50, width: 30, height: 30}}>
+                <Image style={{ width: 60, height: 60, transform: [{ rotateX: this.state.rotate }], }} source={require('../../assets/icons/little_arrow_grey.png')} />
+            </TouchableHighlight>
+
+            <ScrollView style={styles.container}>
+                <View style={{flex: 1, justifyContent: 'center'}}>
+                    <TouchableHighlight onPress={() => this.props.goToActivity()}>
                         <View style={styles.challangeTab}>
                             <Image style={{flex: 2, width: 74, height: 60,}} source={require('../../assets/icons/morning.png')} />
                             <View style={ { flex: 6.5, justifyContent: 'center', }}>
@@ -68,15 +69,9 @@ class CalendarView extends React.Component {
                             </View>
                             <View style={{ flex: 1.5 }}></View>
                         </View>
-                    </View>
-                </ScrollView>
+                    </TouchableHighlight>
                 </View>
-                <View style={styles.footer}>
-                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',}}><Text>Calander</Text></View>
-                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',}}><Text>Tracke</Text></View>
-                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',}}><Text>My Challange</Text></View>
-                </View>
-            </View>
+            </ScrollView>
         </ImageBackground>
     );
 }
@@ -85,26 +80,16 @@ class CalendarView extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: "#FFFFFF80"
-    },
-    footer: {
-        flex: 1,
-        backgroundColor: "#FFFFFF95",
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     homeImage: {
         width: '100%',
         height: '100%',
     },
     calendar: {
-        borderTopWidth: 0.5,
         paddingTop: 20,
         height: 350,
-        // backgroundColor: '#FFFFFF99',
+        backgroundColor: '#FFFFFF95',
         marginBottom: 15,
-        margin: 5,
         marginTop: 0,
       },
       challangeTab: {
@@ -117,7 +102,7 @@ const styles = StyleSheet.create({
           margin: 5,
           marginLeft: 10,
           marginRight: 10,
-          backgroundColor: '#FFFFFF60'
+          backgroundColor: '#FFFFFF80'
       },
   });
 

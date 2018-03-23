@@ -12,7 +12,9 @@ import PasswordForgotten from './src/components/PasswordForgotten.js';
 import ContentOverview from './src/components/ContentOverview.js';
 import AuthoriseWelcome from './src/components/AuthoriseWelcome.js';
 import ImportantNotification from './src/components/ImportantNotification.js';
-import CalendarView from './src/components/CalendarView.js';
+import CalendarFlow from './src/components/CalendarFlow.js';
+import Activity from './src/components/Activity.js';
+
 import userReducer from './src/reducers';
 
 
@@ -40,8 +42,8 @@ export default class App extends React.Component {
       return <ContentOverview navigator={navigator} />
     } else if (route.name == 'importantNotificationPage') {
       return <ImportantNotification navigator={navigator} />
-    } else if (route.name == 'CalendarPage') {
-      return <CalendarView navigator={navigator} />
+    } else if (route.name == 'CalendarFlowPage') {
+      return <CalendarFlow navigator={navigator} />
     }
   }
   render() {
