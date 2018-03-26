@@ -4,7 +4,9 @@ import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableHig
 import { getUser } from '../actions/index'
 import { bindActionCreators } from 'redux'
 import {Calendar} from 'react-native-calendars';
-// import SVGImage from 'react-native-svg-image';
+import Swipeout from 'react-native-swipeout';
+import WeeklyView from './WeeklyView.js'
+
 
 const {height, width} = Dimensions.get('window');
 
@@ -12,7 +14,7 @@ class CalendarView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        weeklyCalendar: false,
+        weeklyCalendar: true,
         rotate: '180deg',
     };
     this.navigate = this.navigate.bind(this);
@@ -27,9 +29,27 @@ class CalendarView extends React.Component {
   }
 
   render() {
+
+    const swipeSettings = {
+        autoClose: true,
+        onOpen: (secId, rowId, direction) =>{
+
+        },
+        onClose: (secId, rowId, direction) =>{
+
+        },
+        right: [
+            {
+                onPress: () => {
+
+                },
+                text: 'Delete', type: 'delete'
+            }
+        ],
+    };
     return (
         <ImageBackground style={styles.homeImage} source={require('../../assets/images/homeBlur.png')}>
-            <Calendar
+            {this.state.weeklyCalendar ? <Calendar
                     style={styles.calendar}
                     theme={{
                         backgroundColor: '#ffffff',
@@ -52,26 +72,34 @@ class CalendarView extends React.Component {
                         '2018-03-09': {dots: [{key: 'vacation', color: '#8ACE91', selectedColor: 'red'}, {key: 'massage', color: '#D4B870', selectedColor: 'blue'}], disabled: false}
                     }}
                     hideArrows={true}
-            />
+            /> : <WeeklyView/>
+            }
 
             <TouchableHighlight style={ {alignItems: 'center', justifyContent: 'center',backgroundColor: '#FFFFFF95', position: 'absolute', top: 335, left: width/2 -15 , borderRadius: 50, width: 30, height: 30}}>
                 <Image style={{ width: 60, height: 60, transform: [{ rotateX: this.state.rotate }], }} source={require('../../assets/icons/little_arrow_grey.png')} />
             </TouchableHighlight>
-
+            
             <ScrollView style={styles.container}>
                 <View style={{flex: 1, justifyContent: 'center'}}>
-                    <TouchableHighlight onPress={() => this.props.goToActivity()}>
-                        <View style={styles.challangeTab}>
-                            <Image style={{flex: 2, width: 74, height: 60,}} source={require('../../assets/icons/morning.png')} />
-                            <View style={ { flex: 6.5, justifyContent: 'center', }}>
-                                <Text style={ {flex: 1, fontFamily:'DINPro-Light', fontSize: 16, color: '#454545', marginVertical: 10}}>Einnahme Multi Vitamin Mix</Text>
-                                {/* <Text style={ {flex: 1,}}>ahjdkjs</Text> */}
+                    
+                        <Swipeout {...swipeSettings} style={styles.SwiperContainer}>                        
+                            <View style={styles.challangeTab} >
+                                <TouchableHighlight onPress={() => this.props.goToActivity()}>
+                                    <View style={styles.challangeTab}>
+                                        <Image style={{flex: 2, width: 74, height: 60,}} source={require('../../assets/icons/morning.png')} />
+                                        <View style={ { flex: 6.5, justifyContent: 'center', }}>
+                                            <Text style={ {flex: 1, fontFamily:'DINPro-Light', fontSize: 16, color: '#454545', marginVertical: 10}}>Einnahme Multi Vitamin Mix</Text>
+                                            {/* <Text style={ {flex: 1,}}>ahjdkjs</Text> */}
+                                        </View>
+                                        <View style={{ flex: 1.5 }}></View>
+                                    </View>
+                                </TouchableHighlight>
                             </View>
-                            <View style={{ flex: 1.5 }}></View>
-                        </View>
-                    </TouchableHighlight>
+                        </Swipeout>
+                    
                 </View>
             </ScrollView>
+            
         </ImageBackground>
     );
 }
@@ -92,7 +120,7 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         marginTop: 0,
       },
-      challangeTab: {
+      SwiperContainer: {
           flex: 1,
           flexDirection: 'row',
           alignItems: 'center',
@@ -104,6 +132,14 @@ const styles = StyleSheet.create({
           marginRight: 10,
           backgroundColor: '#FFFFFF80'
       },
+      challangeTab: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: width - 20,
+        height: 65,
+    },
   });
 
 export default connect(state => {
