@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableHighlight, ScrollView, Dimensions } from 'react-native';
 import { getUser } from '../actions/index'
 import { bindActionCreators } from 'redux'
-import {Calendar} from 'react-native-calendars';
+import {Calendar, Agenda} from 'react-native-calendars';
 import Swipeout from 'react-native-swipeout';
 import WeeklyView from './WeeklyView.js'
+import AddActivity1 from './AddActivity1.js';
 
 
 const {height, width} = Dimensions.get('window');
@@ -72,7 +73,7 @@ class CalendarView extends React.Component {
                         '2018-03-09': {dots: [{key: 'vacation', color: '#8ACE91', selectedColor: 'red'}, {key: 'massage', color: '#D4B870', selectedColor: 'blue'}], disabled: false}
                     }}
                     hideArrows={true}
-            /> : <WeeklyView/>
+            /> : <AddActivity1/>
             }
 
             <TouchableHighlight style={ {alignItems: 'center', justifyContent: 'center',backgroundColor: '#FFFFFF95', position: 'absolute', top: 335, left: width/2 -15 , borderRadius: 50, width: 30, height: 30}}>

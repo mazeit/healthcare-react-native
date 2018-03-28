@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { getUser } from '../actions/index'
 import CalendarView from './CalendarView.js'
 import Activity from './Activity.js'
@@ -11,7 +11,7 @@ class CalendarFlow extends React.Component {
         super(props);
         this.state = {
         calendarView: true,
-        activity: false,
+        activity: true,
         };
         this.navigate = this.navigate.bind(this);
         this.goToActivity = this.goToActivity.bind(this);
@@ -32,9 +32,14 @@ class CalendarFlow extends React.Component {
         return (
             <View style={styles.container}>
                 {this.state.activity && <View style={ styles.header}>
-                    <View style={{ flex: 1.5, alignItems: 'center', justifyContent: 'center'}}></View>
-                    <View style={{ flex: 7, alignItems: 'center', justifyContent: 'center'}}></View>
-                    <View style={{ flex: 1.5, alignItems: 'center', justifyContent: 'center'}}></View>
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10}}>
+                        <Image source={require('../../assets/icons/plus.png')} style={{width: 54, height: 54, resizeMode: 'center'}}/>
+                    </View>
+                    <View style={{ flex: 8, alignItems: 'center', justifyContent: 'center'}}>
+                    </View>
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',  marginTop: 10}}>
+                        <Image source={require('../../assets/icons/menu.png')} style={{width: 54, height: 54, resizeMode: 'center'}}/>
+                    </View>
                 </View>}
                 <View style={{ flex:8 , backgroundColor: '#F5F5F5'}}>
                     {this.state.calendarView ? <CalendarView goToActivity={this.goToActivity} /> : <Activity />}

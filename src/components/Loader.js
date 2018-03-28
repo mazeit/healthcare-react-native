@@ -12,7 +12,7 @@ export default class Loader extends React.Component {
   componentDidMount(){
 
     this.timeoutHandle = setTimeout(()=>{
-      this.navigate('CalendarFlowPage');
+      this.navigate('profilePage');
     }, 2000);
 
   }
