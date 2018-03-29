@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { StyleSheet, View } from 'react-native';
 import { Navigator } from 'react-native-deprecated-custom-components'
 import Loader from './src/components/Loader.js';
-import ProfileContainer from './src/components/ProfileContainer.js';
+import ContentOverviewContainer from './src/components/ContentOverviewContainer.js';
 // import SignInEmail from './src/components/SignInEmail.js';
 // import SignInPassword from './src/components/SignInPassword.js';
 // import PasswordForgotten from './src/components/PasswordForgotten.js';
@@ -28,8 +28,8 @@ export default class App extends React.Component {
   renderScene (route, navigator) {
     if(route.name == 'loaderPage') {
       return <Loader navigator={navigator} />
-    } else if (route.name == 'profilePage') {
-      return <ProfileContainer navigator={navigator} />
+    } else if (route.name == 'contentPage') {
+      return <ContentOverviewContainer navigator={navigator} />
     } 
     // else if (route.name == 'signInEmailPage') {
     //   return <SignInEmail navigator={navigator} />

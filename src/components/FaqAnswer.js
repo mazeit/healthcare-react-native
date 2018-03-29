@@ -15,11 +15,12 @@ export default class FaqAnswer extends React.Component {
         return (
             <View style={styles.container}>
 
-                <View style={ styles.termsOfUse }>
-                                        
-                    <Text style={{ height: 26, fontFamily: 'DINPro', fontSize: 22, color: '#454545', marginTop: 20, marginLeft: 20}}>How can i buy a new challange ?</Text>
+                <ScrollView style={ styles.termsOfUse }>
 
-                    <ScrollView style={ styles.termsOfUseBlock }>
+                    <View style={ styles.termsOfUseBlock }>                  
+                        <Text style={{ height: 26, fontFamily: 'DINPro', fontSize: 22, color: '#454545', marginTop: 20, marginLeft: 20}}>How can i buy a new challange ?</Text>
+
+                    
 
                         <View style={{ flex: 1, alignItems: 'center', }}>
                             <View style={ [styles.textBlock, {marginTop: 0}] }>
@@ -46,9 +47,9 @@ export default class FaqAnswer extends React.Component {
                             </TouchableOpacity>
                         </View>
 
-                    </ScrollView>
+                    </View>
                     
-                </View>
+                </ScrollView>
                 
             </View>
         );
@@ -67,14 +68,17 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 10,
         width: width - 20,
-        alignItems: 'flex-start',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#F5F5F5',
+        
     },
     termsOfUseBlock: {
         flex: 1,
-        margin: 10,
-        marginLeft: 20,
-        marginRight: 10,
+        // margin: 10,
+        // marginLeft: 20,
+        // marginRight: 10,
+        alignItems: 'flex-start',
+        backgroundColor: '#FFFFFF',
+        
 
     },
     textBlock: {
@@ -96,6 +100,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         marginTop: 20,
-        marginBottom: 20
+        marginBottom: 20,
+        borderTopWidth: 0.5, 
     }
   });
