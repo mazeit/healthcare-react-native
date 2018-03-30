@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import GeneralMenu from './GeneralMenu';
 import Recipe from './Recipe';
+import Article from './Article'
 
 
 const { height, width } = Dimensions.get('window');
@@ -10,7 +11,7 @@ export default class ContentOverviewContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            heading: 'AVACADO SALAD',
+            heading: '5 MYTHS ABOUT TRAVELLING',
             showMenu: false,
         };
         this.showMenu = this.showMenu.bind(this)
@@ -41,7 +42,7 @@ export default class ContentOverviewContainer extends React.Component {
                 </View>
 
                 <View style={{ flex: 9 }}>
-                    <Recipe/>
+                    <Article />
                 </View>
 
                 {
@@ -68,6 +69,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    menuOverlay: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: width,
+        height: height,
     },
 
 });
