@@ -71,8 +71,8 @@ export default class Article extends React.Component {
                                 <View style={styles.details}>
                                     <View style={styles.teacherImage}>
                                         <ImageBackground style={{ width: width - 20, height: 124, alignItems: 'center', justifyContent: 'center' }} source={require('../../assets/images/yogaTeacher.png')} blurRadius={15} >
-                                            <View style={{ width: 100, height: 100, borderWidth: 1, borderColor: '#FFFFFF', borderRadius: 100, overflow: 'hidden',}}>
-                                                <Image source={require('../../assets/images/yogaTeacher.png')} style={{ width: 100, height: 100, }}/>
+                                            <View style={{ width: 100, height: 100, borderWidth: 1, borderColor: '#FFFFFF', borderRadius: 100, overflow: 'hidden', }}>
+                                                <Image source={require('../../assets/images/yogaTeacher.png')} style={{ width: 100, height: 100, }} />
                                             </View>
                                         </ImageBackground>
                                     </View>

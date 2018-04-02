@@ -6,20 +6,13 @@ export default class Home extends React.Component {
         super(props);
         this.state = {
         };
-        this.navigate = this.navigate.bind(this);
     }
-
-    navigate(name) {
-        this.props.navigator.push({
-          name
-        })
-      }
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.homeTittleContainer}>
-                    <Image style={styles.homeTittle} source={require('../../assets/images/homeTittle.png')} />
+                    <Image style={styles.homeTittle} source={require('../../../assets/images/homeTittle.png')} />
                 </View>
                 <View style={styles.blankContainer}>
                 </View>

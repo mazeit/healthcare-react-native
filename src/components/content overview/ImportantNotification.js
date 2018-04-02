@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableHighlight, Dimensions } from 'react-native';
-// import { getUser } from '../actions/index'
-// import { bindActionCreators } from 'redux'
-const window = Dimensions.get('window');
+
+
+const { height, width } = Dimensions.get('window');
+
+
 export default class ImportantNotification extends React.Component {
   constructor(props) {
     super(props);
@@ -28,15 +30,15 @@ export default class ImportantNotification extends React.Component {
   render() {
     return (
         <View style={[styles.container, { backgroundColor: this.state.backgroundColor, }]}>
-            <TouchableHighlight onPress={() => this.navigate('homePage')} >
-                    <Image style={{ width: 50, height: 50, position: 'absolute', top: 20, left: '-50%',}} source={require('../../assets/icons/close.png')} />
+            <TouchableHighlight onPress={ () => this.props.goToNext() } >
+                    <Image style={{ width: 50, height: 50, position: 'absolute', top: 20, left: '-50%',}} source={require('../../../assets/icons/close.png')} />
             </TouchableHighlight>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Your next activity</Text>
                 <Text style={styles.headerText}>before noon!</Text>
             </View>
             <View style={styles.activityDisply}>
-                <Image style={styles.image} source={require('../../assets/images/detoxYoga.png')} />   
+                <Image style={styles.image} source={require('../../../assets/images/detoxYoga.png')} />   
             </View>
             <View style={{ backgroundColor: '#FFFFFF',width: '65%', flex: 1, marginTop: '-10%', alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={{ textAlign: 'center', fontFamily: 'DINPro', fontSize: 22 , color: '#454545'}}>Detox Yoga</Text>
@@ -51,7 +53,7 @@ export default class ImportantNotification extends React.Component {
             </View>
             <View style={styles.getCalender}>
                 <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginTop: '12%'}}>Go to My Day</Text>
-                <Image style={{ width: 50, height: 50, marginTop: '-5%'}} source={require('../../assets/icons/little_arrow.png')} />
+                <Image style={{ width: 50, height: 50, marginTop: '-5%'}} source={require('../../../assets/icons/little_arrow.png')} />
             </View>
         </View>
     );
@@ -66,6 +68,7 @@ export default class ImportantNotification extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: width,
         alignItems: 'center',
         justifyContent: 'center'
     },

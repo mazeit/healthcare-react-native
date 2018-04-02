@@ -5,27 +5,15 @@ export default class PasswordForgotten extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    };
-    this.navigate = this.navigate.bind(this);
+    }
   }
 
 
-  navigate(name) {
-    this.props.navigator.push({
-      name
-    })
-  }
   
   render() {
     return (
-        <ImageBackground style={styles.homeImage} source={require('../../assets/images/homeBlur.png')}>
+        
             <View style={styles.email}>
-                <View style={styles.header}>
-                    <TouchableHighlight onPress={() => this.navigate('signInEmailPage')} >
-                        <Image style={{ width: 40, height: 40,}} source={require('../../assets/icons/back.png')} />
-                    </TouchableHighlight>
-                    <Text style={{fontFamily:'DINPro-Medium', fontSize: 16, color: '#ffffff', marginLeft: '10%'}}>REQUEST A NEW PASSWORD</Text>
-                </View>
                 <View style={styles.inputEmailContainer}>
                     <TextInput style={[styles.inputEmail, { fontFamily: 'DINPro-Light', fontSize: 24}]} placeholder='Enter your email address' placeholderTextColor={'#C5E9D6'}/>
                 </View>
@@ -35,7 +23,6 @@ export default class PasswordForgotten extends React.Component {
                     </TouchableHighlight>
                 </View>
             </View>
-        </ImageBackground>
     );
 }
 }
@@ -51,7 +38,7 @@ const styles = StyleSheet.create({
         height: '100%', 
     },
     inputEmailContainer: {
-        flex: 6,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
