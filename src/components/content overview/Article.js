@@ -149,9 +149,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    // teacherImage: {
-    //     flex: 1
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    // },
 });

@@ -1,17 +1,95 @@
 import React from 'react';
-import { StyleSheet, Text, View, PanResponder, Image, Animated } from 'react-native';
+import { StyleSheet, Text, View, PanResponder, Image, Animated, TextInput, Dimensions,ImageBackground } from 'react-native';
 
 
 
-// const { height, width } = Dimensions.get('window');
+
+const dimention = Dimensions.get('window');
+const dayName = ['MO', 'DI', 'MI', 'DO', 'FR', 'SA', 'SO'];
+const monthName = ['Jan', 'feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const monthDays = ['31', '28', '31', '30', '31', '30', '31', '31', '30', '31', '30', '31'];
+let noOfWeeks = 1;
+
+
+class Date extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            
+        };
+    }
+
+    render() {
+    
+        return (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{fontFamily: 'DINPro-Medium', fontSize: 12, color: '#454545'}}>{this.props.date}</Text>
+            </View>
+        );
+    }
+}
+
+class Week extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: [],
+        };
+        this.updateWeek = this.updateWeek.bind(this);
+        
+    }
+
+
+    componentDidMount () {
+        this.updateWeek();
+    }
+
+    updateWeek() {
+        console.log('date & day are>>>>>', this.props.currentDate, this.props.currentDay)
+        let date = [0, 0, 0, 0, 0, 0, 0];
+        let j = 1;
+        for( let i=this.props.currentDay-2; i>=0;i--) {
+            date[i] = this.props.currentDate - j;
+            j--;
+        }
+        j = 1;
+        for( let i=this.props.currentDay; i<=6;i++) {
+            date[i] = this.props.currentDate + j;
+            j++;
+        }
+         date[this.props.currentDay-1] =  this.props.currentDate;
+         this.setState({ date: date})
+    }
+
+
+    render() {
+    
+        return (
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                {
+                    this.state.date.map((item, i) => {
+                        return <Date date={item} key={i}/>
+                    })
+                }
+            </View>
+        );
+    }
+}
 
 export default class Example extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pan: new Animated.ValueXY(),
-            
+            // currentMonth: new Date().getMonth(),
+            // currentYear: new Date().getFullYear(),
+            // pan: new Animated.ValueXY(),
         };
+        this.show = this.show.bind(this);
+        this.hide = this.hide.bind(this);
+        // this.updateMonth = this.updateMonth.bind(this);
+        // this.calculateWeek = this.calculateWeek.bind(this);
+
+        this.open = new Animated.Value(0);
 
     }
 
@@ -24,38 +102,81 @@ export default class Example extends React.Component {
 
             // Initially, set the value of x and y to 0 (the center of the screen)
             onPanResponderGrant: (e, gestureState) => {
-                this.state.pan.setOffset({x: this.state.pan.x._value, y: this.state.pan.y._value});
-                this.state.pan.setValue({x: 0, y: 0});
+                // this.state.pan.setOffset({x: this.state.pan.x._value, y: this.state.pan.y._value});
+                // this.state.pan.setValue({x: 0, y: 0});
             },
 
             // When we drag/pan the object, set the delate to the states pan position
-            onPanResponderMove: Animated.event([
-                null, { dx: this.state.pan.x, dy: this.state.pan.y },
-            ]),
+            onPanResponderMove: () => {
+                //code during Move
+            },
 
-            onPanResponderRelease: (e, { vx, vy }) => {
-                this.state.pan.flattenOffset();
+            onPanResponderRelease: (e, { dx, dy }) => {
+                // this.state.pan.flattenOffset();
+                console.log('in Pan responder');
+                if(dy > dx && dy > 0 ) {
+                    console.log('in condition',dy, dx);
+                    this.show()
+                }
+                if(-(dy) > dx && dy < 0 ) {
+                    console.log('in else',dy, dx);
+                    this.hide()
+                }
             }
         });
     }
 
+
+    
+
+    show() {
+        // this.setState({ open: true})
+        // console.log('in move function');
+        Animated.timing(this.open,{
+            toValue: 1,
+            duration: 100,
+        }).start(()=> this.updateMonth());
+    }
+
+    hide() {
+        // this.setState({ open: true})
+        Animated.timing(this.open,{
+            toValue: 0,
+            duration: 100,
+        }).start(()=> this.updateCelendar());
+    }
+
     render() {
 
-        let { pan } = this.state;
+        const height = this.open.interpolate({
+            inputRange: [0,1],
+            outputRange: [55,275]
+        });
 
-        // Calculate the x and y transform from the pan value
-        let [translateX, translateY] = [pan.x, pan.y];
+        let calendar = [];
 
-        // Calculate the transform property and set it as a value for our style which we add below to the Animated.View component
-        let imageStyle = { transform: [{ translateX }, { translateY }] };
+        for(let i = 0 ; i < noOfWeeks ; i++) {
+            calendar.push(<Week currentDate={ ()=> new Date().getDate()} currentDay={ ()=> new Date().getDay()} key={ i }/>);
+        }
 
         return (
             <View style={{ flex: 1 }}>
-                <Animated.View {...this._panResponder.panHandlers} style={imageStyle}>
+                <View {...this._panResponder.panHandlers} style={{ position: 'absolute',top:0,left:0, width: dimention.width,alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{margin: 20, height: 45 , flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: dimention.width}}>
+                        {
+                            dayName.map((item,i) => {
+                                return <View key={i} style={{flex: 1, alignItems: 'center', justifyContent: 'center',}}>
+                                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 12, color: '#454545'}}>{item}</Text>
+                                        </View>
+                            })
+                        }
+                    </View>
+                    <Animated.View style={[{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF80', width: dimention.width}, {height}]}>
+                        { calendar }
+                    </Animated.View>
+                    
 
-                    <Image source={require('../../assets/icons/back_grey.png')} style={{ width: 54, height: 54, resizeMode: 'center' }} />
-
-                </Animated.View>
+                </View>
             </View>
         );
     }

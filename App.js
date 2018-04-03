@@ -7,7 +7,7 @@ import { StackNavigator } from 'react-navigation';
 
 
 import ContentOverviewContainer from './src/components/content overview';
-import Login from './src/components/login';
+import Login from './src/components/Example';
 import userReducer from './src/reducers';
 
 

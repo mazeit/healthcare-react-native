@@ -1,101 +1,189 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, PanResponder, Animated, TextInput } from 'react-native';
+
+const { width } = Dimensions.get('window');
+const windowHeight = Dimensions.get('window').height;
 
 export default class ContentOverview extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
+    constructor(props) {
+        super(props);
 
-  
-  render() {
-    return (
-        <View style={{flex: 1, backgroundColor: '#F5F5F5',}}>
+        this.state = {
+            openSearch: true,
+        };
 
-            <View style={styles.section1}>
-                <View style={styles.nutrition}>
-                    <Image style={styles.image} source={require('../../../assets/images/nutrition.png')} />
-                    <View style={styles.activityContainer}>
-                        <Image style={{width: 34, height: 40}} source={require('../../../assets/icons/nutrition.png')} />
-                        <Text style={[styles.activitySubtittle,{ color: '#8ACE91' }]} >Nutrition</Text>
+        this.showSearch = this.showSearch.bind(this);
+        this.hideSearch = this.hideSearch.bind(this);
+
+        this.animated = new Animated.Value(0);
+    }
+
+
+    componentWillMount() {
+        this._panResponder = PanResponder.create({
+
+            onMoveShouldSetResponderCapture: () => true,
+
+            onMoveShouldSetPanResponderCapture: () => true,
+            onPanResponderGrant: (e, gestureState) => {
+            },
+
+            onPanResponderMove: () => {
+                //code during Move
+            },
+
+            onPanResponderRelease: (e, { dx, dy }) => {
+
+                if (dy > dx && dy > 0) {
+
+                    this.showSearch()
+                }
+                if (-(dy) > dx && dy < 0) {
+
+                    this.hideSearch()
+                }
+            }
+        });
+    }
+
+
+    showSearch() {
+        //   console.log('in show')
+        this.setState({ openSearch: true })
+        Animated.timing(this.animated, {
+            toValue: 1,
+            duration: 100,
+        }).start();
+    }
+
+    hideSearch() {
+        this.setState({ openSearch: true })
+        Animated.timing(this.animated, {
+            toValue: 0,
+            duration: 100,
+        }).start();
+    }
+
+
+    render() {
+
+        const height = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: this.state.openSearch ? [0, 44] : [44, 0]
+        });
+        const opacity = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: this.state.openSearch ? [0, 1] : [1, 0]
+        });
+
+
+        return (
+            <View style={styles.container} {...this._panResponder.panHandlers}>
+                <Animated.View style={[styles.search, { height }, { opacity }]}>
+                    <TextInput style={{ fontFamily: 'DINPro', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
+                    {/* <Image style={{width: 40, height: 40}} source={require('../../../assets/icons/search.png')} /> */}
+                </Animated.View>
+                <View style={[styles.section, { marginBottom: 5 }]}>
+
+                    <View style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                        <View style={styles.image}>
+                            <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/nutrition.png')} >
+
+                            </ImageBackground>
+                        </View>
+                        <View style={styles.activityContainer}>
+                            <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/nutrition.png')} />
+                            <Text style={[styles.activitySubtittle, { color: '#8ACE91' }]} >Nutrition</Text>
+                        </View>
                     </View>
-                </View>
-                <View style={styles.activity}>
-                    <Image style={styles.image} source={require('../../../assets/images/activity.png')} />
-                    <View style={styles.activityContainer}>
-                        <Image style={{width: 34, height: 40}} source={require('../../../assets/icons/activity.png')}/>
-                        <Text style={[styles.activitySubtittle,{ color: '#AE0069' }]} >Activity</Text>
+                    <View style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
+                        <View style={styles.image}>
+                            <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/activity.png')} >
+                            </ImageBackground>
+                        </View>
+                        <View style={styles.activityContainer}>
+                            <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/activity.png')} />
+                            <Text style={[styles.activitySubtittle, { color: '#AE0069' }]} >Activity</Text>
+                        </View>
                     </View>
+
                 </View>
+
+                <View style={[styles.section, { marginTop: 5 }]}>
+
+                    <View style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                        <View style={styles.image}>
+                            <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/mindfulness.png')} >
+                            </ImageBackground>
+                        </View>
+                        <View style={styles.activityContainer}>
+                            <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/mindfulness.png')} />
+                            <Text style={[styles.activitySubtittle, { color: '#D4B870' }]} >Mindfulness</Text>
+                        </View>
+                    </View>
+                    <View style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
+                        <View style={styles.image}>
+                            <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/coaching.png')} >
+                            </ImageBackground>
+                        </View>
+                        <View style={styles.activityContainer}>
+                            <Text style={[styles.activitySubtittle, { color: '#454545' }]} >Coaching</Text>
+                        </View>
+                    </View>
+
+                </View>
+
             </View>
-            <View style={styles.section2}>
-                <View style={styles.mindfulness}>
-                    <Image style={styles.image} source={require('../../../assets/images/mindfulness.png')} />
-                    <View style={styles.activityContainer}>
-                        <Image style={{width: 34, height: 40}} source={require('../../../assets/icons/mindfulness.png')} />
-                        <Text style={[styles.activitySubtittle,{ color: '#D4B870' }]} >Mindfulness</Text>
-                    </View>
-                </View>
-                <View style={styles.coaching}>
-                    <Image style={styles.image} source={require('../../../assets/images/coaching.png')} />
-                    <View style={styles.activityContainer}>
-                        <Text style={[styles.activitySubtittle,{ color: '#454545' }]} >Coaching</Text>
-                    </View>
-                </View>
-            </View>
-
-        </View>
-    );
-}
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-    
-    section1: {
+
+    container: {
         flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#F5F5F5',
+    },
+    search: {
+        width: width,
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FFFFFF',
     },
-    section2: {
+    section: {
         flex: 1,
+        margin: 10,
         flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        width: width - 20,
     },
-    nutrition: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    activity: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    mindfulness: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    coaching: {
+    subContent: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
     image: {
-        resizeMode: 'cover',
-        height: '80%',
-        width: '100%',
+        width: (width - 20) / 2 - 10,
+        flex: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    activityContainer: {
+        flex: 2,
+        width: (width - 20) / 2 - 10,
+        backgroundColor: '#ffffff',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     activitySubtittle: {
         fontFamily: 'DINPro',
         fontSize: 18,
         textAlign: 'center',
     },
-    activityContainer: {
-        backgroundColor: '#ffffff',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 71,
-    },
-
-  });
+});
