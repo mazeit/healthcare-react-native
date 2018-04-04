@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, PanResponder, Image, Animated, TextInput, Dimensions,ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, PanResponder, Image, Animated, TextInput, Dimensions, ImageBackground } from 'react-native';
 
 
 
@@ -15,15 +15,15 @@ class Date extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+
         };
     }
 
     render() {
-    
+
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{fontFamily: 'DINPro-Medium', fontSize: 12, color: '#454545'}}>{this.props.date}</Text>
+                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 12, color: '#454545' }}>{this.props.date}</Text>
             </View>
         );
     }
@@ -33,42 +33,47 @@ class Week extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: [],
+            week: [],
+
         };
         this.updateWeek = this.updateWeek.bind(this);
-        
+
     }
 
 
-    componentDidMount () {
+    componentDidMount() {
         this.updateWeek();
     }
 
     updateWeek() {
-        console.log('date & day are>>>>>', this.props.currentDate, this.props.currentDay)
-        let date = [0, 0, 0, 0, 0, 0, 0];
+        let date = new Date();
+        console.log('date & day are>>>>>', date);
+        let currentDate = date.getDate();
+        let currentDay = date.getDay();
+        console.log('date & day are>>>>>', currentDate, currentDay);
+        let week = [0, 0, 0, 0, 0, 0, 0];
         let j = 1;
-        for( let i=this.props.currentDay-2; i>=0;i--) {
-            date[i] = this.props.currentDate - j;
+        for (let i = currentDay - 2; i >= 0; i--) {
+            date[i] = currentDate - j;
             j--;
         }
         j = 1;
-        for( let i=this.props.currentDay; i<=6;i++) {
-            date[i] = this.props.currentDate + j;
+        for (let i = currentDay; i <= 6; i++) {
+            week[i] = currentDate + j;
             j++;
         }
-         date[this.props.currentDay-1] =  this.props.currentDate;
-         this.setState({ date: date})
+        week[currentDay - 1] = currentDate;
+        this.setState({ week: week })
     }
 
 
     render() {
-    
+
         return (
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                 {
-                    this.state.date.map((item, i) => {
-                        return <Date date={item} key={i}/>
+                    this.state.week.map((item, i) => {
+                        return <Date date={item} key={i} />
                     })
                 }
             </View>
@@ -114,12 +119,12 @@ export default class Example extends React.Component {
             onPanResponderRelease: (e, { dx, dy }) => {
                 // this.state.pan.flattenOffset();
                 console.log('in Pan responder');
-                if(dy > dx && dy > 0 ) {
-                    console.log('in condition',dy, dx);
+                if (dy > dx && dy > 0) {
+                    console.log('in condition', dy, dx);
                     this.show()
                 }
-                if(-(dy) > dx && dy < 0 ) {
-                    console.log('in else',dy, dx);
+                if (-(dy) > dx && dy < 0) {
+                    console.log('in else', dy, dx);
                     this.hide()
                 }
             }
@@ -127,54 +132,54 @@ export default class Example extends React.Component {
     }
 
 
-    
+
 
     show() {
         // this.setState({ open: true})
         // console.log('in move function');
-        Animated.timing(this.open,{
+        Animated.timing(this.open, {
             toValue: 1,
             duration: 100,
-        }).start(()=> this.updateMonth());
+        }).start(() => this.updateMonth());
     }
 
     hide() {
         // this.setState({ open: true})
-        Animated.timing(this.open,{
+        Animated.timing(this.open, {
             toValue: 0,
             duration: 100,
-        }).start(()=> this.updateCelendar());
+        }).start(() => this.updateCelendar());
     }
 
     render() {
 
         const height = this.open.interpolate({
-            inputRange: [0,1],
-            outputRange: [55,275]
+            inputRange: [0, 1],
+            outputRange: [55, 275]
         });
 
         let calendar = [];
 
-        for(let i = 0 ; i < noOfWeeks ; i++) {
-            calendar.push(<Week currentDate={ ()=> new Date().getDate()} currentDay={ ()=> new Date().getDay()} key={ i }/>);
+        for (let i = 0; i < noOfWeeks; i++) {
+            calendar.push(<Week key={i} />);
         }
 
         return (
             <View style={{ flex: 1 }}>
-                <View {...this._panResponder.panHandlers} style={{ position: 'absolute',top:0,left:0, width: dimention.width,alignItems: 'center', justifyContent: 'center'}}>
-                    <View style={{margin: 20, height: 45 , flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: dimention.width}}>
+                <View {...this._panResponder.panHandlers} style={{ position: 'absolute', top: 0, left: 0, width: dimention.width, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ margin: 20, height: 45, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: dimention.width }}>
                         {
-                            dayName.map((item,i) => {
-                                return <View key={i} style={{flex: 1, alignItems: 'center', justifyContent: 'center',}}>
-                                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 12, color: '#454545'}}>{item}</Text>
-                                        </View>
+                            dayName.map((item, i) => {
+                                return <View key={i} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+                                    <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 12, color: '#454545' }}>{item}</Text>
+                                </View>
                             })
                         }
                     </View>
-                    <Animated.View style={[{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF80', width: dimention.width}, {height}]}>
-                        { calendar }
+                    <Animated.View style={[{ alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFFFFF80', width: dimention.width }, { height }]}>
+                        {calendar}
                     </Animated.View>
-                    
+
 
                 </View>
             </View>

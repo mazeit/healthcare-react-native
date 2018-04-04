@@ -30,11 +30,11 @@ export default class ContentOverviewContainer extends React.Component {
 
             case 'contentInformation':
 
-                this.setState({ page: 'contentOverview', showHeader: true});
+                this.setState({ page: 'contentOverview', showHeader: true });
                 break;
 
             case 'password':
-                return <SignInPassword navigation={ this.props.navigation } forgotPassword={ this.forgotPassword } setInput={this.setInput} invalidPassword={this.state.invalidPassword}/>;
+                return <SignInPassword navigation={this.props.navigation} forgotPassword={this.forgotPassword} setInput={this.setInput} invalidPassword={this.state.invalidPassword} />;
             case 'passwordForgoten':
                 return <PasswordForgotten />;
             default:
@@ -54,38 +54,38 @@ export default class ContentOverviewContainer extends React.Component {
 
                 {
                     this.state.showHeader &&
-                                            <View style={styles.header}>
-                                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
-                                                    {
-                                                        this.state.goBack && <Image source={require('../../../assets/icons/back_grey.png')} style={{ width: 54, height: 54, resizeMode: 'center' }} />
-                                                    }
-                                                </View>
-                                                <View style={{ flex: 8, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
-                                                    <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 16, color: '#454545' }}>{this.state.heading}</Text>
-                                                </View>
-                                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
-                                                    <TouchableOpacity onPress={() => this.showMenu()}>
-                                                        <Image source={require('../../../assets/icons/menu.png')} style={{ width: 54, height: 54, resizeMode: 'center' }} />
-                                                    </TouchableOpacity>
-                                                </View>
-                                            </View>
+                    <View style={styles.header}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+                            {
+                                this.state.goBack && <Image source={require('../../../assets/icons/back_grey.png')} style={{ width: 54, height: 54, resizeMode: 'center' }} />
+                            }
+                        </View>
+                        <View style={{ flex: 8, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 16, color: '#454545' }}>{this.state.heading}</Text>
+                        </View>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+                            <TouchableOpacity onPress={() => this.showMenu()}>
+                                <Image source={require('../../../assets/icons/menu.png')} style={{ width: 54, height: 54, resizeMode: 'center' }} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                 }
 
                 <View style={{ flex: 9 }}>
                     {
-                            (() => {
-                                switch (this.state.page) {
-                                    case 'contentInformation':
-                                        return <ImportantNotification goToNext={ this.goToNext }/>;
-                                    case 'contentOverview':
-                                        return <ContentOverview goToNext={ this.goToNext }/>;
-                                    case 'passwordForgoten':
-                                        return <PasswordForgotten />;
-                                    default:
-                                        return null;
-                                }
-                            })()
-                        }
+                        (() => {
+                            switch (this.state.page) {
+                                case 'contentInformation':
+                                    return <ImportantNotification navigation={this.props.navigation} goToNext={this.goToNext} />;
+                                case 'contentOverview':
+                                    return <ContentOverview goToNext={this.goToNext} />;
+                                case 'passwordForgoten':
+                                    return <PasswordForgotten />;
+                                default:
+                                    return null;
+                            }
+                        })()
+                    }
                 </View>
 
                 {

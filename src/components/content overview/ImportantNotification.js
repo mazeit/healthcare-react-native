@@ -13,7 +13,6 @@ export default class ImportantNotification extends React.Component {
         backgroundColor: '#AE0069',
         backgroundColorArray: ['#AE0069', '#D4B870', '#8ACE91'],
     };
-    this.navigate = this.navigate.bind(this);
   }
 
   componentDidMount() {
@@ -21,11 +20,6 @@ export default class ImportantNotification extends React.Component {
   }
 
 
-  navigate(name) {
-    this.props.navigator.push({
-      name,
-    })
-  }
   
   render() {
     return (
@@ -52,8 +46,12 @@ export default class ImportantNotification extends React.Component {
                 </TouchableHighlight>
             </View>
             <View style={styles.getCalender}>
-                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginTop: '12%'}}>Go to My Day</Text>
-                <Image style={{ width: 50, height: 50, marginTop: '-5%'}} source={require('../../../assets/icons/little_arrow.png')} />
+                <TouchableHighlight onPress={ () => this.props.navigation.navigate('CalendarContainer') }>
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                        <Text  style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginTop: '12%'}}>Go to My Day</Text>
+                        <Image style={{ width: 50, height: 50, marginTop: '-5%'}} source={require('../../../assets/icons/little_arrow.png')} />
+                    </View>
+                </TouchableHighlight>
             </View>
         </View>
     );

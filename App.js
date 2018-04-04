@@ -6,8 +6,10 @@ import { StyleSheet, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 
+
+import Login from './src/components/login';
 import ContentOverviewContainer from './src/components/content overview';
-import Login from './src/components/Example';
+import CalendarContainer from './src/components/calendar';
 import userReducer from './src/reducers';
 
 
@@ -17,11 +19,11 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     return (
       <Provider store={store}>
-        <AppNavigator/>
+        <AppNavigator />
       </Provider>
     );
   }
@@ -30,9 +32,11 @@ export default class App extends React.Component {
 
 const AppNavigator = StackNavigator({
   WelcomeScreen: { screen: Login },
-  ContentOverview: { screen: ContentOverviewContainer},
+  ContentOverview: { screen: ContentOverviewContainer },
+  CalendarContainer: { screen: CalendarContainer },
 
-},{ headerMode: 'none' });
+
+}, { headerMode: 'none' });
 
 const styles = StyleSheet.create({
   container: {
