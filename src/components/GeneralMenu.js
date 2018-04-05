@@ -23,7 +23,7 @@ export default class GeneralMenu extends React.Component {
                     </View>
                     <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center', marginTop: 10 }}>
                         <TouchableOpacity onPress={() => this.props.showMenu()}>
-                            <Image source={require('../../assets/icons/close.png')} style={{ width: 54, height: 54, }} />
+                            <Image source={require('../../assets/icons/close.png')} style={{ width: 15, height: 15, }} />
                         </TouchableOpacity>
                     </View>
                 </View>

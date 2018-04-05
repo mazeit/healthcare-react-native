@@ -54,7 +54,7 @@ class CalendarView extends React.Component {
 
                         <Swipeout {...swipeSettings} style={styles.SwiperContainer}>
                             <View style={styles.challangeTab} >
-                                <TouchableOpacity onPress={() => this.props.goToActivity()}>
+                                <TouchableOpacity onPress={() => this.props.goToNext()}>
                                     <View style={styles.challangeTab}>
                                         <Image style={{ flex: 2, width: 74, height: 60, }} source={require('../../../assets/icons/morning.png')} />
                                         <View style={{ flex: 6.5, justifyContent: 'center', }}>

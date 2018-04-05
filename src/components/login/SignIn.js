@@ -84,7 +84,7 @@ class SignIn extends React.Component {
                 <KeyboardAvoidingView style={[styles.signInContainer, { backgroundColor: this.state.backgroundcolor }]}>
                     <View style={styles.header}>
                         <TouchableHighlight onPress={() => this.props.goToSignIn()} >
-                             <Image style={{ width: 40, height: 40, }} source={require('../../../assets/icons/close.png')} />
+                             <Image style={{ width: 15, height: 15, }} source={require('../../../assets/icons/close.png')} />
                         </TouchableHighlight>
                         <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff' }}>{this.state.headerTitle}</Text>
                         {

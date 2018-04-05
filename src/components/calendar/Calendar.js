@@ -196,7 +196,7 @@ export default class Calendar extends React.Component {
 
         const height = this.animated.interpolate({
             inputRange: [0, 1],
-            outputRange: [280, 118]
+            outputRange: [270, 118]
         });
 
 
@@ -221,7 +221,7 @@ export default class Calendar extends React.Component {
                             })}
                     </View>
                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                        <Image style={{ width: 60, height: 60, transform: [{ rotateX: this.state.weekView }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                        <Image style={{ width: 15, height: 15, transform: [{ rotateX: this.state.weekView }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                     </View>
 
 
