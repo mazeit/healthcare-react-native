@@ -23,6 +23,7 @@ class DateContainer extends React.Component {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 5, marginBottom: 10 }}>
                 <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 18, color: '#838383' }}>{this.props.date}</Text>
+                {/* <View style={{ width: 5, height: 5, borderRadius: 5, borderWidth: 0.5, borderColor: "#AE0069"}}></View> */}
             </View>
         );
     }
@@ -203,7 +204,7 @@ export default class Calendar extends React.Component {
 
 
         return (
-            <Animated.View {...this._panResponder.panHandlers} style={[{ backgroundColor: '#F5F5F580', marginBottom: 10 }, { height }]}>
+            <Animated.View {...this._panResponder.panHandlers} style={[{ backgroundColor: '#F5F5F599', marginBottom: 10 }, { height }]}>
                 <View style={{ position: 'absolute', top: 0, left: 0, width: dimention.width, alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ margin: 20, marginBottom: 10, height: 45, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: dimention.width }}>
                         {

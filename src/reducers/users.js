@@ -1,16 +1,15 @@
-export default function () {
-    return [
-        {
-            id: 1,
-            username: 'Badal',
-            userId: 'imb.surya@gmail.com',
-            password: 'developer@badal'
-        },
-        {
-            id: 2,
-            username: 'Vinay',
-            userId: 'vinay@gmail.com',
-            password: 'ceo@vinay'
-        }
-    ]
-}
+
+const users = (state = {}, action) => {
+    const { type, payload} = action;
+
+    switch(type){
+        case 'GET_USER':
+            state = payload
+            console.log("store", state);
+            return state;
+        default:
+            return state;
+    }
+};
+
+export default users;

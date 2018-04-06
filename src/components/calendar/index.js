@@ -11,6 +11,7 @@ import CalendarView from './CalendarView.js'
 import Activity from './Activity.js'
 import GeneralMenu from '../GeneralMenu';
 import AddActivityCategory from './AddActivityCategory';
+import ChoseActivity from './ChoseActivity'
 
 
 class CalendarFlow extends React.Component {
@@ -21,7 +22,7 @@ class CalendarFlow extends React.Component {
             heading: '',
             calendarView: true,
             showMenu: false,
-            close: true,
+            close: false,
             page: 'calendarMonthly',
             addActivity: false,
         };
@@ -30,8 +31,11 @@ class CalendarFlow extends React.Component {
         this.goToNext = this.goToNext.bind(this);
     }
     goToNext() {
-        if( this.state.page === 'calendarMonthly') {
+        if( this.state.page === 'calendarMonthly' && !this.state.addActivity) {
             this.setState({ page: 'activity', close: true})
+        }
+        if( this.state.page === 'calendarMonthly' && this.state.addActivity) {
+            this.setState({ page: 'choseActivity', addActivity: false})
         }
 
     }
@@ -49,10 +53,10 @@ class CalendarFlow extends React.Component {
                 <View style={styles.header}>
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
                         {
-                            this.state.close ? <TouchableOpacity onPress={() => this.setState({ addActivity: true, close: false })}>
+                            !this.state.close ? <TouchableOpacity onPress={() => this.setState({ addActivity: true, close: true })}>
                                                     <Image source={require('../../../assets/icons/add.png')} style={{ width: 15, height: 15, resizeMode: 'center' }} />
                                                 </TouchableOpacity> : 
-                                                <TouchableOpacity onPress={() => this.setState({ addActivity: false, close: true })}>
+                                                <TouchableOpacity onPress={() => this.setState({ addActivity: false, close: false, page: 'calendarMonthly' })}>
                                                     <Image source={require('../../../assets/icons/close_grey.png')} style={{ width: 15, height: 15, resizeMode: 'center' }} />
                                                 </TouchableOpacity>
                         }
@@ -76,8 +80,8 @@ class CalendarFlow extends React.Component {
                                     return <CalendarView goToNext={this.goToNext} />;
                                 case 'activity':
                                     return <Activity goToNext={this.goToNext} />;
-                                // case 'passwordForgoten':
-                                //     return <PasswordForgotten />;
+                                case 'choseActivity':
+                                    return <ChoseActivity />;
                                 default:
                                     return null;
                             }

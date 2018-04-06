@@ -13,7 +13,7 @@ class SignIn extends React.Component {
         super(props);
         this.state = {
             page: 'signin',
-            backgroundcolor: '#AE006980',
+            backgroundcolor: '#AE0069',
             headerTitle: 'SIGN IN',
             activeUser: "",
             errorMsgEmail: '',
@@ -45,6 +45,10 @@ class SignIn extends React.Component {
     }
 
     goToNextPage() {
+        console.log("BEFORE.....",Boolean(this.props.users.hasError))
+        this.props.getUser(this.state.activeUser)
+        console.log("AFTER.....",Boolean(this.props.users.hasError))
+        return;
         switch (this.state.page) {
             case 'signin':
 
@@ -117,6 +121,7 @@ const styles = StyleSheet.create({
     signInContainer: {
         flex: 1,
         justifyContent: 'center',
+        opacity: 0.8,
     },
     homeImage: {
         width: '100%',
