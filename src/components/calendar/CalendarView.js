@@ -93,10 +93,11 @@ const styles = StyleSheet.create({
         margin: 5,
         marginLeft: 10,
         marginRight: 10,
-        backgroundColor: '#FFFFFF80'
+        backgroundColor: '#FFFFFF80',
     },
     challangeTab: {
         flex: 1,
+        opacity: 0.8,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',

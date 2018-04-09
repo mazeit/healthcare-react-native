@@ -34,7 +34,7 @@ export default class Recipe extends React.Component {
                                     <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', textAlign: 'center' }}>It's like a portable garden. Or some other short description of the recipe.</Text>
                                 </View>
                                 <View style={styles.details}>
-                                    <Image source={require('../../assets/icons/nutrition.png')} style={{ width: 72, height: 72, }} />
+                                    <Image source={require('../../../assets/icons/nutrition.png')} style={{ width: 72, height: 72, }} />
                                 </View>
                             </View>
 
@@ -46,19 +46,19 @@ export default class Recipe extends React.Component {
 
                                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', }}>
 
-                                        <Image source={require('../../assets/icons/clock_979797.png')} style={{ width: 20, height: 20, marginRight: 5 }} />
+                                        <Image source={require('../../../assets/icons/clock_979797.png')} style={{ width: 20, height: 20, marginRight: 5 }} />
                                         <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', textAlign: 'center' }}>0:10</Text>
 
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
 
-                                        <Image source={require('../../assets/icons/level_979797.png')} style={{ width: 30, height: 30, }} />
+                                        <Image source={require('../../../assets/icons/level_979797.png')} style={{ width: 30, height: 30, }} />
                                         <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', textAlign: 'center' }}>Easy</Text>
 
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', }}>
 
-                                        <Image source={require('../../assets/icons/people_979797.png')} style={{ width: 25, height: 25, }} />
+                                        <Image source={require('../../../assets/icons/people_979797.png')} style={{ width: 25, height: 25, }} />
                                         <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', textAlign: 'center' }}>4 people</Text>
 
                                     </View>
@@ -69,19 +69,19 @@ export default class Recipe extends React.Component {
                             <View style={styles.contentSubBlock}>
                                 <View style={[styles.details, { flexDirection: 'row', margin: 10 }]}>
                                     <View style={{ flex: 1, alignItems: 'center', }}>
-                                        <Image source={require('../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
+                                        <Image source={require('../../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
                                         <Text style={{ alignSelf: 'center', fontFamily: 'DINPro', fontSize: 16, color: '#838383', textAlign: 'center' }}>Vegan</Text>
                                     </View>
                                     <View style={{ flex: 1, alignItems: 'center', }}>
-                                        <Image source={require('../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
+                                        <Image source={require('../../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
                                         <Text style={{ alignSelf: 'center', fontFamily: 'DINPro', fontSize: 16, color: '#838383', textAlign: 'center' }}>No nuts</Text>
                                     </View>
                                     <View style={{ flex: 1, alignItems: 'center', }}>
-                                        <Image source={require('../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
+                                        <Image source={require('../../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
                                         <Text style={{ alignSelf: 'center', fontFamily: 'DINPro', fontSize: 16, color: '#838383', textAlign: 'center' }}>Gluten free</Text>
                                     </View>
                                     <View style={{ flex: 1, alignItems: 'center', }}>
-                                        <Image source={require('../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
+                                        <Image source={require('../../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
                                         <Text style={{ alignSelf: 'center', fontFamily: 'DINPro', fontSize: 16, color: '#838383', textAlign: 'center' }}>What ever</Text>
                                     </View>
                                 </View>
@@ -102,13 +102,13 @@ export default class Recipe extends React.Component {
                             </View>
                             <View style={[styles.details, { margin: 10, flexDirection: 'row', }]}>
                                 <View style={{ flex: 1, alignItems: 'flex-start', marginLeft: 20 }}>
-                                    <Image source={require('../../assets/icons/minus_circle_8ACE91.png')} style={{ width: 30, height: 30, }} />
+                                    <Image source={require('../../../assets/icons/minus_circle_8ACE91.png')} style={{ width: 30, height: 30, }} />
                                 </View>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#454545', }}>4 Portions</Text>
                                 </View>
                                 <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 20 }}>
-                                    <Image source={require('../../assets/icons/plus_circle_8ACE91.png')} style={{ width: 30, height: 30, }} />
+                                    <Image source={require('../../../assets/icons/plus_circle_8ACE91.png')} style={{ width: 30, height: 30, }} />
                                 </View>
                             </View>
                         </View>

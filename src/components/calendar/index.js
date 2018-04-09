@@ -109,7 +109,7 @@ class CalendarFlow extends React.Component {
                 {
                     this.state.showMenu &&
                     <View style={styles.menuOverlay}>
-                        <GeneralMenu showMenu={this.showMenu} />
+                        <GeneralMenu navigation={this.props.navigation} showMenu={this.showMenu} />
                     </View>
                 }
 

@@ -3,7 +3,41 @@ import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity } from 'rea
 
 const { height, width } = Dimensions.get('window');
 
-const menuList = ['MY LIVINFLOW', 'MY NAVIGATOR', 'MY FAVORITES', 'MY PROFILE', 'HELP & FAQ', 'INVITE MY FRIENDS', 'WEBSHOP', 'BLOG'];
+
+const menuList = [
+    {
+        name: 'MY LIVINFLOW',
+        component: 'ContentOverview'
+    },
+    {
+        name: 'MY NAVIGATOR',
+        component: 'Navigator'
+    },
+    {
+        name: 'MY FAVORITES',
+        component: 'Favourites'
+    },
+    {
+        name: 'MY PROFILE',
+        component: 'Profile'
+    },
+    {
+        name: 'HELP & FAQ',
+        component: 'HelpFaq'
+    },
+    {
+        name: 'INVITE MY FRIENDS',
+        component: 'InviteFriends'
+    },
+    {
+        name: 'WEBSHOP',
+        component: 'WebShop'
+    },
+    {
+        name: 'BLOG',
+        component: 'Blog'
+    },
+];
 
 export default class GeneralMenu extends React.Component {
     constructor(props) {
@@ -22,8 +56,8 @@ export default class GeneralMenu extends React.Component {
                     <View style={{ flex: 1, }}>
                     </View>
                     <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center', marginTop: 10 }}>
-                        <TouchableOpacity onPress={() => this.props.showMenu()}>
-                            <Image source={require('../../assets/icons/close.png')} style={{ width: 15, height: 15, }} />
+                        <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', margin: 20}} onPress={() => this.props.showMenu()}>
+                            <Image source={require('../../assets/icons/close.png')} style={{ width: 20, height: 20, }} />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -31,7 +65,9 @@ export default class GeneralMenu extends React.Component {
                 <View style={ styles.menu }>
                     {
                         menuList.map((item, i) => 
-                            <Text key={i} style={{ flex:1, fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF',}}>{item}</Text>
+                            <TouchableOpacity key={i} onPress={ () => this.props.navigation.navigate(item.component)} style={ styles.listItem }>
+                                <Text style={{ flex:1, fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF',}}>{item.name}</Text>
+                            </TouchableOpacity>
                         )
                     }
                 </View>
@@ -61,5 +97,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 40,
         marginBottom: 40,
+    },
+    listItem: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });

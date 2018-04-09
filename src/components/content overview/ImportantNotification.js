@@ -25,7 +25,7 @@ export default class ImportantNotification extends React.Component {
     render() {
         return (
             <View style={[styles.container, { backgroundColor: this.state.backgroundColor, }]}>
-                <TouchableOpacity onPress={() => this.props.goToNext()} style={{ alignItems: 'center', justifyContent: 'center'}}>
+                <TouchableOpacity onPress={() => this.props.goToNext('contentOverview','SELECT YOUR TOPIC', true, false)} style={{ alignItems: 'center', justifyContent: 'center'}}>
                     <Image style={{ width: 15, height: 15, position: 'absolute', top: 20, left: '-50%', margin: 10 }} source={require('../../../assets/icons/close.png')} />
                 </TouchableOpacity>
                 <View style={styles.header}>
@@ -50,7 +50,7 @@ export default class ImportantNotification extends React.Component {
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('CalendarContainer')}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginTop: '12%' }}>Go to My Day</Text>
-                            <Image style={{ width: 50, height: 50, marginTop: '-5%' }} source={require('../../../assets/icons/little_arrow.png')} />
+                            <Image style={{ width: 50, height: 50, }} source={require('../../../assets/icons/little_arrow.png')} />
                         </View>
                     </TouchableOpacity>
                 </View>

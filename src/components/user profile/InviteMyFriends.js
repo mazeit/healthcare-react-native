@@ -22,9 +22,9 @@ export default class InviteMyFriends extends React.Component {
                         <View style={{ flex: 2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
                             <View style={{ flex: 1 }}></View>
                             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
-                                <Image source={require('../../assets/icons/people_selected.png')} style={{ width: 108, height: 108, flex: 1 }} />
-                                <Image source={require('../../assets/icons/people_selected.png')} style={{ width: 108, height: 108, flex: 1 }} />
-                                <Image source={require('../../assets/icons/people_unselected.png')} style={{ width: 108, height: 108, flex: 1 }} />
+                                <Image source={require('../../../assets/icons/people_selected.png')} style={{ width: 108, height: 108, flex: 1 }} />
+                                <Image source={require('../../../assets/icons/people_selected.png')} style={{ width: 108, height: 108, flex: 1 }} />
+                                <Image source={require('../../../assets/icons/people_unselected.png')} style={{ width: 108, height: 108, flex: 1 }} />
                             </View>
                             <View style={{ flex: 1 }}></View>
                         </View>

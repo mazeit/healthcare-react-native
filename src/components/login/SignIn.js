@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableHig
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
-import { getUser } from '../../actions/index'
+import { verifyEmail } from '../../actions/index'
+import { verifyPassword } from '../../actions/index'
 import SignInEmail from './SignInEmail';
 import SignInPassword from './SignInPassword';
 import PasswordForgotten from './PasswordForgotten';
@@ -25,10 +26,34 @@ class SignIn extends React.Component {
             wrongPassword: '',
             wrongPasswordMsg: '',
 
+
         }
         this.goToNextPage = this.goToNextPage.bind(this);
         this.forgotPassword = this.forgotPassword.bind(this);
         this.setInput = this.setInput.bind(this);
+    }
+    componentWillReceiveProps(nextProps) {
+
+        switch (this.state.page) {
+            case 'signin':
+                if(!nextProps.validEmail.hasError) {
+                    this.setState({ errorMsgEmail: '', errorMgs: '', page: 'password', backgroundcolor: '#D4B870' });
+                } else {
+                    this.setState({ errorMsgEmail: 'Email address', errorMgs: 'This email address is not registered. Please try again.' });
+                }
+                break;
+            case 'password':
+                if(!nextProps.validPassword.hasError) {
+                    this.setState({ wrongPassword: '', wrongPasswordMsg: ''});
+                    this.props.navigation.navigate('ContentOverviewContainer');
+                } else {
+                    this.setState({  wrongPassword: 'Password', wrongPasswordMsg: 'This password is not correct, Please try again.' });
+                }
+                break;
+            default:
+                break;
+        }
+        
     }
 
     setInput(input) {
@@ -45,35 +70,26 @@ class SignIn extends React.Component {
     }
 
     goToNextPage() {
-        console.log("BEFORE.....",Boolean(this.props.users.hasError))
-        this.props.getUser(this.state.activeUser)
-        console.log("AFTER.....",Boolean(this.props.users.hasError))
-        return;
+
         switch (this.state.page) {
-            case 'signin':
 
-                this.props.users.forEach(element => {
-
-                    if (this.state.activeUser === element.userId) {
-                        this.setState({ errorMsgEmail: '', errorMgs: '', page: 'password', backgroundcolor: '#D4B87080', authorizedPassword: element.password });
-                        return;
+                case 'signin':
+                    this.props.verifyEmail(this.state.activeUser)
+                    return ;
+    
+                case 'password':
+                    this.props.verifyPassword(this.state.activeUser,this.state.password)
+                    return;
+                    if (this.state.authorizedPassword === this.state.password && this.state.authorizedPassword !== '') {
+                        
+                    } else {
+                        
                     }
-                });
-                this.setState({ errorMsgEmail: 'Email address', errorMgs: 'This email address is not registered. Please try again.' });
-                return;
+    
+            }
+        
+           
 
-            case 'password':
-
-                if (this.state.authorizedPassword === this.state.password && this.state.authorizedPassword !== '') {
-                    this.setState({ wrongPassword: '', wrongPasswordMsg: ''});
-                    this.props.navigation.navigate('ContentOverview');
-                    return;
-                } else {
-                    this.setState({  wrongPassword: 'Password', wrongPasswordMsg: 'This password is not correct, Please try again.' });
-                    return;
-                }
-
-        }
     }
 
     forgotPassword() {
@@ -96,13 +112,14 @@ class SignIn extends React.Component {
                         }
                     </View>
                     <View style={styles.componentContainer}>
+                    
                         {
                             (() => {
                                 switch (this.state.page) {
                                     case 'signin':
-                                        return <SignInEmail setInput={this.setInput} errorMsgEmail={this.state.errorMsgEmail} errorMgs={this.state.errorMgs}/>;
+                                        return <SignInEmail goToNextPage={this.goToNextPage} setInput={this.setInput} errorMsgEmail={this.state.errorMsgEmail} errorMgs={this.state.errorMgs}/>;
                                     case 'password':
-                                        return <SignInPassword navigation={ this.props.navigation } forgotPassword={ this.forgotPassword } setInput={this.setInput} wrongPassword={ this.state.wrongPassword } wrongPasswordMsg={ this.state.wrongPasswordMsg }/>;
+                                        return <SignInPassword goToNextPage={this.goToNextPage} navigation={ this.props.navigation } forgotPassword={ this.forgotPassword } setInput={this.setInput} wrongPassword={ this.state.wrongPassword } wrongPasswordMsg={ this.state.wrongPasswordMsg }/>;
                                     case 'passwordForgoten':
                                         return <PasswordForgotten />;
                                     default:
@@ -141,11 +158,13 @@ const styles = StyleSheet.create({
 
 
 export default connect(state => {
-    const users = state.users || {};
+    const validEmail = state.validUser.validEmail || {};
+    const validPassword = state.validUser.validPassword || {};
     return {
-        users
+        validEmail,
+        validPassword
     }
 }, dispatch => {
-    return bindActionCreators({ getUser: getUser }, dispatch)
+    return bindActionCreators({ verifyEmail: verifyEmail , verifyPassword : verifyPassword }, dispatch)
 }
 )(SignIn);

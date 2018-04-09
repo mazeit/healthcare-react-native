@@ -19,9 +19,9 @@ export default class ProfileInformation extends React.Component {
             <View style={styles.container}>
 
                 <View style={ styles.profilePicture }>
-                    <ImageBackground style={styles.profilePictureBlur} source={require('../../assets/images/profilePicture.png')} blurRadius={15}>
+                    <ImageBackground style={styles.profilePictureBlur} source={require('../../../assets/images/profilePicture.png')} blurRadius={15}>
                         <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20}}>
-                            <Image source={require('../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }}/>
+                            <Image source={require('../../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }}/>
                         </View>
                         <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#4AB3E2'}}>Change Profile</Text>
                         <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#4AB3E2'}}>Picture</Text>

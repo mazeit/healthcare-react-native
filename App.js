@@ -9,7 +9,9 @@ import { StackNavigator } from 'react-navigation';
 
 import Login from './src/components/login';
 import ContentOverviewContainer from './src/components/content overview';
+import ContentOverview from './src/components/content overview/ContentOverview';
 import CalendarContainer from './src/components/calendar';
+import Profile from './src/components/user profile';
 import userReducer from './src/reducers';
 
 
@@ -32,8 +34,12 @@ export default class App extends React.Component {
 
 const AppNavigator = StackNavigator({
   WelcomeScreen: { screen: Login },
-  ContentOverview: { screen: ContentOverviewContainer },
+  ContentOverviewContainer: { screen: ContentOverviewContainer },
   CalendarContainer: { screen: CalendarContainer },
+  ContentOverview: { screen: ContentOverview},
+  Profile: { screen: Profile}
+
+
 
 
 }, { headerMode: 'none' });

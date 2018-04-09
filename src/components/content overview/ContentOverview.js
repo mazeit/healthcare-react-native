@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, PanResponder, Animated, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, PanResponder, Animated, TextInput, TouchableOpacity } from 'react-native';
 
 const { width } = Dimensions.get('window');
 const windowHeight = Dimensions.get('window').height;
@@ -81,11 +81,11 @@ export default class ContentOverview extends React.Component {
             <View style={styles.container} {...this._panResponder.panHandlers}>
                 <Animated.View style={[styles.search, { height }, { opacity }]}>
                     <TextInput style={{ fontFamily: 'DINPro', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
-                    {/* <Image style={{width: 40, height: 40}} source={require('../../../assets/icons/search.png')} /> */}
+                    <Image style={{width: 20, height: 20}} source={require('../../../assets/icons/search.png')} />
                 </Animated.View>
                 <View style={[styles.section, { marginBottom: 5 }]}>
 
-                    <View style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                    <TouchableOpacity onPress={ () => this.props.goToNext('categoryList','NUTRITION', true, true) } style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
                         <View style={styles.image}>
                             <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/nutrition.png')} >
 
@@ -95,8 +95,8 @@ export default class ContentOverview extends React.Component {
                             <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/nutrition.png')} />
                             <Text style={[styles.activitySubtittle, { color: '#8ACE91' }]} >Nutrition</Text>
                         </View>
-                    </View>
-                    <View style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={ () => this.props.goToNext('categoryList','ACTIVITY', true, true) } style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
                         <View style={styles.image}>
                             <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/activity.png')} >
                             </ImageBackground>
@@ -105,13 +105,13 @@ export default class ContentOverview extends React.Component {
                             <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/activity.png')} />
                             <Text style={[styles.activitySubtittle, { color: '#AE0069' }]} >Activity</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
 
                 </View>
 
                 <View style={[styles.section, { marginTop: 5 }]}>
 
-                    <View style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                    <TouchableOpacity onPress={ () => this.props.goToNext('categoryList','MINDFULLNESS', true, true) } style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
                         <View style={styles.image}>
                             <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/mindfulness.png')} >
                             </ImageBackground>
@@ -120,8 +120,8 @@ export default class ContentOverview extends React.Component {
                             <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/mindfulness.png')} />
                             <Text style={[styles.activitySubtittle, { color: '#D4B870' }]} >Mindfulness</Text>
                         </View>
-                    </View>
-                    <View style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={ () => this.props.goToNext('categoryList','COACHING', true, true) } style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
                         <View style={styles.image}>
                             <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/coaching.png')} >
                             </ImageBackground>
@@ -129,7 +129,7 @@ export default class ContentOverview extends React.Component {
                         <View style={styles.activityContainer}>
                             <Text style={[styles.activitySubtittle, { color: '#454545' }]} >Coaching</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
 
                 </View>
 

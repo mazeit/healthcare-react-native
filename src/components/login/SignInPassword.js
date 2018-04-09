@@ -21,7 +21,7 @@ export default class SignInPassword extends React.Component {
                 <View style={styles.inputPasswordContainer}>
 
                     <ShakingText style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff' }} >{this.props.wrongPassword}</ShakingText>
-                    <TextInput onChangeText={(text) => this.props.setInput(text)} style={[styles.inputPassword, { fontFamily: 'DINPro-Light', fontSize: 24 }]} placeholder='Password' secureTextEntry={true} placeholderTextColor={'#EFE1CB'} />
+                    <TextInput onChangeText={(text) => this.props.setInput(text)} style={[styles.inputPassword, { fontFamily: 'DINPro-Light', fontSize: 24 }]} placeholder='Password' secureTextEntry={true} placeholderTextColor={'#EFE1CB'} autoFocus={true} enablesReturnKeyAutomatically={true} onSubmitEditing={ () => this.props.goToNextPage()}/>
                     <ShakingText style={{ fontFamily: 'DINPro-Light', fontSize: 16, width: '90%', top: '5%', color: '#ffffff' }}>{this.props.wrongPasswordMsg}</ShakingText>
 
                 </View>

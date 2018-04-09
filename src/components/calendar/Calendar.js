@@ -91,7 +91,7 @@ export default class Calendar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            weekView: '0deg',
+            weekView: '180deg',
             monthView: true,
             calendar: [],
         };
@@ -204,7 +204,7 @@ export default class Calendar extends React.Component {
 
 
         return (
-            <Animated.View {...this._panResponder.panHandlers} style={[{ backgroundColor: '#F5F5F599', marginBottom: 10 }, { height }]}>
+            <Animated.View {...this._panResponder.panHandlers} style={[{ backgroundColor: '#F5F5F5',opacity: 0.8, marginBottom: 10 }, { height }]}>
                 <View style={{ position: 'absolute', top: 0, left: 0, width: dimention.width, alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ margin: 20, marginBottom: 10, height: 45, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: dimention.width }}>
                         {
@@ -221,8 +221,8 @@ export default class Calendar extends React.Component {
                                 return item
                             })}
                     </View>
-                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                        <Image style={{ width: 15, height: 15, transform: [{ rotateX: this.state.weekView }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                    <View style={{ alignItems: 'center', justifyContent: 'center', width: 18, height: 18, borderRadius: 18, backgroundColor: '#F5F5F5', opacity: 0.8, marginTop: 7 }}>
+                        <Image style={{  width: 15, height: 15, transform: [{ rotateX: this.state.weekView }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                     </View>
 
 

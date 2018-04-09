@@ -37,7 +37,7 @@ export default class InviteMyFriendsList extends React.Component {
                                     <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center', marginBottom: 20}}>
                                     
                                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-                                            <Image source={require('../../assets/icons/clock.png')} style={{ flex: 2, width: 60, height: 60, marginLeft: -6, marginTop: 2 }} />
+                                            <Image source={require('../../../assets/icons/clock.png')} style={{ flex: 2, width: 60, height: 60, marginLeft: -6, marginTop: 2 }} />
                                             <Text style={{ flex: 8, fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', }}>21. April 2017</Text>
                                         </View>
 

@@ -1,10 +1,10 @@
 
 import { combineReducers } from 'redux';
-import users from './users';
+import validUser from './validUser';
 
 
 const userReducer = combineReducers({
-    users,
+    validUser,
 })
 
 export default userReducer

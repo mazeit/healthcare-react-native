@@ -11,19 +11,12 @@ export default class AuthoriseWelcome extends React.Component {
         backgroundColor: '#AE006980',
         backgroundColorArray: ['#AE006980', '#D4B87080', '#8ACE9180'],
     };
-    this.navigate = this.navigate.bind(this);
   }
 
   componentDidMount() {
     this.interval = setInterval(() => this.setState({backgroundColor: this.state.backgroundColorArray[Math.floor(Math.random() * 3)]}),2000);
   }
 
-
-  navigate(name) {
-    this.props.navigator.push({
-      name,
-    })
-  }
   
   render() {
     return (

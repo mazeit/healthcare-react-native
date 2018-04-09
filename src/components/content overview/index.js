@@ -5,8 +5,8 @@ import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableOpacity
 import GeneralMenu from '../GeneralMenu';
 import ImportantNotification from './ImportantNotification';
 import ContentOverview from './ContentOverview'
-// import CoachProfile from './CoachProfile'
-// import Example from './Example'
+import CategoryList from './CategoryList'
+import Recipe from './Recipe'
 
 
 const { height, width } = Dimensions.get('window');
@@ -23,31 +23,40 @@ export default class ContentOverviewContainer extends React.Component {
         };
         this.showMenu = this.showMenu.bind(this)
         this.goToNext = this.goToNext.bind(this)
+        this.goBack = this.goBack.bind(this)
     }
 
-    goToNext() {
-        switch (this.state.page) {
+    goToNext(componentName, headerTitle, showHeader = false, goBack = false) {
 
-            case 'contentInformation':
 
-                this.setState({ page: 'contentOverview', showHeader: true });
-                break;
-
-            case 'password':
-                return <SignInPassword navigation={this.props.navigation} forgotPassword={this.forgotPassword} setInput={this.setInput} invalidPassword={this.state.invalidPassword} />;
-            case 'passwordForgoten':
-                return <PasswordForgotten />;
-            default:
-                return null;
-        }
+        this.setState({ page: componentName, showHeader: showHeader, heading: headerTitle, goBack: goBack });
+        
     }
 
     showMenu() {
         this.setState({ showMenu: !this.state.showMenu })
     }
 
+    goBack() {
+
+    //     switch (this.state.page) {
+    //         case 'categoryList':
+
+    //             this.setState({ page: 'contentOverview', showHeader: true, heading: 'SELECT YOUR TOPIC', goBack: false });
+    //             break;
+
+    //         case 'detailedView':
+                
+    //             this.setState({ page: 'categoryList', showHeader: showHeader, heading: 'NUTRI', goBack: true });
+    //             break;
+
+    //         default:
+    //             break;
+    //     }
+    }
 
     render() {
+
 
         return (
             <View style={styles.container}>
@@ -57,7 +66,7 @@ export default class ContentOverviewContainer extends React.Component {
                     <View style={styles.header}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
                             {
-                                this.state.goBack && <Image source={require('../../../assets/icons/back_grey.png')} style={{ width: 54, height: 54, resizeMode: 'center' }} />
+                                this.state.goBack && <TouchableOpacity onPress={() => this.props.goToNext('contentOverview','SELECT YOUR TOPIC', true, false)}><Image source={require('../../../assets/icons/back_grey.png')} style={{ width: 54, height: 54, resizeMode: 'center' }} /></TouchableOpacity>
                             }
                         </View>
                         <View style={{ flex: 8, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
@@ -79,8 +88,10 @@ export default class ContentOverviewContainer extends React.Component {
                                     return <ImportantNotification navigation={this.props.navigation} goToNext={this.goToNext} />;
                                 case 'contentOverview':
                                     return <ContentOverview goToNext={this.goToNext} />;
-                                case 'passwordForgoten':
-                                    return <PasswordForgotten />;
+                                case 'categoryList':
+                                    return <CategoryList goToNext={this.goToNext} />;
+                                case 'detailedView':
+                                    return <Recipe goToNext={this.goToNext} />;
                                 default:
                                     return null;
                             }
@@ -90,7 +101,7 @@ export default class ContentOverviewContainer extends React.Component {
 
                 {
                     this.state.showMenu && <View style={styles.menuOverlay}>
-                        <GeneralMenu showMenu={this.showMenu} />
+                        <GeneralMenu navigation={this.props.navigation} showMenu={this.showMenu} />
                     </View>
                 }
 
@@ -108,7 +119,7 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        backgroundColor: '#F5F5F580',
+        backgroundColor: '#FFFFFF80',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
