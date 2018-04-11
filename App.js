@@ -8,8 +8,8 @@ import { StackNavigator } from 'react-navigation';
 
 
 import Login from './src/components/login';
-import ContentOverviewContainer from './src/components/content overview';
-import ContentOverview from './src/components/content overview/ContentOverview';
+import WelcomeScreen from './src/components/WelcomeScreen';
+import ContentOverview from './src/components/content overview';
 import CalendarContainer from './src/components/calendar';
 import Profile from './src/components/user profile';
 import userReducer from './src/reducers';
@@ -25,7 +25,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <AppNavigator />
+        <AppNavigator/>
       </Provider>
     );
   }
@@ -33,10 +33,10 @@ export default class App extends React.Component {
 
 
 const AppNavigator = StackNavigator({
-  WelcomeScreen: { screen: Login },
-  ContentOverviewContainer: { screen: ContentOverviewContainer },
+  Login: { screen: Login },
+  WelcomeScreen: { screen: WelcomeScreen },
+  ContentOverview: { screen: ContentOverview },
   CalendarContainer: { screen: CalendarContainer },
-  ContentOverview: { screen: ContentOverview},
   Profile: { screen: Profile}
 
 

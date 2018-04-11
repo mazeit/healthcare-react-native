@@ -45,7 +45,7 @@ class SignIn extends React.Component {
             case 'password':
                 if(!nextProps.validPassword.hasError) {
                     this.setState({ wrongPassword: '', wrongPasswordMsg: ''});
-                    this.props.navigation.navigate('ContentOverviewContainer');
+                    this.props.rootNavigation.navigate('WelcomeScreen',{ user: nextProps.validPassword.customer});
                 } else {
                     this.setState({  wrongPassword: 'Password', wrongPasswordMsg: 'This password is not correct, Please try again.' });
                 }
@@ -133,6 +133,8 @@ class SignIn extends React.Component {
         );
     }
 }
+
+
 
 const styles = StyleSheet.create({
     signInContainer: {

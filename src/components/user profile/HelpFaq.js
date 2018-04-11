@@ -30,7 +30,7 @@ export default class HelpFaq extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545'}}>How can i buy a new challenge</Text>
                         </View>
                         <View style={{  flex: 1, alignItems: 'flex-end',}}>
-                            <Image style={{ width: 56, height: 56, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                            <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                         </View>
                     
                     </View>
@@ -41,7 +41,7 @@ export default class HelpFaq extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545'}}>Who to contact ?</Text>
                         </View>
                         <View style={{  flex: 1, alignItems: 'flex-end',}}>
-                            <Image style={{ width: 56, height: 56, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                            <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                         </View>
                     
                     </View>
@@ -52,7 +52,7 @@ export default class HelpFaq extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545'}}>How to become a partner ?</Text>
                         </View>
                         <View style={{  flex: 1, alignItems: 'flex-end',}}>
-                            <Image style={{ width: 56, height: 56, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                            <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                         </View>
                     
                     </View>
@@ -63,7 +63,7 @@ export default class HelpFaq extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545'}}>How to get medical information ?</Text>
                         </View>
                         <View style={{  flex: 1, alignItems: 'flex-end',}}>
-                            <Image style={{ width: 56, height: 56, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                            <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                         </View>
                     
                     </View>
@@ -74,7 +74,7 @@ export default class HelpFaq extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545'}}>How can i invite friends ?</Text>
                         </View>
                         <View style={{  flex: 1, alignItems: 'flex-end',}}>
-                            <Image style={{ width: 56, height: 56, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                            <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                         </View>
                     
                     </View>
@@ -85,7 +85,7 @@ export default class HelpFaq extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545'}}>How does the app works ?</Text>
                         </View>
                         <View style={{  flex: 1, alignItems: 'flex-end',}}>
-                            <Image style={{ width: 56, height: 56, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                            <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                         </View>
                     
                     </View>

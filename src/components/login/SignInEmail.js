@@ -5,6 +5,7 @@ import ShakingText from 'react-native-shaking-text';
 export default class SignInEmail extends React.Component {
     constructor(props) {
         super(props);
+        console.log('THIS PROPS...',this.props)
         this.state = {
         };
     }
@@ -35,6 +36,8 @@ const styles = StyleSheet.create({
     email: {
         flex: 1,
         justifyContent: 'center',
+        backgroundColor: "#AE0069",
+        opacity: 0.8
     },
     homeImage: {
         width: '100%',

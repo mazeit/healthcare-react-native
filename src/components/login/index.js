@@ -28,7 +28,7 @@ export default class WelcomePage extends React.Component {
         return (
                 <View style={styles.container}>
                     {
-                        this.state.welcome ? <Weclome goToSignIn={ this.goToSignIn } /> : <SignIn goToSignIn={ this.goToSignIn } navigation={ this.props.navigation }/>
+                        this.state.welcome ? <Weclome goToSignIn={ this.goToSignIn } /> : <SignIn goToSignIn={ this.goToSignIn } rootNavigation={ this.props.navigation }/>
                     }
                 </View>
         );

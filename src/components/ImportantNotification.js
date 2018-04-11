@@ -25,7 +25,7 @@ export default class ImportantNotification extends React.Component {
     render() {
         return (
             <View style={[styles.container, { backgroundColor: this.state.backgroundColor, }]}>
-                <TouchableOpacity onPress={() => this.props.goToNext('contentOverview','SELECT YOUR TOPIC', true, false)} style={{ alignItems: 'center', justifyContent: 'center'}}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('contentOverview')} style={{ alignItems: 'center', justifyContent: 'center'}}>
                     <Image style={{ width: 15, height: 15, position: 'absolute', top: 20, left: '-50%', margin: 10 }} source={require('../../../assets/icons/close.png')} />
                 </TouchableOpacity>
                 <View style={styles.header}>

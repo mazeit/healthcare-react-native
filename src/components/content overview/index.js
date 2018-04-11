@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableOpacity
 
 
 import GeneralMenu from '../GeneralMenu';
-import ImportantNotification from './ImportantNotification';
 import ContentOverview from './ContentOverview'
 import CategoryList from './CategoryList'
 import Recipe from './Recipe'
@@ -14,22 +13,22 @@ const { height, width } = Dimensions.get('window');
 export default class ContentOverviewContainer extends React.Component {
     constructor(props) {
         super(props);
+        console.log(this.props)
         this.state = {
-            page: 'contentInformation',
+            page: 'contentOverview',
             heading: 'SELECT YOUR TOPIC',
             goBack: false,
             showMenu: false,
-            showHeader: false,
         };
         this.showMenu = this.showMenu.bind(this)
         this.goToNext = this.goToNext.bind(this)
         this.goBack = this.goBack.bind(this)
     }
 
-    goToNext(componentName, headerTitle, showHeader = false, goBack = false) {
+    goToNext(componentName, headerTitle, goBack = false) {
 
 
-        this.setState({ page: componentName, showHeader: showHeader, heading: headerTitle, goBack: goBack });
+        this.setState({ page: componentName, heading: headerTitle, goBack: goBack });
         
     }
 
@@ -61,8 +60,7 @@ export default class ContentOverviewContainer extends React.Component {
         return (
             <View style={styles.container}>
 
-                {
-                    this.state.showHeader &&
+                
                     <View style={styles.header}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
                             {
@@ -78,14 +76,13 @@ export default class ContentOverviewContainer extends React.Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                }
+                
 
                 <View style={{ flex: 9 }}>
                     {
                         (() => {
                             switch (this.state.page) {
-                                case 'contentInformation':
-                                    return <ImportantNotification navigation={this.props.navigation} goToNext={this.goToNext} />;
+                        
                                 case 'contentOverview':
                                     return <ContentOverview goToNext={this.goToNext} />;
                                 case 'categoryList':

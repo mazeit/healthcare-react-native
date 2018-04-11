@@ -87,7 +87,7 @@ export default class ProfilePage extends React.Component {
                         })
                     }
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10, backgroundColor: '#FFFFFF', }}>
-                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('WelcomeScreen')} style={{ flex: 1, marginTop: 20, marginBottom: 10 }}>
+                        <TouchableOpacity onPress={()=> this.props.navigation.navigate('Login')} style={{ flex: 1, marginTop: 20, marginBottom: 10 }}>
                             <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
                                 <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Sign out</Text>
                             </View>
