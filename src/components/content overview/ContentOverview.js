@@ -7,7 +7,7 @@ const windowHeight = Dimensions.get('window').height;
 export default class ContentOverview extends React.Component {
     constructor(props) {
         super(props);
-
+        
         this.state = {
             openSearch: true,
         };

@@ -5,7 +5,6 @@ import ShakingText from 'react-native-shaking-text';
 export default class SignInEmail extends React.Component {
     constructor(props) {
         super(props);
-        console.log('THIS PROPS...',this.props)
         this.state = {
         };
     }

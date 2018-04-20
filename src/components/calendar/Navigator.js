@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, ScrollView, Image, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ScrollView, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle'
 
 const {height, width} = Dimensions.get('window');
@@ -19,11 +19,15 @@ export default class Navigator extends React.Component {
 
                 <ScrollView style={ styles.helpFaqContainer }>
 
-                    <View style={ [styles.termsOfUseBlock, { marginTop: 0,height: 63}] }>
-                                
-                        <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#838383', margin: 20, textAlign: 'center'}}>Do you have issues with your app or your challenge? These answers here might help you:</Text>
-
-                    </View>
+                    <TouchableOpacity style={ [styles.navigatorHeader, { marginTop: 0,height: 63}] }>          
+                        <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#838383', margin: 20, textAlign: 'center'}}>Today</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={ [styles.navigatorHeader, { marginTop: 0,height: 63}] }>          
+                        <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#838383', margin: 20, textAlign: 'center'}}>Week</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={ [styles.navigatorHeader, { marginTop: 0,height: 63}] }>          
+                        <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#838383', margin: 20, textAlign: 'center'}}>Challange</Text>
+                    </TouchableOpacity>
 
                     <View style={ [styles.termsOfUseBlock, { height: 240 }] }>
                                 
@@ -44,7 +48,7 @@ export default class Navigator extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545'}}>Who to contact ?</Text>
                         </View>
                         <View style={{  flex: 1, alignItems: 'flex-end',}}>
-                            <Image style={{ width: 56, height: 56, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                            <Image style={{ width: 15, height: 15, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                         </View>
                     
                     </View>
@@ -55,7 +59,7 @@ export default class Navigator extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545'}}>How to become a partner ?</Text>
                         </View>
                         <View style={{  flex: 1, alignItems: 'flex-end',}}>
-                            <Image style={{ width: 56, height: 56, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                            <Image style={{ width: 15, height: 15, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                         </View>
                     
                     </View>
@@ -66,7 +70,7 @@ export default class Navigator extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545'}}>How to get medical information ?</Text>
                         </View>
                         <View style={{  flex: 1, alignItems: 'flex-end',}}>
-                            <Image style={{ width: 56, height: 56, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                            <Image style={{ width: 15, height: 15, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                         </View>
                     
                     </View>
@@ -77,7 +81,7 @@ export default class Navigator extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545'}}>How can i invite friends ?</Text>
                         </View>
                         <View style={{  flex: 1, alignItems: 'flex-end',}}>
-                            <Image style={{ width: 56, height: 56, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                            <Image style={{ width: 15, height: 15, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                         </View>
                     
                     </View>
@@ -88,7 +92,7 @@ export default class Navigator extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545'}}>How does the app works ?</Text>
                         </View>
                         <View style={{  flex: 1, alignItems: 'flex-end',}}>
-                            <Image style={{ width: 56, height: 56, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                            <Image style={{ width: 15, height: 15, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                         </View>
                     
                     </View>
@@ -133,7 +137,7 @@ const styles = StyleSheet.create({
         width: width,
         backgroundColor: '#FFFFFF50',
     },
-    termsOfUseBlock: {
+    navigatorHeader: {
         flex: 1,
         marginTop: 10,
         alignItems: 'center',

@@ -4,24 +4,34 @@ import { StyleSheet, View, Dimensions, Text, ImageBackground } from 'react-nativ
 
 
 import Home from './Home.js';
+import Loader from '../Loader';
 
 const BannerWidth = Dimensions.get('window').width;
-
+const {height} = Dimensions.get('window')
 const images = [
     "http://xxx.com/1.png",
     "http://xxx.com/2.png",
     "http://xxx.com/3.png"
 ];
 
+let backGround = '';
 export default class HomeInitial extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loader: true,
             introText: 'Skip Intro'
         };
     }
 
 
+    // componentDidMount () {
+    //     this.setState({loader: false});
+    // }
+    onLoad () {
+        setTimeout( () => this.setState({loader: false}), 500);
+        
+    }
     renderPage(image, index) {
         return (
                 <Home key={index}/>
@@ -30,7 +40,8 @@ export default class HomeInitial extends React.Component {
 
     render() {
         return (
-            <ImageBackground style={styles.homeImage} source={require('../../../assets/images/home.png')}>
+            <ImageBackground style={styles.homeImage} source={require('../../../assets/images/home.png')} onLoad={() => this.onLoad()}>
+                {this.state.loader && <View style={{height: height, width: BannerWidth}}><Loader/></View>}
                 <View style={styles.container}>
                     <Carousel
                         autoplay={false}

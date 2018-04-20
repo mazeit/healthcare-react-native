@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableHighlight, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
@@ -8,6 +8,11 @@ import { verifyPassword } from '../../actions/index'
 import SignInEmail from './SignInEmail';
 import SignInPassword from './SignInPassword';
 import PasswordForgotten from './PasswordForgotten';
+import LoaderWait from '../LoaderWait';
+
+const {height, width} = Dimensions.get('window');
+
+
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -25,6 +30,7 @@ class SignIn extends React.Component {
             showNext: true,
             wrongPassword: '',
             wrongPasswordMsg: '',
+            loader: false,
 
 
         }
@@ -53,10 +59,12 @@ class SignIn extends React.Component {
             default:
                 break;
         }
+        this.setState({loader: false});
         
     }
 
     setInput(input) {
+        
         switch (this.state.page) {
             case 'signin':
                 this.setState({ activeUser: input })
@@ -70,7 +78,7 @@ class SignIn extends React.Component {
     }
 
     goToNextPage() {
-
+        this.setState({loader: true});
         switch (this.state.page) {
 
                 case 'signin':
@@ -97,37 +105,43 @@ class SignIn extends React.Component {
         return;
     }
 
-
     render() {
         return (
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')}>
                 <KeyboardAvoidingView style={[styles.signInContainer, { backgroundColor: this.state.backgroundcolor }]}>
-                    <View style={styles.header}>
-                        <TouchableHighlight onPress={() => this.props.goToSignIn()} >
-                             <Image style={{ width: 15, height: 15, }} source={require('../../../assets/icons/close.png')} />
-                        </TouchableHighlight>
-                        <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff' }}>{this.state.headerTitle}</Text>
-                        {
-                            this.state.showNext && <Text onPress={() => this.goToNextPage()} style={{ fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff' }}>Next</Text>
-                        }
-                    </View>
-                    <View style={styles.componentContainer}>
-                    
-                        {
-                            (() => {
-                                switch (this.state.page) {
-                                    case 'signin':
-                                        return <SignInEmail goToNextPage={this.goToNextPage} setInput={this.setInput} errorMsgEmail={this.state.errorMsgEmail} errorMgs={this.state.errorMgs}/>;
-                                    case 'password':
-                                        return <SignInPassword goToNextPage={this.goToNextPage} navigation={ this.props.navigation } forgotPassword={ this.forgotPassword } setInput={this.setInput} wrongPassword={ this.state.wrongPassword } wrongPasswordMsg={ this.state.wrongPasswordMsg }/>;
-                                    case 'passwordForgoten':
-                                        return <PasswordForgotten />;
-                                    default:
-                                        return null;
-                                }
-                            })()
-                        }
-                    </View>
+                
+                    {!this.state.loader && 
+                        <View style={styles.header}>
+                            <TouchableHighlight onPress={() => this.props.goToSignIn()} >
+                                <Image style={{ width: 15, height: 15, }} source={require('../../../assets/icons/close.png')} />
+                            </TouchableHighlight>
+                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff' }}>{this.state.headerTitle}</Text>
+                            <View style={{ alignItems:'center', justifyContent:'center'}}>
+                            {
+                                this.state.showNext && <Text onPress={() => this.goToNextPage()} style={{ fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff' }}>Next</Text>
+                            }
+                            </View>
+                        </View>
+                    }
+                    {!this.state.loader &&
+                        <View style={styles.componentContainer}>
+                            {
+                                (() => {
+                                    switch (this.state.page) {
+                                        case 'signin':
+                                            return <SignInEmail goToNextPage={this.goToNextPage} setInput={this.setInput} errorMsgEmail={this.state.errorMsgEmail} errorMgs={this.state.errorMgs}/>;
+                                        case 'password':
+                                            return <SignInPassword goToNextPage={this.goToNextPage} navigation={ this.props.navigation } forgotPassword={ this.forgotPassword } setInput={this.setInput} wrongPassword={ this.state.wrongPassword } wrongPasswordMsg={ this.state.wrongPasswordMsg }/>;
+                                        case 'passwordForgoten':
+                                            return <PasswordForgotten />;
+                                        default:
+                                            return null;
+                                    }
+                                })()
+                            }
+                        </View>
+                    }
+                    {this.state.loader && <View style={{height: height, width: width}}><LoaderWait/></View>}
                 </KeyboardAvoidingView>
             </ImageBackground>
         );

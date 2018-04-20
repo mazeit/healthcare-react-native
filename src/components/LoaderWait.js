@@ -1,7 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Animated } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated, Dimensions } from 'react-native';
 
-export default class Loader extends React.Component {
+const {height,width} = Dimensions.get('window');
+
+export default class LoaderWait extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,27 +38,23 @@ export default class Loader extends React.Component {
         <View style={styles.loader}>
           <Animated.Image source={require('../../assets/images/loader.png')} style={[{width: 100, height: 100, resizeMode: 'center'}, {transform}]}/>
         </View>
-        <Text style={[styles.welcome,{fontFamily:'DINPro', fontSize: 22}]}>Welcome to livinflow</Text>
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#00000050',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      height: height,
+      width: width,
       alignItems: 'center',
       justifyContent: 'center',
     },
-    welcome: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     loader: {
         flex: 5,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },

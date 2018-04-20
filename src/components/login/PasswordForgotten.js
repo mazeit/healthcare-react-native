@@ -30,7 +30,8 @@ export default class PasswordForgotten extends React.Component {
 const styles = StyleSheet.create({
     email: {
       flex: 1,
-      backgroundColor: '#8ACE9180',
+      backgroundColor: '#8ACE91',
+      opacity: 0.8,
       justifyContent: 'center',
     },
     homeImage: {
