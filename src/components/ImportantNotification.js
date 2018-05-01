@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import icoMoonConfig from '../selection.json';
+const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 
 
@@ -26,7 +29,7 @@ export default class ImportantNotification extends React.Component {
         return (
             <View style={[styles.container, { backgroundColor: this.state.backgroundColor, }]}>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('contentOverview')} style={{ alignItems: 'center', justifyContent: 'center'}}>
-                    <Image style={{ width: 15, height: 15, position: 'absolute', top: 20, left: '-50%', margin: 10 }} source={require('../../../assets/icons/close.png')} />
+                    <Icon name="close" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
                 </TouchableOpacity>
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Your next activity</Text>
@@ -50,7 +53,7 @@ export default class ImportantNotification extends React.Component {
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('CalendarContainer')}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginTop: '12%' }}>Go to My Day</Text>
-                            <Image style={{ width: 50, height: 50, }} source={require('../../../assets/icons/little_arrow.png')} />
+                                <Icon name="little_arrow" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
                         </View>
                     </TouchableOpacity>
                 </View>

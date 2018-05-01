@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity } from 'react-native';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import icoMoonConfig from '../selection.json';
+const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 const { height, width } = Dimensions.get('window');
 
@@ -57,7 +60,7 @@ export default class GeneralMenu extends React.Component {
                     </View>
                     <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center', marginTop: 10 }}>
                         <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', margin: 20}} onPress={() => this.props.showMenu()}>
-                            <Image source={require('../../assets/icons/close.png')} style={{ width: 20, height: 20, }} />
+                            <Icon name="close" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
                         </TouchableOpacity>
                     </View>
                 </View>

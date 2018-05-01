@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, ImageBackground, FlatList, Image } from 'react-native';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import icoMoonConfig from '../selection.json';
+const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 const { height, width } = Dimensions.get('window');
 
@@ -19,11 +22,11 @@ export default class ActivityList extends React.Component {
                     renderItem={({item}) => <View style={styles.categoryContainer}>
                                                 <View style={styles.subIcons}>
                                                     <TouchableOpacity style={{ flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                                                        <Image source={require('../../assets/icons/add.png')} style={{ width: 10, height: 10, resizeMode: 'center', marginTop: 10 }} />
+                                                        <Icon name="fav" size={50} style={{ marginLeft: -15}} color="#454545" />
                                                     </TouchableOpacity>
 
                                                     <TouchableOpacity style={{ flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                                                        <Image source={require('../../assets/icons/add.png')} style={{ width: 10, height: 10, resizeMode: 'center', marginBottom: 10 }} />
+                                                        <Icon name="plus" size={50} style={{ marginLeft: -15}} color="#454545" />
                                                     </TouchableOpacity>
                                                 </View>
                                                 <TouchableOpacity onPress={ () => this.props.goToNext('detailedView','AVACADO SALAD', true, true) } style={styles.categoryDetails}>

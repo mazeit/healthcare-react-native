@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableHighlight } from 'react-native';
 // import { getUser } from '../actions/index'
 // import { bindActionCreators } from 'redux'
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import icoMoonConfig from '../selection.json';
+const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 export default class WelcomeScreen extends React.Component {
   constructor(props) {
@@ -25,8 +28,8 @@ export default class WelcomeScreen extends React.Component {
         <ImageBackground style={styles.homeImage} source={require('../../assets/images/homeBlur.png')}>
             <View style={[styles.container, { backgroundColor: this.state.backgroundColor, }]}>
                 <View style={styles.welcomeHeader}>
-                    <TouchableHighlight style={{marginLeft: 10, marginBottom: 20}} onPress={() => this.props.navigation.navigate('ContentOverview')} >
-                        <Image style={{ width: 15, height: 15, marginLeft: '-50%'}} source={require('../../assets/icons/close.png')} />
+                    <TouchableHighlight style={{marginLeft: 10, marginBottom: 20, alignItems: 'flex-start'}} onPress={() => this.props.navigation.navigate('ContentOverview')} >
+                        <Icon name="close" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
                     </TouchableHighlight>
                     <Text style={styles.headerText}>Welcome</Text>
                     <Text style={styles.headerText}>{this.state.userName}</Text>

@@ -15,7 +15,7 @@ export default class SignInEmail extends React.Component {
             <View style={styles.email}>
                 <View style={styles.inputEmailContainer}>
                     <ShakingText style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff' }}>{this.props.errorMsgEmail}</ShakingText>
-                    <TextInput onChangeText={(text) => this.props.setInput(text)} style={[styles.inputEmail, { fontFamily: 'DINPro-Light', fontSize: 24 }]} placeholder='Email address or Username' placeholderTextColor={'#ECA1C9'} autoCapitalize='none' autoCorrect={false} autoFocus={true} enablesReturnKeyAutomatically={true} onSubmitEditing={ () => this.props.goToNextPage()}/>
+                    <TextInput onChangeText={(text) => this.props.setInput(text)} underlineColorAndroid='rgba(0,0,0,0)' style={[styles.inputEmail, { fontFamily: 'DINPro-Light', fontSize: 24 }]} placeholder='Email address or Username' placeholderTextColor={'#ECA1C9'} autoCapitalize='none' autoCorrect={false} autoFocus={true} enablesReturnKeyAutomatically={true} onSubmitEditing={ () => this.props.goToNextPage()}/>
                     <ShakingText style={{ fontFamily: 'DINPro-Light', fontSize: 16, width: '90%', top: '5%', color: '#ffffff' }}>{this.props.errorMgs}</ShakingText>
                 </View>
                 <View style={styles.passwordManager}>
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     email: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: "#AE0069",
-        opacity: 0.8
+        // backgroundColor: "#AE0069",
+        // opacity: 0.8
     },
     homeImage: {
         width: '100%',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     },
     inputEmail: {
         width: '90%',
-        height: 40,
+        // height: 40,
         color: '#ECA1C9',
         fontSize: 20,
     },

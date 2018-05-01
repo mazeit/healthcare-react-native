@@ -15,7 +15,7 @@ export default class PasswordForgotten extends React.Component {
         
             <View style={styles.email}>
                 <View style={styles.inputEmailContainer}>
-                    <TextInput style={[styles.inputEmail, { fontFamily: 'DINPro-Light', fontSize: 24}]} placeholder='Enter your email address' placeholderTextColor={'#C5E9D6'}/>
+                    <TextInput style={[styles.inputEmail, { fontFamily: 'DINPro-Light', fontSize: 24}]} placeholder='Enter your email address' placeholderTextColor={'#C5E9D6'} underlineColorAndroid='rgba(0,0,0,0)'/>
                 </View>
                 <View style={styles.passwordManager}>
                     <TouchableHighlight style={styles.button}>
@@ -30,8 +30,8 @@ export default class PasswordForgotten extends React.Component {
 const styles = StyleSheet.create({
     email: {
       flex: 1,
-      backgroundColor: '#8ACE91',
-      opacity: 0.8,
+    //   backgroundColor: '#8ACE91',
+    //   opacity: 0.8,
       justifyContent: 'center',
     },
     homeImage: {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     },
     inputEmail: {
         width: '90%',
-        height: 40,
+        // height: 40,
         color: '#C5E9D6',
         fontSize: 20,
     },
