@@ -1,5 +1,9 @@
 import React from 'react';
 import { Text, View, Dimensions, Image, StyleSheet } from 'react-native';
+// import Video from 'react-native-video';
+// import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+// import icoMoonConfig from '../../selection.json';
+// const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 const { height, width } = Dimensions.get('window');
 
@@ -7,15 +11,29 @@ export default class Activity extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            paused: true,
+        };
+    }
+
+    componentDidMount() {
+        this.setState({paused: false})
     }
 
     render() {
         return (
             <View style={{ flex: 1, }}>
-
                 <View style={{ flex: 3, }}>
-                    <Image style={{ flex: 1 }} source={require('../../../assets/images/detoxYoga.png')} />
+                {/* <Icon name="fav_checked" size={80} color="#4AB3E2" /> */}
+                    {/* <Video source={{uri: "https://content.jwplatform.com/players/8rxPJLsL-Qzd90UGq.html"}}
+                    poster="https://assets-jpcust.jwpsrv.com/thumbs/l1VDr5QT-120.jpg"
+                        rate={1}                              // 0 is paused, 1 is normal.
+                        volume={1}                            // 0 is muted, 1 is normal.
+                        muted={false}                           // Mutes the audio entirely.
+                        paused={this.state.paused}                          // Pauses playback entirely.
+                        resizeMode="contain"
+                        style={{ flex: 1}}/> */}
+                    <Image style={{ flex: 1, width:'100%' }} source={require('../../../assets/images/detoxYoga.png')} />
                 </View>
 
                 <View style={{ flex: 7, alignItems: 'center', justifyContent: 'center', }}>
@@ -56,6 +74,7 @@ export default class Activity extends React.Component {
                     </View>
 
                 </View>
+                
             </View>
         );
     }

@@ -2,6 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableHighlight, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import icoMoonConfig from '../../selection.json';
+const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 import { verifyEmail } from '../../actions/index'
 import { verifyPassword } from '../../actions/index'
@@ -113,7 +116,7 @@ class SignIn extends React.Component {
                     {!this.state.loader && 
                         <View style={styles.header}>
                             <TouchableHighlight onPress={() => this.props.goToSignIn()} >
-                                <Image style={{ width: 15, height: 15, }} source={require('../../../assets/icons/close.png')} />
+                                <Icon name="close" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
                             </TouchableHighlight>
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff' }}>{this.state.headerTitle}</Text>
                             <View style={{ alignItems:'center', justifyContent:'center'}}>

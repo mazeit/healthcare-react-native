@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/suryapratapbadal/Desktop/office\ Advenith/livinform/ios/livinform/main.m \
-  /Users/suryapratapbadal/Desktop/office\ Advenith/livinform/ios/livinform/AppDelegate.h
+  /Users/suryapratapbadal/Desktop/livinform/ios/livinform/main.m \
+  /Users/suryapratapbadal/Desktop/livinform/ios/livinform/AppDelegate.h

@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import icoMoonConfig from '../../selection.json';
+const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 
 import GeneralMenu from '../GeneralMenu';
@@ -72,7 +75,7 @@ export default class ContentOverviewContainer extends React.Component {
                         </View>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
                             <TouchableOpacity onPress={() => this.showMenu()}>
-                                <Image source={require('../../../assets/icons/menu.png')} style={{ width: 54, height: 54, resizeMode: 'center' }} />
+                                <Icon name="menu" size={50} color="#454545" />
                             </TouchableOpacity>
                         </View>
                     </View>

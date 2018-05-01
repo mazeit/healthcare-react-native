@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/suryapratapbadal/Desktop/office\ Advenith/livinform/node_modules/react-native/ReactCommon/jschelpers/Unicode.cpp \
-  /Users/suryapratapbadal/Desktop/office\ Advenith/livinform/node_modules/react-native/ReactCommon/jschelpers/Unicode.h
+  /Users/suryapratapbadal/Desktop/livinform/node_modules/react-native/ReactCommon/jschelpers/Unicode.cpp \
+  /Users/suryapratapbadal/Desktop/livinform/node_modules/react-native/ReactCommon/jschelpers/Unicode.h
