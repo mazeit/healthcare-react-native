@@ -39,10 +39,21 @@ const AppNavigator = StackNavigator({
   CalendarContainer: { screen: CalendarContainer },
   Profile: { screen: Profile}
 
-
-
-
-}, { headerMode: 'none' });
+},{
+  initialRouteName: 'Login',
+  /* The header config from HomeScreen is now here */
+  navigationOptions: {
+    headerStyle: {
+      elevation: 0,
+        shadowOpacity: 0,
+      backgroundColor: '#FFFFFF',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
