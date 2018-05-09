@@ -40,19 +40,7 @@ const AppNavigator = StackNavigator({
   Profile: { screen: Profile}
 
 },{
-  initialRouteName: 'Login',
-  /* The header config from HomeScreen is now here */
-  navigationOptions: {
-    headerStyle: {
-      elevation: 0,
-        shadowOpacity: 0,
-      backgroundColor: '#FFFFFF',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
-  },
+    headerMode: 'none',
 });
 
 const styles = StyleSheet.create({
