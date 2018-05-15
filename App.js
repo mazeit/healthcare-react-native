@@ -127,6 +127,7 @@ const AppNavigator = StackNavigator({
   GeneralMenu: { screen: GeneralMenu },
   Profile: { screen: Profile}
 
+<<<<<<< HEAD
 }, {
     mode: 'modal',
     headerMode: 'none',
@@ -134,6 +135,11 @@ const AppNavigator = StackNavigator({
 
 
   ////  ROOT STACK / END ------------------------------------>
+=======
+},{
+    headerMode: 'none',
+});
+>>>>>>> a2233c07f641da8b4d6f3e745b5a41d704982c85
 
 const styles = StyleSheet.create({
   container: {
