@@ -1,9 +1,6 @@
 rootProject.name = 'livinflow'
-<<<<<<< HEAD
 include ':react-native-video'
 project(':react-native-video').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-video/android')
-=======
->>>>>>> a2233c07f641da8b4d6f3e745b5a41d704982c85
 include ':react-native-vector-icons'
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
 
