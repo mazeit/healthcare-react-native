@@ -5,8 +5,12 @@ import { getUser } from '../../actions/index'
 import { bindActionCreators } from 'redux'
 
 
+import Header from '../Header';
+
+
 import Swipeout from 'react-native-swipeout';
 import AddActivity1 from './AddActivity1.js';
+import Activity from './Activity';
 import Calendar from './Calendar';
 
 
@@ -45,30 +49,34 @@ class CalendarView extends React.Component {
         };
         return (
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')}>
-                {
-                    this.state.weeklyCalendar ? <Calendar today={this.state.today} firstDay={this.state.firstDay} /> : <AddActivity1 />
-                }
 
-                <ScrollView style={styles.container}>
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                <View style={{ flex: 1 }}>
+                    <Header goBack={() => this.props.navigation.navigate('AddActivity1')} backgroundcolor={'#FFFFFF'} headerTitle={'SELECT YOUR TOPIC'} leftButton={true} leftButtonName={'plus'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.screenProps.rootNavigation} />
+                </View>
+                <View style={{ flex: 9 }}>
+                    <Calendar today={this.state.today} firstDay={this.state.firstDay} />
 
-                        <Swipeout {...swipeSettings} style={styles.SwiperContainer}>
-                            <View style={styles.challangeTab} >
-                                <TouchableOpacity onPress={() => this.props.goToNext()}>
-                                    <View style={styles.challangeTab}>
-                                        <Image style={{ flex: 2, width: 74, height: 60, }} source={require('../../../assets/icons/morning.png')} />
-                                        <View style={{ flex: 6.5, justifyContent: 'center', }}>
-                                            <Text style={{ flex: 1, fontFamily: 'DINPro-Light', fontSize: 16, color: '#454545', marginVertical: 10 }}>Einnahme Multi Vitamin Mix</Text>
-                                            {/* <Text style={ {flex: 1,}}>ahjdkjs</Text> */}
+                    <ScrollView style={styles.container}>
+                        <View style={{ flex: 1, justifyContent: 'center' }}>
+
+                            <Swipeout {...swipeSettings} style={styles.SwiperContainer}>
+                                <View style={styles.challangeTab} >
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Activity')}>
+                                        <View style={styles.challangeTab}>
+                                            <Image style={{ flex: 2, width: 74, height: 60, }} source={require('../../../assets/icons/morning.png')} />
+                                            <View style={{ flex: 6.5, justifyContent: 'center', }}>
+                                                <Text style={{ flex: 1, fontFamily: 'DINPro-Light', fontSize: 16, color: '#454545', marginVertical: 10 }}>Einnahme Multi Vitamin Mix</Text>
+                                                {/* <Text style={ {flex: 1,}}>ahjdkjs</Text> */}
+                                            </View>
+                                            <View style={{ flex: 1.5 }}></View>
                                         </View>
-                                        <View style={{ flex: 1.5 }}></View>
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
-                        </Swipeout>
+                                    </TouchableOpacity>
+                                </View>
+                            </Swipeout>
 
-                    </View>
-                </ScrollView>
+                        </View>
+                    </ScrollView>
+                </View>
 
             </ImageBackground>
         );

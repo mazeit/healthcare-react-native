@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, PanResponder, Animated, Dimensions, Image } fro
 
 
 const dimention = Dimensions.get('window');
-const dayName = [ 'SO', 'MO', 'DI', 'MI', 'DO', 'FR', 'SA'];
+const dayName = ['SO', 'MO', 'DI', 'MI', 'DO', 'FR', 'SA'];
 const monthName = ['Jan', 'feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const monthDays = ['31', '28', '31', '30', '31', '30', '31', '31', '30', '31', '30', '31'];
 
@@ -33,22 +33,16 @@ class Week extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            week: [],
 
         };
-        this.updateWeek = this.updateWeek.bind(this);
 
     }
 
-
-    componentDidMount() {
-        this.updateWeek();
-    }
-
-    updateWeek() {
+    render() {
 
         let currentDate = this.props.today.getDate();
         let currentDay = this.props.today.getDay();
+        let currentMonth = this.props.today.getMonth();
         let startDate = currentDate;
         let startDay = currentDay;
         if (this.props.monthView) {
@@ -60,25 +54,36 @@ class Week extends React.Component {
         let week = [0, 0, 0, 0, 0, 0, 0];
         let j = 0;
         for (let i = startDay; i >= 0; i--) {
+            if (startDate - j <= 0) {
+                j = 0;
+                startDate = monthDays[currentMonth];
+            }
             week[i] = startDate - j;
             j++;
+
         }
         j = 1;
+        startDate = currentDate;
+        startDay = currentDay;
+        if (this.props.monthView) {
+
+            startDate = this.props.firstDate;
+            startDay = this.props.firstDay;
+        }
         for (let i = startDay + 1; i < 7; i++) {
+            if (startDate + j > monthDays[currentMonth]) {
+                j = 1;
+                startDate = 0;
+            }
             week[i] = startDate + j;
             j++;
         }
 
-        this.setState({ week: week })
-    }
-
-
-    render() {
 
         return (
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
                 {
-                    this.state.week.map((item, i) => {
+                    week.map((item, i) => {
                         return <DateContainer date={item} key={i} />
                     })
                 }
@@ -90,15 +95,14 @@ class Week extends React.Component {
 export default class Calendar extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             weekView: '180deg',
             monthView: true,
-            calendar: [],
         };
         this.monthlyView = this.monthlyView.bind(this);
         this.weeklyView = this.weeklyView.bind(this);
         this.calculateWeek = this.calculateWeek.bind(this);
-        this.updateCalendar = this.updateCalendar.bind(this);
 
         this.animated = new Animated.Value(0);
 
@@ -133,32 +137,6 @@ export default class Calendar extends React.Component {
         });
     }
 
-    componentDidMount() {
-        this.updateCalendar();
-
-    }
-
-    updateCalendar() {
-        let calendar = [];
-        let noOfWeeks = 1;
-
-        if (this.state.monthView) {
-            let year = this.props.today.getFullYear();
-            let month_number = this.props.today.getMonth() + 1;
-            noOfWeeks = this.calculateWeek(year, month_number) - 1;
-
-        };
-
-        let date = 1;
-        for (let i = 0; i < noOfWeeks; i++) {
-
-            calendar.push(<Week today={this.props.today} firstDay={this.props.firstDay} firstDate={date} monthView={this.state.monthView} key={i} />);
-            date = date + 7;
-
-
-        }
-        this.setState({ calendar: calendar });
-    }
 
     calculateWeek(year, month_number) {
 
@@ -170,13 +148,14 @@ export default class Calendar extends React.Component {
         return Math.ceil(used / 7);
     }
     monthlyView() {
+
         Animated.timing(this.animated, {
             toValue: 0,
             duration: 100,
         }).start(() => {
 
             this.setState({ weekView: '180deg', monthView: true })
-            this.updateCalendar()
+
         });
 
     }
@@ -188,23 +167,41 @@ export default class Calendar extends React.Component {
         }).start(() => {
 
             this.setState({ weekView: '0deg', monthView: false })
-            this.updateCalendar()
+
         });
 
     }
 
     render() {
 
+        let calendar = [];
         const height = this.animated.interpolate({
             inputRange: [0, 1],
             outputRange: [270, 118]
         });
 
+        let noOfWeeks = 1;
+        let date = this.props.today.getDate();
 
+        if (this.state.monthView) {
+            let year = this.props.today.getFullYear();
+            let month_number = this.props.today.getMonth() + 1;
+            noOfWeeks = this.calculateWeek(year, month_number) - 1;
+            date = 1;
+
+        };
+        for (let i = 0; i < noOfWeeks; i++) {
+
+            calendar.push(<Week today={this.props.today} firstDay={this.props.firstDay} firstDate={date} monthView={this.state.monthView} key={i} />);
+
+            date = date + 7;
+
+
+        }
 
 
         return (
-            <Animated.View {...this._panResponder.panHandlers} style={[{ backgroundColor: '#F5F5F5',opacity: 0.8, marginBottom: 10 }, { height }]}>
+            <Animated.View {...this._panResponder.panHandlers} style={[{ backgroundColor: '#F5F5F5', opacity: 0.8, marginBottom: 10 }, { height }]}>
                 <View style={{ position: 'absolute', top: 0, left: 0, width: dimention.width, alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ margin: 20, marginBottom: 10, height: 45, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: dimention.width }}>
                         {
@@ -217,12 +214,12 @@ export default class Calendar extends React.Component {
                     </View>
                     <View style={{ alignItems: 'center', justifyContent: 'center', width: dimention.width, marginTop: -10 }}>
                         {
-                            this.state.calendar.map((item, i) => {
+                            calendar.map((item, i) => {
                                 return item
                             })}
                     </View>
-                    <View style={{ alignItems: 'center', justifyContent: 'center', width: 18, height: 18, borderRadius: 18, backgroundColor: '#F5F5F5', opacity: 0.8, marginTop: 7 }}>
-                        <Image style={{  width: 15, height: 15, transform: [{ rotateX: this.state.weekView }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                    <View style={{ alignItems: 'center', justifyContent: 'center', width: 20, height: 20, borderRadius: 20, backgroundColor: '#F5F5F5', opacity: 0.8, marginTop: 4 }}>
+                        <Image style={{ width: 15, height: 15, transform: [{ rotateX: this.state.weekView }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                     </View>
 
 

@@ -8,7 +8,10 @@ export const verifyEmail = (email) => {
         }).then((data) => data.json()).then((json) => {
             dispatch({
                 type: 'AUTHENTICATE_USER_EMAIL',
-                payload: json
+                payload: {
+                            data: json,
+                            userEmail:email,
+                            }   
             })
         }).catch((error) => {
             console.log('There has been a problem with your fetch operation: ' + error.message);

@@ -59,7 +59,7 @@ export default class GeneralMenu extends React.Component {
                     <View style={{ flex: 1, }}>
                     </View>
                     <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center', marginTop: 10 }}>
-                        <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', margin: 20}} onPress={() => this.props.showMenu()}>
+                        <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', margin: 20}} onPress={() => this.props.navigation.goBack()}>
                             <Icon name="close" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
                         </TouchableOpacity>
                     </View>

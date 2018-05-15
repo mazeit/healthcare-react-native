@@ -1,135 +1,196 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
-import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
-import icoMoonConfig from '../../selection.json';
-const Icon = createIconSetFromIcoMoon(icoMoonConfig);
+import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, PanResponder, Animated, TextInput, TouchableOpacity } from 'react-native';
 
+import Header from '../Header';
 
-import GeneralMenu from '../GeneralMenu';
-import ContentOverview from './ContentOverview'
-import CategoryList from './CategoryList'
-import Recipe from './Recipe'
+const { width } = Dimensions.get('window');
+const windowHeight = Dimensions.get('window').height;
 
-
-const { height, width } = Dimensions.get('window');
-
-export default class ContentOverviewContainer extends React.Component {
+export default class ContentOverview extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
+
         this.state = {
-            page: 'contentOverview',
-            heading: 'SELECT YOUR TOPIC',
-            goBack: false,
-            showMenu: false,
+            openSearch: true,
         };
-        this.showMenu = this.showMenu.bind(this)
-        this.goToNext = this.goToNext.bind(this)
-        this.goBack = this.goBack.bind(this)
+
+        this.showSearch = this.showSearch.bind(this);
+        this.hideSearch = this.hideSearch.bind(this);
+
+        this.animated = new Animated.Value(0);
     }
 
-    goToNext(componentName, headerTitle, goBack = false) {
 
+    componentWillMount() {
+        this._panResponder = PanResponder.create({
 
-        this.setState({ page: componentName, heading: headerTitle, goBack: goBack });
-        
+            onMoveShouldSetResponderCapture: () => true,
+
+            onMoveShouldSetPanResponderCapture: () => true,
+            onPanResponderGrant: (e, gestureState) => {
+            },
+
+            onPanResponderMove: () => {
+                //code during Move
+            },
+
+            onPanResponderRelease: (e, { dx, dy }) => {
+
+                if (dy > dx && dy > 0) {
+
+                    this.showSearch()
+                }
+                if (-(dy) > dx && dy < 0) {
+
+                    this.hideSearch()
+                }
+            }
+        });
     }
 
-    showMenu() {
-        this.setState({ showMenu: !this.state.showMenu })
+
+    showSearch() {
+        //   console.log('in show')
+        this.setState({ openSearch: true })
+        Animated.timing(this.animated, {
+            toValue: 1,
+            duration: 100,
+        }).start();
     }
 
-    goBack() {
-
-    //     switch (this.state.page) {
-    //         case 'categoryList':
-
-    //             this.setState({ page: 'contentOverview', showHeader: true, heading: 'SELECT YOUR TOPIC', goBack: false });
-    //             break;
-
-    //         case 'detailedView':
-                
-    //             this.setState({ page: 'categoryList', showHeader: showHeader, heading: 'NUTRI', goBack: true });
-    //             break;
-
-    //         default:
-    //             break;
-    //     }
+    hideSearch() {
+        this.setState({ openSearch: true })
+        Animated.timing(this.animated, {
+            toValue: 0,
+            duration: 100,
+        }).start();
     }
+
 
     render() {
 
+        const height = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: this.state.openSearch ? [0, 44] : [44, 0]
+        });
+        const opacity = this.animated.interpolate({
+            inputRange: [0, 1],
+            outputRange: this.state.openSearch ? [0, 1] : [1, 0]
+        });
+
 
         return (
-            <View style={styles.container}>
-
-                
-                    <View style={styles.header}>
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
-                            {
-                                this.state.goBack && <TouchableOpacity onPress={() => this.props.goToNext('contentOverview','SELECT YOUR TOPIC', true, false)}><Image source={require('../../../assets/icons/back_grey.png')} style={{ width: 54, height: 54, resizeMode: 'center' }} /></TouchableOpacity>
-                            }
-                        </View>
-                        <View style={{ flex: 8, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
-                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 16, color: '#454545' }}>{this.state.heading}</Text>
-                        </View>
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
-                            <TouchableOpacity onPress={() => this.showMenu()}>
-                                <Icon name="menu" size={50} color="#454545" />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                
-
-                <View style={{ flex: 9 }}>
-                    {
-                        (() => {
-                            switch (this.state.page) {
-                        
-                                case 'contentOverview':
-                                    return <ContentOverview goToNext={this.goToNext} />;
-                                case 'categoryList':
-                                    return <CategoryList goToNext={this.goToNext} />;
-                                case 'detailedView':
-                                    return <Recipe goToNext={this.goToNext} />;
-                                default:
-                                    return null;
-                            }
-                        })()
-                    }
+            <View style={{ flex: 1 }}>
+                <View style={{ flex: 1 }}>
+                    <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'SELECT YOUR TOPIC'} leftButton={false} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
                 </View>
+                <View style={styles.container} {...this._panResponder.panHandlers}>
+                    <Animated.View style={[styles.search, { height }, { opacity }]}>
+                        <TextInput style={{ fontFamily: 'DINPro', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
+                        <Image style={{ width: 20, height: 20 }} source={require('../../../assets/icons/search.png')} />
+                    </Animated.View>
+                    <View style={[styles.section, { marginBottom: 5 }]}>
 
-                {
-                    this.state.showMenu && <View style={styles.menuOverlay}>
-                        <GeneralMenu navigation={this.props.navigation} showMenu={this.showMenu} />
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList')} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                            <View style={styles.image}>
+                                <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/nutrition.png')} >
+
+                                </ImageBackground>
+                            </View>
+                            <View style={styles.activityContainer}>
+                                <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/nutrition.png')} />
+                                <Text style={[styles.activitySubtittle, { color: '#8ACE91' }]} >Nutrition</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList')} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
+                            <View style={styles.image}>
+                                <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/activity.png')} >
+                                </ImageBackground>
+                            </View>
+                            <View style={styles.activityContainer}>
+                                <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/activity.png')} />
+                                <Text style={[styles.activitySubtittle, { color: '#AE0069' }]} >Activity</Text>
+                            </View>
+                        </TouchableOpacity>
+
                     </View>
-                }
 
+                    <View style={[styles.section, { marginTop: 5 }]}>
+
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList')} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                            <View style={styles.image}>
+                                <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/mindfulness.png')} >
+                                </ImageBackground>
+                            </View>
+                            <View style={styles.activityContainer}>
+                                <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/mindfulness.png')} />
+                                <Text style={[styles.activitySubtittle, { color: '#D4B870' }]} >Mindfulness</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList')} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
+                            <View style={styles.image}>
+                                <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/coaching.png')} >
+                                </ImageBackground>
+                            </View>
+                            <View style={styles.activityContainer}>
+                                <Text style={[styles.activitySubtittle, { color: '#454545' }]} >Coaching</Text>
+                            </View>
+                        </TouchableOpacity>
+
+                    </View>
+
+                </View>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
+
     container: {
-        flex: 1,
+        flex: 9,
         alignItems: 'center',
         justifyContent: 'center',
-        //   backgroundColor: '#F5F5F5'
+        backgroundColor: '#F5F5F5',
     },
-    header: {
-        flex: 1,
-        backgroundColor: '#FFFFFF80',
+    search: {
+        width: width,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#FFFFFF',
     },
-    menuOverlay: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: width,
-        height: height,
+    section: {
+        flex: 1,
+        margin: 10,
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        width: width - 20,
     },
+    subContent: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    image: {
+        width: (width - 20) / 2 - 10,
+        flex: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
 
+    },
+    activityContainer: {
+        flex: 2,
+        width: (width - 20) / 2 - 10,
+        backgroundColor: '#ffffff',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    activitySubtittle: {
+        fontFamily: 'DINPro',
+        fontSize: 18,
+        textAlign: 'center',
+    },
 });

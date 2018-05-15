@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, Image, TextInput, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 
 
 const { height, width } = Dimensions.get('window');
@@ -49,7 +50,7 @@ const profileSubHeading = [
     // },
 ];
 
-export default class ProfilePage extends React.Component {
+class ProfilePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -135,3 +136,11 @@ const styles = StyleSheet.create({
     },
 
 });
+
+export default connect(state => {
+    const clearState = state || {};
+    return {
+        clearState,
+    }
+}
+)(ProfilePage);

@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Dimensions, TouchableOpacity, TextInput, Image,
 const { height, width } = Dimensions.get('window');
 
 import ActivityList from '../ActivityList';
+import Header from '../Header';
 
 
 export default class CategoryList extends React.Component {
@@ -74,25 +75,30 @@ export default class CategoryList extends React.Component {
 
 
         return (
-            <View style={styles.container} {...this._panResponder.panHandlers}>
-                <Animated.View style={[styles.search, { height }, { opacity }]} >
-                    <TextInput style={{ fontFamily: 'DINPro', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
-                    <Image style={{width: 20, height: 20}} source={require('../../../assets/icons/search.png')} />
-                </Animated.View>
+            <View style={{ flex: 1 }}>
+                <View style={{ flex: 1 }}>
+                    <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'CATEGORY'} leftButton={true} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                </View>
+                <View style={styles.container} {...this._panResponder.panHandlers}>
+                    <Animated.View style={[styles.search, { height }, { opacity }]} >
+                        <TextInput style={{ fontFamily: 'DINPro', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
+                        <Image style={{ width: 20, height: 20 }} source={require('../../../assets/icons/search.png')} />
+                    </Animated.View>
 
-                <ActivityList goToNext={this.props.goToNext}
-                    data={[
-                        {key: 'Devin'},
-                        {key: 'Jackson'},
-                        {key: 'James'},
-                        {key: 'Joel'},
-                        {key: 'John'},
-                        {key: 'Jillian'},
-                        {key: 'Jimmy'},
-                        {key: 'Julie'},
-                    ]}
-                />
+                    <ActivityList navigation={this.props.navigation}  goto={'Recipe'}
+                        data={[
+                            { key: 'Devin' },
+                            { key: 'Jackson' },
+                            { key: 'James' },
+                            { key: 'Joel' },
+                            { key: 'John' },
+                            { key: 'Jillian' },
+                            { key: 'Jimmy' },
+                            { key: 'Julie' },
+                        ]}
+                    />
 
+                </View>
             </View>
         );
     }
@@ -100,7 +106,7 @@ export default class CategoryList extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 9,
         alignItems: 'center',
         justifyContent: 'center',
     },

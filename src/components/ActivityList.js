@@ -19,25 +19,32 @@ export default class ActivityList extends React.Component {
             <View style={styles.container}>
                 <FlatList
                     data={this.props.data}
-                    renderItem={({item}) => <View style={styles.categoryContainer}>
-                                                <View style={styles.subIcons}>
-                                                    <TouchableOpacity style={{ flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                                                        <Icon name="fav" size={50} style={{ marginLeft: -15}} color="#454545" />
-                                                    </TouchableOpacity>
+                    renderItem={({ item }) => <View style={styles.categoryContainer}>
+                        <View style={styles.subIcons}>
+                            <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <Icon name="fav" size={50} style={{ marginLeft: -10 }} color="#454545" />
+                            </TouchableOpacity>
 
-                                                    <TouchableOpacity style={{ flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                                                        <Icon name="plus" size={50} style={{ marginLeft: -15}} color="#454545" />
-                                                    </TouchableOpacity>
-                                                </View>
-                                                <TouchableOpacity onPress={ () => this.props.goToNext('detailedView','AVACADO SALAD', true, true) } style={styles.categoryDetails}>
-                                                    <ImageBackground style={styles.category} source={require('../../assets/images/demo.png')}>
-                                                        <ImageBackground style={styles.category} source={require('../../assets/images/nutrition_frame.png')}>
-                                                            <Text>{item.key}</Text>
-                                                        </ImageBackground>
-                                                    </ImageBackground>
-                                                </TouchableOpacity>
-                                            </View>
-                                }
+                            <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <Icon name="plus" size={50} style={{ marginLeft: -10 }} color="#454545" />
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate(this.props.goto)} style={styles.categoryDetails}>
+                            <ImageBackground style={styles.category} source={require('../../assets/images/demo.png')}>
+                                <ImageBackground style={styles.category} source={require('../../assets/images/nutrition_frame.png')}>
+                                    {/* <Text>{item.key}</Text> */}
+                                    <View style={{ margin: 10, flex: 1 }}>
+                                        <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#FFFFFF', }}>The tittle does it</Text>
+                                    </View>
+                                    <View style={{ margin: 10, marginTop: 0, flex: 1 }}>
+                                        <Text style={{ fontFamily: 'DINPro', fontSize: 14, color: '#FFFFFF', }}>This can be a short description</Text>
+                                        <Text style={{ fontFamily: 'DINPro', fontSize: 14, color: '#FFFFFF', }}>also with two or three lines</Text>
+                                    </View>
+                                </ImageBackground>
+                            </ImageBackground>
+                        </TouchableOpacity>
+                    </View>
+                    }
                 />
 
             </View>
@@ -79,7 +86,7 @@ const styles = StyleSheet.create({
     category: {
         flex: 1,
         width: width - 50,
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
     },
 

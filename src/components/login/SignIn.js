@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableHighlight, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
+import { StackNavigator } from 'react-navigation';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../../selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
@@ -113,7 +114,7 @@ class SignIn extends React.Component {
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')}>
                 <KeyboardAvoidingView style={[styles.signInContainer, { backgroundColor: this.state.backgroundcolor }]}>
                 
-                    {!this.state.loader && 
+                    {/* {!this.state.loader && 
                         <View style={styles.header}>
                             <TouchableHighlight onPress={() => this.props.goToSignIn()} >
                                 <Icon name="close" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
@@ -125,10 +126,11 @@ class SignIn extends React.Component {
                             }
                             </View>
                         </View>
-                    }
+                    } */}
                     {!this.state.loader &&
                         <View style={styles.componentContainer}>
-                            {
+                        <SignInNavigator/>
+                            {/* {
                                 (() => {
                                     switch (this.state.page) {
                                         case 'signin':
@@ -141,7 +143,7 @@ class SignIn extends React.Component {
                                             return null;
                                     }
                                 })()
-                            }
+                            } */}
                         </View>
                     }
                     {this.state.loader && <View style={{height: height, width: width}}><LoaderWait/></View>}
@@ -151,7 +153,14 @@ class SignIn extends React.Component {
     }
 }
 
-
+const SignInNavigator = StackNavigator({
+    SignInEmail: { screen: SignInEmail },
+    SignInPassword: { screen: SignInPassword },
+    PasswordForgotten: { screen: PasswordForgotten },
+    // CalendarContainer: { screen: CalendarContainer },
+    // Profile: { screen: Profile}
+  
+  });
 
 const styles = StyleSheet.create({
     signInContainer: {
@@ -171,9 +180,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     componentContainer: {
-        flex: 9,
+        flex: 1,
     },
 });
+
 
 
 export default connect(state => {

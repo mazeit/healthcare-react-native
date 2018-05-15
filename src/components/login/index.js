@@ -1,44 +1,80 @@
 import React from 'react';
+import Carousel from 'react-native-banner-carousel';
 import { StyleSheet, View, Dimensions, Text, ImageBackground } from 'react-native';
 
 
-import Weclome from './Welcome.js';
-import SignIn from './SignIn.js';
+import Home from './Home.js';
+import Loader from '../Loader';
 
-const {height, width} = Dimensions.get('window');
+const BannerWidth = Dimensions.get('window').width;
+const {height} = Dimensions.get('window')
+const images = [
+    "http://xxx.com/1.png",
+    "http://xxx.com/2.png",
+    "http://xxx.com/3.png"
+];
 
-
-export default class WelcomePage extends React.Component {
+let backGround = '';
+export default class HomeInitial extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            welcome: true,
+            loader: true,
+            introText: 'Skip Intro'
         };
-        this.goToSignIn = this.goToSignIn.bind(this);
     }
 
 
-    goToSignIn() {
+    // componentDidMount () {
+    //     this.setState({loader: false});
+    // }
+    onLoad () {
+        setTimeout( () => this.setState({loader: false}), 500);
         
-        this.setState({ welcome: !this.state.welcome });
     }
-
+    renderPage(image, index) {
+        return (
+                <Home key={index}/>
+        );
+    }
 
     render() {
         return (
+            <ImageBackground style={styles.homeImage} source={require('../../../assets/images/home.png')} onLoad={() => this.onLoad()}>
+                {this.state.loader && <View style={{height: height, width: BannerWidth}}><Loader/></View>}
                 <View style={styles.container}>
-                    {
-                        this.state.welcome ? <Weclome goToSignIn={ this.goToSignIn } /> : <SignIn goToSignIn={ this.goToSignIn } rootNavigation={ this.props.navigation }/>
-                    }
+                    <Carousel
+                        autoplay={false}
+                        loop={false}
+                        index={0}
+                        width={BannerWidth}
+                        onPageChanged={(index) => { if(index === 2) this.setState({introText: 'Continue'}); else {this.setState({introText: 'Skip Intro'})} }}
+                    >
+                        {images.map((image, index) => this.renderPage(image, index))}
+                    </Carousel>
+                    <View style={styles.skipIntro}>
+                        <Text onPress={() => this.props.navigation.navigate('SignInEmail') } style={{fontFamily:'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff'}}>{this.state.introText}</Text>
+                    </View>
                 </View>
+            </ImageBackground>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: '95%',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    skipIntro: {
+        flex: 1,
+        marginTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    homeImage: {
+        width: '100%',
+        height: '100%', 
     },
 });
