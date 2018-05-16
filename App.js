@@ -110,6 +110,8 @@ const CalendarStack = TabNavigator({
       tabBarOptions: {
           activeTintColor: '#4AB3E2',
       }
+},{
+  tabBarPosition: 'bottom'
 });
 
 

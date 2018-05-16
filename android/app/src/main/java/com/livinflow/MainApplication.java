@@ -3,10 +3,6 @@ package com.livinflow;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-<<<<<<< HEAD
-import com.brentvatne.react.ReactVideoPackage;
-=======
->>>>>>> a2233c07f641da8b4d6f3e745b5a41d704982c85
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -28,10 +24,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-<<<<<<< HEAD
-            new ReactVideoPackage(),
-=======
->>>>>>> a2233c07f641da8b4d6f3e745b5a41d704982c85
             new VectorIconsPackage()
       );
     }

@@ -14,7 +14,7 @@ const menuList = [
     },
     {
         name: 'MY NAVIGATOR',
-        component: 'Navigator'
+        component: 'WelcomeScreen'
     },
     {
         name: 'MY FAVORITES',
