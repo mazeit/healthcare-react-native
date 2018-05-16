@@ -22,7 +22,7 @@ const menuList = [
     },
     {
         name: 'MY PROFILE',
-        component: 'Profile'
+        component: 'ProfileStack'
     },
     {
         name: 'HELP & FAQ',

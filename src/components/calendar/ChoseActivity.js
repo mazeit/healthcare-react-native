@@ -18,7 +18,7 @@ export default class ChoseActivity extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={{ flex: 1 }}>
-                    <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'CHOOSE YOUR ACTIVITY'} leftButton={true} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.screenProps.rootNavigation} />
+                    <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'CHOOSE YOUR ACTIVITY'} leftButton={true} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
                 </View>
                 <View style={{ flex: 9 }}>
                     <ActivityList navigation={this.props.navigation} goto={'Activity'}

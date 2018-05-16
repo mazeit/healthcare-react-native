@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { StyleSheet, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import { TabNavigator } from 'react-navigation';
+// import { TabNavigator } from 'react-navigation';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from './src/selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
@@ -24,10 +24,18 @@ import Recipe from './src/components/content overview/Recipe';
 
 import CalendarView from './src/components/calendar';
 import Activity from './src/components/calendar/Activity.js';
-// import AddActivityCategory from './src/components/calendar/AddActivityCategory';
-// import ChoseActivity from '.src/components/calendar/ChoseActivity';
+import AddActivity1 from './src/components/calendar/AddActivity1';
+import ChoseActivity from './src/components/calendar/ChoseActivity';
 
-import Profile from './src/components/user profile'
+import ProfilePage from './src/components/user profile';
+import ProfileInformation from './src/components/user profile/ProfileInformation';
+import ProfileNotification from './src/components/user profile/ProfileNotification';
+import TrackingSetting from './src/components/user profile/TrackingSetting';
+import TermsOfUse from './src/components/user profile/TermsOfUse';
+import HelpFaq from './src/components/user profile/HelpFaq';
+import InviteMyFriends from './src/components/user profile/InviteMyFriends';
+import InviteMyFriendsList from './src/components/user profile/InviteMyFriendsList';
+import FaqAnswer from './src/components/user profile/FaqAnswer';
 
 
 const store = createStore(userReducer, compose(applyMiddleware(thunk)));
@@ -83,39 +91,44 @@ const ContentStack = StackNavigator(
 
 //// CALENDAR STACK / START --------------------------------------------------------
 
-const CalendarStack = TabNavigator({
-  TabItem1: {
-      screen: CalendarView,
-      navigationOptions: {
-          tabBarLabel:"Calendar",
-          tabBarIcon: ({ tintColor }) => <Icon name={"calender"} size={30} color={tintColor} />
-      }
-  },
-  TabItem2: {
-    screen: CalendarView,
-    navigationOptions: {
-        tabBarLabel:"Tracker",
-        tabBarIcon: ({ tintColor }) => <Icon name={"tracker"} size={30} color={tintColor} />
-    }
-  },
-  TabItem3: {
-    screen: CalendarView,
-    navigationOptions: {
-        tabBarLabel:"My Challange",
-        tabBarIcon: ({ tintColor }) => <Icon name={"challenge"} size={30} color={tintColor} />
-    }
-  },
+const CalendarStack = StackNavigator({
+  CalendarView: { screen: CalendarView },
+  AddActivity1: { screen: AddActivity1 },
+  ChoseActivity: { screen: ChoseActivity },
+  Activity: { screen: Activity },
+  
 
-}, {
-      tabBarOptions: {
-          activeTintColor: '#4AB3E2',
-      }
-},{
-  tabBarPosition: 'bottom'
-});
+},
+{
+  headerMode: 'none',
+}
+);
 
 
 //// CALENDAR STACK / END --------------------------------------------------------
+
+
+//// PROFILE STACK / START --------------------------------------------------------
+
+const ProfileStack = StackNavigator({
+  ProfilePage: { screen: ProfilePage },
+  ProfileInformation: { screen: ProfileInformation },
+  ProfileNotification: { screen: ProfileNotification },
+  TrackingSetting: { screen: TrackingSetting },
+  TermsOfUse: { screen: TermsOfUse },
+  HelpFaq: { screen: HelpFaq },
+  InviteMyFriends: { screen: InviteMyFriends },
+  InviteMyFriendsList: { screen: InviteMyFriendsList },
+  FaqAnswer: { screen: FaqAnswer },
+
+},
+{
+  headerMode: 'none',
+}
+);
+
+
+//// PROFILE STACK / END --------------------------------------------------------
 
 
 
@@ -127,7 +140,7 @@ const AppNavigator = StackNavigator({
   ContentStack: { screen: ContentStack },
   CalendarStack: { screen: CalendarStack },
   GeneralMenu: { screen: GeneralMenu },
-  Profile: { screen: Profile}
+  ProfileStack: { screen: ProfileStack}
 
 }, {
     mode: 'modal',

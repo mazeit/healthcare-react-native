@@ -1,130 +1,153 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, ImageBackground, Dimensions, Animated, TouchableOpacity } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { StyleSheet, Text, View, Dimensions, Image, TextInput, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+
+import Header from '../Header';
 
 
-import ProfilePage from './ProfilePage'
-import GeneralMenu from '../GeneralMenu'
-import ProfileInformation from './ProfileInformation'
-import ProfileNotification from './ProfileNotification'
-import TrackingSetting from './TrackingSetting'
-import TermsOfUse from './TermsOfUse'
-import HelpFaq from './HelpFaq'
-import InviteMyFriends from './InviteMyFriends'
-import InviteMyFriendsList from './InviteMyFriendsList'
-import FaqAnswer from './FaqAnswer'
+const { height, width } = Dimensions.get('window');
 
-const dimention = Dimensions.get('window');
 
-export default class Profile extends React.Component {
+const profileSubHeading = [
+    {
+        headerTittle: 'MY PROFILE',
+        name: 'My profile information',
+        currentComponent: 'ProfileInformation',
+
+    },
+    {
+        headerTittle: 'NOTIFICATION',
+        name: 'My notification',
+        currentComponent: 'ProfileNotification',
+    },
+    {
+        headerTittle: 'MY TRACKING SETTING',
+        name: 'My tracking settings',
+        currentComponent: 'TrackingSetting',
+    },
+    {
+        headerTittle: 'INVITE MY FRIENDS',
+        name: 'Invite my friends',
+        currentComponent: 'InviteMyFriends',
+    },
+    {
+        headerTittle: 'TERMS OF USE',
+        name: 'Terms of use',
+        currentComponent: 'TermsOfUse',
+    },
+    // {
+    //     headerTittle: 'PRIVACY POLICY',
+    //     name: 'Privacy policy',
+    //     currentComponent: < TermsOfUse/>,
+    // },
+    {
+        headerTittle: 'HELP & FAQ',
+        name: 'Helf & FAQ',
+        currentComponent: 'HelpFaq',
+    },
+    // {
+    //     headerTittle: 'ABOUT US',
+    //     name: 'About us',
+    //     currentComponent: < />,
+    // },
+];
+
+class ProfilePage extends React.Component {
     constructor(props) {
         super(props);
-        this.animatedStart = new Animated.Value(0);
-        this.animatedReverse = new Animated.Value(1);
         this.state = {
-            page: 'ProfilePage',
-            heading: 'MY PROFILE',
-            showMenu: false,
-            goBack: false,
         };
-        this.showMenu = this.showMenu.bind(this)
-        this.goToNext = this.goToNext.bind(this)
-    }
-    
-
-    showMenu() {
-        this.setState({ showMenu: !this.state.showMenu})
-    }
-    
-    goToNext( currentComponent, headerTittle, goBack = true ) {
-
-        this.setState({ page: currentComponent, heading: headerTittle, goBack: goBack })
-
-    }
-    componentWillReceiveProps( nextProps ) {
-        console.log('NEXTPROPS...', nextProps)
     }
 
     render() {
-
-        
-        
         return (
-            <View style={styles.container}>
+            <View style={{ flex: 1 }}>
+                <View style={{ flex: 1 }}>
+                    <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'MY PROFILE'} leftButton={false} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                </View>
+                <View style={styles.container}>
 
-                <View style={styles.header}>
-                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+                    <View style={styles.profilePicture}>
+                        <ImageBackground style={styles.profilePictureBlur} source={require('../../../assets/images/profilePicture.png')} blurRadius={15}>
+                            <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20 }}>
+                                <Image source={require('../../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }} />
+                            </View>
+                            <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#FFFFFF' }}>Vivivan</Text>
+                            <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#FFFFFF' }}>Undacable</Text>
+                        </ImageBackground>
+                    </View>
+
+                    <ScrollView style={styles.myProfile} showsVerticalScrollIndicator={false}>
                         {
-                            this.state.goBack && <TouchableOpacity onPress={ () => this.goToNext('ProfilePage', 'MY PROFILE', false)}><Image source={require('../../../assets/icons/back_grey.png')} style={{ width: 54, height: 54, resizeMode: 'center' }} /></TouchableOpacity>
+                            profileSubHeading.map((item, i) => {
+
+                                return <TouchableOpacity key={i} style={styles.profileContent} onPress={() => this.props.navigation.navigate(item.currentComponent)}>
+                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                                        <View style={{ flex: 9, alignItems: 'flex-start', marginLeft: 20 }}>
+                                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545' }}>{item.name}</Text>
+                                        </View>
+                                        <View style={{ flex: 1, alignItems: 'flex-end', }}>
+                                            <Image style={{ width: 10, height: 10, marginRight: 20, transform: [{ rotateZ: '-90deg' }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            })
                         }
-                    </View>
-                    <View style={{ flex: 8, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
-                        <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 16, color: '#454545' }}>{this.state.heading}</Text>
-                    </View>
-                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
-                    <TouchableOpacity onPress={() => this.showMenu()}>
-                        <Image source={require('../../../assets/icons/menu.png')} style={{ width: 54, height: 54, resizeMode: 'center' }} />
-                    </TouchableOpacity>
-                    </View>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10, backgroundColor: '#FFFFFF', }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={{ flex: 1, marginTop: 20, marginBottom: 10 }}>
+                                <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Sign out</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <Text style={{ flex: 1, fontFamily: 'DINPro', fontSize: 14, color: '#959595', marginBottom: 20, marginTop: 10 }}>App Version 1.0</Text>
+                        </View>
+                    </ScrollView>
+
                 </View>
-
-                <View style={{ flex: 9 }}>
-                {
-                        (() => {
-                            switch (this.state.page) {
-                                case 'ProfilePage':
-                                    return <ProfilePage navigation={this.props.navigation} goToNext={this.goToNext} />;
-                                case 'ProfileInformation':
-                                    return <ProfileInformation />;
-                                case 'ProfileNotification':
-                                    return <ProfileNotification />;
-                                case 'TrackingSetting':
-                                    return <TrackingSetting />;
-                                case 'TermsOfUse':
-                                    return <TermsOfUse />;
-                                case 'HelpFaq':
-                                    return <HelpFaq />;
-                                case 'InviteMyFriends':
-                                    return <InviteMyFriends />;
-                                default:
-                                    return null;
-                            }
-                        })()
-                    }
-                </View>
-
-                {
-                    this.state.showMenu &&  <View style={ styles.menuOverlay }>
-                                                <GeneralMenu navigation={this.props.navigation} showMenu={this.showMenu}/>
-                                            </View>
-                }
-
             </View>
         );
     }
 }
 
-
-
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 9,
         alignItems: 'center',
         justifyContent: 'center',
-        //   backgroundColor: '#F5F5F5'
+        backgroundColor: '#F5F5F5',
     },
-    header: {
-        flex: 1,
-        backgroundColor: '#F5F5F580',
-        flexDirection: 'row',
+    profilePicture: {
+        height: 254,
         alignItems: 'center',
         justifyContent: 'center',
     },
-    menuOverlay: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: dimention.width,
-        height: dimention.height,
+    profilePictureBlur: {
+        width: width,
+        height: 254,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
+    myProfile: {
+        flex: 1,
+        width: width - 20,
+        marginBottom: 10,
+    },
+    profileContent: {
+        flex: 1,
+        height: 55,
+        marginTop: 10,
+        // marginRight: 5,
+        backgroundColor: '#FFFFFF',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
 });
+
+export default connect(state => {
+    const clearState = state || {};
+    return {
+        clearState,
+    }
+}
+)(ProfilePage);
