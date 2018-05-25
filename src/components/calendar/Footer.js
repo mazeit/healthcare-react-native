@@ -14,14 +14,23 @@ const { height, width } = Dimensions.get('window');
 export default class Footer extends React.Component {
     constructor(props) {
         super(props);
+        
         this.state = {
             active: '#4AB3E2',
-            inactive: '#454545'
+            inactive: '#454545',
+            activeTab: this.props.activeTab || 'CalendarView',
 
         }
+        this.tabSelected = this.tabSelected.bind(this);
     }
 
+
+    tabSelected( input) {
+
+        this.props.navigation.navigate(input);
+    }
     render() {
+
         return (
 
             <View style={styles.footerContainer}>
@@ -29,22 +38,22 @@ export default class Footer extends React.Component {
 
                 <View style={styles.footer}>
 
-                    <TouchableOpacity style={styles.tabButton} >
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
-                            <Icon name='calender' size={50} color={this.state.active} />
-                            <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -5, fontSize: 14, textAlign: 'center', color: this.state.active }}>Calendar</Text>
+                    <TouchableOpacity style={styles.tabButton} onPress={() => this.tabSelected('CalendarView')}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Icon name='calender' size={50} color={this.state.activeTab === 'CalendarView' ? this.state.active : this.state.inactive} />
+                            <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -5, fontSize: 14, textAlign: 'center', color: color = this.state.activeTab === 'CalendarView' ? this.state.active : this.state.inactive }}>Calendar</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.tabButton} onPress={() => this.tabSelected('Tracker')}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Icon name='tracker' size={50} color={this.state.activeTab === 'Tracker' ? this.state.active : this.state.inactive} />
+                            <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -5, fontSize: 14, textAlign: 'center', color: color = this.state.activeTab === 'Tracker' ? this.state.active : this.state.inactive }}>Tracker</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.tabButton} >
-                        <View style={{ flex: 1 , alignItems: 'center', justifyContent:'center'}}>
-                            <Icon name='tracker' size={50} color={this.state.inactive} />
-                            <Text style={{  fontFamily: 'DINPro-Medium', marginTop: -5, fontSize: 14, textAlign: 'center', color: this.state.inactive }}>Tracker</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.tabButton} >
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
-                            <Icon name='challenge' size={50} color={this.state.inactive}/>
-                            <Text style={{  fontFamily: 'DINPro-Medium', marginTop: -5, fontSize: 14, textAlign: 'center', color: this.state.inactive }}>My Challange</Text>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Icon name='challenge' size={50} color={this.state.activeTab === 'challenge' ? this.state.active : this.state.inactive} />
+                            <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -5, fontSize: 14, textAlign: 'center', color: this.state.inactive }}>My Challange</Text>
                         </View>
                     </TouchableOpacity>
 
@@ -59,7 +68,7 @@ const styles = StyleSheet.create({
     footerContainer: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#FFFFFF95',
+        backgroundColor: '#FFFFFF',
     },
     footer: {
         flex: 1,

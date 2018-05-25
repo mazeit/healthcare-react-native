@@ -17,15 +17,19 @@ import Login from './src/components/login';
 import SignInEmail from './src/components/login/SignInEmail';
 import SignInPassword from './src/components/login/SignInPassword';
 import PasswordForgotten from './src/components/login/PasswordForgotten';
+import SignUp from './src/components/login/SignUp';
 
 import ContentOverview from './src/components/content overview';
 import CategoryList from './src/components/content overview/CategoryList'
 import Recipe from './src/components/content overview/Recipe';
+import Meditation from './src/components/content overview/Meditation';
+import Yoga from './src/components/content overview/Yoga';
 
 import CalendarView from './src/components/calendar';
 import Activity from './src/components/calendar/Activity.js';
 import AddActivity1 from './src/components/calendar/AddActivity1';
 import ChoseActivity from './src/components/calendar/ChoseActivity';
+import Tracker from './src/components/calendar/Tracker';
 
 import ProfilePage from './src/components/user profile';
 import ProfileInformation from './src/components/user profile/ProfileInformation';
@@ -60,6 +64,7 @@ const SignInStack = StackNavigator(
   {
     Login: { screen: Login },
     SignInEmail: { screen: SignInEmail },
+    SignUp: { screen: SignUp },
     SignInPassword: { screen: SignInPassword },
     PasswordForgotten: { screen: PasswordForgotten },
 
@@ -79,7 +84,8 @@ const ContentStack = StackNavigator(
     ContentOverview: { screen: ContentOverview },
     CategoryList: { screen: CategoryList },
     Recipe: { screen: Recipe },
-    // PasswordForgotten: { screen: PasswordForgotten },
+    Meditation: { screen: Meditation },
+    Yoga: { screen: Yoga },
 
   },
   {
@@ -96,7 +102,7 @@ const CalendarStack = StackNavigator({
   AddActivity1: { screen: AddActivity1 },
   ChoseActivity: { screen: ChoseActivity },
   Activity: { screen: Activity },
-  
+  Tracker: { screen: Tracker },
 
 },
 {

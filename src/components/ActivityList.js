@@ -30,8 +30,8 @@ export default class ActivityList extends React.Component {
                             </TouchableOpacity>
                         </View>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate(this.props.goto)} style={styles.categoryDetails}>
-                            <ImageBackground style={styles.category} source={require('../../assets/images/demo.png')}>
-                                <ImageBackground style={styles.category} source={require('../../assets/images/nutrition_frame.png')}>
+                            <ImageBackground style={styles.category} source={require('../../assets/images/activity_image.png')}>
+                                <ImageBackground style={styles.category} source={require('../../assets/images/activity_frame.png')}>
                                     {/* <Text>{item.key}</Text> */}
                                     <View style={{ margin: 10, flex: 1 }}>
                                         <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#FFFFFF', }}>The tittle does it</Text>

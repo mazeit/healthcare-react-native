@@ -21,10 +21,11 @@ class SignInPassword extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (!nextProps.validPassword.hasError) {
+        
+        if (nextProps.validPassword.hasError === false) {
             this.setState({ wrongPassword: '', wrongPasswordMsg: '' });
             this.props.navigation.navigate('WelcomeScreen');
-        } else {
+        } else if( nextProps.validPassword.hasError === true) {
             this.setState({ wrongPassword: 'Password', wrongPasswordMsg: 'This password is not correct, Please try again.' });
         }
 

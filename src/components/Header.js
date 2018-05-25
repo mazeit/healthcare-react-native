@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        margin: 5,
+        // margin: 5,
         marginTop: 10,
         alignItems: 'center',
         justifyContent: 'space-between',

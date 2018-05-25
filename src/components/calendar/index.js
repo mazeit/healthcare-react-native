@@ -14,12 +14,14 @@ import Calendar from './Calendar';
 
 
 const { height, width } = Dimensions.get('window');
+const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 class CalendarView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             today: new Date(),
+            headDate: new Date().getDate() + ' ' +month[new Date().getMonth()] + ' ' + new Date().getFullYear() ,
             firstDay: new Date(new Date().getFullYear(), new Date().getMonth(), 1).getDay(),
             weeklyCalendar: true,
             rotate: '180deg',
@@ -50,7 +52,7 @@ class CalendarView extends React.Component {
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')}>
 
                 <View style={{ flex: 1 }}>
-                    <Header goBack={() => this.props.navigation.navigate('AddActivity1')} backgroundcolor={'#FFFFFF'} headerTitle={'SELECT YOUR TOPIC'} leftButton={true} leftButtonName={'plus'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                    <Header goBack={() => this.props.navigation.navigate('AddActivity1')} backgroundcolor={'#FFFFFF'} headerTitle={this.state.headDate} leftButton={true} leftButtonName={'plus'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
                 </View>
                 <View style={{ flex: 8 }}>
                     <Calendar today={this.state.today} firstDay={this.state.firstDay} />
@@ -77,7 +79,7 @@ class CalendarView extends React.Component {
                     </ScrollView>
                 </View>
                 <View style={{flex:1}}>
-                    <Footer/>
+                    <Footer navigation={this.props.navigation}/>
                 </View>
 
             </ImageBackground>

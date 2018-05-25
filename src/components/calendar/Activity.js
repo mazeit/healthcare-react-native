@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, View, Dimensions, Image, StyleSheet } from 'react-native';
 // import Video from 'react-native-video';
-// import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
-// import icoMoonConfig from '../../selection.json';
-// const Icon = createIconSetFromIcoMoon(icoMoonConfig);
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import icoMoonConfig from '../../selection.json';
+const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 const { height, width } = Dimensions.get('window');
 import Header from '../Header';
@@ -58,6 +58,7 @@ export default class Activity extends React.Component {
 
                                 </View>
                                 <View style={styles.subContainers}>
+                                    
                                     <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', }}>30:00</Text>
                                 </View >
                                 <View style={styles.subContainers}>

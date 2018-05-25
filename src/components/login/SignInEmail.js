@@ -23,10 +23,11 @@ class SignInEmail extends React.Component {
     //     this.setState({loader:true});
     // }
     componentWillReceiveProps(nextProps) {
-        if (!nextProps.validEmail.hasError) {
+        
+        if (nextProps.validEmail.hasError === false) {
             this.setState({ errorMsgEmail: '', errorMgs: '', });
             this.props.navigation.navigate('SignInPassword');
-        } else {
+        } else if( nextProps.validEmail.hasError === true){
             this.setState({ errorMsgEmail: 'Email address', errorMgs: 'This email address is not registered. Please try again.' });
         }
 
@@ -56,10 +57,10 @@ class SignInEmail extends React.Component {
                                     <ShakingText style={{ fontFamily: 'DINPro-Light', fontSize: 16, width: '90%', top: '5%', color: '#ffffff' }}>{this.state.errorMgs}</ShakingText>
                                 </View>
                                 <View style={styles.passwordManager}>
-                                    <TouchableOpacity style={styles.button}>
+                                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('SignUp')}>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                                             <Image style={{ width: 17, height: 17, marginTop: 2 }} source={require('../../../assets/icons/1password_icon.png')} />
-                                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginLeft: 5 }}>Password Manager</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginLeft: 5 }}>Sign Up</Text>
                                         </View>
                                     </TouchableOpacity>
                                 </View>

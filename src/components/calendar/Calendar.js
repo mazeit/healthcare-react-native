@@ -14,15 +14,20 @@ class DateContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            dateColor: (new Date().getDate() == this.props.date ) ? '#4AB3E2' : this.props.defaultColor,
         };
     }
 
-    render() {
+    componentWillReceiveProps (nextProps) {
+        this.setState({ dateColor: (new Date().getDate() == nextProps.date ) ? '#4AB3E2' : nextProps.defaultColor})
+    }
 
+    render() {
+        let date = this.props.date;
+        
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 5, marginBottom: 10 }}>
-                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 18, color: '#838383' }}>{this.props.date}</Text>
+                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 18, color: this.state.dateColor }}>{date}</Text>
                 {/* <View style={{ width: 5, height: 5, borderRadius: 5, borderWidth: 0.5, borderColor: "#AE0069"}}></View> */}
             </View>
         );
@@ -33,13 +38,13 @@ class Week extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            defaultColor: '#838383',
         };
 
     }
 
     render() {
-
+        let prevMonth = false;
         let currentDate = this.props.today.getDate();
         let currentDay = this.props.today.getDay();
         let currentMonth = this.props.today.getMonth();
@@ -51,14 +56,18 @@ class Week extends React.Component {
             startDay = this.props.firstDay;
         }
 
-        let week = [0, 0, 0, 0, 0, 0, 0];
+        let week = [{date: 0, color: '#838383'}, {date: 0, color: '#838383'}, {date: 0, color: '#838383'}, {date: 0, color: '#838383'}, {date: 0, color: '#838383'}, {date: 0, color: '#838383'}, {date: 0, color: '#838383'}];
         let j = 0;
+        prevMonth = false;
         for (let i = startDay; i >= 0; i--) {
+            
             if (startDate - j <= 0) {
+                prevMonth = true;
                 j = 0;
                 startDate = monthDays[currentMonth];
             }
-            week[i] = startDate - j;
+            week[i].date = startDate - j;
+            week[i].color = prevMonth ? '#83838370' : '#838383';
             j++;
 
         }
@@ -70,21 +79,25 @@ class Week extends React.Component {
             startDate = this.props.firstDate;
             startDay = this.props.firstDay;
         }
+        prevMonth = false;
         for (let i = startDay + 1; i < 7; i++) {
+            
             if (startDate + j > monthDays[currentMonth]) {
+                prevMonth = true;
                 j = 1;
                 startDate = 0;
             }
-            week[i] = startDate + j;
+            week[i].date = startDate + j;
+            week[i].color = prevMonth ? '#83838370' : '#838383';
             j++;
         }
 
-
+        // console.log('....../////',week)
         return (
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
                 {
                     week.map((item, i) => {
-                        return <DateContainer date={item} key={i} />
+                        return <DateContainer date={item.date} key={i} defaultColor={ item.color}/>
                     })
                 }
             </View>

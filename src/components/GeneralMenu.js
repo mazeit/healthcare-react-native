@@ -10,7 +10,7 @@ const { height, width } = Dimensions.get('window');
 const menuList = [
     {
         name: 'MY LIVINFLOW',
-        component: 'ContentOverview'
+        component: 'ContentStack'
     },
     {
         name: 'MY NAVIGATOR',
@@ -30,7 +30,7 @@ const menuList = [
     },
     {
         name: 'INVITE MY FRIENDS',
-        component: 'InviteFriends'
+        component: 'InviteMyFriends'
     },
     {
         name: 'WEBSHOP',
