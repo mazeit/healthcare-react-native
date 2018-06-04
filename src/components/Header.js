@@ -35,7 +35,7 @@ export default class Header extends React.Component {
                     <TouchableOpacity style={{flex:2}} onPress={() => this.props.goBack()} >
                         {
                             this.state.leftButton ?
-                                <Icon name={this.state.leftButtonName} size={50} style={{ marginLeft: -15 }} color={this.state.leftButtonColor} />
+                                <Icon name={this.state.leftButtonName} size={50} style={{ marginLeft: -5}} color={this.state.leftButtonColor} />
                                 : <View></View>
                         }
                     </TouchableOpacity>

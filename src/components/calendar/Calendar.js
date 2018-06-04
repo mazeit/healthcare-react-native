@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, PanResponder, Animated, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, PanResponder, Animated, Dimensions, Image, TouchableOpacity } from 'react-native';
 
 
 
@@ -14,22 +14,26 @@ class DateContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dateColor: (new Date().getDate() == this.props.date ) ? '#4AB3E2' : this.props.defaultColor,
+            dateColor: (new Date().getDate() == this.props.date) ? '#4AB3E2' : this.props.defaultColor,
+            backColor: '#FFFFFF',
+            textColor: '',
         };
     }
 
-    componentWillReceiveProps (nextProps) {
-        this.setState({ dateColor: (new Date().getDate() == nextProps.date ) ? '#4AB3E2' : nextProps.defaultColor})
+    componentWillReceiveProps(nextProps) {
+        this.setState({ dateColor: (new Date().getDate() == nextProps.date) ? '#4AB3E2' : nextProps.defaultColor })
     }
 
     render() {
         let date = this.props.date;
-        
+
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 5, marginBottom: 10 }}>
-                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 18, color: this.state.dateColor }}>{date}</Text>
-                {/* <View style={{ width: 5, height: 5, borderRadius: 5, borderWidth: 0.5, borderColor: "#AE0069"}}></View> */}
-            </View>
+            <TouchableOpacity onPress={() =>this.setState({backColor: '#454545'})} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 5, marginBottom: 10 }}>
+                <View style={{ flex:8,width: 25, height: 25, borderRadius:25, backgroundColor: this.state.backColor, alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 18, color: this.state.dateColor }}>{date}</Text>
+                </View>
+                <View style={{flex:2,height: 10,flexDirection:'row', marginTop: 2}}></View>
+            </TouchableOpacity>
         );
     }
 }
@@ -56,11 +60,11 @@ class Week extends React.Component {
             startDay = this.props.firstDay;
         }
 
-        let week = [{date: 0, color: '#838383'}, {date: 0, color: '#838383'}, {date: 0, color: '#838383'}, {date: 0, color: '#838383'}, {date: 0, color: '#838383'}, {date: 0, color: '#838383'}, {date: 0, color: '#838383'}];
+        let week = [{ date: 0, color: '#838383' }, { date: 0, color: '#838383' }, { date: 0, color: '#838383' }, { date: 0, color: '#838383' }, { date: 0, color: '#838383' }, { date: 0, color: '#838383' }, { date: 0, color: '#838383' }];
         let j = 0;
         prevMonth = false;
         for (let i = startDay; i >= 0; i--) {
-            
+
             if (startDate - j <= 0) {
                 prevMonth = true;
                 j = 0;
@@ -81,7 +85,7 @@ class Week extends React.Component {
         }
         prevMonth = false;
         for (let i = startDay + 1; i < 7; i++) {
-            
+
             if (startDate + j > monthDays[currentMonth]) {
                 prevMonth = true;
                 j = 1;
@@ -97,7 +101,7 @@ class Week extends React.Component {
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
                 {
                     week.map((item, i) => {
-                        return <DateContainer date={item.date} key={i} defaultColor={ item.color}/>
+                        return <DateContainer date={item.date} key={i} defaultColor={item.color} />
                     })
                 }
             </View>
@@ -190,7 +194,7 @@ export default class Calendar extends React.Component {
         let calendar = [];
         const height = this.animated.interpolate({
             inputRange: [0, 1],
-            outputRange: [270, 118]
+            outputRange: [339, 135]
         });
 
         let noOfWeeks = 1;
@@ -231,7 +235,7 @@ export default class Calendar extends React.Component {
                                 return item
                             })}
                     </View>
-                    <View style={{ alignItems: 'center', justifyContent: 'center', width: 20, height: 20, borderRadius: 20, backgroundColor: '#F5F5F5', opacity: 0.8, marginTop: 4 }}>
+                    <View style={{ alignItems: 'center', justifyContent: 'center', width: 20, height: 20, borderRadius: 20, backgroundColor: '#F5F5F5', opacity: 0.8 }}>
                         <Image style={{ width: 15, height: 15, transform: [{ rotateX: this.state.weekView }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
                     </View>
 

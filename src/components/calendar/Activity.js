@@ -1,12 +1,15 @@
 import React from 'react';
-import { Text, View, Dimensions, Image, StyleSheet } from 'react-native';
+import { Text, View, Dimensions, Image, StyleSheet, WebView } from 'react-native';
 // import Video from 'react-native-video';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../../selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
+import Video from 'react-native-video';
 
 const { height, width } = Dimensions.get('window');
 import Header from '../Header';
+
+
 
 export default class Activity extends React.Component {
     constructor(props) {
@@ -22,23 +25,20 @@ export default class Activity extends React.Component {
     }
 
     render() {
+
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>
-                    <Header goBack={() =>this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'CATEGORY'} leftButton={true} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                    <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'CATEGORY'} leftButton={true} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
                 </View>
                 <View style={{ flex: 9, }}>
                     <View style={{ flex: 3, }}>
-                        {/* <Icon name="fav_checked" size={80} color="#4AB3E2" /> */}
-                        {/* <Video source={{uri: "https://content.jwplatform.com/players/8rxPJLsL-Qzd90UGq.html"}}
-                    poster="https://assets-jpcust.jwpsrv.com/thumbs/l1VDr5QT-120.jpg"
-                        rate={1}                              // 0 is paused, 1 is normal.
-                        volume={1}                            // 0 is muted, 1 is normal.
-                        muted={false}                           // Mutes the audio entirely.
-                        paused={this.state.paused}                          // Pauses playback entirely.
-                        resizeMode="contain"
-                        style={{ flex: 1}}/> */}
-                        <Image style={{ flex: 1, width: '100%' }} source={require('../../../assets/images/detoxYoga.png')} />
+                            <WebView
+                                style={{flex:1}}
+                                javaScriptEnabled={true}
+                                domStorageEnabled={true}
+                                source={{ uri: 'https://content.jwplatform.com/players/F3sDlC2l-Qzd90UGq.html' }}
+                            />
                     </View>
 
                     <View style={{ flex: 7, alignItems: 'center', justifyContent: 'center', }}>
@@ -58,7 +58,7 @@ export default class Activity extends React.Component {
 
                                 </View>
                                 <View style={styles.subContainers}>
-                                    
+
                                     <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', }}>30:00</Text>
                                 </View >
                                 <View style={styles.subContainers}>

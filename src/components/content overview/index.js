@@ -1,17 +1,29 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, PanResponder, Animated, TextInput, TouchableOpacity } from 'react-native';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import icoMoonConfig from '../../selection.json';
+const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 import Header from '../Header';
+import { getContentPillars } from '../../actions/index';
+import LoaderWait from '../LoaderWait';
 
 const { width } = Dimensions.get('window');
 const windowHeight = Dimensions.get('window').height;
 
-export default class ContentOverview extends React.Component {
+class ContentOverview extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             openSearch: true,
+            activityImage: '',
+            nutritionImage: '',
+            mindfulnessImage: '',
+            coachImage: '',
+            loader: true,
         };
 
         this.showSearch = this.showSearch.bind(this);
@@ -48,8 +60,21 @@ export default class ContentOverview extends React.Component {
         });
     }
 
+    componentDidMount() {
+
+        this.props.getContentPillars();
+
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({ nutritionImage: nextProps.contentPillars.pillars[0].img, activityImage: nextProps.contentPillars.pillars[1].img, mindfulnessImage: nextProps.contentPillars.pillars[2].img, coachImage: nextProps.contentPillars.pillars[3].img, loader: false });
+
+    }
+
 
     showSearch() {
+
         //   console.log('in show')
         this.setState({ openSearch: true })
         Animated.timing(this.animated, {
@@ -81,65 +106,71 @@ export default class ContentOverview extends React.Component {
 
         return (
             <View style={{ flex: 1 }}>
-                <View style={{ flex: 1 }}>
-                    <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'SELECT YOUR TOPIC'} leftButton={false} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
-                </View>
-                <View style={styles.container} {...this._panResponder.panHandlers}>
-                    <Animated.View style={[styles.search, { height }, { opacity }]}>
-                        <TextInput style={{ fontFamily: 'DINPro', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
-                        <Image style={{ width: 20, height: 20 }} source={require('../../../assets/icons/search.png')} />
-                    </Animated.View>
-                    <View style={[styles.section, { marginBottom: 5 }]}>
+                {
+                    this.state.loader ?
+                        <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}><LoaderWait /></View> :
+                        <View style={{ flex: 1 }}>
+                            <View style={{ flex: 1 }}>
+                                <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'SELECT YOUR TOPIC'} leftButton={false} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                            </View>
+                            <View style={styles.container} {...this._panResponder.panHandlers}>
+                                <Animated.View style={[styles.search, { height }, { opacity }]}>
+                                    <TextInput style={{ fontFamily: 'DINPro', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
+                                    <Icon name="magnifyer" size={50} style={{ marginLeft: -10 }} color="#454545" />
+                                </Animated.View>
+                                <View style={[styles.section, { marginBottom: 5 }]}>
 
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList')} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
-                            <View style={styles.image}>
-                                <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/nutrition.png')} >
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'nutrition'})} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                                        <View style={styles.image}>
+                                            <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.nutritionImage }} >
 
-                                </ImageBackground>
-                            </View>
-                            <View style={styles.activityContainer}>
-                                <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/nutrition.png')} />
-                                <Text style={[styles.activitySubtittle, { color: '#8ACE91' }]} >Nutrition</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList')} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
-                            <View style={styles.image}>
-                                <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/activity.png')} >
-                                </ImageBackground>
-                            </View>
-                            <View style={styles.activityContainer}>
-                                <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/activity.png')} />
-                                <Text style={[styles.activitySubtittle, { color: '#AE0069' }]} >Activity</Text>
-                            </View>
-                        </TouchableOpacity>
+                                            </ImageBackground>
+                                        </View>
+                                        <View style={styles.activityContainer}>
+                                            <Icon name="nutrition" size={50} style={{ marginLeft: -10 }} color="#8ACE91" />
+                                            <Text style={[styles.activitySubtittle, { color: '#8ACE91' }]} >Nutrition</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'activity'})} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
+                                        <View style={styles.image}>
+                                            <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.activityImage }} >
+                                            </ImageBackground>
+                                        </View>
+                                        <View style={styles.activityContainer}>
+                                            <Icon name="activity" size={50} style={{ marginLeft: -10 }} color="#AE0069" />
+                                            <Text style={[styles.activitySubtittle, { color: '#AE0069' }]} >Activity</Text>
+                                        </View>
+                                    </TouchableOpacity>
 
-                    </View>
+                                </View>
 
-                    <View style={[styles.section, { marginTop: 5 }]}>
+                                <View style={[styles.section, { marginTop: 5 }]}>
 
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList')} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
-                            <View style={styles.image}>
-                                <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/mindfulness.png')} >
-                                </ImageBackground>
-                            </View>
-                            <View style={styles.activityContainer}>
-                                <Image style={{ width: 34, height: 40 }} source={require('../../../assets/icons/mindfulness.png')} />
-                                <Text style={[styles.activitySubtittle, { color: '#D4B870' }]} >Mindfulness</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList')} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
-                            <View style={styles.image}>
-                                <ImageBackground style={{ width: '100%', height: '100%' }} source={require('../../../assets/images/coaching.png')} >
-                                </ImageBackground>
-                            </View>
-                            <View style={styles.activityContainer}>
-                                <Text style={[styles.activitySubtittle, { color: '#454545' }]} >Coaching</Text>
-                            </View>
-                        </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'mindfulness'})} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                                        <View style={styles.image}>
+                                            <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.mindfulnessImage }} >
+                                            </ImageBackground>
+                                        </View>
+                                        <View style={styles.activityContainer}>
+                                            <Icon name="mindfulness" size={50} style={{ marginLeft: -10 }} color="#D4B870" />
+                                            <Text style={[styles.activitySubtittle, { color: '#D4B870' }]} >Mindfulness</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'coach'})} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
+                                        <View style={styles.image}>
+                                            <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.coachImage }} >
+                                            </ImageBackground>
+                                        </View>
+                                        <View style={styles.activityContainer}>
+                                            <Text style={[styles.activitySubtittle, { color: '#454545' }]} >Coach</Text>
+                                        </View>
+                                    </TouchableOpacity>
 
-                    </View>
+                                </View>
 
-                </View>
+                            </View>
+                        </View>
+                }
             </View>
         );
     }
@@ -194,3 +225,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 });
+
+export default connect(state => {
+    const contentPillars = state.getData.contentPillars || {};
+    return {
+        contentPillars,
+    }
+}, dispatch => {
+    return bindActionCreators({ getContentPillars: getContentPillars }, dispatch)
+}
+)(ContentOverview);

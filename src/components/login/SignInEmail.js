@@ -18,6 +18,7 @@ class SignInEmail extends React.Component {
             loader: false,
         };
         this.verifyUser = this.verifyUser.bind(this);
+        this.testComponentWillUnmount = this.testComponentWillUnmount.bind(this);
     }
     // componentDidMount () {
     //     this.setState({loader:true});
@@ -26,6 +27,7 @@ class SignInEmail extends React.Component {
         
         if (nextProps.validEmail.hasError === false) {
             this.setState({ errorMsgEmail: '', errorMgs: '', });
+            // this.testComponentWillUnmount();
             this.props.navigation.navigate('SignInPassword');
         } else if( nextProps.validEmail.hasError === true){
             this.setState({ errorMsgEmail: 'Email address', errorMgs: 'This email address is not registered. Please try again.' });
@@ -69,6 +71,10 @@ class SignInEmail extends React.Component {
                 }
             </ImageBackground>
         );
+    }
+
+    testComponentWillUnmount() {
+        console.log('.......UNMOUNT.......')
     }
 }
 

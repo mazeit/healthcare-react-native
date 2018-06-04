@@ -12,6 +12,10 @@ const validUser = (state = {}, action) => {
         case 'FORGOT_PASSWORD':
             return { ...state, forgotPasswordResponce: payload }
 
+        case 'SIGNOUT':
+            state = {};
+            return state;
+
         default:
             return state;
     }

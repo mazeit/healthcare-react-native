@@ -1,17 +1,60 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 const { height, width } = Dimensions.get('window');
 import Header from '../Header';
+import { sendReminder } from '../../actions/index';
 
-export default class InviteMyFriendsList extends React.Component {
+class InviteMyFriendsList extends React.Component {
     constructor(props) {
         super(props);
+        console.log(',,,,,,,PROPS', this.props)
         this.state = {
+            lastInvitedFriend: this.props.navigation.state.params.invitedFriend,
+            invitedFriendDataList: this.props.invitedFriendData.result,
         };
+        this.sendInvitationReminder = this.sendInvitationReminder.bind(this);
+    }
+
+    // componentDidMount() {
+
+    //     this.props.getInvitedFriendsData(this.props.user_id);
+    // }
+
+    componentWillReceiveProps(nextProps) {
+
+        console.log('......FRIENDS .....',nextProps)
+    }
+
+    sendInvitationReminder() {
+    
+
+            // this.setState({ loader: true });
+            let { invitedFriendDataList } = this.state;
+            let targetItem = listData[index];
+    
+            // Flip the 'liked' property of the targetPost
+            targetItem.favorite = !targetItem.favorite;
+    
+    
+    
+            console.log('.... LIST DATA ........', targetItem)
+            this.setState({ listData });
+            if (cond) {
+                console.log('.... REMOVE ........')
+                this.props.removeFavorite(this.props.user_id, item.id_content, this.props.pillarName)
+            } else if (!cond) {
+                console.log('.... ADD ........')
+                this.props.addFavorite(this.props.user_id, item.id_content, this.props.pillarName)
+            }
+    
+    
     }
 
     render() {
+        console.log(',,,,,,,STATE', this.state.invitedFriendDataList)
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>
@@ -22,7 +65,7 @@ export default class InviteMyFriendsList extends React.Component {
                     <View style={styles.message}>
                         <View style={{ flex: 1, alignItems: 'center', marginTop: 20, }}>
                             <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545' }}>Thank you for inviting</Text>
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#4AB3E2' }}>friend5@gmail.com</Text>
+                            <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#4AB3E2' }}>{this.state.lastInvitedFriend}</Text>
                             <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545' }}>to livinflow.</Text>
                         </View>
                         <View style={{ flex: 1, alignItems: 'center', marginTop: 30, }}>
@@ -36,30 +79,49 @@ export default class InviteMyFriendsList extends React.Component {
 
                         <ScrollView style={styles.friendListContainer}>
 
-                            <View style={styles.informationContainer}>
+                            {
+                                this.state.invitedFriendDataList.map((friend, i) =>
+                                    <View key={i} style={styles.informationContainer}>
 
-                                <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center', marginBottom: 20 }}>
+                                        <View style={{ flex: 6, alignItems: 'flex-start', justifyContent: 'center', marginBottom: 20 }}>
 
-                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                                        <Image source={require('../../../assets/icons/clock.png')} style={{ flex: 2, width: 60, height: 60, marginLeft: -6, marginTop: 2 }} />
-                                        <Text style={{ flex: 8, fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', }}>21. April 2017</Text>
-                                    </View>
+                                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', margin: 5 }}>
+                                                <Image source={require('../../../assets/icons/clock.png')} style={{ flex: 2, width: 60, height: 60, marginLeft: -6, marginTop: 2 }} />
+                                                <Text style={{ flex: 8, fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', }}>21. April 2017</Text>
+                                            </View>
 
-                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383' }}>friend1@gmail.com</Text>
-                                    </View>
+                                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 5 }}>
+                                                <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383' }}>{friend.friendemail}</Text>
+                                            </View>
 
-                                </View>
-
-                                <View style={{ flex: 1, alignItems: 'flex-end', marginBottom: 20 }}>
-                                    <TouchableOpacity>
-                                        <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 132, height: 28, borderRadius: 28, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
-                                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 14, color: '#4AB3E2' }}>Send reminder</Text>
                                         </View>
-                                    </TouchableOpacity>
-                                </View>
 
-                            </View>
+                                        <View style={{ flex: 4, alignItems: 'flex-end', marginBottom: 20 }}>
+                                            {
+                                                friend.join === 'no' ? friend.reminder === null ?
+                                                    <TouchableOpacity onPress={() => this.props.sendReminder(friend.id_customer,friend.friendfirstname,friend.friendlastname, friend.friendemail)}>
+                                                        <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 132, height: 28, borderRadius: 28, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
+                                                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 14, color: '#4AB3E2' }}>Send reminder</Text>
+                                                        </View>
+                                                    </TouchableOpacity> :
+                                                    <View>
+                                                        <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 132, height: 28, borderRadius: 28, borderColor: '#454545', borderWidth: 0.5 }}>
+                                                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 14, color: '#454545' }}>Reminder sent</Text>
+                                                        </View>
+                                                    </View> :
+                                                    <View>
+                                                        <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 132, height: 28 }}>
+                                                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 14, color: '#4AB3E2' }}>Has joined livinflow</Text>
+                                                        </View>
+                                                    </View>
+                                            }
+
+                                        </View>
+
+                                    </View>
+                                )
+                            }
+
 
                         </ScrollView>
 
@@ -82,11 +144,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         height: 200,
         alignItems: 'center',
+        marginTop: 10,
     },
 
     friendList: {
-        // flex: 1,
-        height: 75,
+        flex: 1,
+        // height: 75,
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10,
@@ -111,3 +174,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
 });
+
+export default connect(state => {
+    // const user_id = state.validUser.user.id || '';
+    const invitedFriendData = state.getData.invitedFriendData || {};
+    const success = state.addUser.success || {};
+    return {
+        // user_id,
+        invitedFriendData,
+        success,
+    }
+}, dispatch => {
+    return bindActionCreators({ sendReminder: sendReminder }, dispatch)
+})(InviteMyFriendsList);

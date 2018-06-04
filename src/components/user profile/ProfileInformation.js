@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, ImageBackground, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 
 const { height, width } = Dimensions.get('window');
 import Header from '../Header';
@@ -8,10 +11,12 @@ const myAccountSubHeading = ['User name', 'First name', 'Last name', 'Address', 
 const personalDetailSubHeading = ['Goal', 'Age', 'Weight'];
 
 
-export default class ProfileInformation extends React.Component {
+class ProfileInformation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            myAccountSubHeadingDetails : [this.props.user.firstname + ' ' + this.props.user.lastname, this.props.user.firstname, this.props.user.lastname, this.props.user.country, this.props.user.geoloc_postcode, this.props.user.geoloc_id_state, this.props.user.email, this.props.user.activated, this.props.user.id_lang],
+            personalDetailSubHeadingDetails: [this.props.user.goal, this.props.user.birthday, this.props.user.weight],
         };
     }
 
@@ -24,9 +29,9 @@ export default class ProfileInformation extends React.Component {
                 <View style={styles.container}>
 
                     <View style={styles.profilePicture}>
-                        <ImageBackground style={styles.profilePictureBlur} source={require('../../../assets/images/profilePicture.png')} blurRadius={15}>
+                        <ImageBackground style={styles.profilePictureBlur} source={{uri: this.props.user.img_dir}} blurRadius={15}>
                             <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20 }}>
-                                <Image source={require('../../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }} />
+                                <Image source={{uri: this.props.user.img_dir}} style={{ width: 133, height: 133, }} />
                             </View>
                             <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#4AB3E2' }}>Change Profile</Text>
                             <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#4AB3E2' }}>Picture</Text>
@@ -45,7 +50,7 @@ export default class ProfileInformation extends React.Component {
                                             <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 16, color: '#838383' }}>{item}</Text>
                                         </View>
                                         <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 16, color: '#838383' }}>Value</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 16, color: '#838383' }}>{this.state.myAccountSubHeadingDetails[i]}</Text>
                                         </View>
                                     </View>
                                 )
@@ -61,7 +66,7 @@ export default class ProfileInformation extends React.Component {
                                             <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 16, color: '#838383' }}>{item}</Text>
                                         </View>
                                         <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
-                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 16, color: '#838383' }}>Value</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 16, color: '#838383' }}>{this.state.personalDetailSubHeadingDetails[i]}</Text>
                                         </View>
                                     </View>
                                 )
@@ -131,3 +136,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
 });
+
+export default connect(state => {
+    const user = state.validUser.user || {};
+    return {
+        user,
+    }
+})(ProfileInformation)

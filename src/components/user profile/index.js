@@ -1,8 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, Image, TextInput, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import icoMoonConfig from '../../selection.json';
+const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 import Header from '../Header';
+import { signOut } from '../../actions/index'
 
 
 const { height, width } = Dimensions.get('window');
@@ -52,11 +57,24 @@ const profileSubHeading = [
     // },
 ];
 
+
+
 class ProfilePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+
         };
+        this.userSignOut = this.userSignOut.bind(this);
+    }
+
+    componentDidMount() {
+        // this.props.getProfileData(this.props.user.id)
+    }
+
+    userSignOut() {
+        this.props.signOut();
+        this.props.navigation.navigate('Login');
     }
 
     render() {
@@ -68,12 +86,17 @@ class ProfilePage extends React.Component {
                 <View style={styles.container}>
 
                     <View style={styles.profilePicture}>
-                        <ImageBackground style={styles.profilePictureBlur} source={require('../../../assets/images/profilePicture.png')} blurRadius={15}>
+                        <ImageBackground style={styles.profilePictureBlur} source={{ uri: this.props.user.img_dir }} blurRadius={15}>
                             <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20 }}>
-                                <Image source={require('../../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }} />
+                                <Image source={{ uri: this.props.user.img_dir }} style={{ width: 133, height: 133, }} />
                             </View>
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#FFFFFF' }}>Vivivan</Text>
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#FFFFFF' }}>Undacable</Text>
+                            <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.firstname}</Text>
+                            <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.lastname}</Text>
+                                {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: -20 }}>
+                                    <Icon name="people" size={70} color="#454545" style={{left: 25}}/>
+                                    <Icon name="people" size={70} color="#454545" />
+                                    <Icon name="people" size={70} color="#454545" style={{right: 25}}/>
+                                </View> */}
                         </ImageBackground>
                     </View>
 
@@ -87,14 +110,14 @@ class ProfilePage extends React.Component {
                                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545' }}>{item.name}</Text>
                                         </View>
                                         <View style={{ flex: 1, alignItems: 'flex-end', }}>
-                                            <Image style={{ width: 10, height: 10, marginRight: 20, transform: [{ rotateZ: '-90deg' }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
+                                            <Icon name="little_arrow" size={50} style={{ marginTop: 15, transform: [{ rotateZ: '-90deg' }] }} color="#454545" />
                                         </View>
                                     </View>
                                 </TouchableOpacity>
                             })
                         }
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 10, backgroundColor: '#FFFFFF', }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={{ flex: 1, marginTop: 20, marginBottom: 10 }}>
+                            <TouchableOpacity onPress={() => this.userSignOut()} style={{ flex: 1, marginTop: 20, marginBottom: 10 }}>
                                 <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
                                     <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Sign out</Text>
                                 </View>
@@ -145,9 +168,12 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => {
-    const clearState = state || {};
+    const user = state.validUser.user || {};
+    const profileData = state.getData.profileData || {};
     return {
-        clearState,
+        user,
+        profileData,
     }
-}
-)(ProfilePage);
+}, dispatch => {
+    return bindActionCreators({ signOut: signOut }, dispatch)
+})(ProfilePage);

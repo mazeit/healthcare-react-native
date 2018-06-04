@@ -1,15 +1,32 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import icoMoonConfig from '../../selection.json';
+const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 const { height, width } = Dimensions.get('window');
 import Header from '../Header';
+import { getFAQ } from '../../actions/index'
 
-export default class HelpFaq extends React.Component {
+class HelpFaq extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            Faq: [],
+            conntactInfo: {},
             rotate: '-90deg',
         };
+    }
+
+    componentDidMount() {
+        this.props.getFAQ()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        
+        this.setState({ Faq: nextProps.FaqData.faq_list, conntactInfo: nextProps.FaqData.contact_info });
     }
 
     render() {
@@ -28,88 +45,39 @@ export default class HelpFaq extends React.Component {
 
                         </View>
 
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('FaqAnswer')} style={[styles.termsOfUseBlock, { height: 55 }]}>
+                        {
+                            this.state.Faq.map((question, i) =>
+                                <TouchableOpacity key={i} onPress={() => this.props.navigation.navigate('FaqAnswer')} style={[styles.termsOfUseBlock, { height: 55 }]}>
 
-                            <View style={{ flex: 9, alignItems: 'flex-start', marginLeft: 20 }}>
-                                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545' }}>How can i buy a new challenge</Text>
-                            </View>
-                            <View style={{ flex: 1, alignItems: 'flex-end', }}>
-                                <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
-                            </View>
+                                    <View style={{ flex: 9, alignItems: 'flex-start', marginLeft: 20 }}>
+                                        <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545' }}>{question.title}</Text>
+                                    </View>
+                                    <View style={{ flex: 1, alignItems: 'flex-end', }}>
+                                        <Icon name="little_arrow" size={50} style={{marginTop: 15, transform: [{ rotateZ: '-90deg'}] }} color="#454545" />
+                                    </View>
 
-                        </TouchableOpacity>
+                                </TouchableOpacity>
+                            )
+                        }
 
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('FaqAnswer')} style={[styles.termsOfUseBlock, { height: 55 }]}>
 
-                            <View style={{ flex: 9, alignItems: 'flex-start', marginLeft: 20 }}>
-                                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545' }}>Who to contact ?</Text>
-                            </View>
-                            <View style={{ flex: 1, alignItems: 'flex-end', }}>
-                                <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
-                            </View>
-
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('FaqAnswer')} style={[styles.termsOfUseBlock, { height: 55 }]}>
-
-                            <View style={{ flex: 9, alignItems: 'flex-start', marginLeft: 20 }}>
-                                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545' }}>How to become a partner ?</Text>
-                            </View>
-                            <View style={{ flex: 1, alignItems: 'flex-end', }}>
-                                <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
-                            </View>
-
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('FaqAnswer')} style={[styles.termsOfUseBlock, { height: 55 }]}>
-
-                            <View style={{ flex: 9, alignItems: 'flex-start', marginLeft: 20 }}>
-                                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545' }}>How to get medical information ?</Text>
-                            </View>
-                            <View style={{ flex: 1, alignItems: 'flex-end', }}>
-                                <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
-                            </View>
-
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('FaqAnswer')} style={[styles.termsOfUseBlock, { height: 55 }]}>
-
-                            <View style={{ flex: 9, alignItems: 'flex-start', marginLeft: 20 }}>
-                                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545' }}>How can i invite friends ?</Text>
-                            </View>
-                            <View style={{ flex: 1, alignItems: 'flex-end', }}>
-                                <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
-                            </View>
-
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('FaqAnswer')} style={[styles.termsOfUseBlock, { height: 55 }]}>
-
-                            <View style={{ flex: 9, alignItems: 'flex-start', marginLeft: 20 }}>
-                                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545' }}>How does the app works ?</Text>
-                            </View>
-                            <View style={{ flex: 1, alignItems: 'flex-end', }}>
-                                <Image style={{ width: 20, height: 20, transform: [{ rotateZ: this.state.rotate }] }} source={require('../../../assets/icons/little_arrow_grey.png')} />
-                            </View>
-
-                        </TouchableOpacity>
 
                         <View style={[styles.termsOfUseBlock, { flexDirection: 'column', height: 309 }]}>
 
                             <Text style={{ flex: 1, height: 66, fontFamily: 'DINPro', fontSize: 18, color: '#838383', margin: 20, marginBottom: 0, textAlign: 'center' }}>No answer to your question? Be free to contact our support team for a personal assistence. You can reach us:</Text>
 
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
-                                <Image style={{ width: 147, height: 147, }} source={require('../../../assets/icons/clock.png')} />
+                                <Icon name="time_big" size={50} color="#454545" />
                             </View>
 
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', }}>
-                                <Text style={{ flex: 1, fontFamily: 'DINPro', fontSize: 16, color: '#4AB3E2', textAlign: 'center' }}>Monday – Friday</Text>
+                                <Text style={{ flex: 1, fontFamily: 'DINPro', fontSize: 16, color: '#4AB3E2', textAlign: 'center' }}>{this.state.conntactInfo.day}</Text>
 
-                                <Text style={{ flex: 1, fontFamily: 'DINPro', fontSize: 16, color: '#4AB3E2', textAlign: 'center' }}>9am – 5pm</Text>
+                                <Text style={{ flex: 1, fontFamily: 'DINPro', fontSize: 16, color: '#4AB3E2', textAlign: 'center' }}>{this.state.conntactInfo.time}</Text>
 
-                                <Text style={{ flex: 1, fontFamily: 'DINPro', fontSize: 16, color: '#4AB3E2', textAlign: 'center' }}>[phone number]</Text>
+                                <Text style={{ flex: 1, fontFamily: 'DINPro', fontSize: 16, color: '#4AB3E2', textAlign: 'center' }}>{this.state.conntactInfo.phone}</Text>
 
-                                <Text style={{ flex: 1, fontFamily: 'DINPro', fontSize: 16, color: '#4AB3E2', marginBottom: 20, textAlign: 'center' }}>[email-adresss]</Text>
+                                <Text style={{ flex: 1, fontFamily: 'DINPro', fontSize: 16, color: '#4AB3E2', marginBottom: 20, textAlign: 'center' }}>{this.state.conntactInfo.email}</Text>
                             </View>
 
                         </View>
@@ -146,3 +114,12 @@ const styles = StyleSheet.create({
 
     },
 });
+
+export default connect(state => {
+    const FaqData = state.getData.FaqData || {};
+    return {
+        FaqData,
+    }
+}, dispatch => {
+    return bindActionCreators({ getFAQ: getFAQ }, dispatch)
+})(HelpFaq);

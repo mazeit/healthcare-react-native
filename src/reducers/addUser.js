@@ -6,6 +6,18 @@ const addUser = (state = {}, action) => {
         case 'ADD_NEW_USER':
             return { ...state, addUserSuccess: payload }
 
+        case 'ADD_FAVORITE':
+            return { ...state, addFavResponce: payload }
+
+        case 'REMOVE_FAVORITE':
+            return { ...state, removeFavResponce: payload }
+
+        case 'INVITE_FRIEND':
+            return { ...state, inviteFriendSuccess: payload }
+        
+        case 'INVITE_FRIEND_REMINDER':
+            return { ...state, success: payload }
+
         default:
             return state;
     }
