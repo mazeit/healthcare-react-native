@@ -66,10 +66,10 @@ export const addNewUser = (email, password, firstName, lastName) => {
 export const signOut = () => {
     return async (dispatch, getState) => {
 
-            dispatch({
-                type: 'SIGNOUT',
-                payload: ''
-            })
+        dispatch({
+            type: 'SIGNOUT',
+            payload: ''
+        })
 
     }
 }
@@ -195,7 +195,7 @@ export const getFAQ = () => {
 }
 
 export const getInvitedFriendsData = (user_id) => {
-    
+
     return async (dispatch, getState) => {
 
         fetch('https://spano24.com/fitnessportal/fitness/invitemyfriend/458f1f8232516673a36a86daf0d87e8b?id_customer=' + user_id + '&invitedfriends=true', {
@@ -216,7 +216,7 @@ export const getInvitedFriendsData = (user_id) => {
 }
 
 export const inviteFriend = (user_id, friendFirstname, friendLastname, friendEmail) => {
-    
+
     return async (dispatch, getState) => {
 
         fetch('https://spano24.com/fitnessportal/fitness/invitemyfriend/458f1f8232516673a36a86daf0d87e8b?id_customer=' + user_id + '&friendfirstname=' + friendFirstname + '&friendlastname=' + friendLastname + '&friendemail=' + friendEmail + '&submitinvite=true', {
@@ -237,7 +237,7 @@ export const inviteFriend = (user_id, friendFirstname, friendLastname, friendEma
 }
 
 export const sendReminder = (user_id, friendFirstname, friendLastname, friendEmail) => {
-    
+
     return async (dispatch, getState) => {
 
         fetch('https://spano24.com/fitnessportal/fitness/invitemyfriend/458f1f8232516673a36a86daf0d87e8b?id_customer=' + user_id + '&friendfirstname=' + friendFirstname + '&friendlastname=' + friendLastname + '&friendemail=' + friendEmail + '&sendreminder=true', {
@@ -258,7 +258,7 @@ export const sendReminder = (user_id, friendFirstname, friendLastname, friendEma
 }
 
 export const getCalendarData = (user_id) => {
-    
+
     return async (dispatch, getState) => {
 
         fetch('https://spano24.com/fitnessportal/fitness/calenderplan/458f1f8232516673a36a86daf0d87e8b?id_customer=' + user_id, {
@@ -267,6 +267,49 @@ export const getCalendarData = (user_id) => {
         }).then((data) => data.json()).then((json) => {
             dispatch({
                 type: 'GET_CALENDAR_DATA',
+                payload: json
+            })
+        }).catch((error) => {
+            console.log('There has been a problem with your fetch operation: ' + error.message);
+            // ADD THIS THROW error
+            throw error;
+        });
+
+    }
+}
+
+export const getActivity = (activity_id, page) => {
+
+    return async (dispatch, getState) => {
+
+        fetch('https://spano24.com/fitnessportal/fitness/contents/458f1f8232516673a36a86daf0d87e8b?id_content=' + activity_id, {
+            method: 'POST',
+            mode: 'cors',
+        }).then((data) => data.json()).then((json) => {
+
+            dispatch({
+                type: page === 'show' ? 'GET_ACTIVITY_DATA' : 'GET_ADD_ACTIVITY_DATA',
+                payload: json
+            })
+        }).catch((error) => {
+            console.log('There has been a problem with your fetch operation: ' + error.message);
+            // ADD THIS THROW error
+            throw error;
+        });
+
+    }
+}
+
+export const addActivity = (customer_id, id_content, event, date) => {
+
+    return async (dispatch, getState) => {
+
+        fetch('https://spano24.com/fitnessportal/fitness/addtomychallenge/458f1f8232516673a36a86daf0d87e8b?id_customer=' + customer_id + '&id_content=' + id_content + '&event=' + event + '%202&date=' + date, {
+            method: 'POST',
+            mode: 'cors',
+        }).then((data) => data.json()).then((json) => {
+            dispatch({
+                type: 'ADD_EVENT',
                 payload: json
             })
         }).catch((error) => {

@@ -18,6 +18,9 @@ const addUser = (state = {}, action) => {
         case 'INVITE_FRIEND_REMINDER':
             return { ...state, success: payload }
 
+        case 'ADD_EVENT':
+            return { ...state, addEventResponse: payload }
+
         default:
             return state;
     }

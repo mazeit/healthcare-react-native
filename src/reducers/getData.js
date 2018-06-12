@@ -17,6 +17,12 @@ const getData = (state = {}, action) => {
         case 'GET_CALENDAR_DATA':
             return { ...state, calendarData: payload }
 
+        case 'GET_ACTIVITY_DATA':
+            return { ...state, activityData: payload }
+
+        case 'GET_ADD_ACTIVITY_DATA':
+            return { ...state, addActivityData: payload }
+
         default:
             return state;
     }

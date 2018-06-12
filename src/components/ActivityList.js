@@ -8,7 +8,7 @@ const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 const { height, width } = Dimensions.get('window');
 
-import { addFavorite, removeFavorite } from '../actions/index';
+import { addFavorite, removeFavorite, getActivity } from '../actions/index';
 import LoaderWait from './LoaderWait';
 
 
@@ -21,20 +21,18 @@ class ActivityList extends React.Component {
             dataListImage: { nutrition: require('../../assets/images/nutrition_frame.png'), activity: require('../../assets/images/activity_frame.png'), mindfulness: require('../../assets/images/mindfulness_frame.png'), coach: require('../../assets/images/coach_frame.png') },
             listData: this.props.data,
             loader: false,
+            activityType: this.props.activityType || '',
+            user_id: this.props.user_id || '',
         };
         this.favClicked = this.favClicked.bind(this);
     }
     componentWillReceiveProps(nextProps) {
         console.log('.....NEXTPROPS////', nextProps)
         this.setState({ loader: false })
+        if(nextProps.addActivityData.hasError === false)
+        this.setState({ activityData: nextProps.addActivityData });
+        this.props.navigation.navigate(this.props.goto, {activityType: this.state.activityType, data: nextProps.addActivityData.content})
     }
-
-    // renderItem ({ item, index }) {
-    //     
-    //     return (
-
-    //     )
-    // }
 
     favClicked({ item, index }, cond) {
 
@@ -60,11 +58,23 @@ class ActivityList extends React.Component {
 
     }
 
+    goToNextView (id, item) {
+        if(this.state.activityType === 'add') {
+            this.setState({loader: true})
+            this.props.getActivity(id, null)
+        }
+        else{
+            this.props.navigation.navigate(this.props.goto, {activityType: this.state.activityType, data: item}) 
+        }
+        // this.props.navigation.navigate(this.props.goto, {activityType: this.state.activityType, data: item})
+    }
+
     render() {
 
         const { listData } = this.state;
 
         console.log('......LIST DATA', listData)
+        console.log('.....STATE...', this.state)
         return (
             <View style={styles.container}>
                 {
@@ -95,7 +105,7 @@ class ActivityList extends React.Component {
                                                 <Icon name="plus" size={50} style={{ marginLeft: -10 }} color="#454545" />
                                             </TouchableOpacity>
                                         </View>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate(this.props.goto)} style={styles.categoryDetails}>
+                                        <TouchableOpacity onPress={() => this.goToNextView(item.id_content, item)} style={styles.categoryDetails}>
                                             <ImageBackground style={styles.category} source={item.file_id !== '' ? { uri: 'https://content.jwplatform.com/thumbs/DRJghGa7.jpg' } : this.state.dataListColor[this.props.pillarName]}>
                                                 <ImageBackground style={styles.category} source={this.state.dataListImage[this.props.pillarName]}>
                                                     {/* <Text>{item.key}</Text> */}
@@ -163,11 +173,13 @@ const styles = StyleSheet.create({
 export default connect(state => {
     const addFavResponce = state.addUser.addFavResponce || {};
     const removeFavResponce = state.addUser.removeFavResponce || {};
+    const addActivityData = state.getData.addActivityData || {};
     return {
         addFavResponce,
         removeFavResponce,
+        addActivityData,
     }
 }, dispatch => {
-    return bindActionCreators({ addFavorite: addFavorite, removeFavorite: removeFavorite }, dispatch)
+    return bindActionCreators({ addFavorite: addFavorite, removeFavorite: removeFavorite, getActivity: getActivity }, dispatch)
 }
 )(ActivityList);

@@ -11,6 +11,9 @@ export default class ChoseActivity extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            pillarData: this.props.navigation.state.params.pillarData,
+            pillarName: this.props.navigation.state.params.pillarName,
+            user_id: this.props.navigation.state.params.user_id,
         };
     }
 
@@ -22,16 +25,7 @@ export default class ChoseActivity extends React.Component {
                 </View>
                 <View style={{ flex: 9 }}>
                     <ActivityList navigation={this.props.navigation} goto={'Activity'}
-                        data={[
-                            { key: 'Devin' },
-                            { key: 'Jackson' },
-                            { key: 'James' },
-                            { key: 'Joel' },
-                            { key: 'John' },
-                            { key: 'Jillian' },
-                            { key: 'Jimmy' },
-                            { key: 'Julie' },
-                        ]}
+                        data={this.state.pillarData} pillarName={this.state.pillarName} user_id={this.state.user_id} activityType='add'
                     />
                 </View>
 
