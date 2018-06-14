@@ -304,7 +304,7 @@ export const addActivity = (customer_id, id_content, event, date) => {
 
     return async (dispatch, getState) => {
 
-        fetch('https://spano24.com/fitnessportal/fitness/addtomychallenge/458f1f8232516673a36a86daf0d87e8b?id_customer=' + customer_id + '&id_content=' + id_content + '&event=' + event + '%202&date=' + date, {
+        fetch('https://spano24.com/fitnessportal/fitness/addtomychallenge/458f1f8232516673a36a86daf0d87e8b?id_customer=' + customer_id + '&id_content=' + id_content + '&event=' + event + '&date=' + date, {
             method: 'POST',
             mode: 'cors',
         }).then((data) => data.json()).then((json) => {

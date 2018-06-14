@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Dimensions, Image, StyleSheet, WebView,TouchableOpacity } from 'react-native';
+import { Text, View, Dimensions, Image, StyleSheet, WebView, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 // import Video from 'react-native-video';
@@ -18,7 +18,7 @@ import Header from '../Header';
 
 
 
-class Activity extends React.Component {
+export default class Activity extends React.Component {
     constructor(props) {
         super(props);
         // console.log('.......ID.....', this.props.navigation.state.params.data);
@@ -26,27 +26,25 @@ class Activity extends React.Component {
             activityData: this.props.navigation.state.params.data,
             activityType: this.props.navigation.state.params.activityType,
             type: '',
-            paused: false,
-
         };
         this.openDatePrefrence = this.openDatePrefrence.bind(this);
     }
 
     componentDidMount() {
-    
+
     }
-    componentWillReceiveProps (nextProps) {
-        console.log('.......',nextProps)
+    componentWillReceiveProps(nextProps) {
+        // console.log('.......', nextProps)
         // if(nextProps.CalendarDataResponse.hasError === false) {
-            // this.props.navigation.navigate('CalendarView', {id_content:this.state.activityData.id,event: this.state.activityData.name,})
+        // this.props.navigation.navigate('CalendarView', {id_content:this.state.activityData.id,event: this.state.activityData.name,})
         // }else if(nextProps.CalendarDataResponse.hasError === true ) {
-            // console.log('......ERROR.....', nextProps.activityData.errors)
+        // console.log('......ERROR.....', nextProps.activityData.errors)
         // }
     }
 
 
-    openDatePrefrence () {
-        
+    openDatePrefrence() {
+        this.props.navigation.navigate('CalendarView', { id_content: this.state.activityData.id, event: this.state.activityData.name, selectDate : true })
     }
 
 
@@ -55,16 +53,17 @@ class Activity extends React.Component {
 
 
 
-        const add = <View style={{ flex: 1 }}>
-            <View style={styles.subContainers}>
-                <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 18, color: '#838383', }}>Add this session to your challenge</Text>
-            </View>
-            <TouchableOpacity onPress={() => this.openDatePrefrence()} style={[styles.subContainers, { paddingBottom: 20, flexDirection: 'row' }]}>
-                <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
-                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Add</Text>
+        const add =
+            <View style={{ flex: 1 }}>
+                <View style={styles.subContainers}>
+                    <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 18, color: '#838383', }}>Add this session to your challenge</Text>
                 </View>
-            </TouchableOpacity>
-        </View>
+                <TouchableOpacity onPress={() => this.openDatePrefrence()} style={[styles.subContainers, { paddingBottom: 20, flexDirection: 'row' }]}>
+                    <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
+                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Add</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
 
         const locked =
             <View style={{ flex: 1 }}>
@@ -138,7 +137,7 @@ class Activity extends React.Component {
                                     <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', marginLeft: -10 }}>{this.state.activityData.lange}:00</Text>
                                 </View >
                                 <View style={[styles.subContainers, { flexDirection: 'row' }]}>
-                                    {this.state.activityData.pillar !== 'coach' && <Icon name={this.state.activityData.pillar} size={80} color="#838383" />}
+                                    {this.state.activityData.pillar !== 'coach' && <Icon name={this.state.activityData.pillar} size={50} color="#838383" />}
                                     <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', }}>Easy</Text>
                                 </View >
                                 <View style={styles.subContainers}>
@@ -172,15 +171,15 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(state => {
-    const getCalendarDataResponse = state.getData.getCalendarDataResponse || '';
-    return {
-        CalendarDataResponse,
+// export default connect(state => {
+//     // const getCalendarDataResponse = state.getData.getCalendarDataResponse || '';
+//     return {
+//         // CalendarDataResponse,
 
-    }
-}, dispatch => {
-    return bindActionCreators({ getCalendarData: getCalendarData }, dispatch)
-}
-)(Activity);
+//     }
+// }, dispatch => {
+//     return bindActionCreators({ getCalendarData: getCalendarData }, dispatch)
+// }
+// )(Activity);
 
 

@@ -29,7 +29,7 @@ class AddActivityCategory extends React.Component {
     }
 
     componentWillReceiveProps (nextProps) {
-        console.log('.........PROPS....', nextProps);
+        // console.log('.........PROPS....', nextProps);
         
         if(nextProps.pillarData.hasError === false) {
             this.setState({loader: false});

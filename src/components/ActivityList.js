@@ -15,7 +15,7 @@ import LoaderWait from './LoaderWait';
 class ActivityList extends React.Component {
     constructor(props) {
         super(props);
-        console.log('....PROPS...', this.props)
+        // console.log('....PROPS...', this.props)
         this.state = {
             dataListColor: { nutrition: require('../../assets/images/nutrition_image.png'), activity: require('../../assets/images/activity_image.png'), mindfulness: require('../../assets/images/mindfulness_image.png'), coach: require('../../assets/images/coach_image.png') },
             dataListImage: { nutrition: require('../../assets/images/nutrition_frame.png'), activity: require('../../assets/images/activity_frame.png'), mindfulness: require('../../assets/images/mindfulness_frame.png'), coach: require('../../assets/images/coach_frame.png') },
@@ -27,7 +27,7 @@ class ActivityList extends React.Component {
         this.favClicked = this.favClicked.bind(this);
     }
     componentWillReceiveProps(nextProps) {
-        console.log('.....NEXTPROPS////', nextProps)
+        // console.log('.....NEXTPROPS////', nextProps)
         this.setState({ loader: false })
         if(nextProps.addActivityData.hasError === false)
         this.setState({ activityData: nextProps.addActivityData });
@@ -73,8 +73,8 @@ class ActivityList extends React.Component {
 
         const { listData } = this.state;
 
-        console.log('......LIST DATA', listData)
-        console.log('.....STATE...', this.state)
+        // console.log('......LIST DATA', listData)
+        // console.log('.....STATE...', this.state)
         return (
             <View style={styles.container}>
                 {

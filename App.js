@@ -105,9 +105,9 @@ const CalendarStack = StackNavigator({
   Tracker: { screen: Tracker },
 
 },
-{
-  headerMode: 'none',
-}
+  {
+    headerMode: 'none',
+  }
 );
 
 
@@ -128,9 +128,9 @@ const ProfileStack = StackNavigator({
   FaqAnswer: { screen: FaqAnswer },
 
 },
-{
-  headerMode: 'none',
-}
+  {
+    headerMode: 'none',
+  }
 );
 
 
@@ -146,7 +146,8 @@ const AppNavigator = StackNavigator({
   ContentStack: { screen: ContentStack },
   CalendarStack: { screen: CalendarStack },
   GeneralMenu: { screen: GeneralMenu },
-  ProfileStack: { screen: ProfileStack}
+  
+  ProfileStack: { screen: ProfileStack }
 
 }, {
     mode: 'modal',
@@ -154,7 +155,7 @@ const AppNavigator = StackNavigator({
   });
 
 
-  ////  ROOT STACK / END ------------------------------------>
+////  ROOT STACK / END ------------------------------------>
 
 const styles = StyleSheet.create({
   container: {

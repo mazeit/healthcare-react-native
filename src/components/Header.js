@@ -18,6 +18,7 @@ export default class Header extends React.Component {
             leftButton: this.props.leftButton,
             leftButtonName: this.props.leftButtonName,
             leftButtonColor: this.props.leftButtonColor,
+            rightButtonName: this.props.rightButtonName || 'menu',
 
             rightButton: this.props.rightButton,
             showNext: this.props.showNext,
@@ -43,8 +44,8 @@ export default class Header extends React.Component {
                     <View style={{ flex:2,alignItems: 'flex-end', justifyContent: 'center' }}>
                         {
                             this.state.showNext ? <Text onPress={() => this.props.verifyUser()} style={{ fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff' }}>Next</Text>
-                                : this.props.rightButton ? <TouchableOpacity onPress={() => this.props.navigation.navigate('GeneralMenu')} >
-                                    <Icon name="menu" size={50} color="#454545" />
+                                : this.props.rightButton ? <TouchableOpacity onPress={this.state.rightButtonName === 'menu' ? () => this.props.navigation.navigate('GeneralMenu'): ()=> this.props.rightButtonFunc()} >
+                                    <Icon name={this.state.rightButtonName} size={50} color="#454545" />
                                 </TouchableOpacity>
                                     : <View></View>
                         }

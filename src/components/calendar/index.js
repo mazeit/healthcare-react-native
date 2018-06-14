@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 
-import { getActivity } from '../../actions/index'
+import { getActivity, addActivity } from '../../actions/index'
 import { bindActionCreators } from 'redux'
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../../selection.json';
@@ -17,7 +17,7 @@ import Footer from './Footer';
 
 
 import Swipeout from 'react-native-swipeout';
-import { Agenda, CalendarList } from 'react-native-calendars';
+import { Agenda } from 'react-native-calendars';
 
 
 const { height, width } = Dimensions.get('window');
@@ -43,13 +43,14 @@ const swipeSettings = {
 class CalendarView extends React.Component {
     constructor(props) {
         super(props);
+        
         this.state = {
             today: new Date(),
             headDate: new Date().getDate() + ' ' + month[new Date().getMonth()] + ' ' + new Date().getFullYear(),
             firstDay: new Date(new Date().getFullYear(), new Date().getMonth(), 1).getDay(), weeklyCalendar: true,
             rotate: '180deg',
             user_id: this.props.user_id,
-            calendarData: this.props.navigation.state.params.data,
+            calendarData: this.props.navigation.state.params.data || this.props.calendarData,
             activityData: {},
             eventData: {},
             markedData: {},
@@ -58,9 +59,15 @@ class CalendarView extends React.Component {
             mindfulness: '#D4B870',
             nutrition: '#8ACE91',
             timeDiff: '',
+            dateSelected: false,
+            selectDate: this.props.navigation.state.params.selectDate || false,
+            eventDate: '',
         };
         this.getActivityData = this.getActivityData.bind(this);
         this.renderDay = this.renderDay.bind(this);
+        this.dateSelected = this.dateSelected.bind(this);
+        this.addEvent = this.addEvent.bind(this);
+
     }
 
     componentDidMount() {
@@ -99,8 +106,11 @@ class CalendarView extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        // console.log('......CALENDER NEXT PROPS.....', nextProps)
 
+        console.log('......CALENDERNEXT PROPS.....', this.props)
+        // if(nextProps.addEventResponse.hasError===false) {
+        //     this.setState({ loader: false,dateSelected: true })
+        // }
         if (nextProps.activityData.hasError === false) {
             this.setState({ activityData: nextProps.activityData, loader: false });
             this.props.navigation.navigate('Activity', { data: nextProps.activityData.content, activityType: 'open' });
@@ -110,6 +120,7 @@ class CalendarView extends React.Component {
             this.setState({ loader: false })
             console.log('......ERROR.....', nextProps.activityData.errors)
         }
+        
 
 
 
@@ -130,7 +141,7 @@ class CalendarView extends React.Component {
         minutes = (minutes < 10) ? "0" + minutes : minutes;
         seconds = (seconds < 10) ? "0" + seconds : seconds;
         const timeDiff = hours + ":" + minutes;
-        const activityType = timeDiff.split(':')[0] - 48 > 0 ? 'locked' : 'open' ;
+        const activityType = timeDiff.split(':')[0] - 48 > 0 ? 'locked' : 'open';
         console.log('....ID....INDEX', id, timeDiff);
         // this.setState({ timeDiff: timeDiff });
 
@@ -138,6 +149,17 @@ class CalendarView extends React.Component {
         this.props.getActivity(id, 'show');
     }
 
+    dateSelected(date) {
+        console.log(date)
+        this.setState({eventDate: date.dateString})
+    }
+
+    addEvent() {
+        // this.setState({loader: true});
+        this.props.addActivity(this.state.user_id, this.props.navigation.state.params.id_content, this.props.navigation.state.params.event, this.state.eventDate)
+        
+        
+    }
     renderDay(day, item) {
         return (
             <View>
@@ -194,13 +216,34 @@ class CalendarView extends React.Component {
         return (
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')}>
                 {
+                    this.state.dateSelected &&
+                    <View style={{ position: 'absolute', width: width, height: height, top: 0, left: 0, flex:1, backgroundColor: '#00000080' }}>
+                        <View style={{ flex: 6, alignItems: 'center', justifyContent: 'center' }}>
+                        </View>
+
+                        <View style={{ flex: 4, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' }}>
+                            <View style={{ flex: 1 }}>
+                                <View style={styles.subContainers}>
+                                    <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 18, color: '#838383', }}>Activity {} has been added for {}</Text>
+                                </View>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('WelcomeScreen')} style={[styles.subContainers, { paddingBottom: 20, flexDirection: 'row' }]}>
+                                    <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
+                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Okay</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                }
+                {
                     this.state.loader ?
                         <View style={{ flex: 1, opacity: 0.8 }}><LoaderWait /></View> :
                         <View style={{ flex: 1 }}>
                             <View style={{ flex: 1 }}>
-                                <Header goBack={() => this.props.navigation.navigate('AddActivity1')} backgroundcolor={'#FFFFFF'} headerTitle={this.state.headDate} leftButton={true} leftButtonName={'plus'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                                <Header goBack={this.state.selectDate ? () => this.props.navigation.goBack() : () => this.props.navigation.navigate('AddActivity1')} backgroundcolor={'#FFFFFF'} headerTitle={this.state.selectDate ? 'ADD ACTIVITY TO YOUR CHALLENGE' : this.state.headDate} leftButton={true} leftButtonName={this.state.selectDate ? 'close' : 'plus'} leftButtonColor={'#454545'} showNext={false} rightButton={true} rightButtonName={this.state.selectDate ? 'plus' : 'menu'} headColor={'#454545'} navigation={this.props.navigation} rightButtonFunc={this.addEvent} />
                             </View>
-                            <View style={{ flex: 9 }}>
+
+                            <View style={{ flex: 8 }}>
 
 
 
@@ -214,7 +257,7 @@ class CalendarView extends React.Component {
                                     // callback that fires when the calendar is opened or closed
                                     onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
                                     // callback that gets called on day press
-                                    onDayPress={(day) => { console.log('day pressed') }}
+                                    onDayPress={(day) => { this.state.selectDate ? this.dateSelected(day) : console.log('day pressed') }}
                                     // callback that gets called when day changes while scrolling agenda list
                                     onDayChange={(day) => { console.log('day changed') }}
                                     // initially selected day
@@ -235,7 +278,7 @@ class CalendarView extends React.Component {
                                     // specify how empty date content with no items should be rendered
                                     renderEmptyDate={() => { return (<View />); }}
                                     // specify how agenda knob should look like
-                                    renderKnob={() => { return (<View />); }}
+                                    // renderKnob={() => { return (<View ><Icon name='little_arrow' size={80} color="#838383" /></View>); }}
                                     // specify what should be rendered instead of ActivityIndicator
                                     renderEmptyData={() => { return (<View />); }}
                                     // specify your item comparison function for increased performance
@@ -316,12 +359,15 @@ const styles = StyleSheet.create({
 export default connect(state => {
     const user_id = state.validUser.user.id || '';
     const activityData = state.getData.activityData || {};
+    const calendarData = state.getData.calendarData || {};
+    const addEventResponse = state.addUser.addEventResponse || {};
     return {
         user_id,
         activityData,
-
+        calendarData,
+        addEventResponse,
     }
 }, dispatch => {
-    return bindActionCreators({ getActivity: getActivity }, dispatch)
+    return bindActionCreators({ getActivity: getActivity, addActivity: addActivity }, dispatch)
 }
 )(CalendarView);
