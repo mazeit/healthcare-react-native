@@ -36,7 +36,7 @@ export default class ImportantNotification extends React.Component {
                     <Text style={styles.headerText}>before noon!</Text>
                 </View>
                 <View style={styles.activityDisply}>
-                    <Image style={styles.image} source={require('../../../assets/images/detoxYoga.png')} />
+                    <Image style={styles.image} source={require('../../assets/images/detoxYoga.png')} />
                 </View>
                 <View style={{ backgroundColor: '#FFFFFF', width: width - 130, flex: 1, marginTop: '-10%', alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ textAlign: 'center', fontFamily: 'DINPro', fontSize: 22, color: '#454545' }}>Detox Yoga</Text>

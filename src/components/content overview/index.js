@@ -111,7 +111,7 @@ class ContentOverview extends React.Component {
                         <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}><LoaderWait /></View> :
                         <View style={{ flex: 1 }}>
                             <View style={{ flex: 1 }}>
-                                <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'SELECT YOUR TOPIC'} leftButton={false} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                                <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'SELECT YOUR TOPIC'} leftButton={false} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} notificationButton={true} headColor={'#454545'} navigation={this.props.navigation} />
                             </View>
                             <View style={styles.container} {...this._panResponder.panHandlers}>
                                 <Animated.View style={[styles.search, { height }, { opacity }]}>
