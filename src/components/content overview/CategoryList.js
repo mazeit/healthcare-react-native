@@ -101,7 +101,7 @@ class CategoryList extends React.Component {
                             </View>
                             <View style={styles.container}>
                                 {/* <View style={[styles.search, { height }, { opacity }]} >
-                        <TextInput style={{ fontFamily: 'DINPro', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
+                        <TextInput style={{ fontFamily: 'DINPro-Regular', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
                         <Image style={{ width: 20, height: 20 }} source={require('../../../assets/icons/search.png')} />
                     </View> */}
 

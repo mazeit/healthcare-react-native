@@ -90,8 +90,8 @@ class ProfilePage extends React.Component {
                             <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20 }}>
                                 <Image source={{ uri: this.props.user.img_dir }} style={{ width: 133, height: 133, }} />
                             </View>
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.firstname}</Text>
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.lastname}</Text>
+                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.firstname}</Text>
+                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.lastname}</Text>
                                 {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: -20 }}>
                                     <Icon name="people" size={70} color="#454545" style={{left: 25}}/>
                                     <Icon name="people" size={70} color="#454545" />
@@ -122,7 +122,7 @@ class ProfilePage extends React.Component {
                                     <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Sign out</Text>
                                 </View>
                             </TouchableOpacity>
-                            <Text style={{ flex: 1, fontFamily: 'DINPro', fontSize: 14, color: '#959595', marginBottom: 20, marginTop: 10 }}>App Version 1.0</Text>
+                            <Text style={{ flex: 1, fontFamily: 'DINPro-Regular', fontSize: 14, color: '#959595', marginBottom: 20, marginTop: 10 }}>App Version 1.0</Text>
                         </View>
                     </ScrollView>
 

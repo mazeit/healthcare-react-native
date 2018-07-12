@@ -30,7 +30,7 @@ class QuestionStep extends React.Component {
         return <View style={{flex: 1, backgroundColor: '#ffffff'}}>
                             
 
-            <Text style={{ height: 26, fontFamily: 'DINPro', fontSize: 22, color: '#454545', marginTop: 20, alignItems: 'center', textAlign: 'center'}}>Thema Personal</Text>
+            <Text style={{ height: 26, fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', marginTop: 20, alignItems: 'center', textAlign: 'center'}}>Thema Personal</Text>
 
 
 
@@ -61,7 +61,7 @@ class QuestionStep extends React.Component {
         let stepNum = 3;
 
         return <View style={{flex: 1, backgroundColor: '#ffffff'}}>
-            <Text style={{ height: 26, fontFamily: 'DINPro', fontSize: 22, color: data.color, margin: 20, alignItems: 'center', textAlign: 'left'}}>Frage {stepNum}</Text>
+            <Text style={{ height: 26, fontFamily: 'DINPro-Regular', fontSize: 22, color: data.color, margin: 20, alignItems: 'center', textAlign: 'left'}}>Frage {stepNum}</Text>
 
             <View style={{ flex: 1}}>
                 <View style={[styles.textBlock, { marginTop: 0 }]}>
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     },
 
     textContent: {
-        fontFamily: 'DINPro',
+        fontFamily: 'DINPro-Regular',
         fontSize: 16,
         color: '#838383',
         textAlign: 'center'

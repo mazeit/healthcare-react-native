@@ -64,13 +64,13 @@ class InviteMyFriendsList extends React.Component {
 
                     <View style={styles.message}>
                         <View style={{ flex: 1, alignItems: 'center', marginTop: 20, }}>
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545' }}>Thank you for inviting</Text>
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#4AB3E2' }}>{this.state.lastInvitedFriend}</Text>
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545' }}>to livinflow.</Text>
+                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545' }}>Thank you for inviting</Text>
+                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#4AB3E2' }}>{this.state.lastInvitedFriend}</Text>
+                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545' }}>to livinflow.</Text>
                         </View>
                         <View style={{ flex: 1, alignItems: 'center', marginTop: 30, }}>
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383' }}>We sent your friend</Text>
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383' }}>an invitation email.</Text>
+                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383' }}>We sent your friend</Text>
+                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383' }}>an invitation email.</Text>
                         </View>
 
                     </View>
@@ -91,7 +91,7 @@ class InviteMyFriendsList extends React.Component {
                                             </View>
 
                                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 5 }}>
-                                                <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383' }}>{friend.friendemail}</Text>
+                                                <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383' }}>{friend.friendemail}</Text>
                                             </View>
 
                                         </View>

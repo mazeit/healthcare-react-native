@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
 
     },
     text: {
-        fontFamily: 'DINPro',
+        fontFamily: 'DINPro-Regular',
         fontSize: 22,
         color: '#FFFFFF',
         alignSelf: 'flex-start',

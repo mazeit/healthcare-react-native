@@ -40,13 +40,13 @@ export default class Tracker extends React.Component {
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
 
                     <TouchableOpacity style={[styles.navigatorHeader, { marginTop: 0, height: 63, borderBottomColor: '#4AB3E2' }]}>
-                        <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#4AB3E2', margin: 20, textAlign: 'center' }}>Today</Text>
+                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 18, color: '#4AB3E2', margin: 20, textAlign: 'center' }}>Today</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.navigatorHeader, { marginTop: 0, height: 63 }]}>
-                        <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#838383', margin: 20, textAlign: 'center' }}>Week</Text>
+                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 18, color: '#838383', margin: 20, textAlign: 'center' }}>Week</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.navigatorHeader, { marginTop: 0, height: 63 }]}>
-                        <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#838383', margin: 20, textAlign: 'center' }}>Challange</Text>
+                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 18, color: '#838383', margin: 20, textAlign: 'center' }}>Challange</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -103,14 +103,14 @@ export default class Tracker extends React.Component {
                         <View style={styles.trackerDataBlock}>
 
                             <View style={{ margin: 5 }}>
-                                <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545' }}>Well Done!</Text>
+                                <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545' }}>Well Done!</Text>
                             </View>
                             <View style={{ margin: 5 }}>
-                                <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', textAlign: 'center' }}>You had quite an active day today. You have earned some goodie. Unlock a bonus recipe:</Text>
+                                <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', textAlign: 'center' }}>You had quite an active day today. You have earned some goodie. Unlock a bonus recipe:</Text>
                             </View>
                             <View style={{ margin: 5 }}>
                                 <TouchableOpacity style={styles.freeRecipeButton }>
-                                    <Text style={{ fontFamily: 'DINPro', fontSize: 17, color: '#4AB3E2',  textAlign: 'center', paddingLeft: 20, paddingRight: 20, padding:10 }}>Get a free recipe</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 17, color: '#4AB3E2',  textAlign: 'center', paddingLeft: 20, paddingRight: 20, padding:10 }}>Get a free recipe</Text>
                                 </TouchableOpacity>
                             </View>
 

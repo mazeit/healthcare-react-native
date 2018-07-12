@@ -29,10 +29,10 @@ export default class CoachProfile extends React.Component {
 
                             <View style={[styles.contentSubBlock, { marginTop: -50, }]}>
                                 <View style={[styles.details, { margin: 10 }]}>
-                                    <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545', textAlign: 'center' }}>Kathryn Budig</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', textAlign: 'center' }}>Kathryn Budig</Text>
                                 </View>
                                 <View style={[styles.details, { margin: 10, marginTop: 0 }]}>
-                                    <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', textAlign: 'center' }}>She is yoga teacher behind AIM TRUE,a regular writer for Yoga Journal, and a presenter at Yoga Journal LIVE!</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', textAlign: 'center' }}>She is yoga teacher behind AIM TRUE,a regular writer for Yoga Journal, and a presenter at Yoga Journal LIVE!</Text>
                                 </View>
                             </View>
 
@@ -51,10 +51,10 @@ export default class CoachProfile extends React.Component {
                             <View style={styles.contentSubBlock}>
                                 <View style={[styles.details, { margin: 10 }]}>
                                     <View style={{ flex: 1, alignItems: 'flex-start', margin: 20, marginBottom: 0 }}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', }}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores.</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores.</Text>
                                     </View>
                                     <View style={{ flex: 1, alignItems: 'flex-start', margin: 20, marginBottom: 0 }}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', }}>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</Text>
                                     </View>
                                 </View>
                             </View>
@@ -62,7 +62,7 @@ export default class CoachProfile extends React.Component {
 
                             <View style={[styles.contentSubBlock, { width: width - 20 }]}>
                                 <View style={[styles.details, { margin: 10 }]}>
-                                    <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', textAlign: 'center' }}>If you prefer to continue with Kathryn as your Coach, please click here.</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', textAlign: 'center' }}>If you prefer to continue with Kathryn as your Coach, please click here.</Text>
                                 </View>
                                 <View style={[styles.details, { margin: 10, }]}>
                                     <TouchableOpacity >

@@ -120,7 +120,7 @@ export default class Activity extends React.Component {
 
                         <View style={[styles.descriptionContainer, { flex: 3.5, marginTop: -50 }]}>
                             <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Medium', fontSize: 22, color: '#454545', padding: 5, }}>{this.state.activityData.name}</Text>
-                            <Text style={{ textAlign: 'center', fontFamily: 'DINPro', fontSize: 16, color: '#838383', padding: 5, paddingLeft: 10, paddingRight: 10 }}>{this.state.activityData.description}</Text>
+                            <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', padding: 5, paddingLeft: 10, paddingRight: 10 }}>{this.state.activityData.description}</Text>
                         </View>
 
                         <View style={[styles.descriptionContainer, { flex: 3, marginTop: 10 }]}>

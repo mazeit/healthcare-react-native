@@ -110,13 +110,13 @@ class SignUp extends React.Component {
                                 {
                                     this.state.registrationSuccessful ?
                                         <View style={{ flex: 1 }}>
-                                            <Text style={{ fontFamily: 'DINPro', fontSize: 24, color: '#FFFFFF', textAlign: 'center' }}>
+                                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 24, color: '#FFFFFF', textAlign: 'center' }}>
                                                 Registration Successful
                                             </Text>
                                         </View> :
                                         <View style={styles.inputEmailContainer}>
                                             <View style={{ flex: 1 }}>
-                                                <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#ffffff' }}>
+                                                <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#ffffff' }}>
                                                     {this.state.userAlreadyRegistered}
                                                 </Text>
                                             </View>

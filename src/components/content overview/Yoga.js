@@ -71,7 +71,7 @@ export default class Yoga extends React.Component {
                                         <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Medium', fontSize: 22, color: '#454545', padding: 5, }}>Detox Yoga for relaxation</Text>
                                     </View>
                                     <View style={[styles.details, { margin: 10, marginTop: 0 }]}>
-                                        <Text style={{ textAlign: 'center', fontFamily: 'DINPro', fontSize: 16, color: '#838383', padding: 5, paddingLeft: 10, paddingRight: 10 }}>Build a strong home practice with these sequences, tutorials, challenge poses, tips, and advice for yogis of every level. </Text>
+                                        <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', padding: 5, paddingLeft: 10, paddingRight: 10 }}>Build a strong home practice with these sequences, tutorials, challenge poses, tips, and advice for yogis of every level. </Text>
                                     </View>
                                     <View style={[styles.details, { marginTop: 0 }]}>
                                         <Icon name='activity' size={80} color={'#AE0069'} />
@@ -100,17 +100,17 @@ export default class Yoga extends React.Component {
 
                                 <View style={styles.contentSubBlock}>
                                     <View style={[styles.details, { margin: 10 }]}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545', marginBottom: 10 }}>Asanas</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', marginBottom: 10 }}>Asanas</Text>
                                         {
                                             menuList.map((item, i) =>
                                                 <View key={i} style={styles.informationContainer}>
                                                     <View style={{ flex: 1, alignItems: 'flex-start' }}>
                                                         <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545' }}>{item.head}</Text>
-                                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383' }}>{item.subHead}</Text>
+                                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383' }}>{item.subHead}</Text>
                                                     </View>
                                                     <View style={{ alignItems: 'flex-end', flexDirection: 'row', justifyContent: 'center', width: 100 }}>
                                                         <Icon name='time' size={50} color={'#454545'} />
-                                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', marginBottom: 15 }}>2 min</Text>
+                                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', marginBottom: 15 }}>2 min</Text>
                                                     </View>
                                                 </View>
                                             )
@@ -121,7 +121,7 @@ export default class Yoga extends React.Component {
 
                                 <View style={[styles.contentSubBlock, { width: width - 20 }]}>
                                     <View style={[styles.details, { margin: 10 }]}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', textAlign: 'center' }}>Add this to your challenge</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', textAlign: 'center' }}>Add this to your challenge</Text>
                                     </View>
                                     <View style={[styles.details, { margin: 10, }]}>
                                         <TouchableOpacity >

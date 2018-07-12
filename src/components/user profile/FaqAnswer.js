@@ -22,7 +22,7 @@ export default class FaqAnswer extends React.Component {
                     <ScrollView style={styles.termsOfUse}>
 
                         <View style={styles.termsOfUseBlock}>
-                            <Text style={{ height: 26, fontFamily: 'DINPro', fontSize: 22, color: '#454545', marginTop: 20, marginLeft: 20 }}>How can i buy a new challange ?</Text>
+                            <Text style={{ height: 26, fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', marginTop: 20, marginLeft: 20 }}>How can i buy a new challange ?</Text>
 
 
 
@@ -34,10 +34,10 @@ export default class FaqAnswer extends React.Component {
 
                                 <View style={styles.navegate}>
                                     <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center' }}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#4AB3E2' }}>Previous</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#4AB3E2' }}>Previous</Text>
                                     </View>
                                     <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#4AB3E2' }}>Next</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#4AB3E2' }}>Next</Text>
                                     </View>
                                 </View>
 
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     textContent: {
-        fontFamily: 'DINPro',
+        fontFamily: 'DINPro-Regular',
         fontSize: 16,
         color: '#838383',
         marginTop: 10,

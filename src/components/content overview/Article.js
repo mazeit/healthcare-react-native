@@ -29,10 +29,10 @@ export default class Article extends React.Component {
 
                             <View style={[styles.contentSubBlock, { marginTop: -50, }]}>
                                 <View style={[styles.details, { margin: 10 }]}>
-                                    <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545', textAlign: 'center' }}>5 Myths about travelling</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', textAlign: 'center' }}>5 Myths about travelling</Text>
                                 </View>
                                 <View style={[styles.details, { margin: 10, marginTop: 0 }]}>
-                                    <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545', textAlign: 'center' }}>Yoga teachers</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', textAlign: 'center' }}>Yoga teachers</Text>
                                 </View>
                             </View>
 
@@ -45,23 +45,23 @@ export default class Article extends React.Component {
                             <View style={styles.contentSubBlock}>
                                 <View style={[styles.details, { margin: 10 }]}>
                                     <View style={{ flex: 1, alignItems: 'flex-start', margin: 20, marginBottom: 0 }}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 18, color: '#838383', }}>Kathryn Budig has created a career that’s the envy of yogis around the globe, but here she debunks some common misconceptions about what it means to be a big-name, internationally traveling yoga teacher.</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 18, color: '#838383', }}>Kathryn Budig has created a career that’s the envy of yogis around the globe, but here she debunks some common misconceptions about what it means to be a big-name, internationally traveling yoga teacher.</Text>
                                     </View>
                                     <View style={{ flex: 1, alignItems: 'flex-start', margin: 20, marginBottom: 0 }}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', }}>I’m a yoga teacher who travels for a living. I’ve see the good, the bad, and the ugly. I’ve been on the road since 2008, and I have been simultaneously blessed and cursed to have my local airport feel like an extension of my home. I taught local classes for years with the humble dream of hitting a few national studios a year and perhaps even a class at a big conference or festival.</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>I’m a yoga teacher who travels for a living. I’ve see the good, the bad, and the ugly. I’ve been on the road since 2008, and I have been simultaneously blessed and cursed to have my local airport feel like an extension of my home. I taught local classes for years with the humble dream of hitting a few national studios a year and perhaps even a class at a big conference or festival.</Text>
                                     </View>
                                     <View style={{ flex: 1, alignItems: 'flex-start', margin: 20, marginBottom: 0 }}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', }}>That tater tot of a dream took hold of me, and before I knew it, I was fully committed to being on the travel circuit. I now teach internationally, at festivals and conferences and lead workshops, intensives, and teacher trainings for amazing students around the world. Here are a few myths I’ve learned along the way for anyone eager to pack their suitcase full of stretchy pants and see the world.</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>That tater tot of a dream took hold of me, and before I knew it, I was fully committed to being on the travel circuit. I now teach internationally, at festivals and conferences and lead workshops, intensives, and teacher trainings for amazing students around the world. Here are a few myths I’ve learned along the way for anyone eager to pack their suitcase full of stretchy pants and see the world.</Text>
                                     </View>
                                     <View style={{ flex: 1, alignItems: 'flex-start', margin: 20, marginBottom: 0 }}>
                                         <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545', }}>Myth 1: You’ll be super famous and make oodles of money.</Text>
                                     </View>
                                     <View style={{ flex: 1, alignItems: 'flex-start', margin: 20, marginBottom: 0 }}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', }}>One simple phrase should do the trick:</Text>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', }}>There’s no place like home.</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>One simple phrase should do the trick:</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>There’s no place like home.</Text>
                                     </View>
                                     <View style={{ flex: 1, alignItems: 'flex-start', margin: 20, marginBottom: 0 }}>
-                                        <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', }}>The world is a dazzling place—full of adventure, fascinating people with unbelievable stories, and a unified love for yoga. But let me tell you, nothing tops the clank of the stamp on your passport with the utterance, “Welcome home” or the twist of your hand as you unlock your front door and drop the weight of your trip from your shoulders onto the ground.</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>The world is a dazzling place—full of adventure, fascinating people with unbelievable stories, and a unified love for yoga. But let me tell you, nothing tops the clank of the stamp on your passport with the utterance, “Welcome home” or the twist of your hand as you unlock your front door and drop the weight of your trip from your shoulders onto the ground.</Text>
                                     </View>
                                 </View>
                             </View>
@@ -78,10 +78,10 @@ export default class Article extends React.Component {
                                     </View>
                                 </View>
                                 <View style={[styles.details, { margin: 10 }]}>
-                                    <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545', }}>Kathryn Budig</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', }}>Kathryn Budig</Text>
                                 </View>
                                 <View style={[styles.details, { margin: 10 }]}>
-                                    <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', textAlign: 'center' }}>She is yoga teacher behind AIM TRUE,a regular writer for Yoga Journal, and a presenter at Yoga Journal LIVE!</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', textAlign: 'center' }}>She is yoga teacher behind AIM TRUE,a regular writer for Yoga Journal, and a presenter at Yoga Journal LIVE!</Text>
                                 </View>
                                 <View style={[styles.details, { margin: 10, }]}>
                                     <TouchableOpacity >

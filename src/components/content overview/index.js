@@ -115,7 +115,7 @@ class ContentOverview extends React.Component {
                             </View>
                             <View style={styles.container} {...this._panResponder.panHandlers}>
                                 <Animated.View style={[styles.search, { height }, { opacity }]}>
-                                    <TextInput style={{ fontFamily: 'DINPro', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
+                                    <TextInput style={{ fontFamily: 'DINPro-Regular', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
                                     <Icon name="magnifyer" size={50} style={{ marginLeft: -10 }} color="#454545" />
                                 </Animated.View>
                                 <View style={[styles.section, { marginBottom: 5 }]}>
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     activitySubtittle: {
-        fontFamily: 'DINPro',
+        fontFamily: 'DINPro-Regular',
         fontSize: 18,
         textAlign: 'center',
     },

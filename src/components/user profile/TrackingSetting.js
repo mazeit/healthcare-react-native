@@ -24,13 +24,13 @@ export default class TrackingSetting extends React.Component {
 
                         <View style={styles.trackingBlock}>
 
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545', marginTop: 10 }}>My</Text>
-                            <Text style={{ fontFamily: 'DINPro', fontSize: 22, color: '#454545', marginBottom: 10 }}>connections</Text>
+                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', marginTop: 10 }}>My</Text>
+                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', marginBottom: 10 }}>connections</Text>
 
                             <View style={styles.trackingContainer}>
                                 <View style={{ flex: 7, alignItems: 'flex-start', flexDirection: 'row' }}>
                                     <Image source={require('../../../assets/images/appleHealth.png')} style={{ width: 29, height: 29, }} />
-                                    <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', marginLeft: 10 }}>Apple Health</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', marginLeft: 10 }}>Apple Health</Text>
                                 </View>
                                 <View style={{ flex: 3, alignItems: 'flex-end' }}>
                                     <Switch onValueChange={() => this.setState({ toggle: !this.state.toggle })} onTintColor={'#4AB3E2'} value={this.state.toggle}></Switch>
@@ -40,7 +40,7 @@ export default class TrackingSetting extends React.Component {
                             <View style={styles.trackingContainer}>
                                 <View style={{ flex: 7, alignItems: 'flex-start', flexDirection: 'row' }}>
                                     <Image source={require('../../../assets/images/myFitnessPal.png')} style={{ width: 29, height: 29, resizeMode: 'center' }} />
-                                    <Text style={{ fontFamily: 'DINPro', fontSize: 16, color: '#838383', marginLeft: 10 }}>My Fitness Pal</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', marginLeft: 10 }}>My Fitness Pal</Text>
                                 </View>
                                 <View style={{ flex: 3, alignItems: 'flex-end' }}>
                                     <Switch onValueChange={() => this.setState({ toggle: !this.state.toggle })} onTintColor={'#4AB3E2'} value={this.state.toggle}></Switch>
