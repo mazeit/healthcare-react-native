@@ -20,7 +20,7 @@ export default class CoachProfile extends React.Component {
 
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={styles.coachImage}>
-                            <ImageBackground style={styles.image} source={require('../../assets/images/yogaTeacher.png')}>
+                            <ImageBackground style={styles.image} source={require('../../../assets/images/yogaTeacher.png')}>
 
                             </ImageBackground>
                         </View>

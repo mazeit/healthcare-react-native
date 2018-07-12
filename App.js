@@ -12,6 +12,8 @@ const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 import WelcomeScreen from './src/components/WelcomeScreen';
 import userReducer from './src/reducers';
 import GeneralMenu from './src/components/GeneralMenu';
+import ImportantNotification from './src/components/ImportantNotification';
+
 
 import Login from './src/components/login';
 import SignInEmail from './src/components/login/SignInEmail';
@@ -24,6 +26,7 @@ import CategoryList from './src/components/content overview/CategoryList'
 import Recipe from './src/components/content overview/Recipe';
 import Meditation from './src/components/content overview/Meditation';
 import Yoga from './src/components/content overview/Yoga';
+import CoachProfile from './src/components/content overview/CoachProfile';
 
 import CalendarView from './src/components/calendar';
 import Activity from './src/components/calendar/Activity.js';
@@ -40,6 +43,10 @@ import HelpFaq from './src/components/user profile/HelpFaq';
 import InviteMyFriends from './src/components/user profile/InviteMyFriends';
 import InviteMyFriendsList from './src/components/user profile/InviteMyFriendsList';
 import FaqAnswer from './src/components/user profile/FaqAnswer';
+
+import QuestionarieIntro from './src/components/questionaire';
+import OverviewStatus from './src/components/questionaire/OverviewStatus';
+import QuestionStep from './src/components/questionaire/QuestionStep';
 
 
 const store = createStore(userReducer, compose(applyMiddleware(thunk)));
@@ -86,6 +93,7 @@ const ContentStack = StackNavigator(
     Recipe: { screen: Recipe },
     Meditation: { screen: Meditation },
     Yoga: { screen: Yoga },
+    CoachProfile: { screen: CoachProfile },
 
   },
   {
@@ -94,6 +102,23 @@ const ContentStack = StackNavigator(
 );
 
 //// CONTENT OVERVIEW STACK / END --------------------------------------------------------
+
+//// Qustionarie OVERVIEW STACK / START --------------------------------------------------------
+
+const QuestionarieStack = StackNavigator(
+  {
+    QuestionarieIntro: { screen: QuestionarieIntro },
+    OverviewStatus: { screen: OverviewStatus },
+    QuestionStep: { screen: QuestionStep }
+    
+  },
+  {
+    headerMode: 'none',
+  }
+);
+
+//// Qustionarie OVERVIEW STACK / END --------------------------------------------------------
+
 
 //// CALENDAR STACK / START --------------------------------------------------------
 
@@ -146,7 +171,8 @@ const AppNavigator = StackNavigator({
   ContentStack: { screen: ContentStack },
   CalendarStack: { screen: CalendarStack },
   GeneralMenu: { screen: GeneralMenu },
-  
+
+  QuestionarieStack: { screen: QuestionarieStack },
   ProfileStack: { screen: ProfileStack }
 
 }, {

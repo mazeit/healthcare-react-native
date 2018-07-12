@@ -1,3 +1,4 @@
+import * as auth from '../utils/auth';
 
 export const verifyEmail = (email) => {
     return async (dispatch, getState) => {
@@ -25,7 +26,7 @@ export const verifyEmail = (email) => {
 export const verifyPassword = (email, password) => {
     return async (dispatch, getState) => {
 
-        fetch('https://spano24.com/fitnessportal/fitness/login/458f1f8232516673a36a86daf0d87e8b?email=' + email + '&passwd=' + password, {
+        return fetch('https://spano24.com/fitnessportal/fitness/login/458f1f8232516673a36a86daf0d87e8b?email=' + email + '&passwd=' + password, {
             method: 'GET',
             mode: 'cors',
         }).then((data) => data.json()).then((json) => {
@@ -33,6 +34,7 @@ export const verifyPassword = (email, password) => {
                 type: 'AUTHENTICATE_USER_PASSWORD',
                 payload: json
             })
+            auth.onSignIn(json);
         }).catch((error) => {
             console.log('There has been a problem with your fetch operation: ' + error.message);
             // ADD THIS THROW error
@@ -42,6 +44,14 @@ export const verifyPassword = (email, password) => {
     }
 }
 
+export const autoSignin = (json) => {
+    return async (dispatch, getState) => {
+        dispatch({
+            type: 'AUTHENTICATE_USER_PASSWORD',
+            payload: json
+        })
+    }
+}
 
 export const addNewUser = (email, password, firstName, lastName) => {
     return async (dispatch, getState) => {

@@ -79,26 +79,28 @@ class CalendarView extends React.Component {
             'mindfulness': { key: 'mindfulness', color: '#D4B870' },
             'coach': { key: 'coach', color: '#454545' },
         }
-        this.state.calendarData.events.forEach((item) => {
-            let key = (item.start.split(' ')[0]).toString()
+        if (this.state.calendarData && this.state.calendarData.events) {
+            this.state.calendarData.events.forEach((item) => {
+                let key = (item.start.split(' ')[0]).toString()
 
 
-            if (eventData[key]) {
+                if (eventData[key]) {
 
-                eventData[key].push(item);
-                markedData[key].dots.push(dotColor[item.className.split(' ')[1]])
+                    eventData[key].push(item);
+                    markedData[key].dots.push(dotColor[item.className.split(' ')[1]])
 
-            } else {
-                eventData[key] = [item];
-                markedData[key] = { dots: [] }
-                markedData[key].dots = [dotColor[item.className.split(' ')[1]]];
+                } else {
+                    eventData[key] = [item];
+                    markedData[key] = { dots: [] }
+                    markedData[key].dots = [dotColor[item.className.split(' ')[1]]];
+                }
+
+            });
+            for (let data in markedData) {
+                markedData[data].dots = markedData[data].dots.filter(function (item, pos) {
+                    return markedData[data].dots.indexOf(item) == pos;
+                })
             }
-
-        });
-        for (let data in markedData) {
-            markedData[data].dots = markedData[data].dots.filter(function (item, pos) {
-                return markedData[data].dots.indexOf(item) == pos;
-            })
         }
 
 
@@ -262,11 +264,11 @@ class CalendarView extends React.Component {
                                     onDayChange={(day) => { console.log('day changed') }}
                                     // initially selected day
                                     current={new Date()}
-                                    selected={this.state.calendarData.event_start_date.split(' ')[0]}
+                                    selected={this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0]}
                                     // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-                                    minDate={this.state.calendarData.event_start_date.split(' ')[0]}
+                                    minDate={this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0]}
                                     // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-                                    maxDate={this.state.calendarData.event_end_date.split(' ')[0]}
+                                    maxDate={this.state.calendarData.event_end_date && this.state.calendarData.event_end_date.split(' ')[0]}
                                     // Max amount of months allowed to scroll to the past. Default = 50
                                     pastScrollRange={50}
                                     // Max amount of months allowed to scroll to the future. Default = 50
