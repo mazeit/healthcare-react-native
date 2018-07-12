@@ -12,9 +12,9 @@ export const isSignedIn = () => {
     AsyncStorage.getItem(USER_KEY)
       .then(res => {
         if (res !== null) {
-          resolve(true);
+          resolve(res);
         } else {
-          resolve(false);
+          resolve(null);
         }
       })
       .catch(err => reject(err));
