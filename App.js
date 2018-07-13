@@ -189,3 +189,17 @@ const styles = StyleSheet.create({
 
   },
 });
+
+
+
+  // <key>NSAppTransportSecurity</key>
+  // <dict>
+  //   <key>NSExceptionDomains</key>
+  //   <dict>
+  //     <key>localhost</key>
+  //     <dict>
+  //       <key>NSExceptionAllowsInsecureHTTPLoads</key>
+  //       <true/>
+  //     </dict>
+  //   </dict>
+  // </dict>
