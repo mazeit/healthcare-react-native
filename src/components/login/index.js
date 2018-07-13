@@ -10,6 +10,7 @@ import Loader from '../Loader';
 
 import { autoSignin } from '../../actions/index';
 
+import Header from '../Header';
 const BannerWidth = Dimensions.get('window').width;
 const {height} = Dimensions.get('window')
 const images = [

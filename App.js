@@ -16,6 +16,7 @@ import ImportantNotification from './src/components/ImportantNotification';
 
 
 import Login from './src/components/login';
+import Welcome from './src/components/login/WelcomeNew';
 import SignInEmail from './src/components/login/SignInEmail';
 import SignInPassword from './src/components/login/SignInPassword';
 import PasswordForgotten from './src/components/login/PasswordForgotten';
@@ -74,6 +75,7 @@ const SignInStack = StackNavigator(
     SignUp: { screen: SignUp },
     SignInPassword: { screen: SignInPassword },
     PasswordForgotten: { screen: PasswordForgotten },
+    Welcome: { screen: Welcome }
 
   },
   {
@@ -110,7 +112,6 @@ const QuestionarieStack = StackNavigator(
     QuestionarieIntro: { screen: QuestionarieIntro },
     OverviewStatus: { screen: OverviewStatus },
     QuestionStep: { screen: QuestionStep }
-    
   },
   {
     headerMode: 'none',

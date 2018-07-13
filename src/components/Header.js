@@ -40,7 +40,7 @@ export default class Header extends React.Component {
                                 : <View></View>
                         }
                     </TouchableOpacity>
-                    <Text style={{ flex:6,fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: this.props.headColor }}>{this.props.headerTitle}</Text>
+                    <Text style={{ flex:6, fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: this.props.headColor }}>{this.props.headerTitle}</Text>
 
                     <View style={{ flex:2,alignItems: 'flex-end', justifyContent: 'center' }}>
 

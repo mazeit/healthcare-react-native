@@ -46,26 +46,34 @@ class SignInEmail extends React.Component {
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')} onLoad={() => this.setState({ loader: false })}>
                 {
                     this.state.loader ?
-                        <View style={{ flex: 1, backgroundColor: '#AE0069', opacity: 0.8 }}><LoaderWait /></View> :
+                        <View style={{ flex: 1, backgroundColor: '#454545', opacity: 0.8 }}><LoaderWait /></View> :
                         <View style={{ flex: 1 }}>
                             <View style={{ flex: 1 }}>
-                                <Header goBack={this.props.navigation.goBack} backgroundcolor={'#AE0069'} headerTitle={'SIGN IN'} leftButton={true} leftButtonName={'close'} leftButtonColor={'#FFFFFF'} showNext={true} rightButton={false} headColor={'#FFFFFF'} verifyUser={this.verifyUser} />
+                                <Header goBack={this.props.navigation.goBack} backgroundcolor={'#454545'} headerTitle={'SIGN IN'} leftButton={true} leftButtonName={'close'} leftButtonColor={'#FFFFFF'} showNext={false} rightButton={false} headColor={'#FFFFFF'} verifyUser={this.verifyUser} />
                             </View>
 
                             <KeyboardAvoidingView style={styles.email}>
                                 <View style={styles.inputEmailContainer}>
                                     <ShakingText style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff' }}>{this.state.errorMsgEmail}</ShakingText>
-                                    <TextInput onChangeText={(text) => this.setState({ activUserEmail: text })} underlineColorAndroid='rgba(0,0,0,0)' style={[styles.inputEmail, { fontFamily: 'DINPro-Light', fontSize: 24 }]} placeholder='Email address or Username' placeholderTextColor={'#ECA1C9'} autoCapitalize='none' autoCorrect={false} autoFocus={true} enablesReturnKeyAutomatically={true} onSubmitEditing={() => this.verifyUser()} />
+                                    <TextInput onChangeText={(text) => this.setState({ activUserEmail: text })} underlineColorAndroid='rgba(0,0,0,0)' style={[styles.inputEmail, { fontFamily: 'DINPro-Light', fontSize: 24 }]} placeholder='Email address or Username' placeholderTextColor={'#FFFFFF'} autoCapitalize='none' autoCorrect={false} autoFocus={true} enablesReturnKeyAutomatically={true} onSubmitEditing={() => this.verifyUser()} />
                                     <ShakingText style={{ fontFamily: 'DINPro-Light', fontSize: 16, width: '90%', top: '5%', color: '#ffffff' }}>{this.state.errorMgs}</ShakingText>
                                 </View>
-                                <View style={styles.passwordManager}>
+
+
+                                <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', marginBottom: 50 }} onPress={()=> this.verifyUser()}>
+                                    <View style={{ backgroundColor: '#454545', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#FFFFFF', borderWidth: 1 }}>
+                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#FFFFFF' }}>Next</Text>
+                                    </View>
+                                </TouchableOpacity>
+
+                                {/*<View style={styles.passwordManager}>
                                     <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('SignUp')}>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                                             <Image style={{ width: 17, height: 17, marginTop: 2 }} source={require('../../../assets/icons/1password_icon.png')} />
                                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginLeft: 5 }}>Sign Up</Text>
                                         </View>
                                     </TouchableOpacity>
-                                </View>
+                                </View>*/}
                             </KeyboardAvoidingView>
                         </View>
                 }
@@ -82,8 +90,8 @@ const styles = StyleSheet.create({
     email: {
         flex: 9,
         justifyContent: 'center',
-        backgroundColor: "#AE0069",
-        opacity: 0.8
+        backgroundColor: "#454545",
+        opacity: 1
     },
     homeImage: {
         width: '100%',
@@ -97,7 +105,7 @@ const styles = StyleSheet.create({
     inputEmail: {
         width: '90%',
         // height: 40,
-        color: '#ECA1C9',
+        color: '#FFFFFF',
         fontSize: 20,
     },
     passwordManager: {

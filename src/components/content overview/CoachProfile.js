@@ -17,8 +17,10 @@ export default class CoachProfile extends React.Component {
             <View style={styles.container}>
 
                 <ScrollView style={styles.article} showsVerticalScrollIndicator={false}>
-
-                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ flex: 1}}>
+                        <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'KATHRYN BUDIG'} leftButton={true} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                    </View>
+                    <View style={{ flex: 9, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={styles.coachImage}>
                             <ImageBackground style={styles.image} source={require('../../../assets/images/yogaTeacher.png')}>
 

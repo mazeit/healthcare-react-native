@@ -25,6 +25,14 @@ const menuList = [
         component: 'ProfileStack'
     },
     {
+        name: 'BLOG',
+        component: 'CoachProfile'
+    },
+    {
+        name: 'COACHES',
+        component: 'CoachProfile'
+    },
+    {
         name: 'HELP & FAQ',
         component: 'HelpFaq'
     },
@@ -35,10 +43,6 @@ const menuList = [
     {
         name: 'WEBSHOP',
         component: 'WebShop'
-    },
-    {
-        name: 'BLOG',
-        component: 'Blog'
     },
 ];
 
