@@ -43,10 +43,10 @@ class SignInPassword extends React.Component {
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')} onLoad={() => this.setState({ loader: false })}>
                 {
                     this.state.loader ?
-                        <View style={{ flex: 1, backgroundColor: '#D4B870', opacity: 0.8 }}><LoaderWait /></View> :
+                        <View style={{ flex: 1, backgroundColor: '#454545', opacity: 0.8 }}><LoaderWait /></View> :
                         <View style={{ flex: 1 }}>
                             <View style={{ flex: 1 }}>
-                            <Header goBack={this.props.navigation.goBack} backgroundcolor={'#D4B870'} headerTitle={'SIGN IN'} leftButton={true} leftButtonName={'arrow'} leftButtonColor={'#FFFFFF'} showNext={true} rightButton={false} headColor={'#FFFFFF'} verifyUser={this.verifyUser} />
+                            <Header goBack={this.props.navigation.goBack} backgroundcolor={'#454545'} headerTitle={'SIGN IN'} leftButton={true} leftButtonName={'arrow'} leftButtonColor={'#FFFFFF'} showNext={false} rightButton={false} headColor={'#FFFFFF'} verifyUser={this.verifyUser} />
                             </View>
                             <KeyboardAvoidingView style={styles.password}>
 
@@ -58,14 +58,21 @@ class SignInPassword extends React.Component {
 
                                 </View>
                                 <View style={styles.forgotPassword}>
-                                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('PasswordForgotten')}>
+                                    <TouchableOpacity style={styles.button} onPress={() => this.verifyUser()}>
                                         <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff', }}>Forgot your password?</Text>
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, marginBottom: 5, width: '85%', textAlign: 'center', fontFamily: 'DINPro-Light', fontSize: 22, color: '#ffffff' }} >Password too long? Hard to type?</Text>
+
+                                <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', marginBottom: 50 }} onPress={()=> this.verifyUser()}>
+                                    <View style={{ backgroundColor: '#454545', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#FFFFFF', borderWidth: 1 }}>
+                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#FFFFFF' }}>Next</Text>
+                                    </View>
+                                </TouchableOpacity>
+                                    {/*<Text style={{ marginTop: 5, marginBottom: 5, width: '85%', textAlign: 'center', fontFamily: 'DINPro-Light', fontSize: 22, color: '#ffffff' }} >Password too long? Hard to type?</Text>
                                     <Text style={{ marginTop: 5, marginBottom: 5, width: '85%', textAlign: 'center', fontFamily: 'DINPro-Light', fontSize: 16, color: '#ffffff' }}>Stay in the flow and get a link sent to your email that’ll sign you in instantly</Text>
                                     <TouchableOpacity style={styles.linkButton}>
                                         <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 17, textAlign: 'center', color: '#ffffff', }}>Send flow link</Text>
-                                    </TouchableOpacity>
+                                    </TouchableOpacity>*/}
+                                    
                                 </View>
                             </KeyboardAvoidingView>
                         </View>
@@ -79,8 +86,8 @@ const styles = StyleSheet.create({
     password: {
         flex: 9,
         justifyContent: 'center',
-        backgroundColor: "#D4B870",
-        opacity: 0.8
+        backgroundColor: "#454545",
+        opacity: 1
     },
     homeImage: {
         width: '100%',
