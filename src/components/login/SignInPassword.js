@@ -61,8 +61,8 @@ class SignInPassword extends React.Component {
                                     <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('PasswordForgotten')}>
                                         <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff', }}>Forgot your password?</Text>
                                     </TouchableOpacity>
-                                    <Text style={{ marginTop: 5, marginBottom: 5, width: '85%', textAlign: 'center', fontFamily: 'DINPro-Regular', fontSize: 22, color: '#ffffff' }} >Password too long? Hard to type?</Text>
-                                    <Text style={{ marginTop: 5, marginBottom: 5, width: '85%', textAlign: 'center', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#ffffff' }}>Stay in the flow and get a link sent to your email that’ll sign you in instantly</Text>
+                                    <Text style={{ marginTop: 5, marginBottom: 5, width: '85%', textAlign: 'center', fontFamily: 'DINPro-Light', fontSize: 22, color: '#ffffff' }} >Password too long? Hard to type?</Text>
+                                    <Text style={{ marginTop: 5, marginBottom: 5, width: '85%', textAlign: 'center', fontFamily: 'DINPro-Light', fontSize: 16, color: '#ffffff' }}>Stay in the flow and get a link sent to your email that’ll sign you in instantly</Text>
                                     <TouchableOpacity style={styles.linkButton}>
                                         <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 17, textAlign: 'center', color: '#ffffff', }}>Send flow link</Text>
                                     </TouchableOpacity>

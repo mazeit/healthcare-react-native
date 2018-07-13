@@ -21,7 +21,7 @@ export default class TermsOfUse extends React.Component {
 
                     <View style={styles.termsOfUse}>
 
-                        <Text style={{ height: 26, fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', marginTop: 20, marginLeft: 20 }}>Terms of use</Text>
+                        <Text style={{ height: 26, fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', marginTop: 20, marginLeft: 20 }}>Terms of use</Text>
 
                         <ScrollView style={styles.termsOfUseBlock}>
 
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     textContent: {
-        fontFamily: 'DINPro-Regular',
+        fontFamily: 'DINPro-Light',
         fontSize: 16,
         color: '#838383',
         marginTop: 10,

@@ -34,10 +34,10 @@ export default class Recipe extends React.Component {
                             <View style={styles.content}>
                                 <View style={[styles.contentSubBlock, { marginTop: -50, }]}>
                                     <View style={[styles.details, { margin: 10 }]}>
-                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', textAlign: 'center' }}>Easy peasy avocado salad</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', textAlign: 'center' }}>Easy peasy avocado salad</Text>
                                     </View>
                                     <View style={[styles.details, { margin: 10 }]}>
-                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', textAlign: 'center' }}>It's like a portable garden. Or some other short description of the recipe.</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', textAlign: 'center' }}>It's like a portable garden. Or some other short description of the recipe.</Text>
                                     </View>
                                     <View style={styles.details}>
                                         <Image source={require('../../../assets/icons/nutrition.png')} style={{ width: 72, height: 72, }} />
@@ -76,35 +76,35 @@ export default class Recipe extends React.Component {
                                     <View style={[styles.details, { flexDirection: 'row', margin: 10 }]}>
                                         <View style={{ flex: 1, alignItems: 'center', }}>
                                             <Image source={require('../../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
-                                            <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', textAlign: 'center' }}>Vegan</Text>
+                                            <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', textAlign: 'center' }}>Vegan</Text>
                                         </View>
                                         <View style={{ flex: 1, alignItems: 'center', }}>
                                             <Image source={require('../../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
-                                            <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', textAlign: 'center' }}>No nuts</Text>
+                                            <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', textAlign: 'center' }}>No nuts</Text>
                                         </View>
                                         <View style={{ flex: 1, alignItems: 'center', }}>
                                             <Image source={require('../../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
-                                            <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', textAlign: 'center' }}>Gluten free</Text>
+                                            <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', textAlign: 'center' }}>Gluten free</Text>
                                         </View>
                                         <View style={{ flex: 1, alignItems: 'center', }}>
                                             <Image source={require('../../../assets/icons/vegan.png')} style={{ width: 60, height: 60, }} />
-                                            <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', textAlign: 'center' }}>What ever</Text>
+                                            <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', textAlign: 'center' }}>What ever</Text>
                                         </View>
                                     </View>
                                 </View>
 
                                 <View style={styles.contentSubBlock}>
                                     <View style={[styles.details, { margin: 10 }]}>
-                                        <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', textAlign: 'center' }}>Ingredients</Text>
+                                        <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', textAlign: 'center' }}>Ingredients</Text>
                                     </View>
                                     <View style={[styles.details, { borderBottomWidth: 0.5, borderBottomColor: '#E9E9E9', height: 190, }]}>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>· 2 avocados, pitted</Text>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>· 1/2 c. cherry tomatoes, halved</Text>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>· 1/2 c. mini marinated mozzarella balls,   halved balsamic vinegar</Text>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>· Extra virgin olive oil</Text>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>· Kosher salt</Text>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>· Freshly ground black pepper</Text>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>· Basil, for garnish</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>· 2 avocados, pitted</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>· 1/2 c. cherry tomatoes, halved</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>· 1/2 c. mini marinated mozzarella balls,   halved balsamic vinegar</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>· Extra virgin olive oil</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>· Kosher salt</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>· Freshly ground black pepper</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>· Basil, for garnish</Text>
                                     </View>
                                     <View style={[styles.details, { margin: 10, flexDirection: 'row', }]}>
                                         <View style={{ flex: 1, alignItems: 'flex-start', marginLeft: 20 }}>
@@ -121,21 +121,21 @@ export default class Recipe extends React.Component {
 
                                 <View style={styles.contentSubBlock}>
                                     <View style={[styles.details, { margin: 10 }]}>
-                                        <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', textAlign: 'center' }}>Directions</Text>
+                                        <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', textAlign: 'center' }}>Directions</Text>
                                     </View>
                                     <View style={[styles.details, { margin: 10 }]}>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>1. Coop out avocados, leaving a small border.     Dice avocado and set aside.</Text>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>2. In a large bowl, toss diced avocado with      tomatoes, mozzarella, balsamic, and      olive oil.</Text>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>· 1/2 c. mini marinated mozzarella balls,   halved balsamic vinegar</Text>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>3. Season with salt and pepper.</Text>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>4. Divide salad among 4 avocado halves.</Text>
-                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>5. Garnish with basil.</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>1. Coop out avocados, leaving a small border.     Dice avocado and set aside.</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>2. In a large bowl, toss diced avocado with      tomatoes, mozzarella, balsamic, and      olive oil.</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>· 1/2 c. mini marinated mozzarella balls,   halved balsamic vinegar</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>3. Season with salt and pepper.</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>4. Divide salad among 4 avocado halves.</Text>
+                                        <Text style={{ alignSelf: 'flex-start', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>5. Garnish with basil.</Text>
                                     </View>
                                 </View>
 
                                 <View style={[styles.contentSubBlock, { width: width - 20 }]}>
                                     <View style={[styles.details, { margin: 10 }]}>
-                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 18, color: '#838383', }}>Add this recipe to your challenge</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#838383', }}>Add this recipe to your challenge</Text>
                                     </View>
                                     <View style={[styles.details, { margin: 10, }]}>
                                         <TouchableOpacity >

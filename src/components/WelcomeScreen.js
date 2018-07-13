@@ -65,32 +65,32 @@ class WelcomeScreen extends React.Component {
                                     <Text style={styles.headerText}>to your</Text>
                                     <Text style={styles.headerText}>Challange Name</Text>
                                     <Text style={styles.headerText}>Challenge!</Text>
-                                    <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#FFFFFF', textAlign: 'center', marginTop: 30 }}>This is what is waiting for you:</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center', marginTop: 30 }}>This is what is waiting for you:</Text>
                                 </View>
 
                                 <View style={styles.menuDescription}>
                                     <View style={styles.subMenu1}>
                                         <View style={styles.daysEnergy}>
                                             <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>30</Text>
-                                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>DAYS OF ENERGY</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>DAYS OF ENERGY</Text>
                                         </View>
                                         <View style={styles.videos}>
                                             <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>67</Text>
-                                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>VIDEOS</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>VIDEOS</Text>
                                         </View>
                                         <View style={styles.recipes}>
                                             <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>35</Text>
-                                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>RECIPES</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>RECIPES</Text>
                                         </View>
                                     </View>
                                     <View style={styles.subMenu2}>
                                         <View style={styles.coachingVideos}>
                                             <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>8</Text>
-                                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>COACHING VIDEOS</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>COACHING VIDEOS</Text>
                                         </View>
                                         <View style={styles.personalCoachingSession}>
                                             <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>2</Text>
-                                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>PERSONAL COACHING SESSION</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>PERSONAL COACHING SESSION</Text>
                                         </View>
                                     </View>
                                 </View>
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     headerText: {
-        fontFamily: 'DINPro-Regular',
+        fontFamily: 'DINPro-Light',
         fontSize: 22,
         color: '#ffffff'
     },

@@ -110,10 +110,10 @@ class ActivityList extends React.Component {
                                                 <ImageBackground style={styles.category} source={this.state.dataListImage[this.props.pillarName]}>
                                                     {/* <Text>{item.key}</Text> */}
                                                     <View style={{ margin: 10, flex: 1 }}>
-                                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 18, color: '#FFFFFF', }}>{item.name}</Text>
+                                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#FFFFFF', }}>{item.name}</Text>
                                                     </View>
                                                     <View style={{ margin: 10, marginTop: 0, flex: 1 }}>
-                                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 14, color: '#FFFFFF', }}>{item.description}</Text>
+                                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 14, color: '#FFFFFF', }}>{item.description}</Text>
                                                     </View>
                                                 </ImageBackground>
                                             </ImageBackground>

@@ -85,7 +85,7 @@ class InviteMyFriends extends React.Component {
                             </View>
 
                             <View style={{ flex: 2, alignItems: 'flex-start', marginTop: 10, marginBottom: 10 }}>
-                                <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', }}>You have already successfully invited {this.state.invitedFriends} friends. {3 - this.state.invitedFriends} more and you get one challenge for free.</Text>
+                                <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>You have already successfully invited {this.state.invitedFriends} friends. {3 - this.state.invitedFriends} more and you get one challenge for free.</Text>
                             </View>
 
                             <View style={{ flex: 4, alignItems: 'flex-start', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>

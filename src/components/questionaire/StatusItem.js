@@ -33,9 +33,9 @@ export default class StatusItem extends React.Component {
                         <View style={[styles.textSection, {backgroundColor: !!asHeader ? '#FFFFFF' : item.back}]}>
                             <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}} >
                                 <Icon name={item.icon} size={80} color={item.color} />
-                                <Text style={{ fontFamily: 'DINPro-Regular',color: item.color, fontSize: 18, fontWeight: 'bold' }} >{item.text}</Text>
+                                <Text style={{ fontFamily: 'DINPro-Light',color: item.color, fontSize: 18, fontWeight: 'bold' }} >{item.text}</Text>
                             </View>
-                            <Text style={{ fontFamily: 'DINPro-Regular',color: item.color , fontSize: 14}} >
+                            <Text style={{ fontFamily: 'DINPro-Light',color: item.color , fontSize: 14}} >
                                 <Text style={{fontWeight: 'bold'}}>{item.current+ ' '}</Text>
                                  von 
                                  <Text style={{fontWeight: 'bold'}}>{item.total}</Text>

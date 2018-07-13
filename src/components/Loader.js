@@ -36,7 +36,7 @@ export default class Loader extends React.Component {
         <View style={styles.loader}>
           <Animated.Image source={require('../../assets/images/loader.png')} style={[{width: 100, height: 100, resizeMode: 'center'}, {transform}]}/>
         </View>
-        <Text style={[styles.welcome,{fontFamily:'DINPro-Regular', fontSize: 22}]}>Welcome to livinflow</Text>
+        <Text style={[styles.welcome,{fontFamily:'DINPro-Light', fontSize: 22}]}>Welcome to livinflow</Text>
       </View>
     );
   }

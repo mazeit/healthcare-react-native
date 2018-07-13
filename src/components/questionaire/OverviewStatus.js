@@ -21,7 +21,7 @@ class OverviewStatus extends React.Component {
 
         this.state = {
             listData: [
-                { key: 'personal', icon: 'nutrition', color: '#4ab3e2' , text: 'Personal', back: '#e2f4fa', current: 4, total: 12, img: require('../../../assets/images/q-personal.png')},
+                { key: 'personal', icon: 'nutrition', color: '#4ab3e2' , text: 'Perssonal', back: '#e2f4fa', current: 4, total: 12, img: require('../../../assets/images/q-personal.png')},
                 { key: 'nutrition', icon: 'nutrition', color: '#8ACE91', text: 'Nutrition', back: '#e1f2e2', current: 4, total: 20, img: require('../../../assets/images/q-nutrition.png')},
                 { key: 'mindfulness', icon: 'mindfulness', color: '#D4B870', text: 'Mindfulness', back: '#f4ead6', current: 2, total: 7, img: require('../../../assets/images/q-mindfulness.png')},
 

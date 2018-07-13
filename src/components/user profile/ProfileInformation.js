@@ -33,16 +33,16 @@ class ProfileInformation extends React.Component {
                             <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20 }}>
                                 <Image source={{uri: this.props.user.img_dir}} style={{ width: 133, height: 133, }} />
                             </View>
-                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 18, color: '#4AB3E2' }}>Change Profile</Text>
-                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 18, color: '#4AB3E2' }}>Picture</Text>
+                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#4AB3E2' }}>Change Profile</Text>
+                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#4AB3E2' }}>Picture</Text>
                         </ImageBackground>
                     </View>
 
                     <ScrollView style={styles.profileInformaton}>
 
                         <View style={styles.myAccount}>
-                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', marginTop: 10 }}>My</Text>
-                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', marginBottom: 10 }}>Account</Text>
+                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', marginTop: 10 }}>My</Text>
+                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', marginBottom: 10 }}>Account</Text>
                             {
                                 myAccountSubHeading.map((item, i) =>
                                     <View key={i} style={styles.informationContainer}>
@@ -58,7 +58,7 @@ class ProfileInformation extends React.Component {
 
                         </View>
                         <View style={styles.personelDetails}>
-                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', marginBottom: 10, marginTop: 10 }}>Personal details</Text>
+                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', marginBottom: 10, marginTop: 10 }}>Personal details</Text>
                             {
                                 personalDetailSubHeading.map((item, i) =>
                                     <View key={i} style={styles.informationContainer}>

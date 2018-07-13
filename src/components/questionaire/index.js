@@ -29,7 +29,7 @@ export default class QuestionarieIntro extends React.Component {
                             <Image source={require('../../../assets/icons/qintro.png')} style={{ width: 50, height: 61, marginTop: 20}} />
 
                             
-                            <Text style={{ height: 26, fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', marginTop: 20, alignItems: 'center', textAlign: 'center'}}>Es freut uns sehr, dass Livinflow Dein Interesse wecken konnten! </Text>
+                            <Text style={{ height: 26, fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', marginTop: 20, alignItems: 'center', textAlign: 'center'}}>Es freut uns sehr, dass Livinflow Dein Interesse wecken konnten! </Text>
 
 
 
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
 
     textContent: {
-        fontFamily: 'DINPro-Regular',
+        fontFamily: 'DINPro-Light',
         fontSize: 16,
         color: '#838383',
         marginTop: 10,

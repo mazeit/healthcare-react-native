@@ -45,7 +45,7 @@ export default class Meditation extends React.Component {
                                         <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Medium', fontSize: 22, color: '#454545', padding: 5, }}>Meditation for stress</Text>
                                     </View>
                                     <View style={[styles.details, { margin: 10, marginTop: 0 }]}>
-                                        <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', padding: 5, paddingLeft: 10, paddingRight: 10 }}>Enjoy a healthier mind by developing your awareness of stress and learning how to reframe negative emotions</Text>
+                                        <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', padding: 5, paddingLeft: 10, paddingRight: 10 }}>Enjoy a healthier mind by developing your awareness of stress and learning how to reframe negative emotions</Text>
                                     </View>
                                     <View style={[styles.details, { margin: 10, marginTop: 0 }]}>
                                         <Icon name='mindfulness' size={80} color={'#D4B870'} />
@@ -78,7 +78,7 @@ export default class Meditation extends React.Component {
                                 <View style={styles.contentSubBlock}>
                                     <View style={[styles.details, { margin: 10 }]}>
                                         <View style={{ flex: 1, alignItems: 'flex-start', margin: 20, marginBottom: 0 }}>
-                                            <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545', }}>This could also interest you:</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', }}>This could also interest you:</Text>
                                         </View>
                                         <View style={{ flex: 9, alignItems: 'flex-start', margin: 20, marginBottom: 0, width: '100%' }}>
                                             <ActivityList navigation={this.props.navigation} goto={'Recipe'}
@@ -94,7 +94,7 @@ export default class Meditation extends React.Component {
 
                                 <View style={[styles.contentSubBlock, { width: width - 20 }]}>
                                     <View style={[styles.details, { margin: 10 }]}>
-                                        <Text style={{ fontFamily: 'DINPro-Regular', fontSize: 16, color: '#838383', textAlign: 'center' }}>Add this to your challenge</Text>
+                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', textAlign: 'center' }}>Add this to your challenge</Text>
                                     </View>
                                     <View style={[styles.details, { margin: 10, }]}>
                                         <TouchableOpacity >

@@ -39,14 +39,14 @@ export default class ImportantNotification extends React.Component {
                     <Image style={styles.image} source={require('../../assets/images/detoxYoga.png')} />
                 </View>
                 <View style={{ backgroundColor: '#FFFFFF', width: width - 130, flex: 1, marginTop: '-10%', alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Regular', fontSize: 22, color: '#454545' }}>Detox Yoga</Text>
+                    <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545' }}>Detox Yoga</Text>
                 </View>
                 <View style={styles.buttons}>
                     <TouchableOpacity style={{ backgroundColor: this.state.backgroundColor, flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderColor: '#ffffff', borderRadius: 50, borderWidth: 0.5 }}>
-                        <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Regular', fontSize: 17, color: '#ffffff' }}>More Details</Text>
+                        <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Light', fontSize: 17, color: '#ffffff' }}>More Details</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ backgroundColor: '#FFFFFF', flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderRadius: 50 }}>
-                        <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Regular', fontSize: 17, color: this.state.backgroundColor }}>Start session</Text>
+                        <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Light', fontSize: 17, color: this.state.backgroundColor }}>Start session</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.getCalender}>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     headerText: {
-        fontFamily: 'DINPro-Regular',
+        fontFamily: 'DINPro-Light',
         fontSize: 22,
         color: '#ffffff'
     },
