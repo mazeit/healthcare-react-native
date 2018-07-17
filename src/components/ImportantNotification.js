@@ -28,7 +28,7 @@ export default class ImportantNotification extends React.Component {
     render() {
         return (
             <View style={[styles.container, { backgroundColor: this.state.backgroundColor, }]}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('contentOverview')} style={{ alignItems: 'center', justifyContent: 'center'}}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('ContentOverview')} style={{ alignItems: 'center', justifyContent: 'center'}}>
                     <Icon name="close" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
                 </TouchableOpacity>
                 <View style={styles.header}>
@@ -50,7 +50,7 @@ export default class ImportantNotification extends React.Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.getCalender}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CalendarContainer')}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CalendarView')}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginTop: '12%' }}>Go to My Day</Text>
                                 <Icon name="little_arrow" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />

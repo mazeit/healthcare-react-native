@@ -32,20 +32,11 @@ class WelcomeScreen extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         
-        if (nextProps.calendarData.hasError === false) {
-            this.setState({ calendarData: nextProps.calendarData, loader: false })
-            this.props.navigation.navigate('CalendarStack', { data: nextProps.calendarData })
-        }
-        else {
-            this.setState({ loader: false })
-            console.log('......ERROR.....', nextProps.calendarData.errors)
-        }
 
     }
 
     goToCalendarStack(id) {
-        this.setState({ loader: true });
-        this.props.getCalendarData(id);
+        this.props.navigation.navigate('CalendarStack')
     }
 
     render() {

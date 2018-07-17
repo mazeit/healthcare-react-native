@@ -169,6 +169,7 @@ const ProfileStack = StackNavigator({
 const AppNavigator = StackNavigator({
   SignInStack: { screen: SignInStack },
   WelcomeScreen: { screen: WelcomeScreen },
+  ImportantNotification: { screen: ImportantNotification },
   ContentStack: { screen: ContentStack },
   CalendarStack: { screen: CalendarStack },
   GeneralMenu: { screen: GeneralMenu },

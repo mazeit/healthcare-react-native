@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Linking } from 'react-native';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
@@ -42,7 +42,8 @@ const menuList = [
     },
     {
         name: 'WEBSHOP',
-        component: 'WebShop'
+        // component: 'WebShop'
+        webLink: 'http://livinflow.com/'
     },
 ];
 
@@ -51,6 +52,14 @@ export default class GeneralMenu extends React.Component {
         super(props);
         this.state = {
         };
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(item) {
+        if (item.webLink)
+            Linking.openURL(item.webLink);
+        else
+            this.props.navigation.navigate(item.component);
     }
 
     render() {
@@ -72,7 +81,7 @@ export default class GeneralMenu extends React.Component {
                 <View style={ styles.menu }>
                     {
                         menuList.map((item, i) => 
-                            <TouchableOpacity key={i} onPress={ () => this.props.navigation.navigate(item.component)} style={ styles.listItem }>
+                            <TouchableOpacity key={i} onPress={ () => this.handleClick(item)} style={ styles.listItem }>
                                 <Text style={{ flex:1, fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF',}}>{item.name}</Text>
                             </TouchableOpacity>
                         )

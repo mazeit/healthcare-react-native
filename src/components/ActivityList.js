@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const { height, width } = Dimensions.get('window');
 
-import { addFavorite, removeFavorite, getActivity } from '../actions/index';
+import { addFavorite, removeFavorite, getActivity, removeChallenge, addChallenge } from '../actions/index';
 import LoaderWait from './LoaderWait';
 
 
@@ -26,55 +28,67 @@ class ActivityList extends React.Component {
         };
         this.favClicked = this.favClicked.bind(this);
     }
+
     componentWillReceiveProps(nextProps) {
-        // console.log('.....NEXTPROPS////', nextProps)
-        this.setState({ loader: false })
-        if(nextProps.addActivityData.hasError === false)
-        this.setState({ activityData: nextProps.addActivityData });
-        this.props.navigation.navigate(this.props.goto, {activityType: this.state.activityType, data: nextProps.addActivityData.content})
     }
 
     favClicked({ item, index }, cond) {
 
-        this.setState({ loader: true });
         let { listData } = this.state;
         let targetItem = listData[index];
 
-        // Flip the 'liked' property of the targetPost
         targetItem.favorite = !targetItem.favorite;
 
-
-
-        console.log('.... LIST DATA ........', targetItem)
-        this.setState({ listData });
+        this.setState({ listData: [...listData] });
         if (cond) {
-            console.log('.... REMOVE ........')
-            this.props.removeFavorite(this.props.user_id, item.id_content, this.props.pillarName)
+            this.props.removeFavorite(item.id_content, this.props.pillarName).then(()=>{
+            })
         } else if (!cond) {
-            console.log('.... ADD ........')
-            this.props.addFavorite(this.props.user_id, item.id_content, this.props.pillarName)
+            this.props.addFavorite(item.id_content, this.props.pillarName).then(()=>{
+            })
+        }
+    }
+
+    challengeClicked({ item, index }, cond) {
+
+        let { listData } = this.state;
+        let targetItem = listData[index];
+
+        targetItem.favorite = !targetItem.favorite;
+
+        this.setState({ listData: [...listData] });
+        if (cond) {
+            this.props.removeChallenge(item.id_content, this.props.pillarName).then(()=>{
+            })
+        } else if (!cond) {
+            this.props.addChallenge(item.id_content, this.props.pillarName).then(()=>{
+            })
         }
 
-
     }
+
 
     goToNextView (id, item) {
         if(this.state.activityType === 'add') {
             this.setState({loader: true})
-            this.props.getActivity(id, null)
+            this.props.getActivity(id, null).then((addActivityData) => {
+
+                this.setState({ loader: false })
+                if(addActivityData.hasError === false) {
+                    this.setState({ activityData: addActivityData });
+                    this.props.navigation.navigate(this.props.goto, {activityType: this.state.activityType, data: addActivityData.content})
+                }
+            })
         }
         else{
             this.props.navigation.navigate(this.props.goto, {activityType: this.state.activityType, data: item}) 
         }
-        // this.props.navigation.navigate(this.props.goto, {activityType: this.state.activityType, data: item})
     }
 
     render() {
 
         const { listData } = this.state;
 
-        // console.log('......LIST DATA', listData)
-        // console.log('.....STATE...', this.state)
         return (
             <View style={styles.container}>
                 {
@@ -100,16 +114,22 @@ class ActivityList extends React.Component {
 
                                                     </TouchableOpacity>
                                             }
+                                            {
+                                                item.favorite ?
+                                                    <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} onPress={() => this.challengeClicked({ item, index }, item.challenge)} >
+                                                        <MaterialCommunityIcons name="minus" size={30} style={{  }} color="#454545" />
+                                                    </TouchableOpacity> :
+                                                    <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} onPress={() => this.challengeClicked({ item, index }, item.challenge)}>
+                                                        <Icon name="plus" size={50} style={{ marginLeft: -10 }} color="#454545" />
+                                                    </TouchableOpacity>
+                                            }
 
-                                            <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                                <Icon name="plus" size={50} style={{ marginLeft: -10 }} color="#454545" />
-                                            </TouchableOpacity>
                                         </View>
                                         <TouchableOpacity onPress={() => this.goToNextView(item.id_content, item)} style={styles.categoryDetails}>
                                             <ImageBackground style={styles.category} source={item.file_id !== '' ? { uri: 'https://content.jwplatform.com/thumbs/DRJghGa7.jpg' } : this.state.dataListColor[this.props.pillarName]}>
                                                 <ImageBackground style={styles.category} source={this.state.dataListImage[this.props.pillarName]}>
                                                     {/* <Text>{item.key}</Text> */}
-                                                    <View style={{ margin: 10, flex: 1 }}>
+                                                    <View style={{ margin: 10, flex: 1   }}>
                                                         <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#FFFFFF', }}>{item.name}</Text>
                                                     </View>
                                                     <View style={{ margin: 10, marginTop: 0, flex: 1 }}>
@@ -180,6 +200,6 @@ export default connect(state => {
         addActivityData,
     }
 }, dispatch => {
-    return bindActionCreators({ addFavorite: addFavorite, removeFavorite: removeFavorite, getActivity: getActivity }, dispatch)
+    return bindActionCreators({ addFavorite: addFavorite, removeFavorite: removeFavorite, getActivity: getActivity, removeChallenge, addChallenge }, dispatch)
 }
 )(ActivityList);

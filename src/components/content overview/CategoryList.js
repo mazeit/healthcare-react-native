@@ -15,7 +15,9 @@ class CategoryList extends React.Component {
         super(props);
 
         this.state = {
+            viewType: this.props.navigation.state.params.viewType ? this.props.navigation.state.params.viewType,
             pillarName: this.props.navigation.state.params.pillarName,
+            searchKey: this.props.navigation.state.params.searchKey,
             pillarData: [],
             loader: true,
         };
@@ -53,12 +55,14 @@ class CategoryList extends React.Component {
     // }
     componentDidMount() {
         
-        this.props.getPillarData(this.state.pillarName, this.props.user.id, this.props.user.id_lang)
+        this.props.getPillarData(this.state.pillarName).then((pillarData) => {
+
+            this.setState({ pillarData: pillarData[this.state.pillarName], loader: false })
+        });
     }
 
     componentWillReceiveProps(nextProps) {
         
-        this.setState({ pillarData: nextProps.pillarData[this.state.pillarName], loader: false })
 
     }
     // showSearch() {
@@ -89,7 +93,6 @@ class CategoryList extends React.Component {
         //     outputRange: [0, 1]
         // });
 
-
         return (
             <View style={{ flex: 1 }}>
                 {
@@ -101,9 +104,9 @@ class CategoryList extends React.Component {
                             </View>
                             <View style={styles.container}>
                                 {/* <View style={[styles.search, { height }, { opacity }]} >
-                        <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
-                        <Image style={{ width: 20, height: 20 }} source={require('../../../assets/icons/search.png')} />
-                    </View> */}
+                                    <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
+                                    <Image style={{ width: 20, height: 20 }} source={require('../../../assets/icons/search.png')} />
+                                </View> */}
 
                                 <ActivityList navigation={this.props.navigation} goto={'Recipe'}
                                     data={this.state.pillarData} pillarName={this.state.pillarName} user_id={this.props.user.id}

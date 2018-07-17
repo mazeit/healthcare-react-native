@@ -32,7 +32,7 @@ class InviteMyFriends extends React.Component {
 
     componentDidMount() {
 
-        this.props.getInvitedFriendsData(this.props.user_id);
+        this.props.getInvitedFriendsData();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -54,7 +54,7 @@ class InviteMyFriends extends React.Component {
             if (!re.test(this.state.friendEmail)) this.setState({ emailError: 'Please enter valid email' })
         } else {
             console.log('......HI ALL GOOD');
-            this.props.inviteFriend(this.props.user_id,this.state.friendFirstName, this.state.friendLastName, this.state.friendEmail);
+            this.props.inviteFriend(this.state.friendFirstName, this.state.friendLastName, this.state.friendEmail);
             
         }
     }

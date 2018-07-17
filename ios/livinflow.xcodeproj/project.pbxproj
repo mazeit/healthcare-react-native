@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -64,6 +63,8 @@
 		FD0B13923FE342F9BC03AB42 /* DINPro-CondBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A5EB0FF8CF748F38EF34E66 /* DINPro-CondBold.otf */; };
 		FE41130563B04DD08374FC93 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		FE93177E7A214749991A5D67 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3D050FB0EF345E8901A6513 /* icomoon.ttf */; };
+		092198ABBE204A3BAC5CE30D /* DINPro-CondMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A9F34798E36495AA2FD8C6A /* DINPro-CondMedium.otf */; };
+		1878DAEFC0184C09816DD6DF /* DINPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D25AF847A274572B322D772 /* DINPro-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -423,6 +424,8 @@
 		E2F60853EB174768A3D8FB86 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		EAD684A3E7214771A84FCF42 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
 		F44EC4A3EA554734B15DABC8 /* DINPro-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DINPro-Light.otf"; path = "../assets/fonts/DINPro-Light.otf"; sourceTree = "<group>"; };
+		2A9F34798E36495AA2FD8C6A /* DINPro-CondMedium.otf */ = {isa = PBXFileReference; name = "DINPro-CondMedium.otf"; path = "../assets/fonts/DINPro-CondMedium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7D25AF847A274572B322D772 /* DINPro-Regular.otf */ = {isa = PBXFileReference; name = "DINPro-Regular.otf"; path = "../assets/fonts/DINPro-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -740,6 +743,8 @@
 		A722CB75F56045729C28DBC6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2A9F34798E36495AA2FD8C6A /* DINPro-CondMedium.otf */,
+				7D25AF847A274572B322D772 /* DINPro-Regular.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1268,6 +1273,8 @@
 				834FB83983BF491EABDA3953 /* DINPro-Medium.otf in Resources */,
 				BBC13418AF934408803EB498 /* fontello.ttf in Resources */,
 				FE93177E7A214749991A5D67 /* icomoon.ttf in Resources */,
+				092198ABBE204A3BAC5CE30D /* DINPro-CondMedium.otf in Resources */,
+				1878DAEFC0184C09816DD6DF /* DINPro-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 
-import { getActivity, addActivity } from '../../actions/index'
+import { getActivity, addActivity, getCalendarData } from '../../actions/index'
 import { bindActionCreators } from 'redux'
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../../selection.json';
@@ -22,23 +22,7 @@ import { Agenda } from 'react-native-calendars';
 
 const { height, width } = Dimensions.get('window');
 const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const swipeSettings = {
-    autoClose: true,
-    onOpen: (secId, rowId, direction) => {
 
-    },
-    onClose: (secId, rowId, direction) => {
-
-    },
-    right: [
-        {
-            onPress: () => {
-
-            },
-            text: 'Delete', type: 'delete'
-        }
-    ],
-};
 
 class CalendarView extends React.Component {
     constructor(props) {
@@ -50,85 +34,69 @@ class CalendarView extends React.Component {
             firstDay: new Date(new Date().getFullYear(), new Date().getMonth(), 1).getDay(), weeklyCalendar: true,
             rotate: '180deg',
             user_id: this.props.user_id,
-            calendarData: this.props.navigation.state.params.data || this.props.calendarData,
+            calendarData: [],
             activityData: {},
             eventData: {},
             markedData: {},
-            loader: false,
+            loader: true,
             activity: '#AE0069',
             mindfulness: '#D4B870',
             nutrition: '#8ACE91',
             timeDiff: '',
             dateSelected: false,
-            selectDate: this.props.navigation.state.params.selectDate || false,
+            selectDate: this.props.navigation.state.params ? this.props.navigation.state.params.selectDate : false,
             eventDate: '',
+            selectedIdContent: null
         };
         this.getActivityData = this.getActivityData.bind(this);
         this.renderDay = this.renderDay.bind(this);
         this.dateSelected = this.dateSelected.bind(this);
         this.addEvent = this.addEvent.bind(this);
-
+        
     }
 
     componentDidMount() {
-        const eventData = {};
-        const markedData = {};
-        var dotColor = {
-            'activity': { key: 'activity', color: '#AE0069', },
-            'nutrition': { key: 'nutrition', color: '#8ACE91', },
-            'mindfulness': { key: 'mindfulness', color: '#D4B870' },
-            'coach': { key: 'coach', color: '#454545' },
-        }
-        if (this.state.calendarData && this.state.calendarData.events) {
-            this.state.calendarData.events.forEach((item) => {
-                let key = (item.start.split(' ')[0]).toString()
+        this.props.getCalendarData().then(calendarData=>{
 
-
-                if (eventData[key]) {
-
-                    eventData[key].push(item);
-                    markedData[key].dots.push(dotColor[item.className.split(' ')[1]])
-
-                } else {
-                    eventData[key] = [item];
-                    markedData[key] = { dots: [] }
-                    markedData[key].dots = [dotColor[item.className.split(' ')[1]]];
-                }
-
-            });
-            for (let data in markedData) {
-                markedData[data].dots = markedData[data].dots.filter(function (item, pos) {
-                    return markedData[data].dots.indexOf(item) == pos;
-                })
+            const eventData = {};
+            const markedData = {};
+            var dotColor = {
+                'activity': { key: 'activity', color: '#AE0069', },
+                'nutrition': { key: 'nutrition', color: '#8ACE91', },
+                'mindfulness': { key: 'mindfulness', color: '#D4B870' },
+                'coach': { key: 'coach', color: '#454545' },
             }
-        }
+            if (calendarData && calendarData.events) {
+                calendarData.events.forEach((item) => {
+                    let key = (item.start.split(' ')[0]).toString()
 
 
-        this.setState({ eventData: eventData, markedData: markedData });
+                    if (eventData[key]) {
+
+                        eventData[key].push(item);
+                        markedData[key].dots.push(dotColor[item.className.split(' ')[1]])
+
+                    } else {
+                        eventData[key] = [item];
+                        markedData[key] = { dots: [] }
+                        markedData[key].dots = [dotColor[item.className.split(' ')[1]]];
+                    }
+
+                });
+                for (let data in markedData) {
+                    markedData[data].dots = markedData[data].dots.filter(function (item, pos) {
+                        return markedData[data].dots.indexOf(item) == pos;
+                    })
+                }
+            }
+            this.setState({ eventData: eventData, markedData: markedData, calendarData: calendarData, loader: false });
+        })
+        
     }
 
     componentWillReceiveProps(nextProps) {
-
-        console.log('......CALENDERNEXT PROPS.....', this.props)
-        // if(nextProps.addEventResponse.hasError===false) {
-        //     this.setState({ loader: false,dateSelected: true })
-        // }
-        if (nextProps.activityData.hasError === false) {
-            this.setState({ activityData: nextProps.activityData, loader: false });
-            this.props.navigation.navigate('Activity', { data: nextProps.activityData.content, activityType: 'open' });
-        }
-
-        else if (nextProps.activityData.hasError === true) {
-            this.setState({ loader: false })
-            console.log('......ERROR.....', nextProps.activityData.errors)
-        }
         
-
-
-
     }
-
-
 
     getActivityData(id, time) {
         var today = new Date();
@@ -148,17 +116,22 @@ class CalendarView extends React.Component {
         // this.setState({ timeDiff: timeDiff });
 
         this.setState({ loader: true });
-        this.props.getActivity(id, 'show');
+        this.props.getActivity(id, 'show').then(activityData => {
+
+            if (activityData.hasError === false) {
+                this.setState({ activityData: activityData, loader: false });
+                this.props.navigation.navigate('Activity', { data: activityData.content, activityType: 'open' });
+            }
+        });
     }
 
     dateSelected(date) {
-        console.log(date)
         this.setState({eventDate: date.dateString})
     }
 
     addEvent() {
         // this.setState({loader: true});
-        this.props.addActivity(this.state.user_id, this.props.navigation.state.params.id_content, this.props.navigation.state.params.event, this.state.eventDate)
+        this.props.addActivity(this.props.navigation.state.params.id_content, this.props.navigation.state.params.event, this.state.eventDate)
         
         
     }
@@ -167,7 +140,7 @@ class CalendarView extends React.Component {
             <View>
                 {
                     day ?
-                        <View style={{ flex: 1, backgroundColor: '#FFFFFF80', borderRadius: 5, padding: 10, alignItems: 'center', justifyContent: 'center', left: 10, width: 70 }}>
+                        <View style={{ flex: 1, backgroundColor: '#FFFFFF80', borderRadius: 5, padding: 5, margin: 5, alignItems: 'center', justifyContent: 'center', left: 10, width: 70 }}>
                             <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 35, color: '#838383' }}>{day.day}</Text>
                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 15, color: '#838383', alignSelf: 'center' }}>{month[day.month]}</Text>
                         </View> :
@@ -175,15 +148,35 @@ class CalendarView extends React.Component {
             </View>
         );
     }
+
     renderItem(item) {
+        const swipeSettings = {
+            autoClose: true,
+            onOpen: (secId, rowId, direction) => {
+                console.log(rowId);
+            },
+            onClose: (secId, rowId, direction) => {
+                console.log(rowId);
+            },
+            right: [
+                {
+                    onPress: (param) => {
+                        console.log(param);
+                    },
+                    text: 'Delete', type: 'delete'
+                }
+            ],
+        };
+
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
 
-                <Swipeout {...swipeSettings} style={[styles.SwiperContainer, { borderRadius: 5 }]}>
+                <Swipeout {...swipeSettings} rowID={item.id_content} sectionID={'SECTIONID'} style={[styles.SwiperContainer, { borderRadius: 5 }]}>
                     <View style={styles.challangeTab} >
                         <TouchableOpacity onPress={() => this.getActivityData(item.id, item.start)}>
                             <View style={styles.challangeTab}>
-                                <Icon style={{ flex: 2, left: -10 }} name={item.className.split(' ')[0].split('_')[0]} size={80} color="#838383" />
+                                {/*<Icon style={{ flex: 2, left: -10 }} name={item.className.split(' ')[0].split('_')[0]} size={80} color="#838383" />*/}
+                                <Icon style={{ flex: 2, left: -10 }} name="morning" size={80} color="#838383" />
                                 <View style={{ flex: 6.5, justifyContent: 'center', marginRight: 5, marginLeft: 15 }}>
                                     <Text style={{ flex: 1, fontFamily: 'DINPro-Light', fontSize: 16, color: '#454545', marginVertical: 10 }}>{item.title}</Text>
                                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginLeft: -20, marginTop: -20 }}>
@@ -211,15 +204,11 @@ class CalendarView extends React.Component {
 
         const eventData = this.state.eventData;
         const markedData = this.state.markedData;
-
-
-
-
         return (
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')}>
                 {
                     this.state.dateSelected &&
-                    <View style={{ position: 'absolute', width: width, height: height, top: 0, left: 0, flex:1, backgroundColor: '#00000080' }}>
+                    <View style={{ position: 'absolute', width: width, height: height, top: 0, left: 0, flex:1, backgroundColor: '#00000080', zIndex: 100 }}>
                         <View style={{ flex: 6, alignItems: 'center', justifyContent: 'center' }}>
                         </View>
 
@@ -246,8 +235,6 @@ class CalendarView extends React.Component {
                             </View>
 
                             <View style={{ flex: 8 }}>
-
-
 
                                 <Agenda
                                     // the list of items that have to be displayed in agenda. If you want to render item as empty date
@@ -370,6 +357,6 @@ export default connect(state => {
         addEventResponse,
     }
 }, dispatch => {
-    return bindActionCreators({ getActivity: getActivity, addActivity: addActivity }, dispatch)
+    return bindActionCreators({ getActivity: getActivity, addActivity: addActivity, getCalendarData: getCalendarData }, dispatch)
 }
 )(CalendarView);
