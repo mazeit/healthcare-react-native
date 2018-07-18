@@ -37,7 +37,7 @@ export default class Activity extends React.Component {
     }
 
     openDatePrefrence() {
-        this.props.navigation.navigate('CalendarView', { id_content: this.state.activityData.id, event: this.state.activityData.name, selectDate : true })
+        this.props.navigation.navigate('CalendarView', { id_content: this.state.activityData.id, mode : 'add-activity' })
     }
 
 

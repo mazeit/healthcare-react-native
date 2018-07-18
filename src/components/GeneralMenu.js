@@ -10,35 +10,43 @@ const { height, width } = Dimensions.get('window');
 const menuList = [
     {
         name: 'MY LIVINFLOW',
-        component: 'ContentStack'
+        component: 'ContentStack',
+        params: {}
     },
     {
         name: 'MY NAVIGATOR',
-        component: 'WelcomeScreen'
+        component: 'WelcomeScreen',
+        params: {}
     },
     {
         name: 'MY FAVORITES',
-        component: 'Favourites'
+        component: 'CategoryList',
+        params: {}
     },
     {
         name: 'MY PROFILE',
-        component: 'ProfileStack'
+        component: 'ProfileStack',
+        params: {}
     },
     {
         name: 'BLOG',
-        component: 'CoachProfile'
+        component: 'CoachProfile',
+        params: {}
     },
     {
         name: 'COACHES',
-        component: 'CoachProfile'
+        component: 'CoachProfile',
+        params: {}
     },
     {
         name: 'HELP & FAQ',
-        component: 'HelpFaq'
+        component: 'HelpFaq',
+        params: {}
     },
     {
         name: 'INVITE MY FRIENDS',
-        component: 'InviteMyFriends'
+        component: 'InviteMyFriends',
+        params: {}
     },
     {
         name: 'WEBSHOP',

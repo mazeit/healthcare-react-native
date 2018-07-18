@@ -15,9 +15,9 @@ class CategoryList extends React.Component {
         super(props);
 
         this.state = {
-            viewType: this.props.navigation.state.params.viewType ? this.props.navigation.state.params.viewType,
-            pillarName: this.props.navigation.state.params.pillarName,
-            searchKey: this.props.navigation.state.params.searchKey,
+            viewType: this.props.navigation.state.params.viewType ? this.props.navigation.state.params.viewType : '',
+            pillarName: this.props.navigation.state.params.pillarName ? this.props.navigation.state.params.pillarName : '',
+            searchKey: this.props.navigation.state.params.searchKey ? this.props.navigation.state.params.searchKey : '',
             pillarData: [],
             loader: true,
         };
@@ -109,7 +109,7 @@ class CategoryList extends React.Component {
                                 </View> */}
 
                                 <ActivityList navigation={this.props.navigation} goto={'Recipe'}
-                                    data={this.state.pillarData} pillarName={this.state.pillarName} user_id={this.props.user.id}
+                                    data={this.state.pillarData} user_id={this.props.user.id}
                                 />
 
                             </View>

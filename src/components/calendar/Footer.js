@@ -27,7 +27,7 @@ export default class Footer extends React.Component {
 
     tabSelected( input) {
 
-        this.props.navigation.navigate(input);
+        this.props.navigation.navigate(input, {});
     }
     render() {
 

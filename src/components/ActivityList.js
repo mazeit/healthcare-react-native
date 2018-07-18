@@ -17,7 +17,6 @@ import LoaderWait from './LoaderWait';
 class ActivityList extends React.Component {
     constructor(props) {
         super(props);
-        // console.log('....PROPS...', this.props)
         this.state = {
             dataListColor: { nutrition: require('../../assets/images/nutrition_image.png'), activity: require('../../assets/images/activity_image.png'), mindfulness: require('../../assets/images/mindfulness_image.png'), coach: require('../../assets/images/coach_image.png') },
             dataListImage: { nutrition: require('../../assets/images/nutrition_frame.png'), activity: require('../../assets/images/activity_frame.png'), mindfulness: require('../../assets/images/mindfulness_frame.png'), coach: require('../../assets/images/coach_frame.png') },
@@ -41,10 +40,10 @@ class ActivityList extends React.Component {
 
         this.setState({ listData: [...listData] });
         if (cond) {
-            this.props.removeFavorite(item.id_content, this.props.pillarName).then(()=>{
+            this.props.removeFavorite(item.id_content, item.pillar).then(()=>{
             })
         } else if (!cond) {
-            this.props.addFavorite(item.id_content, this.props.pillarName).then(()=>{
+            this.props.addFavorite(item.id_content, item.pillar).then(()=>{
             })
         }
     }
@@ -58,10 +57,10 @@ class ActivityList extends React.Component {
 
         this.setState({ listData: [...listData] });
         if (cond) {
-            this.props.removeChallenge(item.id_content, this.props.pillarName).then(()=>{
+            this.props.removeChallenge(item.id_content, item.pillar).then(()=>{
             })
         } else if (!cond) {
-            this.props.addChallenge(item.id_content, this.props.pillarName).then(()=>{
+            this.props.addChallenge(item.id_content, item.pillar).then(()=>{
             })
         }
 
@@ -123,11 +122,10 @@ class ActivityList extends React.Component {
                                                         <Icon name="plus" size={50} style={{ marginLeft: -10 }} color="#454545" />
                                                     </TouchableOpacity>
                                             }
-
                                         </View>
                                         <TouchableOpacity onPress={() => this.goToNextView(item.id_content, item)} style={styles.categoryDetails}>
-                                            <ImageBackground style={styles.category} source={item.file_id !== '' ? { uri: 'https://content.jwplatform.com/thumbs/DRJghGa7.jpg' } : this.state.dataListColor[this.props.pillarName]}>
-                                                <ImageBackground style={styles.category} source={this.state.dataListImage[this.props.pillarName]}>
+                                            <ImageBackground style={styles.category} source={item.file_id !== '' ? { uri: 'https://content.jwplatform.com/thumbs/DRJghGa7.jpg' } : this.state.dataListColor[item.pillar]}>
+                                                <ImageBackground style={styles.category} source={this.state.dataListImage[item.pillar]}>
                                                     {/* <Text>{item.key}</Text> */}
                                                     <View style={{ margin: 10, flex: 1   }}>
                                                         <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#FFFFFF', }}>{item.name}</Text>

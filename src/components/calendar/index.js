@@ -27,7 +27,6 @@ const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'O
 class CalendarView extends React.Component {
     constructor(props) {
         super(props);
-        
         this.state = {
             today: new Date(),
             headDate: new Date().getDate() + ' ' + month[new Date().getMonth()] + ' ' + new Date().getFullYear(),
@@ -43,9 +42,11 @@ class CalendarView extends React.Component {
             mindfulness: '#D4B870',
             nutrition: '#8ACE91',
             timeDiff: '',
+
             dateSelected: false,
-            selectDate: this.props.navigation.state.params ? this.props.navigation.state.params.selectDate : false,
-            eventDate: '',
+            //add-activity, default
+            mode: (this.props.navigation.state.params && this.props.navigation.state.params.mode) ? this.props.navigation.state.params.mode : 'default',
+            selectedDate: '',
             selectedIdContent: null
         };
         this.getActivityData = this.getActivityData.bind(this);
@@ -126,12 +127,14 @@ class CalendarView extends React.Component {
     }
 
     dateSelected(date) {
-        this.setState({eventDate: date.dateString})
+        console.log('date selected' ,date);
+        this.setState({selectedDate: date.dateString});
+        return date;
     }
 
     addEvent() {
         // this.setState({loader: true});
-        this.props.addActivity(this.props.navigation.state.params.id_content, this.props.navigation.state.params.event, this.state.eventDate)
+        this.props.addActivity(this.props.navigation.state.params.id_content, this.props.navigation.state.params.event, this.state.selectedDate)
         
         
     }
@@ -231,7 +234,12 @@ class CalendarView extends React.Component {
                         <View style={{ flex: 1, opacity: 0.8 }}><LoaderWait /></View> :
                         <View style={{ flex: 1 }}>
                             <View style={{ flex: 1 }}>
-                                <Header goBack={this.state.selectDate ? () => this.props.navigation.goBack() : () => this.props.navigation.navigate('AddActivity1')} backgroundcolor={'#FFFFFF'} headerTitle={this.state.selectDate ? 'ADD ACTIVITY TO YOUR CHALLENGE' : this.state.headDate} leftButton={true} leftButtonName={this.state.selectDate ? 'close' : 'plus'} leftButtonColor={'#454545'} showNext={false} rightButton={true} rightButtonName={this.state.selectDate ? 'plus' : 'menu'} headColor={'#454545'} navigation={this.props.navigation} rightButtonFunc={this.addEvent} />
+                                {this.state.mode == 'default' &&
+                                    <Header goBack={() => this.props.navigation.navigate('AddActivity1')}backgroundcolor={'#FFFFFF'} headerTitle={this.state.headDate} leftButton={true} leftButtonName={'plus'} leftButtonColor={'#454545'} showNext={false} rightButton={true} rightButtonName={'menu'} headColor={'#454545'} navigation={this.props.navigation} rightButtonFunc={this.addEvent} />
+                                }
+                                {this.state.mode == 'add-activity' &&
+                                    <Header goBack={()=>this.props.navigation.goBack()}  backgroundcolor={'#FFFFFF'} headerTitle={'ADD ACTIVITY TO YOUR CHALLENGE'} leftButton={true} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} rightButtonName={'plus'} headColor={'#454545'} navigation={this.props.navigation} rightButtonFunc={this.addEvent} />
+                                }
                             </View>
 
                             <View style={{ flex: 8 }}>
@@ -246,7 +254,7 @@ class CalendarView extends React.Component {
                                     // callback that fires when the calendar is opened or closed
                                     onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
                                     // callback that gets called on day press
-                                    onDayPress={(day) => { this.state.selectDate ? this.dateSelected(day) : console.log('day pressed') }}
+                                    onDayPress={(day) => {console.log('ss',day); this.dateSelected(day) }}
                                     // callback that gets called when day changes while scrolling agenda list
                                     onDayChange={(day) => { console.log('day changed') }}
                                     // initially selected day

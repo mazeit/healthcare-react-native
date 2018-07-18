@@ -96,7 +96,7 @@ class ContentOverview extends React.Component {
     }
 
     tabSelected( input) {
-        this.props.navigation.navigate(input);
+        this.props.navigation.navigate(input, {});
     }
 
     render() {
@@ -156,7 +156,7 @@ class ContentOverview extends React.Component {
                                 </Animated.View>
                                 <View style={[styles.section, { marginBottom: 5 }]}>
 
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'nutrition'}, viewType: 'pillar')} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'nutrition', viewType: 'pillar'})} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
                                         <View style={styles.image}>
                                             <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.nutritionImage }} >
 
@@ -182,7 +182,7 @@ class ContentOverview extends React.Component {
 
                                 <View style={[styles.section, { marginTop: 5 }]}>
 
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'mindfulness'}, viewType: 'pillar')} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'mindfulness', viewType: 'pillar'})} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
                                         <View style={styles.image}>
                                             <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.mindfulnessImage }} >
                                             </ImageBackground>
@@ -192,12 +192,13 @@ class ContentOverview extends React.Component {
                                             <Text style={[styles.activitySubtittle, { color: '#D4B870' }]} >Mindfulness</Text>
                                         </View>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'coach'}, viewType: 'pillar')} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'coach', viewType: 'pillar'})} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
                                         <View style={styles.image}>
                                             <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.coachImage }} >
                                             </ImageBackground>
                                         </View>
                                         <View style={styles.activityContainer}>
+                                            <Icon name="coach" size={50} style={{ marginLeft: -10 }} color="#D4B870" />
                                             <Text style={[styles.activitySubtittle, { color: '#454545' }]} >Coach</Text>
                                         </View>
                                     </TouchableOpacity>
