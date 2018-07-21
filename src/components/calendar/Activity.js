@@ -90,7 +90,7 @@ export default class Activity extends React.Component {
                 </View>
                 <View style={{ flex: 9, }}>
                     <View style={{ flex: 6, }}>
-                        this.state.activityData.file_id !== '' ?
+                        {this.state.activityData.file_id !== '' ?
                             <WebView
                                 style={{ flex: 1 }}
                                 javaScriptEnabled={true}
@@ -98,7 +98,7 @@ export default class Activity extends React.Component {
                                 source={{ uri: 'https://content.jwplatform.com/players/' + this.state.activityData.file_id + '-Qzd90UGq.html' }}
                             /> :
                             <Image source={require('../../../assets/images/no_video.png')} style={{ width: '100%', height: '100%', }} />
-                    
+                        }                    
                     </View>
 
                     <View style={{ flex: 7, alignItems: 'center', justifyContent: 'center', }}>
