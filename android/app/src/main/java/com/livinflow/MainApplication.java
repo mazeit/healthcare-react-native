@@ -12,7 +12,7 @@ import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
-
+import net.gamesofton.rnjwplayer.RNJWPlayerPackage;
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -26,7 +26,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new ReactVideoPackage(),
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+            new RNJWPlayerPackage()
       );
     }
 

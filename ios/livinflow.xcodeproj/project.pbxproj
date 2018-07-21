@@ -65,6 +65,7 @@
 		FE93177E7A214749991A5D67 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3D050FB0EF345E8901A6513 /* icomoon.ttf */; };
 		092198ABBE204A3BAC5CE30D /* DINPro-CondMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A9F34798E36495AA2FD8C6A /* DINPro-CondMedium.otf */; };
 		1878DAEFC0184C09816DD6DF /* DINPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7D25AF847A274572B322D772 /* DINPro-Regular.otf */; };
+		609312FC848E41A184B4565C /* libRNJWPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F328D23A3BFF48219C1A0CE7 /* libRNJWPlayer.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -426,6 +427,8 @@
 		F44EC4A3EA554734B15DABC8 /* DINPro-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "DINPro-Light.otf"; path = "../assets/fonts/DINPro-Light.otf"; sourceTree = "<group>"; };
 		2A9F34798E36495AA2FD8C6A /* DINPro-CondMedium.otf */ = {isa = PBXFileReference; name = "DINPro-CondMedium.otf"; path = "../assets/fonts/DINPro-CondMedium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		7D25AF847A274572B322D772 /* DINPro-Regular.otf */ = {isa = PBXFileReference; name = "DINPro-Regular.otf"; path = "../assets/fonts/DINPro-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		93FBB00E00E94E068356B9CC /* RNJWPlayer.xcodeproj */ = {isa = PBXFileReference; name = "RNJWPlayer.xcodeproj"; path = "../node_modules/react-native-jwplayer/ios/RNJWPlayer.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		F328D23A3BFF48219C1A0CE7 /* libRNJWPlayer.a */ = {isa = PBXFileReference; name = "libRNJWPlayer.a"; path = "libRNJWPlayer.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -457,6 +460,7 @@
 				5C8A0F8258564D4EA890754B /* libRNVectorIcons.a in Frameworks */,
 				86463D6468504BBDB5791BA7 /* libRCTVideo.a in Frameworks */,
 				DB78B25918984C3D90C2FD36 /* libRCTAppleHealthKit.a in Frameworks */,
+				609312FC848E41A184B4565C /* libRNJWPlayer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,6 +704,7 @@
 				E2F60853EB174768A3D8FB86 /* RNVectorIcons.xcodeproj */,
 				DD7C9FFAFCC144A2A8A0EFBD /* RCTVideo.xcodeproj */,
 				06FB5EC42B70454B85AA1CFE /* RCTAppleHealthKit.xcodeproj */,
+				93FBB00E00E94E068356B9CC /* RNJWPlayer.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1401,12 +1406,14 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+					"$(SRCROOT)/../node_modules/react-native-jwplayer/ios/**",
 				);
 				INFOPLIST_FILE = livinflowTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1430,12 +1437,14 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+					"$(SRCROOT)/../node_modules/react-native-jwplayer/ios/**",
 				);
 				INFOPLIST_FILE = livinflowTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1463,6 +1472,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+					"$(SRCROOT)/../node_modules/react-native-jwplayer/ios/**",
 				);
 				INFOPLIST_FILE = livinflow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1492,6 +1502,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+					"$(SRCROOT)/../node_modules/react-native-jwplayer/ios/**",
 				);
 				INFOPLIST_FILE = livinflow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1525,11 +1536,13 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+					"$(SRCROOT)/../node_modules/react-native-jwplayer/ios/**",
 				);
 				INFOPLIST_FILE = "livinflow-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1563,11 +1576,13 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios",
 					"$(SRCROOT)/../node_modules/rn-apple-healthkit/RCTAppleHealthKit",
+					"$(SRCROOT)/../node_modules/react-native-jwplayer/ios/**",
 				);
 				INFOPLIST_FILE = "livinflow-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1602,6 +1617,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.livinflow-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1626,6 +1642,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

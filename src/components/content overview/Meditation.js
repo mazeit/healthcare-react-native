@@ -81,11 +81,8 @@ export default class Meditation extends React.Component {
                                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', }}>This could also interest you:</Text>
                                         </View>
                                         <View style={{ flex: 9, alignItems: 'flex-start', margin: 20, marginBottom: 0, width: '100%' }}>
-                                            <ActivityList navigation={this.props.navigation} goto={'Recipe'}
-                                                data={[
-                                                    { key: 'Devin' },
-                                                    { key: 'Jackson' },
-                                                ]}
+                                            <ActivityList navigation={this.props.navigation} goto={'ContentDetail'}
+                                                data={this.state.pillarData} 
                                             />
                                         </View>
                                     </View>

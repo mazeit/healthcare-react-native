@@ -13,7 +13,7 @@ const ApiManager = function(url, params, excludeUserInfo) {
     let fullUrl = baseUrl + url;
     fullUrl = fullUrl.split('?')[0] + '/' + securityKey + '?' + (fullUrl.split('?').length > 1 ? (fullUrl.split('?')[1] + '&') : '');
     fullUrl += userCred;
-
+    console.log(fullUrl);
     return fetch(fullUrl, {
         ...params,
         mode: 'cors',
@@ -152,6 +152,37 @@ export const getPillarData = (pillarName) => {
     }
 }
 
+export const getSearchContent = (keyword) => {
+    return async (dispatch, getState) => {
+
+        return ApiManager('search?q=' + keyword, {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_SEARCH_CONTENT',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+export const getMyFavorites = () => {
+    return async (dispatch, getState) => {
+
+        return ApiManager('myfavorites?', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_MY_FAVORITES',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
 export const addFavorite = (id_content, pillarName) => {
     return async (dispatch, getState) => {
 
@@ -178,30 +209,6 @@ export const removeFavorite = (id_content, pillarName) => {
                 type: 'REMOVE_FAVORITE',
                 payload: json
             })
-            return json;
-        })
-
-    }
-}
-
-export const addChallenge = (id_content, pillarName) => {
-    return async (dispatch, getState) => {
-
-        return ApiManager('addtofavorite?id_content=' + id_content + '&event=' + pillarName + '&date=' + moment().format('YYYY-MM-DD'), {
-            method: 'POST',
-        }).then((json) => {
-            return json;
-        })
-
-    }
-}
-
-export const removeChallenge = (id_content, pillarName) => {
-    return async (dispatch, getState) => {
-
-        return ApiManager('removefavorite?id_content=' + id_content + '&type=' + pillarName, {
-            method: 'POST',
-        }).then((json) => {
             return json;
         })
 
@@ -292,7 +299,7 @@ export const getCalendarData = () => {
     }
 }
 
-export const getActivity = (activity_id, page) => {
+export const getActivity = (activity_id) => {
 
     return async (dispatch, getState) => {
 
@@ -301,7 +308,25 @@ export const getActivity = (activity_id, page) => {
         }).then((json) => {
 
             dispatch({
-                type: page === 'show' ? 'GET_ACTIVITY_DATA' : 'GET_ADD_ACTIVITY_DATA',
+                type: 'GET_ACTIVITY_DATA',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+export const getRecipe = (recipe_id) => {
+
+    return async (dispatch, getState) => {
+
+        return ApiManager('recipes?id_recipe=' + recipe_id, {
+            method: 'POST',
+        }).then((json) => {
+
+            dispatch({
+                type: 'GET_RECIPE_DATA',
                 payload: json
             })
             return json;
@@ -319,6 +344,175 @@ export const addActivity = (id_content, event, date) => {
         }).then((json) => {
             dispatch({
                 type: 'ADD_EVENT',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+export const removeActivity = (id_content, date) => {
+
+    return async (dispatch, getState) => {
+
+        return ApiManager('removemychallenge?id_content=' + id_content + '&date=' + date, {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'ADD_EVENT',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+export const getImportantNotification = () => {
+
+    return async (dispatch, getState) => {
+
+        return ApiManager('importantn?', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_IMPORTANT_NOTOFICATION',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+export const getWelcome = () => {
+
+    return async (dispatch, getState) => {
+
+        return ApiManager('welcome?', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_WELCOME',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+export const getQuestionGroup = () => {
+
+    return async (dispatch, getState) => {
+
+        return ApiManager('questiongroup?', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_QUESTION_GROUP',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+
+export const getQuestionaire = (id_question_category) => {
+
+    return async (dispatch, getState) => {
+        return ApiManager('questionnaire?id_question_category=' + id_question_category, {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_QUESTIONARIE',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+
+
+export const getlfmagazinepost = (id_question_category) => {
+
+    return async (dispatch, getState) => {
+        return ApiManager('lfmagazinepost?page=1', {
+            method: 'GET',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_QUESTIONARIE',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+
+export const getlfmagazinepostById= (id_post) => {
+
+    return async (dispatch, getState) => {
+        return ApiManager('lfmagazinepost?id_post=' + id_post, {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_QUESTIONARIE',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+export const lfmagazineauthor = () => {
+
+    return async (dispatch, getState) => {
+        return ApiManager('lfmagazineauthor', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_QUESTIONARIE',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+
+export const lfmagazineauthorById = (id_author) => {
+
+    return async (dispatch, getState) => {
+        return ApiManager('lfmagazineauthor?id_author=' + id_author, {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_QUESTIONARIE',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+export const answerQuestion = (id_question_category, id_question, id_answers) => {
+
+    return async (dispatch, getState) => {
+        return ApiManager('customerquestionnaire?id_question_category=' + id_question_category + '&id_question=' + id_question + '&id_answers=' + id_answers, {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_QUESTIONARIE',
                 payload: json
             })
             return json;

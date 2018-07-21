@@ -2,28 +2,24 @@ import React from 'react';
 import { Text, View, Dimensions, Image, StyleSheet, WebView, TouchableOpacity } from 'react-native';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-// import Video from 'react-native-video';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../../selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
-// import Video from 'react-native-video';
-
-
+import Video from 'react-native-video';
+import JWPlayer from 'react-native-jwplayer';
+ 
 import { getCalendarData } from '../../actions/index'
 
 
 const { height, width } = Dimensions.get('window');
 import Header from '../Header';
 
-
-
-
 export default class Activity extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             activityData: this.props.navigation.state.params.data,
-            activityType: this.props.navigation.state.params.activityType,
+            activityType: this.props.navigation.state.params.activityType ? this.props.navigation.state.params.activityType : 'add',
             type: '',
         };
         this.openDatePrefrence = this.openDatePrefrence.bind(this);
@@ -37,13 +33,12 @@ export default class Activity extends React.Component {
     }
 
     openDatePrefrence() {
-        this.props.navigation.navigate('CalendarView', { id_content: this.state.activityData.id, mode : 'add-activity' })
+        this.props.navigation.navigate('CalendarView', { id_content : this.state.activityData.id, mode : 'add-activity' })
     }
 
 
 
     render() {
-        console.log(this.state);
         const add =
             <View style={{ flex: 1 }}>
                 <View style={styles.subContainers}>
@@ -87,15 +82,15 @@ export default class Activity extends React.Component {
             'locked': locked,
             'add': add
         }
-
+        console.log('https://content.jwplatform.com/players/' + this.state.activityData.file_id + '-Qzd90UGq.html');
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>
-                    <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'CATEGORY'} leftButton={true} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                    <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={this.state.activityData.name} leftButton={true} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
                 </View>
                 <View style={{ flex: 9, }}>
                     <View style={{ flex: 6, }}>
-                        {
+                        {/*
                             this.state.activityData.file_id !== '' ?
                                 <WebView
                                     style={{ flex: 1 }}
@@ -104,7 +99,18 @@ export default class Activity extends React.Component {
                                     source={{ uri: 'https://content.jwplatform.com/players/' + this.state.activityData.file_id + '-Qzd90UGq.html' }}
                                 /> :
                                 <Image source={require('../../../assets/images/no_video.png')} style={{ width: '100%', height: '100%', }} />
-                        }
+                        */}
+
+                        <JWPlayer
+                            style={{flex: 1}}
+                            autostart={false}
+                            file={'https://content.jwplatform.com/players/' + this.state.activityData.file_id + '-Qzd90UGq.html'}
+                            onBeforePlay={() => this.onBeforePlay()}
+                            onPlay={() => this.onPlay()}
+                            onPlayerError={e => this.onPlayerError(e)}
+                            onBuffer={() => this.onBuffer()}
+                            onTime={time => this.onTime(time)}
+                        />
                     </View>
 
                     <View style={{ flex: 7, alignItems: 'center', justifyContent: 'center', }}>

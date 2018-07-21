@@ -44,7 +44,7 @@ export default class Footer extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -5, fontSize: 14, textAlign: 'center', color: color = this.state.activeTab === 'CalendarView' ? this.state.active : this.state.inactive }}>Calendar</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.tabButton} onPress={() => this.tabSelected('Tracker')}>
+                    <TouchableOpacity style={styles.tabButton} onPress={() => this.tabSelected('')}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                             <Icon name='tracker' size={50} color={this.state.activeTab === 'Tracker' ? this.state.active : this.state.inactive} />
                             <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -5, fontSize: 14, textAlign: 'center', color: color = this.state.activeTab === 'Tracker' ? this.state.active : this.state.inactive }}>Tracker</Text>

@@ -32,29 +32,26 @@ class InviteMyFriends extends React.Component {
 
     componentDidMount() {
 
-        this.props.getInvitedFriendsData();
+        this.props.getInvitedFriendsData().then(invitedFriendData=>{
+
+            this.setState({ invitedFriends: ((invitedFriendData.result.length >= 3) ? 3 :(invitedFriendData.result.length  % 3) ) })
+        });
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('.........INVITED FRIENDS SUCCESS', nextProps.invitedFriendData)
-        this.setState({ invitedFriends: ((nextProps.invitedFriendData.result.length) % 3) })
-        if (nextProps.inviteFriendSuccess.hasError === false) {
-            
-            this.props.navigation.navigate('InviteMyFriendsList', {invitedFriend: this.state.friendEmail});
-        }
     }
 
     sendInvitation() {
-        console.log('..........DETAILS....', this.state.friendFirstName, this.state.friendLastName, this.state.friendEmail);
-
         if (this.state.friendFirstName === '' || this.state.friendLastName === '' || this.state.friendEmail === '' || !re.test(this.state.friendEmail)) {
             if (this.state.friendFirstName === '') this.setState({ firstNameError: 'First name cannot be blank' })
             if (this.state.friendLastName === '') this.setState({ lastNameError: 'Last name cannot be blank' })
             if (this.state.friendEmail === '') this.setState({ emailNameError: 'Email cannot be blank' })
             if (!re.test(this.state.friendEmail)) this.setState({ emailError: 'Please enter valid email' })
         } else {
-            console.log('......HI ALL GOOD');
-            this.props.inviteFriend(this.state.friendFirstName, this.state.friendLastName, this.state.friendEmail);
+            this.props.inviteFriend(this.state.friendFirstName, this.state.friendLastName, this.state.friendEmail).then(res=>{
+
+                this.props.navigation.navigate('InviteMyFriendsList', {invitedFriend: this.state.friendEmail});
+            });
             
         }
     }

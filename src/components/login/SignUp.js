@@ -89,7 +89,9 @@ class SignUp extends React.Component {
 
             else {
                 this.setState({ loader: true });
-                this.props.addNewUser(this.state.userEmail, this.state.userPassword, this.state.userFirstName, this.state.userLastName);
+                this.props.addNewUser(this.state.userEmail, this.state.userPassword, this.state.userFirstName, this.state.userLastName).then((res)=>{
+                    this.props.verifyPassword(this.state.userEmail, this.state.userPassword);
+                });
                 return;
             }
         }

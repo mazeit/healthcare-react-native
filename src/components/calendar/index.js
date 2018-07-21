@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 
-import { getActivity, addActivity, getCalendarData } from '../../actions/index'
+import { getActivity, addActivity, getCalendarData, removeActivity } from '../../actions/index'
 import { bindActionCreators } from 'redux'
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../../selection.json';
@@ -17,7 +17,7 @@ import Footer from './Footer';
 
 
 import Swipeout from 'react-native-swipeout';
-import { Agenda } from 'react-native-calendars';
+import { Agenda, Calendar } from 'react-native-calendars';
 
 
 const { height, width } = Dimensions.get('window');
@@ -43,7 +43,7 @@ class CalendarView extends React.Component {
             nutrition: '#8ACE91',
             timeDiff: '',
 
-            dateSelected: false,
+            showDateAddedNotification: false,
             //add-activity, default
             mode: (this.props.navigation.state.params && this.props.navigation.state.params.mode) ? this.props.navigation.state.params.mode : 'default',
             selectedDate: '',
@@ -53,44 +53,49 @@ class CalendarView extends React.Component {
         this.renderDay = this.renderDay.bind(this);
         this.dateSelected = this.dateSelected.bind(this);
         this.addEvent = this.addEvent.bind(this);
+        this.generateData = this.generateData.bind(this);
         
+    }
+
+    generateData(calendarData) {
+
+        const eventData = {};
+        const markedData = {};
+        var dotColor = {
+            'activity': { key: 'activity', color: '#AE0069', },
+            'nutrition': { key: 'nutrition', color: '#8ACE91', },
+            'mindfulness': { key: 'mindfulness', color: '#D4B870' },
+            'coach': { key: 'coach', color: '#454545' },
+        }
+        if (calendarData) {
+            calendarData.forEach((item) => {
+                let key = (item.start.split(' ')[0]).toString()
+
+
+                if (eventData[key]) {
+
+                    eventData[key].push(item);
+                    markedData[key].dots.push(dotColor[item.className.split(' ')[1]])
+
+                } else {
+                    eventData[key] = [item];
+                    markedData[key] = { dots: [] }
+                    markedData[key].dots = [dotColor[item.className.split(' ')[1]]];
+                }
+
+            });
+            for (let data in markedData) {
+                markedData[data].dots = markedData[data].dots.filter(function (item, pos) {
+                    return markedData[data].dots.indexOf(item) == pos;
+                })
+            }
+            this.setState({ eventData: eventData, markedData: markedData, calendarData: [...calendarData], loader: false });
+        }
     }
 
     componentDidMount() {
         this.props.getCalendarData().then(calendarData=>{
-
-            const eventData = {};
-            const markedData = {};
-            var dotColor = {
-                'activity': { key: 'activity', color: '#AE0069', },
-                'nutrition': { key: 'nutrition', color: '#8ACE91', },
-                'mindfulness': { key: 'mindfulness', color: '#D4B870' },
-                'coach': { key: 'coach', color: '#454545' },
-            }
-            if (calendarData && calendarData.events) {
-                calendarData.events.forEach((item) => {
-                    let key = (item.start.split(' ')[0]).toString()
-
-
-                    if (eventData[key]) {
-
-                        eventData[key].push(item);
-                        markedData[key].dots.push(dotColor[item.className.split(' ')[1]])
-
-                    } else {
-                        eventData[key] = [item];
-                        markedData[key] = { dots: [] }
-                        markedData[key].dots = [dotColor[item.className.split(' ')[1]]];
-                    }
-
-                });
-                for (let data in markedData) {
-                    markedData[data].dots = markedData[data].dots.filter(function (item, pos) {
-                        return markedData[data].dots.indexOf(item) == pos;
-                    })
-                }
-            }
-            this.setState({ eventData: eventData, markedData: markedData, calendarData: calendarData, loader: false });
+            this.generateData(calendarData.events);
         })
         
     }
@@ -117,7 +122,7 @@ class CalendarView extends React.Component {
         // this.setState({ timeDiff: timeDiff });
 
         this.setState({ loader: true });
-        this.props.getActivity(id, 'show').then(activityData => {
+        this.props.getActivity(id).then(activityData => {
 
             if (activityData.hasError === false) {
                 this.setState({ activityData: activityData, loader: false });
@@ -127,17 +132,26 @@ class CalendarView extends React.Component {
     }
 
     dateSelected(date) {
-        console.log('date selected' ,date);
         this.setState({selectedDate: date.dateString});
         return date;
     }
 
     addEvent() {
-        // this.setState({loader: true});
         this.props.addActivity(this.props.navigation.state.params.id_content, this.props.navigation.state.params.event, this.state.selectedDate)
-        
+        .then(res=>{
+            this.setState({showDateAddedNotification: true});
+        })
         
     }
+
+    removeActivity(item, key) {
+        this.props.removeActivity(item.id_content, (item.start.split(' ')[0]).toString())
+        .then(res=>{
+            this.generateData(this.state.calendarData.filter((i)=>i.id_content!=item.id_content));
+
+        })
+    }
+
     renderDay(day, item) {
         return (
             <View>
@@ -152,29 +166,27 @@ class CalendarView extends React.Component {
         );
     }
 
-    renderItem(item) {
-        const swipeSettings = {
-            autoClose: true,
-            onOpen: (secId, rowId, direction) => {
-                console.log(rowId);
-            },
-            onClose: (secId, rowId, direction) => {
-                console.log(rowId);
-            },
-            right: [
-                {
-                    onPress: (param) => {
-                        console.log(param);
-                    },
-                    text: 'Delete', type: 'delete'
-                }
-            ],
-        };
-
+    renderItem(item, key) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
 
-                <Swipeout {...swipeSettings} rowID={item.id_content} sectionID={'SECTIONID'} style={[styles.SwiperContainer, { borderRadius: 5 }]}>
+                <Swipeout 
+                    autoClose={true}
+                    onOpen={(secId, rowId, direction) => {
+                    }}
+                    onClose={(secId, rowId, direction) => {
+                    }}
+                    right={[
+                        {
+                            onPress: () => {
+                                this.removeActivity.bind(this)(item);
+                            },
+                            text: 'Delete', type: 'delete'
+                        }
+                    ]}
+                    rowID={item.id_content} 
+                    sectionID={'SECTIONID'} 
+                    style={[styles.SwiperContainer, { borderRadius: 5 }]}>
                     <View style={styles.challangeTab} >
                         <TouchableOpacity onPress={() => this.getActivityData(item.id, item.start)}>
                             <View style={styles.challangeTab}>
@@ -210,17 +222,17 @@ class CalendarView extends React.Component {
         return (
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')}>
                 {
-                    this.state.dateSelected &&
-                    <View style={{ position: 'absolute', width: width, height: height, top: 0, left: 0, flex:1, backgroundColor: '#00000080', zIndex: 100 }}>
+                    this.state.showDateAddedNotification &&
+                    <View style={{ position: 'absolute', width: width, height: height, top: 0, left: 0, flex:1, backgroundColor: '#00000080', zIndex: 100}}>
                         <View style={{ flex: 6, alignItems: 'center', justifyContent: 'center' }}>
                         </View>
 
                         <View style={{ flex: 4, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' }}>
                             <View style={{ flex: 1 }}>
-                                <View style={styles.subContainers}>
-                                    <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 18, color: '#838383', }}>Activity {} has been added for {}</Text>
+                                <View style={[styles.subContainers, {marginTop: 30, marginBottom: 30 }]}>
+                                    <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 18, color: '#838383'}}>The Activity has been added.</Text>
                                 </View>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('WelcomeScreen')} style={[styles.subContainers, { paddingBottom: 20, flexDirection: 'row' }]}>
+                                <TouchableOpacity onPress={() => { this.setState({ showDateAddedNotification: false}); this.props.navigation.goBack(); }} style={[styles.subContainers, { paddingBottom: 20, flexDirection: 'row' }]}>
                                     <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
                                         <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Okay</Text>
                                     </View>
@@ -365,6 +377,6 @@ export default connect(state => {
         addEventResponse,
     }
 }, dispatch => {
-    return bindActionCreators({ getActivity: getActivity, addActivity: addActivity, getCalendarData: getCalendarData }, dispatch)
+    return bindActionCreators({ getActivity: getActivity, addActivity: addActivity, getCalendarData: getCalendarData, removeActivity }, dispatch)
 }
 )(CalendarView);

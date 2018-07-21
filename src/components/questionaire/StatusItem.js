@@ -36,17 +36,17 @@ export default class StatusItem extends React.Component {
                                 <Text style={{ fontFamily: 'DINPro-Light',color: item.color, fontSize: 18, fontWeight: 'bold' }} >{item.text}</Text>
                             </View>
                             <Text style={{ fontFamily: 'DINPro-Light',color: item.color , fontSize: 14}} >
-                                <Text style={{fontWeight: 'bold'}}>{item.current+ ' '}</Text>
+                                <Text style={{fontWeight: 'bold'}}>{item.answes_given+ ' '}</Text>
                                  von 
-                                 <Text style={{fontWeight: 'bold'}}>{item.total}</Text>
+                                 <Text style={{fontWeight: 'bold'}}>{item.total_question}</Text>
                             </Text>
                         </View>
 
                     </View>
                     
 
-                    {item.current > 0 && !asHeader && <View style={{height: 5, width: '100%', flexDirection: 'row', backgroundColor: item.back}}>
-                        <View style={{backgroundColor: item.color, width: item.current/item.total*100 + '%'}}>
+                    {item.answes_given > 0 && !asHeader && <View style={{height: 5, width: '100%', flexDirection: 'row', backgroundColor: item.back}}>
+                        <View style={{backgroundColor: item.color, width: item.answes_given/item.total_question*100 + '%'}}>
                         </View>
                     </View>}
                 </View>

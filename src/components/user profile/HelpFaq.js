@@ -49,7 +49,7 @@ class HelpFaq extends React.Component {
 
                         {
                             this.state.Faq.map((question, i) =>
-                                <TouchableOpacity key={i} onPress={() => this.props.navigation.navigate('FaqAnswer')} style={[styles.termsOfUseBlock, { height: 55 }]}>
+                                <TouchableOpacity key={i} onPress={() => this.props.navigation.navigate('FaqAnswer', {Faq: this.state.Faq, qIndex: i})} style={[styles.termsOfUseBlock, { height: 55 }]}>
 
                                     <View style={{ flex: 9, alignItems: 'flex-start', marginLeft: 20 }}>
                                         <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#454545' }}>{question.title}</Text>
