@@ -24,7 +24,6 @@
     "react-native": "0.52.0",
     "react-native-banner-carousel": "^1.0.3",
     "react-native-calendars": "^1.19.4",
-    "react-native-jwplayer": "https://github.com/nulleof/react-native-jwplayer.git",
     "react-native-progress-circle": "^2.0.0",
     "react-native-render-html": "^3.10.0",
     "react-native-shaking-text": "^0.1.0",

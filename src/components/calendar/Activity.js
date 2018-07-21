@@ -6,7 +6,7 @@ import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../../selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 import Video from 'react-native-video';
-import JWPlayer from 'react-native-jwplayer';
+// import JWPlayer from 'react-native-jwplayer';
  
 import { getCalendarData } from '../../actions/index'
 
@@ -90,27 +90,15 @@ export default class Activity extends React.Component {
                 </View>
                 <View style={{ flex: 9, }}>
                     <View style={{ flex: 6, }}>
-                        {/*
-                            this.state.activityData.file_id !== '' ?
-                                <WebView
-                                    style={{ flex: 1 }}
-                                    javaScriptEnabled={true}
-                                    domStorageEnabled={true}
-                                    source={{ uri: 'https://content.jwplatform.com/players/' + this.state.activityData.file_id + '-Qzd90UGq.html' }}
-                                /> :
-                                <Image source={require('../../../assets/images/no_video.png')} style={{ width: '100%', height: '100%', }} />
-                        */}
-
-                        <JWPlayer
-                            style={{flex: 1}}
-                            autostart={false}
-                            file={'https://content.jwplatform.com/players/' + this.state.activityData.file_id + '-Qzd90UGq.html'}
-                            onBeforePlay={() => this.onBeforePlay()}
-                            onPlay={() => this.onPlay()}
-                            onPlayerError={e => this.onPlayerError(e)}
-                            onBuffer={() => this.onBuffer()}
-                            onTime={time => this.onTime(time)}
-                        />
+                        this.state.activityData.file_id !== '' ?
+                            <WebView
+                                style={{ flex: 1 }}
+                                javaScriptEnabled={true}
+                                domStorageEnabled={true}
+                                source={{ uri: 'https://content.jwplatform.com/players/' + this.state.activityData.file_id + '-Qzd90UGq.html' }}
+                            /> :
+                            <Image source={require('../../../assets/images/no_video.png')} style={{ width: '100%', height: '100%', }} />
+                    
                     </View>
 
                     <View style={{ flex: 7, alignItems: 'center', justifyContent: 'center', }}>
