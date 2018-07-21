@@ -21,12 +21,14 @@ class HelpFaq extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getFAQ()
+        this.props.getFAQ().then((FaqData) => {
+            this.setState({ Faq: FaqData.faq_list, conntactInfo: FaqData.contact_info });
+        })
     }
 
     componentWillReceiveProps(nextProps) {
+
         
-        this.setState({ Faq: nextProps.FaqData.faq_list, conntactInfo: nextProps.FaqData.contact_info });
     }
 
     render() {

@@ -25,7 +25,7 @@ export default class ChoseActivity extends React.Component {
                 </View>
                 <View style={{ flex: 9 }}>
                     <ActivityList navigation={this.props.navigation} goto={'Activity'}
-                        data={this.state.pillarData} pillarName={this.state.pillarName} user_id={this.state.user_id} activityType='add'
+                        data={this.state.pillarData} user_id={this.state.user_id} activityType='add'
                     />
                 </View>
 

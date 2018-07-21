@@ -23,7 +23,7 @@ class AddActivityCategory extends React.Component {
 
     openActivityList(pillar) {
         this.setState({pillarName: pillar,loader: true});
-        this.props.getPillarData(pillar, this.props.user.id, this.props.user.id_lang)
+        this.props.getPillarData(pillar, this.props.user.id_lang)
 
         
     }

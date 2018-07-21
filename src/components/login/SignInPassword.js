@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
 import Header from '../Header';
-import { verifyPassword } from '../../actions/index';
+import { verifyPassword, getCalendarData } from '../../actions/index';
 import LoaderWait from '../LoaderWait';
 
 class SignInPassword extends React.Component {
@@ -58,7 +58,7 @@ class SignInPassword extends React.Component {
 
                                 </View>
                                 <View style={styles.forgotPassword}>
-                                    <TouchableOpacity style={styles.button} onPress={() => this.verifyUser()}>
+                                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('PasswordForgotten')}>
                                         <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff', }}>Forgot your password?</Text>
                                     </TouchableOpacity>
 
@@ -133,11 +133,13 @@ const styles = StyleSheet.create({
 export default connect(state => {
     const validPassword = state.validUser.validPassword || {};
     const userEmail = state.validUser.userEmail || '';
+    const user = state.validUser.user || {};
     return {
         validPassword,
-        userEmail
+        userEmail,
+        user,
     }
 }, dispatch => {
-    return bindActionCreators({ verifyPassword: verifyPassword }, dispatch)
+    return bindActionCreators({ verifyPassword: verifyPassword, getCalendarData: getCalendarData }, dispatch)
 }
 )(SignInPassword);

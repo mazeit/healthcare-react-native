@@ -21,7 +21,6 @@ import Header from '../Header';
 export default class Activity extends React.Component {
     constructor(props) {
         super(props);
-        // console.log('.......ID.....', this.props.navigation.state.params.data);
         this.state = {
             activityData: this.props.navigation.state.params.data,
             activityType: this.props.navigation.state.params.activityType,
@@ -34,30 +33,22 @@ export default class Activity extends React.Component {
 
     }
     componentWillReceiveProps(nextProps) {
-        // console.log('.......', nextProps)
-        // if(nextProps.CalendarDataResponse.hasError === false) {
-        // this.props.navigation.navigate('CalendarView', {id_content:this.state.activityData.id,event: this.state.activityData.name,})
-        // }else if(nextProps.CalendarDataResponse.hasError === true ) {
-        // console.log('......ERROR.....', nextProps.activityData.errors)
-        // }
+
     }
 
-
     openDatePrefrence() {
-        this.props.navigation.navigate('CalendarView', { id_content: this.state.activityData.id, event: this.state.activityData.name, selectDate : true })
+        this.props.navigation.navigate('CalendarView', { id_content: this.state.activityData.id, mode : 'add-activity' })
     }
 
 
 
     render() {
-
-
-
+        console.log(this.state);
         const add =
             <View style={{ flex: 1 }}>
                 <View style={styles.subContainers}>
                     <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 18, color: '#838383', }}>Add this session to your challenge</Text>
-                </View>
+                </View> 
                 <TouchableOpacity onPress={() => this.openDatePrefrence()} style={[styles.subContainers, { paddingBottom: 20, flexDirection: 'row' }]}>
                     <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
                         <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Add</Text>
@@ -103,7 +94,7 @@ export default class Activity extends React.Component {
                     <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'CATEGORY'} leftButton={true} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
                 </View>
                 <View style={{ flex: 9, }}>
-                    <View style={{ flex: 3, }}>
+                    <View style={{ flex: 6, }}>
                         {
                             this.state.activityData.file_id !== '' ?
                                 <WebView

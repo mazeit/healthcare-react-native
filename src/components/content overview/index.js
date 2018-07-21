@@ -29,6 +29,7 @@ class ContentOverview extends React.Component {
         this.showSearch = this.showSearch.bind(this);
         this.hideSearch = this.hideSearch.bind(this);
 
+        this.tabSelected = this.tabSelected.bind(this);
         this.animated = new Animated.Value(0);
     }
 
@@ -62,13 +63,16 @@ class ContentOverview extends React.Component {
 
     componentDidMount() {
 
-        this.props.getContentPillars();
+        this.props.getContentPillars()
+        .then((contentPillars)=>{
+
+            this.setState({ nutritionImage: contentPillars.pillars[0].img, activityImage: contentPillars.pillars[1].img, mindfulnessImage: contentPillars.pillars[2].img, coachImage: contentPillars.pillars[3].img, loader: false });
+        });
 
 
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ nutritionImage: nextProps.contentPillars.pillars[0].img, activityImage: nextProps.contentPillars.pillars[1].img, mindfulnessImage: nextProps.contentPillars.pillars[2].img, coachImage: nextProps.contentPillars.pillars[3].img, loader: false });
 
     }
 
@@ -91,6 +95,9 @@ class ContentOverview extends React.Component {
         }).start();
     }
 
+    tabSelected( input) {
+        this.props.navigation.navigate(input, {});
+    }
 
     render() {
 
@@ -114,13 +121,42 @@ class ContentOverview extends React.Component {
                                 <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'SELECT YOUR TOPIC'} leftButton={false} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} notificationButton={true} headColor={'#454545'} navigation={this.props.navigation} />
                             </View>
                             <View style={styles.container} {...this._panResponder.panHandlers}>
+
+
+
+                                {/* HEADER */}
+                                <View style={styles.buttonGroup}>
+
+                                    <TouchableOpacity style={styles.tabButton} onPress={() => this. tabSelected('CalendarView')}>
+                                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',flexDirection: 'column' }}>
+                                            <Icon name='calender' size={50} color='#454545' />
+                                            <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -15, fontSize: 14, textAlign: 'center', color: '#000'}}>Calendar</Text>
+                                        </View>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity style={styles.tabButton} onPress={() => this. tabSelected('Tracker')}>
+                                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',flexDirection: 'column' }}>
+                                            <Icon name='tracker' size={50} color='#454545' />
+                                            <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -15, fontSize: 14, textAlign: 'center', color: '#000'}}>Tracker</Text>
+                                        </View>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity style={styles.tabButton} onPress={() => this. tabSelected('Challenge')}>
+                                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',flexDirection: 'column' }}>
+                                            <Icon name='challenge' size={50} color='#454545' />
+                                            <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -15, fontSize: 14, textAlign: 'center', color: '#000'}}>My Challange</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                                {/* HEADER ENDS*/}
+
                                 <Animated.View style={[styles.search, { height }, { opacity }]}>
                                     <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
                                     <Icon name="magnifyer" size={50} style={{ marginLeft: -10 }} color="#454545" />
                                 </Animated.View>
                                 <View style={[styles.section, { marginBottom: 5 }]}>
 
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'nutrition'})} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'nutrition', viewType: 'pillar'})} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
                                         <View style={styles.image}>
                                             <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.nutritionImage }} >
 
@@ -131,7 +167,7 @@ class ContentOverview extends React.Component {
                                             <Text style={[styles.activitySubtittle, { color: '#8ACE91' }]} >Nutrition</Text>
                                         </View>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'activity'})} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'activity', viewType: 'pillar'})} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
                                         <View style={styles.image}>
                                             <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.activityImage }} >
                                             </ImageBackground>
@@ -146,7 +182,7 @@ class ContentOverview extends React.Component {
 
                                 <View style={[styles.section, { marginTop: 5 }]}>
 
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'mindfulness'})} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'mindfulness', viewType: 'pillar'})} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
                                         <View style={styles.image}>
                                             <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.mindfulnessImage }} >
                                             </ImageBackground>
@@ -156,12 +192,13 @@ class ContentOverview extends React.Component {
                                             <Text style={[styles.activitySubtittle, { color: '#D4B870' }]} >Mindfulness</Text>
                                         </View>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'coach'})} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'coach', viewType: 'pillar'})} style={[styles.subContent, { marginLeft: 10, marginRight: 10 }]}>
                                         <View style={styles.image}>
                                             <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.coachImage }} >
                                             </ImageBackground>
                                         </View>
                                         <View style={styles.activityContainer}>
+                                            <Icon name="coach" size={50} style={{ marginLeft: -10 }} color="#D4B870" />
                                             <Text style={[styles.activitySubtittle, { color: '#454545' }]} >Coach</Text>
                                         </View>
                                     </TouchableOpacity>
@@ -192,7 +229,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
     },
     section: {
-        flex: 1,
+        flex: 8,
         margin: 10,
         flexDirection: 'row',
         alignItems: 'flex-start',
@@ -224,6 +261,19 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: 'center',
     },
+
+    buttonGroup: {
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        backgroundColor: '#FFFFFF',
+    },
+    tabButton: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
 });
 
 export default connect(state => {
