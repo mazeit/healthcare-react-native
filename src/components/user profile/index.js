@@ -7,8 +7,9 @@ import icoMoonConfig from '../../selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 import Header from '../Header';
-import { signOut } from '../../actions/index'
+import { signOut, getInvitedFriendsData } from '../../actions/index'
 
+import AppleHealthKit from 'rn-apple-healthkit';
 
 const { height, width } = Dimensions.get('window');
 
@@ -63,13 +64,39 @@ class ProfilePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            invitedFriendDataList: [],
         };
         this.userSignOut = this.userSignOut.bind(this);
+        
+        let options = {
+            permissions: {
+                read: ["Height", "Weight", "StepCount", "DateOfBirth", "BodyMassIndex", "ActiveEnergyBurned"],
+                write: ["Height", "Weight", "StepCount", "BodyMassIndex", "Biotin", "Caffeine", "Calcium", "Carbohydrates", "Chloride", "Cholesterol", "Copper", "EnergyConsumed", "FatMonounsaturated", "FatPolyunsaturated", "FatSaturated", "FatTotal", "Fiber", "Folate", "Iodine", "Iron", "Magnesium", "Manganese", "Molybdenum", "Niacin", "PantothenicAcid", "Phosphorus", "Potassium", "Protein", "Riboflavin", "Selenium", "Sodium", "Sugar", "Thiamin", "VitaminA", "VitaminB12", "VitaminB6", "VitaminC", "VitaminD", "VitaminE", "VitaminK", "Zinc", "Water"]
+            }
+        };
+
+        // AppleHealthKit.initHealthKit(options: Object, (err: string, results: Object) => {
+        //     if (err) {
+        //         console.log("error initializing Healthkit: ", err);
+        //         return;
+        //     }
+
+        //     // Height Example
+        //     AppleHealthKit.getDateOfBirth(null, (err: Object, results: Object) => {
+        //     if (this._handleHealthkitError(err, 'getDateOfBirth')) {
+        //       return;
+        //     }
+        //       console.log(results)
+        //     });
+
+        // });
     }
 
     componentDidMount() {
-        // this.props.getProfileData(this.props.user.id)
+        
+        this.props.getInvitedFriendsData().then((result)=>{
+            this.setState({invitedFriendDataList: result.result});
+        });
     }
 
     userSignOut() {
@@ -86,17 +113,17 @@ class ProfilePage extends React.Component {
                 <View style={styles.container}>
 
                     <View style={styles.profilePicture}>
-                        <ImageBackground style={styles.profilePictureBlur} source={{ uri: this.props.user.img_dir }} blurRadius={15}>
+                        <ImageBackground style={styles.profilePictureBlur} source={this.props.user.img_dir ? { uri: this.props.user.img_dir } : require('../../../assets/images/profilePicture.png')} blurRadius={15}>
                             <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20 }}>
-                                <Image source={{ uri: this.props.user.img_dir }} style={{ width: 133, height: 133, }} />
+                                <Image source={this.props.user.img_dir ? { uri: this.props.user.img_dir } : require('../../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }} />
                             </View>
                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.firstname}</Text>
                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.lastname}</Text>
-                                {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: -20 }}>
-                                    <Icon name="people" size={70} color="#454545" style={{left: 25}}/>
-                                    <Icon name="people" size={70} color="#454545" />
-                                    <Icon name="people" size={70} color="#454545" style={{right: 25}}/>
-                                </View> */}
+                                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: -20 }}>
+                                    <Icon name="people" size={70} color="#FFFFFF" style={{left: 25}} color={this.state.invitedFriendDataList.length >= 2 ? "#4AB3E2" : "#FFFFFF"}/>
+                                    <Icon name="people" size={70} color="#FFFFFF"  color={this.state.invitedFriendDataList.length >= 1 ? "#4AB3E2" : "#FFFFFF"}/>
+                                    <Icon name="people" size={70} color="#FFFFFF" style={{right: 25}}  color={this.state.invitedFriendDataList.length >= 3 ? "#4AB3E2" : "#FFFFFF"}/>
+                                </View>
                         </ImageBackground>
                     </View>
 
@@ -175,5 +202,5 @@ export default connect(state => {
         profileData,
     }
 }, dispatch => {
-    return bindActionCreators({ signOut: signOut }, dispatch)
+    return bindActionCreators({ signOut: signOut, getInvitedFriendsData }, dispatch)
 })(ProfilePage);

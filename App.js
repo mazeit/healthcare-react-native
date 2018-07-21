@@ -27,7 +27,9 @@ import CategoryList from './src/components/content overview/CategoryList'
 import Recipe from './src/components/content overview/Recipe';
 import Meditation from './src/components/content overview/Meditation';
 import Yoga from './src/components/content overview/Yoga';
-import CoachProfile from './src/components/content overview/CoachProfile';
+// Not used
+// import ContentDetail from './src/components/content overview/ContentDetail';
+
 
 import CalendarView from './src/components/calendar';
 import Activity from './src/components/calendar/Activity.js';
@@ -49,6 +51,9 @@ import QuestionarieIntro from './src/components/questionaire';
 import OverviewStatus from './src/components/questionaire/OverviewStatus';
 import QuestionStep from './src/components/questionaire/QuestionStep';
 
+import Blog from './src/components/blog';
+import Article from './src/components/blog/Article';
+import CoachProfile from './src/components/blog/CoachProfile';
 
 const store = createStore(userReducer, compose(applyMiddleware(thunk)));
 
@@ -88,20 +93,14 @@ const SignInStack = StackNavigator(
 
 //// CONTENT OVERVIEW STACK / START --------------------------------------------------------
 
-const ContentStack = StackNavigator(
-  {
-    ContentOverview: { screen: ContentOverview },
-    CategoryList: { screen: CategoryList },
-    Recipe: { screen: Recipe },
-    Meditation: { screen: Meditation },
-    Yoga: { screen: Yoga },
-    CoachProfile: { screen: CoachProfile },
+// const ContentStack = StackNavigator(
+//   {
 
-  },
-  {
-    headerMode: 'none',
-  }
-);
+//   },
+//   {
+//     headerMode: 'none',
+//   }
+// );
 
 //// CONTENT OVERVIEW STACK / END --------------------------------------------------------
 
@@ -129,6 +128,15 @@ const CalendarStack = StackNavigator({
   ChoseActivity: { screen: ChoseActivity },
   Activity: { screen: Activity },
   Tracker: { screen: Tracker },
+
+  // Content
+  ContentOverview: { screen: ContentOverview },
+  CategoryList: { screen: CategoryList },
+  Recipe: { screen: Recipe },
+  Meditation: { screen: Meditation },
+  Yoga: { screen: Yoga },
+  CoachProfile: { screen: CoachProfile },
+  // ContentDetail: { screen: ContentDetail }
 
 },
   {
@@ -163,19 +171,32 @@ const ProfileStack = StackNavigator({
 //// PROFILE STACK / END --------------------------------------------------------
 
 
+const BlogStack = StackNavigator({
+  Blog: { screen: Blog },
+  Article: { screen: Article },
+  CoachProfile: { screen: CoachProfile },
+
+},
+  {
+    headerMode: 'none',
+  }
+);
+
 
 ////  ROOT STACK / START------------------------------------>
+
 
 const AppNavigator = StackNavigator({
   SignInStack: { screen: SignInStack },
   WelcomeScreen: { screen: WelcomeScreen },
   ImportantNotification: { screen: ImportantNotification },
-  ContentStack: { screen: ContentStack },
+  // ContentStack: { screen: ContentStack },
   CalendarStack: { screen: CalendarStack },
   GeneralMenu: { screen: GeneralMenu },
 
   QuestionarieStack: { screen: QuestionarieStack },
-  ProfileStack: { screen: ProfileStack }
+  ProfileStack: { screen: ProfileStack },
+  BlogStack: { screen: BlogStack }
 
 }, {
     mode: 'modal',
@@ -192,6 +213,19 @@ const styles = StyleSheet.create({
 });
 
 
+// const prevGetStateForActionCalendarStack = CalendarStack.router.getStateForAction;
+// CalendarStack.router.getStateForAction = (action, state) =>{
+//   if (state && action.type === 'ReplaceCurrentScreen') {
+//     const routes = state.routes.slice(0, state.routes.length - 1);
+//     routes.push(action);
+//     return {
+//       ...state,
+//       routes,
+//       index: routes.length - 1,
+//     };
+//   }
+//   return prevGetStateForActionCalendarStack(action, state);
+// };
 
   // <key>NSAppTransportSecurity</key>
   // <dict>
@@ -204,3 +238,6 @@ const styles = StyleSheet.create({
   //     </dict>
   //   </dict>
   // </dict>
+
+  // react-native link react-native-jwplayer
+  // react-native link

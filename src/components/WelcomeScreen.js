@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
-import { getCalendarData } from '../actions/index';
+import { getCalendarData, getWelcome } from '../actions/index';
 import LoaderWait from './LoaderWait';
 
 const { height, width } = Dimensions.get('window');
@@ -22,12 +22,20 @@ class WelcomeScreen extends React.Component {
             backgroundColorArray: ['#AE006980', '#D4B87080', '#8ACE9180'],
             calendarData: {},
             loader: false,
+            welcome: {"challenge_name":"","days":0,"videos":0,"coaching_videos":0,"recipes":0,"personal_session":0}
         };
         this.goToCalendarStack = this.goToCalendarStack.bind(this);
     }
 
     componentDidMount() {
         this.interval = setInterval(() => this.setState({ backgroundColor: this.state.backgroundColorArray[Math.floor(Math.random() * 3)] }), 2000);
+        this.props.getWelcome().then(res=>{
+            if(!res.hasError) {
+                this.setState({
+                    welcome: res.welcome
+                })
+            }
+        })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -40,6 +48,7 @@ class WelcomeScreen extends React.Component {
     }
 
     render() {
+        let welcome = this.state.welcome;
         return (
             <ImageBackground style={styles.homeImage} source={require('../../assets/images/homeBlur.png')}>
                 <View style={[styles.container, { backgroundColor: this.state.backgroundColor, }]}>
@@ -54,7 +63,7 @@ class WelcomeScreen extends React.Component {
                                     <Text style={styles.headerText}>Welcome</Text>
                                     <Text style={styles.headerText}>{this.state.userName}</Text>
                                     <Text style={styles.headerText}>to your</Text>
-                                    <Text style={styles.headerText}>Challange Name</Text>
+                                    <Text style={styles.headerText}>{welcome.challenge_name}</Text>
                                     <Text style={styles.headerText}>Challenge!</Text>
                                     <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center', marginTop: 30 }}>This is what is waiting for you:</Text>
                                 </View>
@@ -62,25 +71,25 @@ class WelcomeScreen extends React.Component {
                                 <View style={styles.menuDescription}>
                                     <View style={styles.subMenu1}>
                                         <View style={styles.daysEnergy}>
-                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>30</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>{welcome.days}</Text>
                                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>DAYS OF ENERGY</Text>
                                         </View>
                                         <View style={styles.videos}>
-                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>67</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>{welcome.videos}</Text>
                                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>VIDEOS</Text>
                                         </View>
                                         <View style={styles.recipes}>
-                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>35</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>{welcome.recipes}</Text>
                                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>RECIPES</Text>
                                         </View>
                                     </View>
                                     <View style={styles.subMenu2}>
                                         <View style={styles.coachingVideos}>
-                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>8</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>{welcome.coaching_videos}</Text>
                                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>COACHING VIDEOS</Text>
                                         </View>
                                         <View style={styles.personalCoachingSession}>
-                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>2</Text>
+                                            <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 64, color: '#FFFFFF', textAlign: 'center' }}>{welcome.personal_session}</Text>
                                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#FFFFFF', textAlign: 'center' }}>PERSONAL COACHING SESSION</Text>
                                         </View>
                                     </View>
@@ -206,7 +215,7 @@ export default connect(state => {
     }
 }
     , dispatch => {
-        return bindActionCreators({ getCalendarData: getCalendarData }, dispatch)
+        return bindActionCreators({ getCalendarData: getCalendarData, getWelcome }, dispatch)
     }
 )(WelcomeScreen);
 

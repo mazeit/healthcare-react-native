@@ -24,6 +24,8 @@ class ContentOverview extends React.Component {
             mindfulnessImage: '',
             coachImage: '',
             loader: true,
+
+            searchKey: ''
         };
 
         this.showSearch = this.showSearch.bind(this);
@@ -79,7 +81,6 @@ class ContentOverview extends React.Component {
 
     showSearch() {
 
-        //   console.log('in show')
         this.setState({ openSearch: true })
         Animated.timing(this.animated, {
             toValue: 1,
@@ -134,7 +135,7 @@ class ContentOverview extends React.Component {
                                         </View>
                                     </TouchableOpacity>
 
-                                    <TouchableOpacity style={styles.tabButton} onPress={() => this. tabSelected('Tracker')}>
+                                    <TouchableOpacity style={styles.tabButton} onPress={() => this. tabSelected('')}>
                                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',flexDirection: 'column' }}>
                                             <Icon name='tracker' size={50} color='#454545' />
                                             <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -15, fontSize: 14, textAlign: 'center', color: '#000'}}>Tracker</Text>
@@ -151,8 +152,8 @@ class ContentOverview extends React.Component {
                                 {/* HEADER ENDS*/}
 
                                 <Animated.View style={[styles.search, { height }, { opacity }]}>
-                                    <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} />
-                                    <Icon name="magnifyer" size={50} style={{ marginLeft: -10 }} color="#454545" />
+                                    <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} value={this.state.searchKey} onChangeText={(text)=>this.setState({searchKey: text}) } />
+                                    <Icon name="magnifyer" onPress={()=>{ this.state.searchKey && this.props.navigation.navigate('CategoryList', {viewType: 'search', searchKey: this.state.searchKey}) }} size={50} style={{ marginLeft: -10 }} color="#454545" />
                                 </Animated.View>
                                 <View style={[styles.section, { marginBottom: 5 }]}>
 

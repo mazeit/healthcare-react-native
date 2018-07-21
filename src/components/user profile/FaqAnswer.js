@@ -4,14 +4,31 @@ import { StyleSheet, Text, View, Dimensions, ScrollView, TouchableOpacity } from
 const { height, width } = Dimensions.get('window');
 import Header from '../Header';
 
+import HTML from 'react-native-render-html';
 export default class FaqAnswer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            Faq: this.props.navigation.state.params.Faq,
+            qIndex: this.props.navigation.state.params.qIndex
         };
+        this.prevQuestion = this.prevQuestion.bind(this);
+        this.nextQuestion = this.nextQuestion.bind(this);
+    }
+
+    nextQuestion() {
+        if(this.state.qIndex > 0)
+            this.setState({qIndex: this.state.qIndex - 1});
+    }
+
+    prevQuestion() { 
+        if(this.state.qIndex < (this.state.Faq.length - 1))
+            this.setState({qIndex: this.state.qIndex + 1});
     }
 
     render() {
+        let {Faq, qIndex} = this.state;
+
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>
@@ -22,29 +39,35 @@ export default class FaqAnswer extends React.Component {
                     <ScrollView style={styles.termsOfUse}>
 
                         <View style={styles.termsOfUseBlock}>
-                            <Text style={{ height: 26, fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', marginTop: 20, marginLeft: 20 }}>How can i buy a new challange ?</Text>
+                            <Text style={{ height: 26, fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545' }}>{Faq[qIndex].title}</Text>
 
 
 
-                            <View style={{ flex: 1, alignItems: 'center', }}>
+                            <View style={{ flex: 1, alignItems: 'center'}}>
                                 <View style={[styles.textBlock, { marginTop: 0 }]}>
-                                    <Text style={styles.textContent}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</Text>
+                                    <HTML html={"<div style='font-family: DINPro-Light !important'>" + Faq[qIndex].description + "</div>"} imagesMaxWidth={width - 20} />
                                 </View>
 
 
                                 <View style={styles.navegate}>
-                                    <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center' }}>
-                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#4AB3E2' }}>Previous</Text>
-                                    </View>
-                                    <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
-                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#4AB3E2' }}>Next</Text>
-                                    </View>
+
+                                    <TouchableOpacity style={{flex: 1, alignItems: 'flex-start', justifyContent: 'center'}} onPress={()=>this.prevQuestion()}>
+                                        <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center' }}>
+                                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#4AB3E2' }}>Previous</Text>
+                                        </View>
+                                    </TouchableOpacity> 
+
+                                    <TouchableOpacity style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }} onPress={()=>this.nextQuestion()}>
+                                        <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
+                                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#4AB3E2' }}>Next</Text>
+                                        </View>
+                                    </TouchableOpacity>
                                 </View>
 
                             </View>
 
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 10 }}>
-                                <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <View style={{ flex: 1, alignItems: 'center', alignSelf:'center', justifyContent: 'center', margin: 10}}>
+                                <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} onPress={()=>this.props.navigation.goBack()}>
                                     <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
                                         <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Okay</Text>
                                     </View>
@@ -78,9 +101,7 @@ const styles = StyleSheet.create({
     },
     termsOfUseBlock: {
         flex: 1,
-        // margin: 10,
-        // marginLeft: 20,
-        // marginRight: 10,
+        padding: 20,
         alignItems: 'flex-start',
         backgroundColor: '#FFFFFF',
 

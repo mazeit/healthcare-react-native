@@ -5,52 +5,44 @@ import { connect } from 'react-redux';
 
 const { height, width } = Dimensions.get('window');
 import Header from '../Header';
-import { sendReminder } from '../../actions/index';
+import { sendReminder, getInvitedFriendsData } from '../../actions/index';
 
 class InviteMyFriendsList extends React.Component {
     constructor(props) {
         super(props);
-        console.log(',,,,,,,PROPS', this.props)
         this.state = {
             lastInvitedFriend: this.props.navigation.state.params.invitedFriend,
-            invitedFriendDataList: this.props.invitedFriendData.result,
+            invitedFriendDataList: [],
         };
         this.sendInvitationReminder = this.sendInvitationReminder.bind(this);
     }
 
-    // componentDidMount() {
-
-    //     this.props.getInvitedFriendsData(this.props.user_id);
-    // }
+    componentDidMount() {
+        this.props.getInvitedFriendsData().then((result)=>{
+            console.log(result);
+            this.setState({invitedFriendDataList: result.result});
+        });
+    }
 
     componentWillReceiveProps(nextProps) {
 
-        console.log('......FRIENDS .....',nextProps)
     }
 
-    sendInvitationReminder() {
+    sendInvitationReminder(friend) {
     
-
-            // this.setState({ loader: true });
-            let { invitedFriendDataList } = this.state;
-            let targetItem = listData[index];
-    
-            // Flip the 'liked' property of the targetPost
-            targetItem.favorite = !targetItem.favorite;
-    
-    
-    
-            console.log('.... LIST DATA ........', targetItem)
-            this.setState({ listData });
-            if (cond) {
-                console.log('.... REMOVE ........')
-                this.props.removeFavorite(this.props.user_id, item.id_content, this.props.pillarName)
-            } else if (!cond) {
-                console.log('.... ADD ........')
-                this.props.addFavorite(this.props.user_id, item.id_content, this.props.pillarName)
-            }
-    
-    
+        let { invitedFriendDataList } = this.state;
+        
+        this.props.sendReminder(friend.id_customer,friend.friendfirstname,friend.friendlastname, friend.friendemail)
+        .then(res=>{
+            let newList = invitedFriendDataList.map(f=>{
+                if (f.id_customer == friend.id_customer) {
+                    return {
+                        ...f,
+                        reminder: "1"
+                    }
+                }
+            })
+        })
     }
 
     render() {
@@ -99,7 +91,7 @@ class InviteMyFriendsList extends React.Component {
                                         <View style={{ flex: 4, alignItems: 'flex-end', marginBottom: 20 }}>
                                             {
                                                 friend.join === 'no' ? friend.reminder === null ?
-                                                    <TouchableOpacity onPress={() => this.props.sendReminder(friend.id_customer,friend.friendfirstname,friend.friendlastname, friend.friendemail)}>
+                                                    <TouchableOpacity onPress={() => this.sendInvitationReminder(friend)}>
                                                         <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 132, height: 28, borderRadius: 28, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
                                                             <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 14, color: '#4AB3E2' }}>Send reminder</Text>
                                                         </View>
@@ -185,5 +177,5 @@ export default connect(state => {
         success,
     }
 }, dispatch => {
-    return bindActionCreators({ sendReminder: sendReminder }, dispatch)
+    return bindActionCreators({ sendReminder: sendReminder, getInvitedFriendsData: getInvitedFriendsData }, dispatch)
 })(InviteMyFriendsList);

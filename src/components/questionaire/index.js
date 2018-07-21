@@ -20,7 +20,7 @@ export default class QuestionarieIntro extends React.Component {
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>
-                    <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'FRAGEBOGEN'} leftButton={true} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} notificationButton={false} headColor={'#454545'} navigation={this.props.navigation} />
+                    <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'FRAGEBOGEN'} leftButton={false} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} notificationButton={false} headColor={'#454545'} navigation={this.props.navigation} />
                 </View>
                 <View style={styles.container}>
 

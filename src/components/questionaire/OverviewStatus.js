@@ -7,6 +7,7 @@ const { height, width } = Dimensions.get('window');
 
 import Header from '../Header';
 
+import { getQuestionGroup, getQuestionaire } from '../../actions/index';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../../selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
@@ -20,16 +21,42 @@ class OverviewStatus extends React.Component {
         super(props);
 
         this.state = {
-            listData: [
-                { key: 'personal', icon: 'nutrition', color: '#4ab3e2' , text: 'Perssonal', back: '#e2f4fa', current: 4, total: 12, img: require('../../../assets/images/q-personal.png')},
-                { key: 'nutrition', icon: 'nutrition', color: '#8ACE91', text: 'Nutrition', back: '#e1f2e2', current: 4, total: 20, img: require('../../../assets/images/q-nutrition.png')},
-                { key: 'mindfulness', icon: 'mindfulness', color: '#D4B870', text: 'Mindfulness', back: '#f4ead6', current: 2, total: 7, img: require('../../../assets/images/q-mindfulness.png')},
+            loader: false,
 
-                { key: 'activity', icon: 'activity', color: '#AE0069', text: 'Activity', back: '#f0d1e4', current: 4, total: 7, img: require('../../../assets/images/q-activity.png')},
-                { key: 'coach', icon: 'activity', color: '#454545' , text: 'Coaching', back: '#e1e1e1', current: 4, total: 7, img: require('../../../assets/images/q-coach.png')},
-                { key: 'allgemein', icon: 'activity', color: '#ea6b57' , text: 'Allgemein', back: '#fce7e5', current: 4, total: 7, img: require('../../../assets/images/q-allgemein.png')},
-            ]
+            // listData: [
+            //     { key: 'personal', icon: 'nutrition', color: '#4ab3e2' , text: 'Perssonal', back: '#e2f4fa', answes_given: 4, total_question: 12, img: require('../../../assets/images/q-personal.png')},
+            //     { key: 'nutrition', icon: 'nutrition', color: '#8ACE91', text: 'Nutrition', back: '#e1f2e2', answes_given: 4, total_question: 20, img: require('../../../assets/images/q-nutrition.png')},
+            //     { key: 'mindfulness', icon: 'mindfulness', color: '#D4B870', text: 'Mindfulness', back: '#f4ead6', answes_given: 2, total_question: 7, img: require('../../../assets/images/q-mindfulness.png')},
+
+            //     { key: 'activity', icon: 'activity', color: '#AE0069', text: 'Activity', back: '#f0d1e4', answes_given: 4, total_question: 7, img: require('../../../assets/images/q-activity.png')},
+            //     { key: 'coach', icon: 'activity', color: '#454545' , text: 'Coaching', back: '#e1e1e1', answes_given: 4, total_question: 7, img: require('../../../assets/images/q-coach.png')},
+            //     { key: 'allgemein', icon: 'activity', color: '#ea6b57' , text: 'Allgemein', back: '#fce7e5', answes_given: 4, total_question: 7, img: require('../../../assets/images/q-allgemein.png')},
+            // ]
+
+
+            allData: {
+                personal: { key: 'personal', icon: 'nutrition', color: '#4ab3e2' , text: 'Personal', back: '#e2f4fa', img: require('../../../assets/images/q-personal.png')},
+                nutrition: { key: 'nutrition', icon: 'nutrition', color: '#8ACE91', text: 'Nutrition', back: '#e1f2e2',  img: require('../../../assets/images/q-nutrition.png')},
+                mindfulness: { key: 'mindfulness', icon: 'mindfulness', color: '#D4B870', text: 'Mindfulness', back: '#f4ead6', img: require('../../../assets/images/q-mindfulness.png')},
+
+                activity: { key: 'activity', icon: 'activity', color: '#AE0069', text: 'Activity', back: '#f0d1e4', img: require('../../../assets/images/q-activity.png')},
+                coach: { key: 'coach', icon: 'activity', color: '#454545' , text: 'Coaching', back: '#e1e1e1', img: require('../../../assets/images/q-coach.png')},
+                allgemein: { key: 'allgemein', icon: 'activity', color: '#ea6b57' , text: 'Allgemein', back: '#fce7e5', img: require('../../../assets/images/q-allgemein.png')},
+            },
+            listData: []
         };
+
+    }
+
+    componentDidMount() {
+        this.props.getQuestionGroup().then(questiongroup=>{
+
+            let arr = questiongroup.result.map(item => {
+                return {...this.state.allData[item.name.toLowerCase()], ...item};
+            });
+            this.setState({ listData: arr, loader: false });
+        })
+        
     }
 
     render() {
@@ -37,11 +64,9 @@ class OverviewStatus extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={{ flex: 1 }}>
-                    <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'FRAGEBOGEN'} leftButton={true} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                    <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'FRAGEBOGEN'} leftButton={false} leftButtonName={'close'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
                 </View>
                 <View style={{ flex: 9 }}>
-                    
-
                     <View style={styles.subContainer}>
                         {
                             this.state.loader ?
@@ -87,5 +112,5 @@ export default connect(state => {
         user_id,
     }
 }, dispatch => {
-    return bindActionCreators({ }, dispatch)
+    return bindActionCreators({ getQuestionaire, getQuestionGroup }, dispatch)
 })(OverviewStatus);

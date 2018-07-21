@@ -10,18 +10,18 @@ const { height, width } = Dimensions.get('window');
 const menuList = [
     {
         name: 'MY LIVINFLOW',
-        component: 'ContentStack',
+        component: 'ContentOverview',
         params: {}
     },
     {
-        name: 'MY NAVIGATOR',
-        component: 'WelcomeScreen',
+        name: 'MY CHALLENGE',
+        component: 'CalendarView',
         params: {}
     },
     {
         name: 'MY FAVORITES',
         component: 'CategoryList',
-        params: {}
+        params: {viewType: 'fav'}
     },
     {
         name: 'MY PROFILE',
@@ -30,14 +30,14 @@ const menuList = [
     },
     {
         name: 'BLOG',
-        component: 'CoachProfile',
+        component: 'BlogStack',
         params: {}
     },
-    {
-        name: 'COACHES',
-        component: 'CoachProfile',
-        params: {}
-    },
+    // {
+    //     name: 'COACHES',
+    //     component: 'CoachProfile',
+    //     params: {}
+    // },
     {
         name: 'HELP & FAQ',
         component: 'HelpFaq',
@@ -67,7 +67,7 @@ export default class GeneralMenu extends React.Component {
         if (item.webLink)
             Linking.openURL(item.webLink);
         else
-            this.props.navigation.navigate(item.component);
+            this.props.navigation.navigate(item.component, item.params);
     }
 
     render() {

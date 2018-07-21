@@ -1,19 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { StyleSheet, Text, View, ImageBackground, TextInput, Image, TouchableOpacity, Dimensions, WebView } from 'react-native';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
+import LoaderWait from './LoaderWait';
+import { getImportantNotification, getActivity, getRecipe } from '../actions/index';
 
 
 const { height, width } = Dimensions.get('window');
 
 
-export default class ImportantNotification extends React.Component {
+class ImportantNotification extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loader: true,
+            importantn: null,   
             backgroundColor: '#AE0069',
             backgroundColorArray: ['#AE0069', '#D4B870', '#8ACE91'],
         };
@@ -21,43 +26,111 @@ export default class ImportantNotification extends React.Component {
 
     componentDidMount() {
         this.interval = setInterval(() => this.setState({ backgroundColor: this.state.backgroundColorArray[Math.floor(Math.random() * 3)] }), 2000);
+        this.props.getImportantNotification()
+        .then((importantn)=>{
+            this.setState({loader: false, importantn});
+        })
+        
     }
 
 
+    gotoContentDeail() {
+        let content = this.state.importantn.importantn;
+        this.setState({loader: true});
+        if (content.rezept == 0) {
+
+            this.props.getActivity(content.id_content)
+            .then((resultObj)=>{
+                console.log(resultObj);
+                if (!resultObj.hasError) {
+                    this.setState({loader: false, resultObj: resultObj.content});
+
+                    this.props.navigation.navigate('Activity',  {activityType: this.state.activityType, data: resultObj.content})
+                }
+            });
+        } else {
+
+            this.props.getRecipe(content.rezept_video)
+            .then((resultObj)=>{
+                console.log(resultObj);
+                if (!resultObj.hasError){
+                    this.setState({loader: false, resultObj: resultObj.recipe});
+                    this.props.navigation.navigate('Recipe',  {activityType: this.state.activityType, data: resultObj.recipe})
+
+                }
+            });
+        }
+    }
 
     render() {
+        const {importantn} = this.state;
         return (
-            <View style={[styles.container, { backgroundColor: this.state.backgroundColor, }]}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('ContentOverview')} style={{ alignItems: 'center', justifyContent: 'center'}}>
-                    <Icon name="close" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
-                </TouchableOpacity>
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>Your next activity</Text>
-                    <Text style={styles.headerText}>before noon!</Text>
-                </View>
-                <View style={styles.activityDisply}>
-                    <Image style={styles.image} source={require('../../assets/images/detoxYoga.png')} />
-                </View>
-                <View style={{ backgroundColor: '#FFFFFF', width: width - 130, flex: 1, marginTop: '-10%', alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545' }}>Detox Yoga</Text>
-                </View>
-                <View style={styles.buttons}>
-                    <TouchableOpacity style={{ backgroundColor: this.state.backgroundColor, flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderColor: '#ffffff', borderRadius: 50, borderWidth: 0.5 }}>
-                        <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Light', fontSize: 17, color: '#ffffff' }}>More Details</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ backgroundColor: '#FFFFFF', flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderRadius: 50 }}>
-                        <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Light', fontSize: 17, color: this.state.backgroundColor }}>Start session</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.getCalender}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CalendarView')}>
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginTop: '12%' }}>Go to My Day</Text>
-                                <Icon name="little_arrow" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <ImageBackground style={styles.homeImage} source={require('../../assets/images/homeBlur.png')}>
+
+                {this.state.loader ?
+                    <View style={{ flex: 1, opacity: 0.8 }}><LoaderWait /></View> :
+                    <View style={[styles.container, { backgroundColor: this.state.backgroundColor, }]}>
+                        {(this.state.importantn && this.state.importantn.errors.length > 0) ?
+
+                            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                                <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginTop: '12%' }}>{this.state.importantn.errors[0]}</Text>
+
+                                <View style={[styles.getCalender, {}]}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CalendarView', {})}>
+                                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginTop: '12%' }}>Go to My Day</Text>
+                                                <Icon name="little_arrow" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            :
+                            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('ContentOverview')} style={{ justifyContent: 'center', alignItems: 'center'}}>
+                                    <Icon name="close" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
+                                </TouchableOpacity>
+                                <View style={styles.header}>
+                                    <Text style={styles.headerText}>Your next activity</Text>
+                                    <Text style={styles.headerText}>before noon!</Text>
+                                </View>
+                                <View style={styles.activityDisply}>
+
+                                    {
+                                        importantn.importantn.file_id !== '' ?
+                                            <WebView
+                                                style={{ flex: 1 }}
+                                                javaScriptEnabled={true}
+                                                domStorageEnabled={true}
+                                                source={{ uri: 'https://content.jwplatform.com/players/' + importantn.importantn.file_id + '-Qzd90UGq.html' }}
+                                            /> :
+                                            <Image source={require('../../assets/images/no_video.png')} style={{ width: '100%', height: '100%', }} />
+                                    }
+                                </View>
+                                <View style={{ backgroundColor: '#FFFFFF', width: width - 130, flex: 1, marginTop: '-10%', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545' }}>{importantn.importantn.name}</Text>
+                                </View>
+                                <View style={styles.buttons}>
+                                    <TouchableOpacity style={{ backgroundColor: this.state.backgroundColor, flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderColor: '#ffffff', borderRadius: 50, borderWidth: 0.5 }} onPress={()=>this.gotoContentDeail() }>
+                                        <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Light', fontSize: 17, color: '#ffffff' }}>More Details</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={{ backgroundColor: '#FFFFFF', flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderRadius: 50 }}>
+                                        <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Light', fontSize: 17, color: this.state.backgroundColor }}>Start session</Text>
+                                    </TouchableOpacity>
+                                </View> 
+
+                                <View style={[styles.getCalender, {}]}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CalendarView', {})}>
+                                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                            <Text style={{ fontFamily: 'DINPro-Medium', fontSize: 16, color: '#ffffff', marginTop: '12%' }}>Go to My Day</Text>
+                                                <Icon name="little_arrow" size={50} style={{ marginLeft: -15}} color="#FFFFFF" />
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>}
+
+                    </View>
+                }
+            </ImageBackground>
         );
     }
 
@@ -71,24 +144,29 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: width,
-        alignItems: 'center',
-        justifyContent: 'center'
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    homeImage: {
+        width: '100%',
+        height: '100%',
     },
     header: {
         flex: 1.5,
         marginTop: '5%',
-        alignItems: 'center',
         justifyContent: 'center',
+        alignItems: 'center'
     },
     headerText: {
         fontFamily: 'DINPro-Light',
         fontSize: 22,
-        color: '#ffffff'
+        color: '#ffffff',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     activityDisply: {
         flex: 4,
-        alignItems: 'center',
-        justifyContent: 'center',
         overflow: 'hidden',
         marginTop: 5,
         width: width - 100,
@@ -113,4 +191,15 @@ const styles = StyleSheet.create({
 });
 
 
+
+
+export default connect(state => {
+
+    return {
+    }
+}
+    , dispatch => {
+        return bindActionCreators({ getImportantNotification: getImportantNotification, getActivity, getRecipe }, dispatch)
+    }
+)(ImportantNotification);
 
