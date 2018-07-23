@@ -89,7 +89,7 @@ class CalendarView extends React.Component {
                     return markedData[data].dots.indexOf(item) == pos;
                 })
             }
-            this.setState({ eventData: eventData, markedData: markedData, calendarData: [...calendarData], loader: false });
+            this.setState({ eventData: eventData, markedData: markedData, calendarData: [...calendarData], loader: false, selectedDate: this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0] });
         }
     }
 
@@ -266,9 +266,9 @@ class CalendarView extends React.Component {
                                     // callback that fires when the calendar is opened or closed
                                     onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
                                     // callback that gets called on day press
-                                    onDayPress={(day) => {console.log('ss',day); this.dateSelected(day) }}
+                                    onDayPress={(day) => {console.log('day pressed'); this.dateSelected(day) }}
                                     // callback that gets called when day changes while scrolling agenda list
-                                    onDayChange={(day) => { console.log('day changed') }}
+                                    onDayChange={(day) => { console.log('day changed'); this.dateSelected(day) }}
                                     // initially selected day
                                     current={new Date()}
                                     selected={this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0]}

@@ -31,7 +31,7 @@ class InviteMyFriendsList extends React.Component {
     sendInvitationReminder(friend) {
     
         let { invitedFriendDataList } = this.state;
-        
+        console.log('TEst', friend);
         this.props.sendReminder(friend.id_customer,friend.friendfirstname,friend.friendlastname, friend.friendemail)
         .then(res=>{
             let newList = invitedFriendDataList.map(f=>{
@@ -41,7 +41,9 @@ class InviteMyFriendsList extends React.Component {
                         reminder: "1"
                     }
                 }
-            })
+            });
+            this.setState({invitedFriendDataList: newList});
+            console.log(newList);
         })
     }
 

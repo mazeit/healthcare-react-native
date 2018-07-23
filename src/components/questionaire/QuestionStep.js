@@ -45,21 +45,49 @@ class QuestionStep extends React.Component {
     }
 
     answerSelected(question, answer) {
-        // if (this.state.selectedAnswers.indexOf(answer.id_answer) == -1)
-        //     this.setState({selectedAnswers: this.state.selectedAnswers.concat([answer.id_answer])});
-        this.setState({selectedAnswers: [answer.id_answer] });
+        if (this.state.questionaire[this.state.step].multiple_choice == '0') { //Multiple choice
+            let selectedAnswers = this.state.selectedAnswers.concat([]);
+            if (selectedAnswers.indexOf(answer.id_answer) == -1) { /// if not selected
+                this.setState({selectedAnswers: selectedAnswers.concat([answer.id_answer]) });    
+            } else {
+                selectedAnswers.splice(selectedAnswers.indexOf(answer.id_answer), 1);
+                this.setState({selectedAnswers});    
+            }
+        } else {
+            this.setState({selectedAnswers: [answer.id_answer] });
+        }
+        
     }
 
     nextStep(skip) {
+        if (skip)
+            return;
         if (((this.state.questionaire.length ) > this.state.step)) {
+            let nextStepSelected = [];
+            try {
+                nextStepSelected = this.state.questionaire[this.state.step + 1].selected_answers.id_answers ? this.state.questionaire[this.state.step + 1].selected_answers.id_answers : [];
+            } catch (err) {
+                nextStepSelected = [];
+            }
+
+
             if (this.state.step == -1)
-                this.setState({step: this.state.step + 1, selectedAnswers: []});  
-            else {
+                this.setState({step: this.state.step + 1, selectedAnswers: nextStepSelected});  
+            else if (this.state.selectedAnswers.length > 0) {
+
+                //Update current question answers for local
+                this.setState({ questionaire: this.state.questionaire.map((q, index)=>{
+                        if (index == this.state.step) {
+                            return {...q, selected_answers: {id_answers: this.state.selectedAnswers}};
+                        } else 
+                            return q;
+                    })
+                })
 
                 this.props.answerQuestion(this.state.questionCategory.id_question_category,  this.state.questionaire[this.state.step].id_question, this.state.selectedAnswers.join(','))
                 .then(res=>{
-                    if (this.state.questionaire.length -1 != this.state.step)
-                        this.setState({step: this.state.step + 1, selectedAnswers:  this.state.questionaire[this.state.step + 1].selected_answers ? this.state.questionaire[this.state.step + 1].selected_answers.split(',') : []});  
+                    if (this.state.questionaire.length - 1 != this.state.step)
+                        this.setState({step: this.state.step + 1, selectedAnswers: nextStepSelected});  
                     
                 })   
             }
@@ -67,8 +95,36 @@ class QuestionStep extends React.Component {
     }
 
     prevStep() {
-        if (this.state.step > 0)
-            this.setState({step: this.state.step - 1});
+        if (-1 < this.state.step) {
+            let prevStepSelected = [];
+            try {
+                prevStepSelected = this.state.questionaire[this.state.step - 1].selected_answers.id_answers ? this.state.questionaire[this.state.step - 1].selected_answers.id_answers : [];
+            } catch (err) {
+                prevStepSelected = [];
+            }
+
+
+            if (this.state.step == this.state.questionaire.length - 1)
+                this.setState({step: this.state.step - 1, selectedAnswers: prevStepSelected});  
+            else if (this.state.selectedAnswers.length > 0) {
+
+                //Update current question answers for local
+                this.setState({ questionaire: this.state.questionaire.map((q, index)=>{
+                        if (index == this.state.step) {
+                            return {...q, selected_answers: {id_answers: this.state.selectedAnswers}};
+                        } else 
+                            return q;
+                    })
+                })
+
+                this.props.answerQuestion(this.state.questionCategory.id_question_category,  this.state.questionaire[this.state.step].id_question, this.state.selectedAnswers.join(','))
+                .then(res=>{
+                    if (0 != this.state.step)
+                        this.setState({step: this.state.step - 1, selectedAnswers: prevStepSelected});  
+                    
+                })   
+            }
+        } 
     }
 
     renderStep0() {
@@ -120,7 +176,7 @@ class QuestionStep extends React.Component {
                             return (
                                 <View style={{ flexDirection: 'row', marginBottom: 10 }} key={index}>
                                     <TouchableOpacity style={{ flexDirection: 'row' }} onPress={()=>this.answerSelected(question, answer)}>
-                                        <Option selected={this.state.selectedAnswers.indexOf(answer.id_answer) != -1} style={{}} color={questionCategory.color}/>
+                                        <Option selected={(this.state.selectedAnswers.indexOf(answer.id_answer+'') != -1) || (this.state.selectedAnswers.indexOf(answer.id_answer) != -1)} style={{}} color={questionCategory.color}/>
                                         <Text style={{color: questionCategory.color, marginLeft: 10}}>{answer.name}</Text>
                                     </TouchableOpacity>
                                 </View>

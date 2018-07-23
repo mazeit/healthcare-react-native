@@ -76,7 +76,7 @@ export default class Activity extends React.Component {
                     </View>
                 </View>
             </View>
-
+            console.log(this.state.activityData);
         const demo = {
             'open': open,
             'locked': locked,
