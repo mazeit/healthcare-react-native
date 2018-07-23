@@ -38,38 +38,40 @@ class HomeInitial extends React.Component {
         var c1 = {"id_content":31,"file_id":"PjrsQ3kh","pillar":"activity","rezept":"0","rezept_video":0,"favorite":false,"page_url":"https:\/\/spano24.com\/fitnessportal\/de\/module\/roccfitnessportal\/contentdetail?content=31&type=activity","name":"Mobiler R\u00fccken - Workout 9","description":""};
         var c2 = {"id_content":98,"file_id":"SMaedwwZ","pillar":"nutrition","rezept":"1","rezept_video":"328","favorite":false,"rezept_url":"https:\/\/spano24.com\/fitnessportal\/rezeptideen\/328-pecannuss-rosmarin-muffins-auf-avocado-hummus?type=activity","page_url":"https:\/\/spano24.com\/fitnessportal\/de\/module\/roccfitnessportal\/contentdetail?content=98&type=activity","name":"Pekannuss-Rosmarin-Muffins auf Avocadohummus","description":""};
         
-        let content = c1;
-        this.setState({loader: true});
-        if (content.rezept == 0) {
+        // let content = c1;
+        // this.setState({loader: true});
+        // if (content.rezept == 0) {
 
-            this.props.getActivity(content.id_content)
-            .then((resultObj)=>{
-                console.log(resultObj);
-                if (!resultObj.hasError) {
-                    this.setState({loader: false, resultObj: resultObj.content});
+        //     this.props.getActivity(content.id_content)
+        //     .then((resultObj)=>{
+        //         console.log(resultObj);
+        //         if (!resultObj.hasError) {
+        //             this.setState({loader: false, resultObj: resultObj.content});
 
-                    this.props.navigation.navigate('Activity',  {activityType: this.state.activityType, data: resultObj.content})
-                }
-            });
-        } else {
+        //             this.props.navigation.navigate('Activity',  {activityType: this.state.activityType, data: resultObj.content})
+        //         }
+        //     });
+        // } else {
 
-            this.props.getRecipe(content.rezept_video)
-            .then((resultObj)=>{
-                console.log(resultObj);
-                if (!resultObj.hasError){
-                    this.setState({loader: false, resultObj: resultObj.recipe});
-                    this.props.navigation.navigate('Recipe',  {activityType: this.state.activityType, data: resultObj.recipe})
+        //     this.props.getRecipe(content.rezept_video)
+        //     .then((resultObj)=>{
+        //         console.log(resultObj);
+        //         if (!resultObj.hasError){
+        //             this.setState({loader: false, resultObj: resultObj.recipe});
+        //             this.props.navigation.navigate('Recipe',  {activityType: this.state.activityType, data: resultObj.recipe})
 
-                }
-            });
-        }
+        //         }
+        //     });
+        // }
 
         
         // this.props.navigation.navigate('WelcomeScreen', { id_content: 12, mode : 'add-activity' })
         // this.props.navigation.navigate('ContentOverview', {})
+
+        // this.props.navigation.navigate('InviteMyFriends', {})
         // this.props.navigation.navigate('InviteMyFriendsList', {invitedFriend: '3@c.com'})
         // this.props.navigation.navigate('OverviewStatus', {})
-        // this.props.navigation.navigate('QuestionStep', {data: JSON.parse('{"key":"nutrition","icon":"nutrition","color":"#8ACE91","text":"Nutrition","back":"#e1f2e2","img":7,"id_question_category":"1","name":"Nutrition","short_description":"sss","description":"ssss","answes_given":1,"total_question":2}')})
+        this.props.navigation.navigate('QuestionStep', {data: JSON.parse('{"key":"nutrition","icon":"nutrition","color":"#8ACE91","text":"Nutrition","back":"#e1f2e2","img":7,"id_question_category":"1","name":"Nutrition","short_description":"sss","description":"ssss","answes_given":1,"total_question":2}')})
 
         // this.props.navigation.navigate('BlogStack', {})
         // this.props.navigation.navigate('Article', {article: JSON.parse(`{"name":"What is Lorem Ipsum?","reading_time":"12 Mins","active":"1","feature":"1","id_lfmagazine_category":"2","id_lfmagazine_author":"2","position":"0","short_description":"s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500","description": "Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.","link_rewrite":"what-is-lorem-ipsum","date_add":"2018-04-18 13:46:14","date_upd":"2018-04-25 08:34:18","id_image":1,"id":1,"id_shop_list":null,"force_id":false,"id_post":"1"}`)})
