@@ -71,8 +71,9 @@ class HomeInitial extends React.Component {
         // this.props.navigation.navigate('InviteMyFriends', {})
         // this.props.navigation.navigate('InviteMyFriendsList', {invitedFriend: '3@c.com'})
         // this.props.navigation.navigate('OverviewStatus', {})
-        this.props.navigation.navigate('QuestionStep', {data: JSON.parse('{"key":"nutrition","icon":"nutrition","color":"#8ACE91","text":"Nutrition","back":"#e1f2e2","img":7,"id_question_category":"1","name":"Nutrition","short_description":"sss","description":"ssss","answes_given":1,"total_question":2}')})
+        // this.props.navigation.navigate('QuestionStep', {data: JSON.parse('{"key":"nutrition","icon":"nutrition","color":"#8ACE91","text":"Nutrition","back":"#e1f2e2","img":7,"id_question_category":"1","name":"Nutrition","short_description":"sss","description":"ssss","answes_given":1,"total_question":2}')})
 
+        this.props.navigation.navigate('Tracker', {})
         // this.props.navigation.navigate('BlogStack', {})
         // this.props.navigation.navigate('Article', {article: JSON.parse(`{"name":"What is Lorem Ipsum?","reading_time":"12 Mins","active":"1","feature":"1","id_lfmagazine_category":"2","id_lfmagazine_author":"2","position":"0","short_description":"s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500","description": "Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.","link_rewrite":"what-is-lorem-ipsum","date_add":"2018-04-18 13:46:14","date_upd":"2018-04-25 08:34:18","id_image":1,"id":1,"id_shop_list":null,"force_id":false,"id_post":"1"}`)})
         
