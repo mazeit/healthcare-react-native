@@ -82,7 +82,7 @@ class Blog extends React.Component {
                                                     {/*<View style={{ flex: 1, alignItems: 'flex-start', margin: 20, marginBottom: 0 }}>
                                                         <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#838383', }}>Kathryn Budig has created a career that’s the envy of yogis around the globe, but here she debunks some common misconceptions about what it means to be a big-name, internationally traveling yoga teacher.</Text>
                                                     </View>*/}
-                                                    <HTML html={`<div style="font-family: DINPro-Light !important; ">` + article.description + "</div>"} />
+                                                    <HTML html={`<div style="font-family: DINPro-Light; ">` + article.description + "</div>"} />
                                                             
                                                 </View>
                                             </View>

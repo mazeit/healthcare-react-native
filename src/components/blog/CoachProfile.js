@@ -32,7 +32,6 @@ class Blog extends React.Component {
 
     componentDidMount() {
         this.props.lfmagazineauthorById(this.state.id_author).then((author) => {
-            console.log(author);
             this.setState({ author: author.author, loader: false })
         });
     }
@@ -127,7 +126,7 @@ class Blog extends React.Component {
                                                 <View style={[styles.details, { margin: 10 }]}>
                                                     <View style={{ flex: 1, alignItems: 'flex-start', margin: 20, marginBottom: 0 }}>
 
-                                                        <HTML html={`<div style="font-family: DINPro-Light !important; ">` + author.description + "</div>"} />
+                                                        <HTML html={`<div style="font-family: DINPro-Light; ">` + author.description + "</div>"} />
                                                     </View>
                                                 </View>
                                             </View>

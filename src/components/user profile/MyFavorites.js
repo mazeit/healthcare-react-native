@@ -29,7 +29,6 @@
 
 //             this.props.getActivity(this.state.content.id_content)
 //             .then((resultObj)=>{
-//                 console.log(resultObj);
 //                 if (!resultObj.hasError) {
 //                     this.setState({loader: false, resultObj: resultObj.content});
 
@@ -40,7 +39,6 @@
 
 //             this.props.getRecipe(this.state.content.rezept_video)
 //             .then((resultObj)=>{
-//                 console.log(resultObj);
 //                 if (!resultObj.hasError){
 //                     this.setState({loader: false, resultObj: resultObj.recipe});
 //                     this.props.navigation.navigate('Activity',  {activityType: this.state.activityType, data: resultObj.recipe})

@@ -21,7 +21,7 @@ import { Agenda, Calendar } from 'react-native-calendars';
 
 
 const { height, width } = Dimensions.get('window');
-const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const month = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 
 class CalendarView extends React.Component {
@@ -118,7 +118,6 @@ class CalendarView extends React.Component {
         seconds = (seconds < 10) ? "0" + seconds : seconds;
         const timeDiff = hours + ":" + minutes;
         const activityType = timeDiff.split(':')[0] - 48 > 0 ? 'locked' : 'open';
-        console.log('....ID....INDEX', id, timeDiff);
         // this.setState({ timeDiff: timeDiff });
 
         this.setState({ loader: true });
@@ -191,8 +190,8 @@ class CalendarView extends React.Component {
                         <TouchableOpacity onPress={() => this.getActivityData(item.id, item.start)}>
                             <View style={styles.challangeTab}>
                                 {/*<Icon style={{ flex: 2, left: -10 }} name={item.className.split(' ')[0].split('_')[0]} size={80} color="#838383" />*/}
-                                <Icon style={{ flex: 2, left: -10 }} name="morning" size={80} color="#838383" />
-                                <View style={{ flex: 6.5, justifyContent: 'center', marginRight: 5, marginLeft: 15 }}>
+                                <Icon style={{ flex: 2, left: -15 }} name="morning" size={65} color="#838383" />
+                                <View style={{ flex: 6.5, justifyContent: 'center', marginRight: 5, marginLeft: 10 }}>
                                     <Text style={{ flex: 1, fontFamily: 'DINPro-Light', fontSize: 16, color: '#454545', marginVertical: 10 }}>{item.title}</Text>
                                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginLeft: -20, marginTop: -20 }}>
                                         <Icon name='time' size={50} color="#838383" />
@@ -335,7 +334,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: width - 100,
-        height: 65,
+        height: 70,
         margin: 5,
         marginLeft: 10,
         marginRight: 10,
@@ -348,7 +347,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: width - 100,
-        height: 65,
+        height: 70,
     },
     item: {
         backgroundColor: 'white',

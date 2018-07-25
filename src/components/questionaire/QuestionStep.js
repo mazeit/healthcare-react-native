@@ -39,7 +39,6 @@ class QuestionStep extends React.Component {
     componentDidMount() {
     
         this.props.getQuestionaire(this.state.questionCategory.id_question_category).then(result=>{
-            console.log(result);
             this.setState({ questionaire: result.result, loader: false });
         })
     }
@@ -138,7 +137,7 @@ class QuestionStep extends React.Component {
                 <View style={[styles.textBlock, { marginTop: 0 }]}>
                     <Text style={styles.textContent}>Lorem ipsum dolor amet yOLO hexagon pok pok cardigan lomo biodiesel, normcore deep v snackwave ugh. 
                     </Text>
-                    <HTML html={"<div style='font-family: DINPro-Light !important'>" + questionCategory.description + "</div>"} />
+                    <HTML html={"<div style='font-family: DINPro-Light'>" + questionCategory.description + "</div>"} />
 
                     <Text style={styles.textContent}> Zunächst benötigen wir ein paar allgemeine Angaben von Dir:</Text>
                 </View>

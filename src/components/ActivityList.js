@@ -58,7 +58,6 @@ class ActivityList extends React.Component {
 
             this.props.getActivity(item.id_content)
             .then((resultObj)=>{
-                console.log(resultObj);
                 if (!resultObj.hasError) {
                     this.setState({loader: false, resultObj: resultObj.content});
 
@@ -69,7 +68,6 @@ class ActivityList extends React.Component {
 
             this.props.getRecipe(item.rezept_video)
             .then((resultObj)=>{
-                console.log(resultObj);
                 if (!resultObj.hasError){
                     this.setState({loader: false, resultObj: resultObj.recipe});
                     this.props.navigation.navigate('Recipe',  {activityType: this.state.activityType, data: resultObj.recipe})

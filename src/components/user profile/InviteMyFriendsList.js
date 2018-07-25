@@ -19,7 +19,6 @@ class InviteMyFriendsList extends React.Component {
 
     componentDidMount() {
         this.props.getInvitedFriendsData().then((result)=>{
-            console.log(result);
             this.setState({invitedFriendDataList: result.result});
         });
     }
@@ -31,7 +30,6 @@ class InviteMyFriendsList extends React.Component {
     sendInvitationReminder(friend) {
     
         let { invitedFriendDataList } = this.state;
-        console.log('TEst', friend);
         this.props.sendReminder(friend.id_customer,friend.friendfirstname,friend.friendlastname, friend.friendemail)
         .then(res=>{
             let newList = invitedFriendDataList.map(f=>{
@@ -48,7 +46,6 @@ class InviteMyFriendsList extends React.Component {
     }
 
     render() {
-        console.log(',,,,,,,STATE', this.state.invitedFriendDataList)
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>

@@ -45,7 +45,7 @@ export default class FaqAnswer extends React.Component {
 
                             <View style={{ flex: 1, alignItems: 'center'}}>
                                 <View style={[styles.textBlock, { marginTop: 0 }]}>
-                                    <HTML html={"<div style='font-family: DINPro-Light !important'>" + Faq[qIndex].description + "</div>"} imagesMaxWidth={width - 20} />
+                                    <HTML html={"<div style='font-family: DINPro-Light'>" + Faq[qIndex].description + "</div>"} imagesMaxWidth={width - 20} />
                                 </View>
 
 

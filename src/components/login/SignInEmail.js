@@ -82,7 +82,6 @@ class SignInEmail extends React.Component {
     }
 
     testComponentWillUnmount() {
-        console.log('.......UNMOUNT.......')
     }
 }
 

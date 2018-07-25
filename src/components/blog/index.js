@@ -48,7 +48,7 @@ class Blog extends React.Component {
                         <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}><LoaderWait /></View> :
                         <View style={{ flex: 1 }}>
                             <View style={{ flex: 1 }}>
-                                <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'Articles'} leftButton={true} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                                <Header goBack={() => this.props.navigation.goBack()} backgroundcolor={'#FFFFFF'} headerTitle={'Articles'} leftButton={false} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
                             </View>
                             <View style={styles.container}>
 
@@ -67,7 +67,7 @@ class Blog extends React.Component {
                                                         <View style={{ margin: 10, marginTop: 0, flex: 1 }}>
 
                                                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 14, color: '#FFFFFF', }}>{item.short_description.replace(/<[^>]*>/g, "")}</Text>
-                                                            {/*<HTML html={`<div style="font-family: DINPro-Light !important; color: #FFFFFF">` + item.short_description + "</div>"} />
+                                                            {/*<HTML html={`<div style="font-family: DINPro-Light; color: #FFFFFF">` + item.short_description + "</div>"} />
                                                             */}
                                                         </View>
                                                     </ImageBackground>

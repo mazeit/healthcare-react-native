@@ -147,7 +147,7 @@ export default class Recipe extends React.Component {
                                         <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', textAlign: 'center' }}>Directions</Text>
                                     </View>
                                     <View style={[styles.details, { margin: 10 }]}>
-                                        <HTML html={"<div style='font-family: DINPro-Light !important'>" + activityData.instructions + "</div>"} imagesMaxWidth={width - 20} />
+                                        <HTML html={"<div style='font-family: DINPro-Light'>" + activityData.instructions + "</div>"} imagesMaxWidth={width - 20} />
                                     </View>
                                 </View>
 

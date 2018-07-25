@@ -33,7 +33,7 @@ class HomeInitial extends React.Component {
 
     componentDidMount () {
         // this.props.autoSignin(JSON.parse('{"customer":{"id":"99","id_shop":"1","id_shop_group":"1","secure_key":"91239ec59c1c87b67da3733709a6155c","note":null,"id_gender":"0","id_default_group":"3","id_lang":"2","lastname":"app","firstname":"test","birthday":"0000-00-00","email":"testapprocco@roccomedia.de","newsletter":"0","ip_registration_newsletter":null,"newsletter_date_add":"0000-00-00 00:00:00","optin":"0","website":null,"company":null,"siret":null,"ape":null,"outstanding_allow_amount":"0.000000","show_public_prices":"0","id_risk":"0","max_payment_days":"0","last_passwd_gen":"2018-07-11 09:56:13","active":"1","is_guest":"0","deleted":"0","date_add":"2018-07-11 15:56:13","date_upd":"2018-07-11 15:56:13","years":null,"days":null,"months":null,"geoloc_id_country":null,"geoloc_id_state":null,"geoloc_postcode":null,"logged":0,"id_guest":null,"groupBox":null,"activated":"0","image":null,"goal":null,"weight":null,"id_shop_list":null,"force_id":false,"language":"Deutsch (German)","img_dir":"https://spano24.com/fitnessportal/img/customers/"},"hasError":false,"errors":[]}'));
-        this.props.autoSignin(JSON.parse('{"customer":{"id":"91","id_shop":"1","id_shop_group":"1","secure_key":"8bef682395889d3816bbd4ef065c0a6d","note":"Spinner","id_gender":"0","id_default_group":"3","id_lang":"2","lastname":"test","firstname":"Tobias","birthday":"0000-00-00","email":"tobias@roccomedia.de","newsletter":"0","ip_registration_newsletter":null,"newsletter_date_add":"0000-00-00 00:00:00","optin":"0","website":null,"company":null,"siret":null,"ape":null,"outstanding_allow_amount":"0.000000","show_public_prices":"0","id_risk":"0","max_payment_days":"0","last_passwd_gen":"2018-07-05 05:26:43","active":"1","is_guest":"0","deleted":"0","date_add":"2018-07-05 11:26:43","date_upd":"2018-07-18 16:38:23","years":null,"days":null,"months":null,"geoloc_id_country":null,"geoloc_id_state":null,"geoloc_postcode":null,"logged":0,"id_guest":null,"groupBox":null,"activated":"0","image":null,"goal":null,"weight":null,"id_shop_list":null,"force_id":false,"language":"Deutsch (German)","img_dir":""},"hasError":false,"errors":[]}'));
+        // this.props.autoSignin(JSON.parse('{"customer":{"id":"91","id_shop":"1","id_shop_group":"1","secure_key":"8bef682395889d3816bbd4ef065c0a6d","note":"Spinner","id_gender":"0","id_default_group":"3","id_lang":"2","lastname":"test","firstname":"Tobias","birthday":"0000-00-00","email":"tobias@roccomedia.de","newsletter":"0","ip_registration_newsletter":null,"newsletter_date_add":"0000-00-00 00:00:00","optin":"0","website":null,"company":null,"siret":null,"ape":null,"outstanding_allow_amount":"0.000000","show_public_prices":"0","id_risk":"0","max_payment_days":"0","last_passwd_gen":"2018-07-05 05:26:43","active":"1","is_guest":"0","deleted":"0","date_add":"2018-07-05 11:26:43","date_upd":"2018-07-18 16:38:23","years":null,"days":null,"months":null,"geoloc_id_country":null,"geoloc_id_state":null,"geoloc_postcode":null,"logged":0,"id_guest":null,"groupBox":null,"activated":"0","image":null,"goal":null,"weight":null,"id_shop_list":null,"force_id":false,"language":"Deutsch (German)","img_dir":""},"hasError":false,"errors":[]}'));
 
         var c1 = {"id_content":31,"file_id":"PjrsQ3kh","pillar":"activity","rezept":"0","rezept_video":0,"favorite":false,"page_url":"https:\/\/spano24.com\/fitnessportal\/de\/module\/roccfitnessportal\/contentdetail?content=31&type=activity","name":"Mobiler R\u00fccken - Workout 9","description":""};
         var c2 = {"id_content":98,"file_id":"SMaedwwZ","pillar":"nutrition","rezept":"1","rezept_video":"328","favorite":false,"rezept_url":"https:\/\/spano24.com\/fitnessportal\/rezeptideen\/328-pecannuss-rosmarin-muffins-auf-avocado-hummus?type=activity","page_url":"https:\/\/spano24.com\/fitnessportal\/de\/module\/roccfitnessportal\/contentdetail?content=98&type=activity","name":"Pekannuss-Rosmarin-Muffins auf Avocadohummus","description":""};
@@ -73,16 +73,23 @@ class HomeInitial extends React.Component {
         // this.props.navigation.navigate('OverviewStatus', {})
         // this.props.navigation.navigate('QuestionStep', {data: JSON.parse('{"key":"nutrition","icon":"nutrition","color":"#8ACE91","text":"Nutrition","back":"#e1f2e2","img":7,"id_question_category":"1","name":"Nutrition","short_description":"sss","description":"ssss","answes_given":1,"total_question":2}')})
 
-        this.props.navigation.navigate('Tracker', {})
+        // this.props.navigation.navigate('Tracker', {})
         // this.props.navigation.navigate('BlogStack', {})
         // this.props.navigation.navigate('Article', {article: JSON.parse(`{"name":"What is Lorem Ipsum?","reading_time":"12 Mins","active":"1","feature":"1","id_lfmagazine_category":"2","id_lfmagazine_author":"2","position":"0","short_description":"s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500","description": "Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.","link_rewrite":"what-is-lorem-ipsum","date_add":"2018-04-18 13:46:14","date_upd":"2018-04-25 08:34:18","id_image":1,"id":1,"id_shop_list":null,"force_id":false,"id_post":"1"}`)})
         
         // this.props.navigation.navigate('CoachProfile', {id_author: 2})
 
         // this.props.navigation.navigate('ImportantNotification', {});
-        // auth.isSignedIn().then(json=>{
-        //     // Auth signin
-        // })
+        auth.isSignedIn().then(json=>{
+            try {
+                let obj = JSON.parse(json);
+                this.props.autoSignin(obj);
+                this.props.navigation.navigate('ImportantNotification', {});
+            } catch (e) {
+
+            }
+            
+        })
     }
 
     onLoad () {

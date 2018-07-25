@@ -76,13 +76,11 @@ export default class Activity extends React.Component {
                     </View>
                 </View>
             </View>
-            console.log(this.state.activityData);
         const demo = {
             'open': open,
             'locked': locked,
             'add': add
         }
-        console.log('https://content.jwplatform.com/players/' + this.state.activityData.file_id + '-Qzd90UGq.html');
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>

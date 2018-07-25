@@ -29,15 +29,12 @@ class AddActivityCategory extends React.Component {
     }
 
     componentWillReceiveProps (nextProps) {
-        // console.log('.........PROPS....', nextProps);
-        
         if(nextProps.pillarData.hasError === false) {
             this.setState({loader: false});
             this.props.navigation.navigate('ChoseActivity',{pillarData: nextProps.pillarData[this.state.pillarName], pillarName: this.state.pillarName, user_id: this.props.user.id})
         }
         else if(nextProps.pillarData.hasError === true) {
             this.setState({ loader: false })
-            console.log('......ERROR.....', nextProps.pillarData.errors)
         }
         
     }

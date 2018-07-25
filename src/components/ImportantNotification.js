@@ -9,10 +9,21 @@ const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 import LoaderWait from './LoaderWait';
 import { getImportantNotification, getActivity, getRecipe } from '../actions/index';
 
-
+import Video from 'react-native-video';
 const { height, width } = Dimensions.get('window');
 
-
+// <Video source={{uri: "background"}}   // Can be a URL or a local file.
+//        ref={(ref) => {
+//          this.player = ref
+//        }}                                      // Store reference
+//        onBuffer={this.onBuffer}                // Callback when remote video is buffering
+//        onEnd={this.onEnd}                      // Callback when playback finishes
+//        onError={this.videoError}               // Callback when video cannot be loaded
+//        onFullscreenPlayerWillPresent={this.fullScreenPlayerWillPresent} // Callback before fullscreen starts
+//        onFullscreenPlayerDidPresent={this.fullScreenPlayerDidPresent}   // Callback after fullscreen started
+//        onFullscreenPlayerWillDismiss={this.fullScreenPlayerWillDismiss} // Callback before fullscreen stops
+//        onFullscreenPlayerDidDismiss={this.fullScreenPlayerDidDismiss}  // Callback after fullscreen stopped
+//        style={styles.backgroundVideo} />
 class ImportantNotification extends React.Component {
     constructor(props) {
         super(props);
@@ -41,7 +52,6 @@ class ImportantNotification extends React.Component {
 
             this.props.getActivity(content.id_content)
             .then((resultObj)=>{
-                console.log(resultObj);
                 if (!resultObj.hasError) {
                     this.setState({loader: false, resultObj: resultObj.content});
 
@@ -52,7 +62,6 @@ class ImportantNotification extends React.Component {
 
             this.props.getRecipe(content.rezept_video)
             .then((resultObj)=>{
-                console.log(resultObj);
                 if (!resultObj.hasError){
                     this.setState({loader: false, resultObj: resultObj.recipe});
                     this.props.navigation.navigate('Recipe',  {activityType: this.state.activityType, data: resultObj.recipe})
