@@ -12,6 +12,7 @@ const { height, width } = Dimensions.get('window');
 import Header from '../Header';
 import Footer from './Footer';
 
+// import ScrollRuler from '../SCrollRuler';
 
 const TrakerList = ['Steps', 'Distance', 'Floors', 'Pulse', 'Meditation time', 'Active time', 'Sleeping time', 'Burned calories'];
 let options = {
@@ -240,7 +241,7 @@ export default class Tracker extends React.Component {
                             </View>
 
                         </View>
-
+                        {/*<ScrollRuler minValue={0} maxValue={100} step={1} unit={'pound'} />*/}
                     </ScrollView>
                 </View>
                 <View style={{ flex: 1 }}>

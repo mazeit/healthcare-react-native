@@ -10,20 +10,10 @@ import LoaderWait from './LoaderWait';
 import { getImportantNotification, getActivity, getRecipe } from '../actions/index';
 
 import Video from 'react-native-video';
+import VideoPlayer from 'react-native-video-player';
+
 const { height, width } = Dimensions.get('window');
 
-// <Video source={{uri: "background"}}   // Can be a URL or a local file.
-//        ref={(ref) => {
-//          this.player = ref
-//        }}                                      // Store reference
-//        onBuffer={this.onBuffer}                // Callback when remote video is buffering
-//        onEnd={this.onEnd}                      // Callback when playback finishes
-//        onError={this.videoError}               // Callback when video cannot be loaded
-//        onFullscreenPlayerWillPresent={this.fullScreenPlayerWillPresent} // Callback before fullscreen starts
-//        onFullscreenPlayerDidPresent={this.fullScreenPlayerDidPresent}   // Callback after fullscreen started
-//        onFullscreenPlayerWillDismiss={this.fullScreenPlayerWillDismiss} // Callback before fullscreen stops
-//        onFullscreenPlayerDidDismiss={this.fullScreenPlayerDidDismiss}  // Callback after fullscreen stopped
-//        style={styles.backgroundVideo} />
 class ImportantNotification extends React.Component {
     constructor(props) {
         super(props);
@@ -73,6 +63,8 @@ class ImportantNotification extends React.Component {
 
     render() {
         const {importantn} = this.state;
+        if (importantn)
+            console.log('https://content.jwplatform.com/videos/' + importantn.importantn.file_id + '-1y8TnPKC.mp4')
         return (
             <ImageBackground style={styles.homeImage} source={require('../../assets/images/homeBlur.png')}>
 
@@ -102,16 +94,27 @@ class ImportantNotification extends React.Component {
                                     <Text style={styles.headerText}>Your next activity</Text>
                                     <Text style={styles.headerText}>before noon!</Text>
                                 </View>
-                                <View style={styles.activityDisply}>
+                                <View style={[styles.activityDisply]}>
 
                                     {
                                         importantn.importantn.file_id !== '' ?
-                                            <WebView
-                                                style={{ flex: 1 }}
-                                                javaScriptEnabled={true}
-                                                domStorageEnabled={true}
-                                                source={{ uri: 'https://content.jwplatform.com/players/' + importantn.importantn.file_id + '-Qzd90UGq.html' }}
-                                            /> :
+                                            // <WebView
+                                            //     style={{ flex: 1 }}
+                                            //     javaScriptEnabled={true}
+                                            //     domStorageEnabled={true}
+                                            //     source={{ uri: 'https://content.jwplatform.com/players/' + importantn.importantn.file_id + '-Qzd90UGq.html' }}
+                                            // /> 
+
+                                            <VideoPlayer
+                                               ref={(ref) => {
+                                                 this.player = ref
+                                               }}                    
+
+                                               endWithThumbnail={true}
+                                               pauseOnPress={true}
+                                               style={{}}
+                                               thumbnail={{uri: 'https://content.jwplatform.com/thumbs/' + importantn.importantn.file_id + '-480.jpg'}} 
+                                                video={{ uri: 'https://content.jwplatform.com/videos/' + importantn.importantn.file_id + '-1y8TnPKC.mp4' }}/>:
                                             <Image source={require('../../assets/images/no_video.png')} style={{ width: '100%', height: '100%', }} />
                                     }
                                 </View>
@@ -122,7 +125,7 @@ class ImportantNotification extends React.Component {
                                     <TouchableOpacity style={{ backgroundColor: this.state.backgroundColor, flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderColor: '#ffffff', borderRadius: 50, borderWidth: 0.5 }} onPress={()=>this.gotoContentDeail() }>
                                         <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Light', fontSize: 17, color: '#ffffff' }}>More Details</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={{ backgroundColor: '#FFFFFF', flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderRadius: 50 }}>
+                                    <TouchableOpacity style={{ backgroundColor: '#FFFFFF', flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderRadius: 50 }} onPress={()=>this.player.resume()}>
                                         <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Light', fontSize: 17, color: this.state.backgroundColor }}>Start session</Text>
                                     </TouchableOpacity>
                                 </View> 
@@ -178,7 +181,7 @@ const styles = StyleSheet.create({
         flex: 4,
         overflow: 'hidden',
         marginTop: 5,
-        width: width - 100,
+        width: width - 40,
     },
     image: {
         width: 300,

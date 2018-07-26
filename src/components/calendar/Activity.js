@@ -10,7 +10,7 @@ import Video from 'react-native-video';
  
 import { getCalendarData } from '../../actions/index'
 
-
+import VideoPlayer from 'react-native-video-player';
 const { height, width } = Dimensions.get('window');
 import Header from '../Header';
 
@@ -89,12 +89,22 @@ export default class Activity extends React.Component {
                 <View style={{ flex: 9, }}>
                     <View style={{ flex: 6, }}>
                         {this.state.activityData.file_id !== '' ?
-                            <WebView
-                                style={{ flex: 1 }}
-                                javaScriptEnabled={true}
-                                domStorageEnabled={true}
-                                source={{ uri: 'https://content.jwplatform.com/players/' + this.state.activityData.file_id + '-Qzd90UGq.html' }}
-                            /> :
+                            // <WebView
+                            //     style={{ flex: 1 }}
+                            //     javaScriptEnabled={true}
+                            //     domStorageEnabled={true}
+                            //     source={{ uri: 'https://content.jwplatform.com/players/' + this.state.activityData.file_id + '-Qzd90UGq.html' }}
+                            // /> :
+                            <VideoPlayer
+                               ref={(ref) => {
+                                 this.player = ref
+                               }}                    
+
+                               endWithThumbnail={true}
+                               pauseOnPress={true}
+                               style={{}}
+                               thumbnail={{uri: 'https://content.jwplatform.com/thumbs/' + this.state.activityData.file_id + '-480.jpg'}} 
+                                video={{ uri: 'https://content.jwplatform.com/videos/' + this.state.activityData.file_id + '-1y8TnPKC.mp4' }}/>:
                             <Image source={require('../../../assets/images/no_video.png')} style={{ width: '100%', height: '100%', }} />
                         }                    
                     </View>
