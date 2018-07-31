@@ -112,7 +112,7 @@ class ActivityList extends React.Component {
                                             </TouchableOpacity>
                                         </View>
                                         <TouchableOpacity onPress={() => this.goToNextView(item)} style={styles.categoryDetails}>
-                                            <ImageBackground style={styles.category} source={item.file_id !== '' ? { uri: 'https://content.jwplatform.com/thumbs/DRJghGa7.jpg' } : this.state.dataListColor[item.pillar]}>
+                                            <ImageBackground style={[styles.category, {height: 100}]} source={item.file_id !== '' ? { uri: `https://content.jwplatform.com/thumbs/${item.file_id}-320.jpg` } : this.state.dataListColor[item.pillar]}>
                                                 <ImageBackground style={styles.category} source={this.state.dataListImage[item.pillar]}>
                                                     {/* <Text>{item.key}</Text> */}
                                                     <View style={{ margin: 10, flex: 1   }}>

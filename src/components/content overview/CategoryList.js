@@ -95,6 +95,8 @@ class CategoryList extends React.Component {
             this.props.getSearchContent(this.state.searchKey).then((pillarData) => {
                 this.setState({ pillarData: pillarData['search'], loader: false })
             });   
+        } else if (this.state.viewType == 'all') {
+            // Promise.all([])
         }
     }
 
@@ -139,6 +141,8 @@ class CategoryList extends React.Component {
             title = 'SEARCH YOUR TOPIC';
         else if (viewType == 'pillar')
             title = pillarName.toUpperCase();
+        else if (viewType == 'all')
+            title = 'ALL'
         return (
             <View style={{ flex: 1 }}>
                 {
@@ -154,7 +158,7 @@ class CategoryList extends React.Component {
                                     <Image style={{ width: 20, height: 20 }} source={require('../../../assets/icons/search.png')} />
                                 </View> */}
                                 {viewType == 'search' && <View style={{flexDirection: 'row'}}>
-                                    <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40}} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} value={this.state.searchKey} onChangeText={(text)=>this.setState({searchKey: text}) } />
+                                    <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, paddingLeft: 20}} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} value={this.state.searchKey} onChangeText={(text)=>this.setState({searchKey: text}) } />
                                     <Icon name="magnifyer" onPress={()=>{ this.getSearchResult() }} size={50} style={{ marginLeft: -10, backgroundColor: '#FFFFFF',}} color="#454545" />
                                 </View>}
 

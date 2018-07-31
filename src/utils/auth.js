@@ -7,10 +7,13 @@ const user = null;
 export const USER_KEY = "user-obj";
 export const onSignIn = (obj) => {
   user = obj.customer;
-  AsyncStorage.setItem(USER_KEY, JSON.stringify(obj));
+  return AsyncStorage.setItem(USER_KEY, JSON.stringify(obj));
 };
 
-export const onSignOut = () => AsyncStorage.removeItem(USER_KEY);
+export const onSignOut = () => {
+  AsyncStorage.removeItem(USER_KEY);
+  user = null;
+};  
 
 export const isSignedIn = () => {
   return new Promise((resolve, reject) => {

@@ -63,8 +63,6 @@ class ImportantNotification extends React.Component {
 
     render() {
         const {importantn} = this.state;
-        if (importantn)
-            console.log('https://content.jwplatform.com/videos/' + importantn.importantn.file_id + '-1y8TnPKC.mp4')
         return (
             <ImageBackground style={styles.homeImage} source={require('../../assets/images/homeBlur.png')}>
 

@@ -4,15 +4,51 @@ import { StyleSheet, Text, View, Image, ScrollView, ImageBackground, Dimensions,
 const { height, width } = Dimensions.get('window');
 import Header from '../Header';
 
-export default class ProfileNotification extends React.Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { getNotificationInfo, updateNotificationInfo } from '../../actions';
+import RNPickerSelect from 'react-native-picker-select';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+
+import LoaderWait from '../LoaderWait';
+import moment from 'moment';
+class ProfileNotification extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            toggle: false
+            toggle: false,
+            userNotfi: null,
+            loader: false,
+
+
+            isMorningActivityVisible: false,
+            isAfternoonActivityVisible: false,
         };
+        this.updateNotificationInfo = this.updateNotificationInfo.bind(this);
+    }
+
+    updateNotificationInfo(info) {
+        this.props.updateNotificationInfo(info).then(res=>{
+            console.log(res);
+        })
+    }
+
+    componentDidMount() {
+        // this.props.getNotificationInfo().then((res)=>{
+        //     this.setState({userNotfi: res.notifications, loader: false});
+
+        // });
     }
 
     render() {
+        if (this.state.loader) {
+            return (<View style={{ flex: 1 }}>
+                        <View style={{ flex: 1, opacity: 0.8 }}><LoaderWait /></View>
+                    </View>);
+        }
+        let {notifiInfo} = this.props;
+        console.log(notifiInfo);
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>
@@ -29,10 +65,10 @@ export default class ProfileNotification extends React.Component {
 
                             <View style={styles.notificationContainer}>
                                 <View style={{ flex: 1, alignItems: 'flex-start' }}>
-                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383' }}>Activity Reminder</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383' }}>Activity quote</Text>
                                 </View>
                                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                                    <Switch onValueChange={() => this.setState({ toggle: !this.state.toggle })} onTintColor={'#4AB3E2'} value={this.state.toggle}></Switch>
+                                    <Switch onValueChange={() => this.updateNotificationInfo({ reminder: notifiInfo.reminder == 0 ? 1 :0 })} onTintColor={'#4AB3E2'} value={notifiInfo.reminder==0 ? false : true}></Switch>
                                 </View>
                             </View>
 
@@ -41,7 +77,15 @@ export default class ProfileNotification extends React.Component {
                                     <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383' }}>Reminder for morning activities</Text>
                                 </View>
                                 <View style={{ flex: 3, alignItems: 'flex-end' }}>
-                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383' }}>7:00 AM</Text>
+
+                                    <DateTimePicker
+                                        date={notifiInfo.morning_reminder_time ? new Date(notifiInfo.morning_reminder_time) : new Date()}
+                                        mode={'time'}
+                                        isVisible={this.state.isMorningActivityVisible}
+                                        onConfirm={(value)=>{console.log(value); this.updateNotificationInfo({morning_reminder_time: moment(value).format('YYYY-MM-DD HH:mm:ss')}); this.setState({isMorningActivityVisible: false}); }}
+                                        onCancel={()=>this.setState({isMorningActivityVisible: false})}
+                                    />
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#4AB3E2' }} onPress={()=>this.setState({isMorningActivityVisible: true}) }>{notifiInfo.morning_reminder_time ? moment(notifiInfo.morning_reminder_time).format('HH:mm') : moment().format('HH:mm')}</Text>
                                 </View>
                             </View>
 
@@ -50,7 +94,16 @@ export default class ProfileNotification extends React.Component {
                                     <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383' }}>Reminder for afternoon activities</Text>
                                 </View>
                                 <View style={{ flex: 3, alignItems: 'flex-end' }}>
-                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383' }}>2:00 PM</Text>
+                                    
+
+                                    <DateTimePicker
+                                        date={notifiInfo.evening_reminder_time ? new Date(notifiInfo.evening_reminder_time) : new Date()}
+                                        mode={'time'}
+                                        isVisible={this.state.isAfternoonActivityVisible}
+                                        onConfirm={(value)=>{this.updateNotificationInfo({evening_reminder_time:  moment(value).format('YYYY-MM-DD HH:mm:ss')}); this.setState({isAfternoonActivityVisible: false}); }}
+                                        onCancel={()=>this.setState({isAfternoonActivityVisible: false})}
+                                    />
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#4AB3E2' }} onPress={()=>this.setState({isAfternoonActivityVisible: true}) }>{notifiInfo.evening_reminder_time ? moment(notifiInfo.evening_reminder_time).format('hh:mm') : moment().format('hh:mm')}</Text>
                                 </View>
                             </View>
 
@@ -59,7 +112,7 @@ export default class ProfileNotification extends React.Component {
                                     <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383' }}>Success/Motivation notification</Text>
                                 </View>
                                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                                    <Switch onTintColor={'#4AB3E2'}></Switch>
+                                    <Switch onValueChange={() => this.updateNotificationInfo({ motivation: notifiInfo.motivation == 0 ? 1 :0 })} onTintColor={'#4AB3E2'} value={notifiInfo.motivation==0 ? false : true}></Switch>
                                 </View>
                             </View>
 
@@ -68,7 +121,7 @@ export default class ProfileNotification extends React.Component {
                                     <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383' }}>Quote of the day</Text>
                                 </View>
                                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                                    <Switch onTintColor={'#4AB3E2'}></Switch>
+                                    <Switch onValueChange={() => this.updateNotificationInfo({ quote: notifiInfo.quote == 0 ? 1 :0 })} onTintColor={'#4AB3E2'} value={notifiInfo.quote==0 ? false : true}></Switch>
                                 </View>
                             </View>
 
@@ -77,7 +130,7 @@ export default class ProfileNotification extends React.Component {
                                     <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383' }}>News/Blog Posts</Text>
                                 </View>
                                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                                    <Switch onTintColor={'#4AB3E2'}></Switch>
+                                    <Switch onValueChange={() => this.updateNotificationInfo({ news: notifiInfo.news == 0 ? 1 :0 })} onTintColor={'#4AB3E2'} value={notifiInfo.news==0 ? false : true}></Switch>
                                 </View>
                             </View>
 
@@ -126,3 +179,14 @@ const styles = StyleSheet.create({
         borderBottomColor: '#838383',
     },
 });
+
+
+
+export default connect(state => {
+    const notifiInfo = state.validUser.notifiInfo || {};
+    return {
+        notifiInfo,
+    }
+}, dispatch => {
+    return bindActionCreators({ getNotificationInfo, updateNotificationInfo }, dispatch)
+})(ProfileNotification)

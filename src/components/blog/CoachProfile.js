@@ -110,7 +110,7 @@ class Blog extends React.Component {
                                                 </View>
                                             </View>
 
-                                            <View style={styles.contentSubBlock}>
+                                            {/*<View style={styles.contentSubBlock}>
                                                 <View style={[styles.details, { height: 51, width: width - 40, borderBottomWidth: 0.5, borderColor: '#E9E9E9', }]}>
                                                     <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', textAlign: 'center' }}>37 years old, married, 2 kids</Text>
                                                 </View>
@@ -120,7 +120,7 @@ class Blog extends React.Component {
                                                 <View style={[styles.details, { height: 51, width: width - 40, }]}>
                                                     <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545', textAlign: 'center' }}>0Nutirion specialist, Tai Chi teacher</Text>
                                                 </View>
-                                            </View>
+                                            </View>*/}
 
                                             <View style={styles.contentSubBlock}>
                                                 <View style={[styles.details, { margin: 10 }]}>
@@ -132,7 +132,8 @@ class Blog extends React.Component {
                                             </View>
 
 
-                                            <View style={[styles.contentSubBlock, { width: width - 20 }]}>
+                                            
+                                        {/*<View style={[styles.contentSubBlock, { width: width - 20 }]}>
                                                 <View style={[styles.details, { margin: 10 }]}>
                                                     <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', textAlign: 'center' }}>If you prefer to continue with Kathryn as your Coach, please click here.</Text>
                                                 </View>
@@ -143,7 +144,7 @@ class Blog extends React.Component {
                                                         </View>
                                                     </TouchableOpacity>
                                                 </View>
-                                            </View>
+                                            </View>*/}
                                             <View style={styles.contentSubBlock}></View>
                                         </View>
                                     </View>

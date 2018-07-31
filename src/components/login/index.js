@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Home from './Home.js';
 import Loader from '../Loader';
 
-import { autoSignin, getActivity, getRecipe } from '../../actions/index';
+import { autoSignin, getActivity, getRecipe, getCurrentUser, getNotificationInfo } from '../../actions/index';
 
 import Header from '../Header';
 const BannerWidth = Dimensions.get('window').width;
@@ -29,6 +29,7 @@ class HomeInitial extends React.Component {
             loader: true,
             introText: 'Skip Intro'
         };
+        this.checkLoggedInAndNavigate = this.checkLoggedInAndNavigate.bind(this);
     }
 
     componentDidMount () {
@@ -80,26 +81,40 @@ class HomeInitial extends React.Component {
         // this.props.navigation.navigate('CoachProfile', {id_author: 2})
 
         // this.props.navigation.navigate('ImportantNotification', {});
+        this.checkLoggedInAndNavigate('CalendarView');
+    }
+
+    onLoad () {
+        
+    }
+
+    renderPage(image, index) {
+        return (
+            <Home key={index}/>
+        );
+    }
+
+    checkLoggedInAndNavigate(screen) {
         auth.isSignedIn().then(json=>{
             try {
+
                 let obj = JSON.parse(json);
-                this.props.autoSignin(obj);
-                this.props.navigation.navigate('ImportantNotification', {});
+                if (obj) {
+                    this.props.autoSignin(obj);  
+                    Promise.all([this.props.getCurrentUser(), this.props.getNotificationInfo()])
+                    .then(res=>{
+                        this.props.navigation.navigate('CalendarView', {});   
+                        this.setState({loader: false});
+                    });
+                } else {
+                    this.setState({loader: false});
+                }
+
             } catch (e) {
 
             }
             
         })
-    }
-
-    onLoad () {
-        setTimeout( () => this.setState({loader: false}), 500);
-        
-    }
-    renderPage(image, index) {
-        return (
-            <Home key={index}/>
-        );
     }
 
     render() {
@@ -117,7 +132,7 @@ class HomeInitial extends React.Component {
                         {images.map((image, index) => this.renderPage(image, index))}
                     </Carousel>
                     <View style={styles.skipIntro}>
-                        <Text onPress={() => this.props.navigation.navigate('Welcome') } style={{fontFamily:'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff'}}>{this.state.introText}</Text>
+                        <Text onPress={() => this.checkLoggedInAndNavigate('Welcome')} style={{fontFamily:'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff'}}>{this.state.introText}</Text>
                     </View>
                 </View>
             </ImageBackground>
@@ -148,6 +163,6 @@ export default connect(state => {
     return {
     }
 }, dispatch => {
-    return bindActionCreators({ autoSignin: autoSignin, getActivity, getRecipe }, dispatch)
+    return bindActionCreators({ autoSignin: autoSignin, getActivity, getRecipe, getCurrentUser, getNotificationInfo }, dispatch)
 }
 )(HomeInitial);

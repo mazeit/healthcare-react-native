@@ -152,7 +152,7 @@ class ContentOverview extends React.Component {
                                 {/* HEADER ENDS*/}
 
                                 <Animated.View style={[styles.search, { height }, { opacity }]}>
-                                    <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} value={this.state.searchKey} onChangeText={(text)=>this.setState({searchKey: text}) } />
+                                    <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44, paddingLeft: 20 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} value={this.state.searchKey} onChangeText={(text)=>this.setState({searchKey: text}) } />
                                     <Icon name="magnifyer" onPress={()=>{ this.state.searchKey && this.props.navigation.navigate('CategoryList', {viewType: 'search', searchKey: this.state.searchKey}) }} size={50} style={{ marginLeft: -10 }} color="#454545" />
                                 </Animated.View>
                                 <View style={[styles.section, { marginBottom: 5 }]}>
@@ -199,7 +199,7 @@ class ContentOverview extends React.Component {
                                             </ImageBackground>
                                         </View>
                                         <View style={styles.activityContainer}>
-                                            <Icon name="coach" size={50} style={{ marginLeft: -10 }} color="#D4B870" />
+                                            <Icon name="coach" size={40} style={{ marginLeft: -10 }} color="#454545" />
                                             <Text style={[styles.activitySubtittle, { color: '#454545' }]} >Coach</Text>
                                         </View>
                                     </TouchableOpacity>
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     },
 
     buttonGroup: {
-        height: 50,
+        height: 70,
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',

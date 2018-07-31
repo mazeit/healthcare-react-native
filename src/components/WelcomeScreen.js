@@ -57,7 +57,7 @@ class WelcomeScreen extends React.Component {
                             <View style={{ flex: 1, opacity: 0.8 }}><LoaderWait /></View> :
                             <View style={{ flex: 1 }}>
                                 <View style={styles.welcomeHeader}>
-                                    <TouchableOpacity style={{ marginLeft: 10, marginBottom: 20, alignItems: 'flex-start', width: width - 5 }} onPress={() => this.props.navigation.navigate('ContentStack')} >
+                                    <TouchableOpacity style={{ marginLeft: 10, marginBottom: 20, alignItems: 'flex-start', width: width - 5 }} onPress={() => this.props.navigation.navigate('CalendarStack')} >
                                         <Icon name="close" size={50} style={{ marginLeft: -15 }} color="#FFFFFF" />
                                     </TouchableOpacity>
                                     <Text style={styles.headerText}>Welcome</Text>

@@ -32,6 +32,10 @@ export default class Recipe extends React.Component {
         this.setState({portion: parseInt(this.state.portion) + 1});
     }
 
+    openDatePrefrence() {
+        this.props.navigation.navigate('CalendarView', { id_content : this.state.activityData.id, mode : 'add-activity' })
+    }
+    
     render() {
         let {activityData, activityType, portion} = this.state;
         return (
@@ -156,7 +160,7 @@ export default class Recipe extends React.Component {
                                         <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#838383', }}>Add this recipe to your challenge</Text>
                                     </View>
                                     <View style={[styles.details, { margin: 10, }]}>
-                                        <TouchableOpacity >
+                                        <TouchableOpacity  onPress={() => this.openDatePrefrence()}>
                                             <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
                                                 <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Add</Text>
                                             </View>

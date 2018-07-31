@@ -55,6 +55,11 @@ import Blog from './src/components/blog';
 import Article from './src/components/blog/Article';
 import CoachProfile from './src/components/blog/CoachProfile';
 
+
+import WebShop from './src/components/WebShop';
+
+import Storage from 'react-native-storage';
+import { AsyncStorage } from 'react-native';
 const store = createStore(userReducer, compose(applyMiddleware(thunk)));
 
 export default class App extends React.Component {
@@ -183,6 +188,16 @@ const BlogStack = StackNavigator({
 );
 
 
+
+const WebShopStack = StackNavigator({
+  WebShop: { screen: WebShop },
+
+},
+  {
+    headerMode: 'none',
+  }
+);
+
 ////  ROOT STACK / START------------------------------------>
 
 
@@ -196,8 +211,8 @@ const AppNavigator = StackNavigator({
 
   QuestionarieStack: { screen: QuestionarieStack },
   ProfileStack: { screen: ProfileStack },
-  BlogStack: { screen: BlogStack }
-
+  BlogStack: { screen: BlogStack },
+  WebShopStack: { screen: WebShopStack }
 }, {
     mode: 'modal',
     headerMode: 'none',
@@ -212,7 +227,29 @@ const styles = StyleSheet.create({
   },
 });
 
+var storage = new Storage({
+  // maximum capacity, default 1000 
+  size: 1000,
 
+  // Use AsyncStorage for RN, or window.localStorage for web.
+  // If not set, data would be lost after reload.
+  storageBackend: AsyncStorage,
+  
+  // expire time, default 1 day(1000 * 3600 * 24 milliseconds).
+  // can be null, which means never expire.
+  defaultExpires: null,
+  
+  // cache data in the memory. default is true.
+  enableCache: true,
+  
+  // if data was not found in storage or expired,
+  // the corresponding sync method will be invoked and return 
+  // the latest data.
+  sync : {
+    // we'll talk about the details later.
+  }
+});
+global.storage = storage;
 // const prevGetStateForActionCalendarStack = CalendarStack.router.getStateForAction;
 // CalendarStack.router.getStateForAction = (action, state) =>{
 //   if (state && action.type === 'ReplaceCurrentScreen') {
@@ -227,17 +264,12 @@ const styles = StyleSheet.create({
 //   return prevGetStateForActionCalendarStack(action, state);
 // };
 
-  // <key>NSAppTransportSecurity</key>
-  // <dict>
-  //   <key>NSExceptionDomains</key>
-  //   <dict>
-  //     <key>localhost</key>
-  //     <dict>
-  //       <key>NSExceptionAllowsInsecureHTTPLoads</key>
-  //       <true/>
-  //     </dict>
-  //   </dict>
-  // </dict>
+
+      // <key>localhost</key>
+      // <dict>
+      //   <key>NSExceptionAllowsInsecureHTTPLoads</key>
+      //   <true/>
+      // </dict>
 
   // react-native link react-native-jwplayer
   // react-native link

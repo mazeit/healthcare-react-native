@@ -3,11 +3,10 @@ import moment from 'moment';
 const baseUrl = 'https://spano24.com/fitnessportal/fitness/';
 const securityKey = '458f1f8232516673a36a86daf0d87e8b';
 
-const ApiManager = function(url, params, excludeUserInfo) {
-
+const ApiManager = function(url, params, usero) {
     let user = auth.getUser();
     let userCred = '';
-    if (user && !excludeUserInfo) {
+    if (user) {
         userCred = `id_customer=${user.id}&id_lang=${user.id_lang}`;
     }
     let fullUrl = baseUrl + url;
@@ -56,11 +55,14 @@ export const verifyPassword = (email, password) => {
         return ApiManager('login?email=' + email + '&passwd=' + password, {
             method: 'GET',
         }, true).then((json) => {
-            dispatch({
-                type: 'AUTHENTICATE_USER_PASSWORD',
-                payload: json
-            })
-            auth.onSignIn(json);
+            return auth.onSignIn(json).then(resp=>{
+
+                dispatch({
+                    type: 'AUTHENTICATE_USER',
+                    payload: json
+                })
+                return json;
+            });
         })
 
     }
@@ -70,7 +72,7 @@ export const autoSignin = (json) => {
     return async (dispatch, getState) => {
         auth.onSignIn(json);
         dispatch({
-            type: 'AUTHENTICATE_USER_PASSWORD',
+            type: 'AUTHENTICATE_USER',
             payload: json
         })
     }
@@ -99,7 +101,7 @@ export const signOut = () => {
             type: 'SIGNOUT',
             payload: ''
         })
-
+        return auth.onSignOut();
     }
 }
 
@@ -518,5 +520,191 @@ export const answerQuestion = (id_question_category, id_question, id_answers) =>
             return json;
         })
 
+    }
+}
+
+
+
+export const getTermOfConditions = () => {
+
+    return async (dispatch, getState) => {
+        return ApiManager('cms?id_cms=3', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_TERMS_CONDITION',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+export const getLangs = () => {
+
+    return async (dispatch, getState) => {
+        return ApiManager('languages?', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_LANGS',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+export const getGenders = () => {
+
+    return async (dispatch, getState) => {
+        return ApiManager('genders?', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_GENDERS',
+                payload: json
+            })
+            return json;
+        })
+
+    }
+}
+
+export const updateProfileInfo = (info) => {
+    let str = '';
+    for (let key in info) {
+        if (info[key])
+            str += `${key}=${info[key]}&`;
+    }
+    return async (dispatch, getState) => {
+        return ApiManager('customerupdate?' + str, {
+            method: 'POST',
+        }).then((json) => {
+
+            return ApiManager('customer?', {
+                method: 'POST',
+            }).then((json) => {
+                dispatch({
+                    type: 'UPATE_PROFILE_INFO',
+                    payload: json.customer
+                });
+                auth.onSignIn(json);
+                return json;
+            });
+        })
+
+    }
+}
+
+
+export const getCountries = (info) => {
+    return async (dispatch, getState) => {
+        return ApiManager('countries?', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_COUNTRY_LIST',
+                payload: info
+            })
+            return json;
+        })
+
+    }
+}
+
+export const getCurrentUser = () => {
+    return async (dispatch, getState) => {
+        return ApiManager('customer?', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'UPATE_PROFILE_INFO',
+                payload: json.customer
+            });
+            return auth.onSignIn(json);
+        })
+
+    }
+}
+
+export const updateNotificationInfo = (info) => {
+    let str = '';
+    for (let key in info) {
+        str += `${key}=${info[key]}&`;
+    }
+    return async (dispatch, getState) => {
+        return ApiManager('updatenotifications?'+str, {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'UPDATE_NOTIFICATION',
+                payload: info
+            });
+            return json;
+        })
+
+    }
+}
+
+export const getNotificationInfo = () => {
+    return async (dispatch, getState) => {
+        return ApiManager('mynotifications?', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_NOTIFICATION',
+                payload: json.notifications
+            });
+            return json;
+        })
+
+    }
+}
+
+export const updateProfileimage = (imageBase64) => {
+
+    return async (dispatch, getState) => {
+        // function dataURLtoFile(dataurl, filename) {
+        //     var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        //         bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        //     while(n--){
+        //         u8arr[n] = bstr.charCodeAt(n);
+        //     }
+        //     return new File([u8arr], filename, {type:mime});
+        // }
+
+        // let file = dataURLtoFile(imageBase64, 'testFile.png')
+
+        let user = auth.getUser();
+        var body = new FormData();
+        body.append('id_customer', user.id);
+        body.append('customerimage', imageBase64);
+        body.append('img_type', 'png');
+
+
+        return fetch(`${baseUrl}customerupdate/${securityKey}?id_customer=${user.id}`, {
+            method: 'POST',
+            // body: {
+            //     id_customer: user.id,
+            //     customer_image: imageBase64,
+            //     img_type: 'png'
+            // }
+            body: body
+        }).then((response) =>  {
+            
+            return ApiManager('customer?', {
+                method: 'POST',
+            }).then((json) => {
+                dispatch({
+                    type: 'UPATE_PROFILE_INFO',
+                    payload: json.customer
+                });
+                auth.onSignIn(json);
+                return json;
+            })
+        });
     }
 }

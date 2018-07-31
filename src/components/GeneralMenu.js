@@ -50,8 +50,8 @@ const menuList = [
     },
     {
         name: 'WEBSHOP',
-        // component: 'WebShop'
-        webLink: 'http://livinflow.com/'
+        component: 'WebShop'
+        // webLink: 'http://livinflow.com/'
     },
 ];
 

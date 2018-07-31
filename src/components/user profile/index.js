@@ -48,7 +48,7 @@ const profileSubHeading = [
     // },
     {
         headerTittle: 'HELP & FAQ',
-        name: 'Helf & FAQ',
+        name: 'Help & FAQ',
         currentComponent: 'HelpFaq',
     },
     // {
@@ -100,8 +100,9 @@ class ProfilePage extends React.Component {
     }
 
     userSignOut() {
-        this.props.signOut();
-        this.props.navigation.navigate('Login');
+        this.props.signOut().then(()=>{
+            this.props.navigation.navigate('Login');
+        });
     }
 
     render() {

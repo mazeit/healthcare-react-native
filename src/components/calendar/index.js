@@ -57,8 +57,7 @@ class CalendarView extends React.Component {
         
     }
 
-    generateData(calendarData) {
-
+    generateData(calendarData) {    
         const eventData = {};
         const markedData = {};
         var dotColor = {
@@ -68,7 +67,7 @@ class CalendarView extends React.Component {
             'coach': { key: 'coach', color: '#454545' },
         }
         if (calendarData) {
-            calendarData.forEach((item) => {
+            calendarData.events.forEach((item) => {
                 let key = (item.start.split(' ')[0]).toString()
 
 
@@ -89,13 +88,13 @@ class CalendarView extends React.Component {
                     return markedData[data].dots.indexOf(item) == pos;
                 })
             }
-            this.setState({ eventData: eventData, markedData: markedData, calendarData: [...calendarData], loader: false, selectedDate: this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0] });
+            this.setState({ eventData: eventData, markedData: markedData, calendarData: calendarData, loader: false, selectedDate: this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0] });
         }
     }
 
     componentDidMount() {
         this.props.getCalendarData().then(calendarData=>{
-            this.generateData(calendarData.events);
+            this.generateData(calendarData);
         })
         
     }
@@ -215,9 +214,10 @@ class CalendarView extends React.Component {
 
 
     render() {
-
         const eventData = this.state.eventData;
         const markedData = this.state.markedData;
+        console.log(this.state.calendarData);
+        // console.log(this.state.calendarData.event_start_date.split(' ')[0], 'ggg');
         return (
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')}>
                 {
@@ -232,7 +232,7 @@ class CalendarView extends React.Component {
                                     <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 18, color: '#838383'}}>The Activity has been added.</Text>
                                 </View>
                                 <TouchableOpacity onPress={() => { this.setState({ showDateAddedNotification: false}); this.props.navigation.goBack(); }} style={[styles.subContainers, { paddingBottom: 20, flexDirection: 'row' }]}>
-                                    <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
+                                    <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 220, height: 60, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5 }}>
                                         <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>Okay</Text>
                                     </View>
                                 </TouchableOpacity>
@@ -265,16 +265,16 @@ class CalendarView extends React.Component {
                                     // callback that fires when the calendar is opened or closed
                                     onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
                                     // callback that gets called on day press
-                                    onDayPress={(day) => {console.log('day pressed'); this.dateSelected(day) }}
+                                    onDayPress={(day) => {console.log('day pressed'); }}
                                     // callback that gets called when day changes while scrolling agenda list
-                                    onDayChange={(day) => { console.log('day changed'); this.dateSelected(day) }}
+                                    onDayChange={(day) => { console.log('day changed');  }}
                                     // initially selected day
                                     current={new Date()}
-                                    selected={this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0]}
+                                    // selected={this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0]}
                                     // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-                                    minDate={this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0]}
+                                    // minDate={this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0]}
                                     // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-                                    maxDate={this.state.calendarData.event_end_date && this.state.calendarData.event_end_date.split(' ')[0]}
+                                    // maxDate={this.state.calendarData.event_end_date && this.state.calendarData.event_end_date.split(' ')[0]}
                                     // Max amount of months allowed to scroll to the past. Default = 50
                                     pastScrollRange={50}
                                     // Max amount of months allowed to scroll to the future. Default = 50
@@ -365,12 +365,10 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => {
-    const user_id = state.validUser.user.id || '';
     const activityData = state.getData.activityData || {};
     const calendarData = state.getData.calendarData || {};
     const addEventResponse = state.addUser.addEventResponse || {};
     return {
-        user_id,
         activityData,
         calendarData,
         addEventResponse,

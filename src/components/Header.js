@@ -10,8 +10,7 @@ import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 const { height, width } = Dimensions.get('window');
 
 
-
-export default class Header extends React.Component {
+class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,6 +25,7 @@ export default class Header extends React.Component {
     }
 
     render() {
+        let notificationButton = this.props.user.firstname; //is logged in
         return (
 
             <View style={[styles.signInContainer, { backgroundColor: this.props.backgroundcolor }]}>
@@ -48,7 +48,7 @@ export default class Header extends React.Component {
                             this.state.showNext ? <Text onPress={() => this.props.verifyUser()} style={{ fontFamily: 'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff' }}>Next</Text>
                                 : 
                                 <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-                                    {!!this.props.notificationButton && <TouchableOpacity style={{backgroundColor: '#dd422a', borderRadius: 50}} onPress={() => this.props.navigation.navigate('QuestionarieIntro') }>
+                                    {!!notificationButton && <TouchableOpacity style={{backgroundColor: '#dd422a', borderRadius: 50}} onPress={() => this.props.navigation.navigate('QuestionarieIntro') }>
                                         <IconFontAwesome name="bell" size={15} style={{ padding: 5}} color="#ffffff" />
                                     </TouchableOpacity>}
                                     {!!this.props.rightButton && <TouchableOpacity onPress={this.state.rightButtonName === 'menu' ? () => this.props.navigation.navigate('GeneralMenu'): ()=> this.props.rightButtonFunc()} >
@@ -88,3 +88,13 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 });
+
+export default connect(state => {
+    const user = state.validUser.user || {};
+    return {
+        user,
+    }
+}, dispatch => {
+    return bindActionCreators({ }, dispatch)
+})(Header)
+

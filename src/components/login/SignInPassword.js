@@ -22,19 +22,21 @@ class SignInPassword extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         
-        if (nextProps.validPassword.hasError === false) {
-            this.setState({ wrongPassword: '', wrongPasswordMsg: '' });
-            this.props.navigation.navigate('WelcomeScreen');
-        } else if( nextProps.validPassword.hasError === true) {
-            this.setState({ wrongPassword: 'Password', wrongPasswordMsg: 'This password is not correct, Please try again.' });
-        }
-
-        this.setState({ loader: false });
     }
 
     verifyUser() {
         this.setState({ loader: true });
-        this.props.verifyPassword(this.props.userEmail, this.state.activUserPassword);
+        this.props.verifyPassword(this.props.userEmail, this.state.activUserPassword)
+        .then(result=>{
+            if (result.hasError === false) {
+                this.setState({ wrongPassword: '', wrongPasswordMsg: '' });
+                this.props.navigation.navigate('WelcomeScreen');
+            } else if( result.hasError === true) {
+                this.setState({ wrongPassword: 'Password', wrongPasswordMsg: 'This password is not correct, Please try again.' });
+            }
+
+            this.setState({ loader: false });
+        });
     }
 
 

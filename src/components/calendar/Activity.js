@@ -61,21 +61,21 @@ export default class Activity extends React.Component {
                 </View>
             </View>
 
-        const open =
-            <View style={{ flex: 1 }}>
-                <View style={styles.subContainers}>
-                    <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 18, color: '#838383', }}>Change your challenge</Text>
-                </View>
-                <View style={[styles.subContainers, { paddingBottom: 20, flexDirection: 'row' }]}>
-                    <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 110, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5, margin: 5 }}>
+        const open = null;
+            // <View style={{ flex: 1 }}>
+                // <View style={styles.subContainers}>
+                //     <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Bold', fontSize: 18, color: '#838383', }}>Change your challenge</Text>
+                // </View>
+                // <View style={[styles.subContainers, { paddingBottom: 20, flexDirection: 'row' }]}>
+                //     <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 110, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5, margin: 5 }}>
 
-                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>1  Day</Text>
-                    </View>
-                    <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 110, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5, margin: 5 }}>
-                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>1 Day</Text>
-                    </View>
-                </View>
-            </View>
+                //         <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>1  Day</Text>
+                //     </View>
+                //     <View style={{ backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center', width: 110, height: 52, borderRadius: 52, borderColor: '#4AB3E2', borderWidth: 0.5, margin: 5 }}>
+                //         <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#4AB3E2' }}>1 Day</Text>
+                //     </View>
+                // </View>
+            // </View>
         const demo = {
             'open': open,
             'locked': locked,

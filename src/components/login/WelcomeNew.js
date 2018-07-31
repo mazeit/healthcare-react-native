@@ -50,7 +50,7 @@ class HomeInitial extends React.Component {
                         <View style={{height: height, width: BannerWidth}}><Loader/></View> :
                         <View style={{ flex: 1 }}>
                             <View style={{ flex: 1 }}>
-                                <Header goBack={this.props.navigation.goBack} backgroundcolor={'#454545'} headerTitle={'Welcome'} leftButton={false} leftButtonName={'close'} leftButtonColor={'#FFFFFF'} showNext={false} rightButton={false} headColor={'#FFFFFF'} verifyUser={this.verifyUser} />
+                                <Header goBack={()=>this.props.navigation.navigate('CalendarStack')} backgroundcolor={'#454545'} headerTitle={'Welcome'} leftButton={false} leftButtonName={'close'} leftButtonColor={'#FFFFFF'} showNext={false} rightButton={false} headColor={'#FFFFFF'} verifyUser={this.verifyUser} />
                             </View>
 
                             <View style={{flex: 9, backgroundColor: '#454545', padding: 50, justifyContent: 'center', alignItems: 'center'}}>
