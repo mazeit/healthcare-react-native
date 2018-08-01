@@ -3,6 +3,7 @@ package com.livinflow;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.shenhuniurou.scrollruler.RNScrollRulerPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.rnfs.RNFSPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
@@ -16,7 +17,6 @@ import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
-import net.gamesofton.rnjwplayer.RNJWPlayerPackage;
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -29,13 +29,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNScrollRulerPackage(),
             new ReactNativeOneSignalPackage(),
             new RNFSPackage(),
             new ImageResizerPackage(),
             new ImagePickerPackage(),
             new ReactVideoPackage(),
-            new VectorIconsPackage(),
-            new RNJWPlayerPackage()
+            new VectorIconsPackage()
       );
     }
 

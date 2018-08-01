@@ -1,4 +1,6 @@
 rootProject.name = 'livinflow'
+include ':react-native-scroll-ruler'
+project(':react-native-scroll-ruler').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-scroll-ruler/android')
 include ':react-native-onesignal'
 project(':react-native-onesignal').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-onesignal/android')
 include ':react-native-fs'
@@ -12,6 +14,4 @@ project(':react-native-video').projectDir = new File(rootProject.projectDir, '..
 include ':react-native-vector-icons'
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
 
-include ':react-native-jwplayer'
-project(':react-native-jwplayer').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-jwplayer/android')
 include ':app'
