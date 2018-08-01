@@ -142,7 +142,7 @@ class ContentOverview extends React.Component {
                                         </View>
                                     </TouchableOpacity>
 
-                                    <TouchableOpacity style={styles.tabButton} onPress={() => this. tabSelected('Challenge')}>
+                                    <TouchableOpacity style={styles.tabButton} onPress={() => this.tabSelected('MyChallenge')}>
                                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',flexDirection: 'column' }}>
                                             <Icon name='challenge' size={50} color='#454545' />
                                             <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -15, fontSize: 14, textAlign: 'center', color: '#000'}}>My Challange</Text>

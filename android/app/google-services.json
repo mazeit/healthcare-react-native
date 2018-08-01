@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "684563171552",
+    "firebase_url": "https://livinflow-roy.firebaseio.com",
+    "project_id": "livinflow-roy",
+    "storage_bucket": "livinflow-roy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684563171552:android:95b79c2bd04ab8fc",
+        "android_client_info": {
+          "package_name": "com.livinflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684563171552-9lfu2tt4cefareoocu181gvok0nud35p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAti4sKr2ezmPLdLgQ9bPadDxnVc-CJDng"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

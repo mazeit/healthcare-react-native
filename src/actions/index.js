@@ -55,14 +55,19 @@ export const verifyPassword = (email, password) => {
         return ApiManager('login?email=' + email + '&passwd=' + password, {
             method: 'GET',
         }, true).then((json) => {
-            return auth.onSignIn(json).then(resp=>{
+            if (!json.hasError) {
+                return auth.onSignIn(json).then(resp=>{
+                    auth.onSignIn(json);
+                    dispatch({
+                        type: 'AUTHENTICATE_USER',
+                        payload: json
+                    });
 
-                dispatch({
-                    type: 'AUTHENTICATE_USER',
-                    payload: json
-                })
+                    return json;
+                });
+            } else {
                 return json;
-            });
+            }
         })
 
     }

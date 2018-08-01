@@ -9,8 +9,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import <RCTOneSignal.h> /* <--- Add this */
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) RCTOneSignal *oneSignal;
 
 @end

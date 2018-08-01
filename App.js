@@ -36,7 +36,7 @@ import Activity from './src/components/calendar/Activity.js';
 import AddActivity1 from './src/components/calendar/AddActivity1';
 import ChoseActivity from './src/components/calendar/ChoseActivity';
 import Tracker from './src/components/calendar/Tracker';
-
+import MyChallenge from './src/components/calendar/MyChallenge';
 import ProfilePage from './src/components/user profile';
 import ProfileInformation from './src/components/user profile/ProfileInformation';
 import ProfileNotification from './src/components/user profile/ProfileNotification';
@@ -133,7 +133,7 @@ const CalendarStack = StackNavigator({
   ChoseActivity: { screen: ChoseActivity },
   Activity: { screen: Activity },
   Tracker: { screen: Tracker },
-
+  MyChallenge: { screen: MyChallenge },
   // Content
   ContentOverview: { screen: ContentOverview },
   CategoryList: { screen: CategoryList },

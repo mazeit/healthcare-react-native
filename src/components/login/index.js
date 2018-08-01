@@ -29,7 +29,7 @@ class HomeInitial extends React.Component {
             loader: true,
             introText: 'Skip Intro'
         };
-        this.checkLoggedInAndNavigate = this.checkLoggedInAndNavigate.bind(this);
+        this.onSkipIntro = this.onSkipIntro.bind(this);
     }
 
     componentDidMount () {
@@ -81,7 +81,27 @@ class HomeInitial extends React.Component {
         // this.props.navigation.navigate('CoachProfile', {id_author: 2})
 
         // this.props.navigation.navigate('ImportantNotification', {});
-        this.checkLoggedInAndNavigate('CalendarView');
+        
+        auth.isSignedIn().then(json=>{
+            try {
+
+                let obj = JSON.parse(json);
+                if (obj && !obj.hasError) {
+                    this.props.autoSignin(obj);  
+                    Promise.all([this.props.getCurrentUser(), this.props.getNotificationInfo()])
+                    .then(res=>{
+                        this.props.navigation.navigate('MyChallenge', {});   
+                        this.setState({loader: false});
+                    });
+                } else {
+                    this.setState({loader: false});
+                }
+
+            } catch (e) {
+                throw e;
+            }
+            
+        })
     }
 
     onLoad () {
@@ -94,12 +114,15 @@ class HomeInitial extends React.Component {
         );
     }
 
-    checkLoggedInAndNavigate(screen) {
+    // checkLoggedInAndNavigate(screen) {
+    // }
+
+    onSkipIntro() {
         auth.isSignedIn().then(json=>{
             try {
 
                 let obj = JSON.parse(json);
-                if (obj) {
+                if (obj && !obj.hasError) {
                     this.props.autoSignin(obj);  
                     Promise.all([this.props.getCurrentUser(), this.props.getNotificationInfo()])
                     .then(res=>{
@@ -107,13 +130,16 @@ class HomeInitial extends React.Component {
                         this.setState({loader: false});
                     });
                 } else {
-                    this.setState({loader: false});
+                    this.props.navigation.navigate('SignInEmail', {});   
                 }
 
             } catch (e) {
-
+                throw e;
+                this.props.navigation.navigate('SignInEmail', {});   
             }
             
+        }).catch(err=>{
+            this.props.navigation.navigate('SignInEmail', {});   
         })
     }
 
@@ -132,7 +158,7 @@ class HomeInitial extends React.Component {
                         {images.map((image, index) => this.renderPage(image, index))}
                     </Carousel>
                     <View style={styles.skipIntro}>
-                        <Text onPress={() => this.checkLoggedInAndNavigate('Welcome')} style={{fontFamily:'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff'}}>{this.state.introText}</Text>
+                        <Text onPress={() => this.onSkipIntro()} style={{fontFamily:'DINPro-Medium', fontSize: 16, textAlign: 'center', color: '#ffffff'}}>{this.state.introText}</Text>
                     </View>
                 </View>
             </ImageBackground>

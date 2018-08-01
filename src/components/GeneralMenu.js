@@ -14,7 +14,7 @@ const menuList = [
         params: {}
     },
     {
-        name: 'MY CHALLENGE',
+        name: 'MY CALENDAR',
         component: 'CalendarView',
         params: {}
     },

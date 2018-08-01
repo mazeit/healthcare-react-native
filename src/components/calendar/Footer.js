@@ -50,9 +50,9 @@ export default class Footer extends React.Component {
                             <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -5, fontSize: 14, textAlign: 'center', color: color = this.state.activeTab === 'Tracker' ? this.state.active : this.state.inactive }}>Tracker</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.tabButton} >
+                    <TouchableOpacity style={styles.tabButton} onPress={() => this.tabSelected('MyChallenge')}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <Icon name='challenge' size={50} color={this.state.activeTab === 'challenge' ? this.state.active : this.state.inactive} />
+                            <Icon name='challenge' size={50} color={this.state.activeTab === 'MyChallenge' ? this.state.active : this.state.inactive} />
                             <Text style={{ fontFamily: 'DINPro-Medium', marginTop: -5, fontSize: 14, textAlign: 'center', color: this.state.inactive }}>My Challange</Text>
                         </View>
                     </TouchableOpacity>
