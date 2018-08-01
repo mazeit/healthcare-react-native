@@ -149,7 +149,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-scroll-ruler')
     compile project(':react-native-onesignal')
     compile project(':react-native-fs')
     compile project(':react-native-image-resizer')

@@ -265,6 +265,9 @@ global.storage = storage;
 // };
 
 
+// distributionUrl=https\://services.gradle.org/distributions/gradle-2.14.1-all.zip
+// gralde-wapper-properties
+
       // <key>localhost</key>
       // <dict>
       //   <key>NSExceptionAllowsInsecureHTTPLoads</key>
