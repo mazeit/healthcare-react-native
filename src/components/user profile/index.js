@@ -115,14 +115,14 @@ class ProfilePage extends React.Component {
 
                     <View style={styles.profilePicture}>
                         <ImageBackground style={styles.profilePictureBlur} source={this.props.user.img_dir ? { uri: this.props.user.img_dir } : require('../../../assets/images/profilePicture.png')} blurRadius={15}>
-                            <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20 }}>
+                            <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20, marginTop: 20 }}>
                                 <Image source={this.props.user.img_dir ? { uri: this.props.user.img_dir } : require('../../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }} />
                             </View>
                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.firstname}</Text>
                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.lastname}</Text>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: -20 }}>
-                                    <Icon name="people" size={70} color="#FFFFFF" style={{left: 25}} color={this.state.invitedFriendDataList.length >= 2 ? "#4AB3E2" : "#FFFFFF"}/>
-                                    <Icon name="people" size={70} color="#FFFFFF"  color={this.state.invitedFriendDataList.length >= 1 ? "#4AB3E2" : "#FFFFFF"}/>
+                                    <Icon name="people" size={70} color="#FFFFFF" style={{left: 25}} color={this.state.invitedFriendDataList.length >= 1 ? "#4AB3E2" : "#FFFFFF"}/>
+                                    <Icon name="people" size={70} color="#FFFFFF"  color={this.state.invitedFriendDataList.length >= 2 ? "#4AB3E2" : "#FFFFFF"}/>
                                     <Icon name="people" size={70} color="#FFFFFF" style={{right: 25}}  color={this.state.invitedFriendDataList.length >= 3 ? "#4AB3E2" : "#FFFFFF"}/>
                                 </View>
                         </ImageBackground>

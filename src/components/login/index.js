@@ -90,7 +90,7 @@ class HomeInitial extends React.Component {
                     this.props.autoSignin(obj);  
                     Promise.all([this.props.getCurrentUser(), this.props.getNotificationInfo()])
                     .then(res=>{
-                        this.props.navigation.navigate('MyChallenge', {});   
+                        this.props.navigation.navigate('ImportantNotification', {});   
                         this.setState({loader: false});
                     });
                 } else {
@@ -126,7 +126,7 @@ class HomeInitial extends React.Component {
                     this.props.autoSignin(obj);  
                     Promise.all([this.props.getCurrentUser(), this.props.getNotificationInfo()])
                     .then(res=>{
-                        this.props.navigation.navigate('CalendarView', {});   
+                        this.props.navigation.navigate('WelcomeScreen', {});   
                         this.setState({loader: false});
                     });
                 } else {

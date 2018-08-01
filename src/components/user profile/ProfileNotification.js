@@ -17,7 +17,6 @@ class ProfileNotification extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            toggle: false,
             userNotfi: null,
             loader: false,
 
@@ -30,7 +29,7 @@ class ProfileNotification extends React.Component {
 
     updateNotificationInfo(info) {
         this.props.updateNotificationInfo(info).then(res=>{
-            console.log(res);
+
         })
     }
 
@@ -65,7 +64,7 @@ class ProfileNotification extends React.Component {
 
                             <View style={styles.notificationContainer}>
                                 <View style={{ flex: 1, alignItems: 'flex-start' }}>
-                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383' }}>Activity quote</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383' }}>Activity Reminder</Text>
                                 </View>
                                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
                                     <Switch onValueChange={() => this.updateNotificationInfo({ reminder: notifiInfo.reminder == 0 ? 1 :0 })} onTintColor={'#4AB3E2'} value={notifiInfo.reminder==0 ? false : true}></Switch>
@@ -82,10 +81,10 @@ class ProfileNotification extends React.Component {
                                         date={notifiInfo.morning_reminder_time ? new Date(notifiInfo.morning_reminder_time) : new Date()}
                                         mode={'time'}
                                         isVisible={this.state.isMorningActivityVisible}
-                                        onConfirm={(value)=>{console.log(value); this.updateNotificationInfo({morning_reminder_time: moment(value).format('YYYY-MM-DD HH:mm:ss')}); this.setState({isMorningActivityVisible: false}); }}
+                                        onConfirm={(value)=>{this.updateNotificationInfo({morning_reminder_time: moment(value).format('YYYY-MM-DD HH:mm:ss')}); this.setState({isMorningActivityVisible: false}); }}
                                         onCancel={()=>this.setState({isMorningActivityVisible: false})}
                                     />
-                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#4AB3E2' }} onPress={()=>this.setState({isMorningActivityVisible: true}) }>{notifiInfo.morning_reminder_time ? moment(notifiInfo.morning_reminder_time).format('HH:mm') : moment().format('HH:mm')}</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: (notifiInfo.reminder == 0 ? '#838383' : '#4AB3E2') }} onPress={()=>{ if (notifiInfo.reminder == 1) this.setState({isMorningActivityVisible: true}); }}>{notifiInfo.morning_reminder_time ? moment(notifiInfo.morning_reminder_time).format('HH:mm') : moment().format('HH:mm')}</Text>
                                 </View>
                             </View>
 
@@ -103,7 +102,7 @@ class ProfileNotification extends React.Component {
                                         onConfirm={(value)=>{this.updateNotificationInfo({evening_reminder_time:  moment(value).format('YYYY-MM-DD HH:mm:ss')}); this.setState({isAfternoonActivityVisible: false}); }}
                                         onCancel={()=>this.setState({isAfternoonActivityVisible: false})}
                                     />
-                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#4AB3E2' }} onPress={()=>this.setState({isAfternoonActivityVisible: true}) }>{notifiInfo.evening_reminder_time ? moment(notifiInfo.evening_reminder_time).format('hh:mm') : moment().format('hh:mm')}</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: (notifiInfo.reminder == 0 ? '#838383' : '#4AB3E2') }} onPress={()=>{ if (notifiInfo.reminder == 1) this.setState({isAfternoonActivityVisible: true}) }}>{notifiInfo.evening_reminder_time ? moment(notifiInfo.evening_reminder_time).format('hh:mm') : moment().format('hh:mm')}</Text>
                                 </View>
                             </View>
 

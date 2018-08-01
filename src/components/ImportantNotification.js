@@ -116,14 +116,14 @@ class ImportantNotification extends React.Component {
                                             <Image source={require('../../assets/images/no_video.png')} style={{ width: '100%', height: '100%', }} />
                                     }
                                 </View>
-                                <View style={{ backgroundColor: '#FFFFFF', width: width - 130, flex: 1, marginTop: '-10%', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545' }}>{importantn.importantn.name}</Text>
+                                <View style={{ backgroundColor: '#FFFFFF', width: width - 60, flex: 1, marginTop: '-10%', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Text style={{ textAlign: 'center', fontFamily: 'DINPro-Light', fontSize: 18, color: '#454545' }}>{importantn.importantn.name}</Text>
                                 </View>
                                 <View style={styles.buttons}>
                                     <TouchableOpacity style={{ backgroundColor: this.state.backgroundColor, flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderColor: '#ffffff', borderRadius: 50, borderWidth: 0.5 }} onPress={()=>this.gotoContentDeail() }>
                                         <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Light', fontSize: 17, color: '#ffffff' }}>More Details</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={{ backgroundColor: '#FFFFFF', flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderRadius: 50 }} onPress={()=>this.player.resume()}>
+                                    <TouchableOpacity style={{ backgroundColor: '#FFFFFF', flex: 1, width: '100%', marginTop: '5%', alignItems: 'center', justifyContent: 'center', borderRadius: 50 }} onPress={()=>{console.log(this.player); this.player.resume()}}>
                                         <Text style={{ marginLeft: '20%', marginRight: '20%', fontFamily: 'DINPro-Light', fontSize: 17, color: this.state.backgroundColor }}>Start session</Text>
                                     </TouchableOpacity>
                                 </View> 

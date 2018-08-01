@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, Image, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 import icoMoonConfig from '../../selection.json';
 const Icon = createIconSetFromIcoMoon(icoMoonConfig);
@@ -61,64 +61,66 @@ class InviteMyFriends extends React.Component {
     render() {
         
         return (
-            <View style={{ flex: 1 }}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <View style={{ flex: 1 }}>
-                    <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'INVITE MY FRIENDS'} leftButton={true} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
-                </View>
-                <View style={styles.container}>
+                    <View style={{ flex: 1 }}>
+                        <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'INVITE MY FRIENDS'} leftButton={true} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} headColor={'#454545'} navigation={this.props.navigation} />
+                    </View>
+                    <View style={styles.container}>
 
-                    <View style={styles.inviteFriendContainer}>
+                        <View style={styles.inviteFriendContainer}>
 
-                        <View style={styles.inviteFriendContent}>
+                            <View style={styles.inviteFriendContent}>
 
-                            <View style={{ flex: 2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
-                                <View style={{ flex: 1 }}></View>
-                                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
-                                    <Icon name="people" size={90} color={this.state.invitedFriends >= 1 ? "#4AB3E2" : "#838383"} />
-                                    <Icon name="people" size={90} color={this.state.invitedFriends >= 2 ? "#4AB3E2" : "#838383"} />
-                                    <Icon name="people" size={90} color={this.state.invitedFriends >= 3 ? "#4AB3E2" : "#838383"} />
-                                </View>
-                                <View style={{ flex: 1 }}></View>
-                            </View>
-
-                            <View style={{ flex: 2, alignItems: 'flex-start', marginTop: 10, marginBottom: 10 }}>
-                                <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>You have already successfully invited {this.state.invitedFriends} friends. {3 - this.state.invitedFriends} more and you get one challenge for free.</Text>
-                            </View>
-
-                            <View style={{ flex: 4, alignItems: 'flex-start', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
-                                <ShakingText style={{ fontFamily: 'DINPro-Light', fontSize: 16, width: '90%', top: '5%', color: 'red', }}>
-                                    {this.state.firstNameError}
-                                </ShakingText>
-                                <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 24, marginBottom: 40, width: '90%' }} onChangeText={(text) => this.setState({ friendFirstName: text })} underlineColorAndroid='rgba(0,0,0,0)' placeholder='First name' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} onBlur={() => { if (this.state.friendFirstName === '') this.setState({ firstNameError: 'First name cannot be blank' }) }} />
-
-
-                                <ShakingText style={{ fontFamily: 'DINPro-Light', fontSize: 16, width: '90%', top: '5%', color: 'red', }}>
-                                    {this.state.lastNameError}
-                                </ShakingText>
-                                <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 24, marginBottom: 40, width: '90%' }} onChangeText={(text) => this.setState({ friendLastName: text })} underlineColorAndroid='rgba(0,0,0,0)' placeholder='Last name' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} onBlur={() => { if (this.state.friendLastName === '') this.setState({ lastNameError: 'Last name cannot be blank' }) }} />
-
-                                <ShakingText style={{ fontFamily: 'DINPro-Light', fontSize: 16, width: '90%', top: '5%', color: 'red', }}>
-                                    {this.state.emailError}
-                                </ShakingText>
-                                <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 24, width: '90%' }} onChangeText={(text) => this.setState({ friendEmail: text })} underlineColorAndroid='rgba(0,0,0,0)' placeholder='Email address' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} onBlur={() => { if (this.state.friendEmail === '') this.setState({ emailNameError: 'Email cannot be blank' }); if (!re.test(this.state.friendEmail)) this.setState({ emailError: 'Please enter valid email' }); }} />
-
-
-                            </View>
-
-                            <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
-                                <TouchableOpacity onPress={() => this.sendInvitation()}>
-                                    <View style={{ backgroundColor: '#4AB3E2', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52 }}>
-                                        <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#FFFFFF' }}>Send Invitation</Text>
+                                <View style={{ flex: 2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
+                                    <View style={{ flex: 1 }}></View>
+                                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
+                                        <Icon name="people" size={90} color={this.state.invitedFriends >= 1 ? "#4AB3E2" : "#838383"} />
+                                        <Icon name="people" size={90} color={this.state.invitedFriends >= 2 ? "#4AB3E2" : "#838383"} />
+                                        <Icon name="people" size={90} color={this.state.invitedFriends >= 3 ? "#4AB3E2" : "#838383"} />
                                     </View>
-                                </TouchableOpacity>
+                                    <View style={{ flex: 1 }}></View>
+                                </View>
+
+                                <View style={{ flex: 2, alignItems: 'flex-start', marginTop: 10, marginBottom: 10 }}>
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#838383', }}>You have already successfully invited {this.state.invitedFriends} friends. {3 - this.state.invitedFriends} more and you get one challenge for free.</Text>
+                                </View>
+
+                                <View style={{ flex: 4, alignItems: 'flex-start', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
+                                    <ShakingText style={{ fontFamily: 'DINPro-Light', fontSize: 16, width: '90%', top: '5%', color: 'red', }}>
+                                        {this.state.firstNameError}
+                                    </ShakingText>
+                                    <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 24, marginBottom: 40, width: '90%' }} onChangeText={(text) => this.setState({ friendFirstName: text })} underlineColorAndroid='rgba(0,0,0,0)' placeholder='First name' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} onBlur={() => { if (this.state.friendFirstName === '') this.setState({ firstNameError: 'First name cannot be blank' }) }} />
+
+
+                                    <ShakingText style={{ fontFamily: 'DINPro-Light', fontSize: 16, width: '90%', top: '5%', color: 'red', }}>
+                                        {this.state.lastNameError}
+                                    </ShakingText>
+                                    <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 24, marginBottom: 40, width: '90%' }} onChangeText={(text) => this.setState({ friendLastName: text })} underlineColorAndroid='rgba(0,0,0,0)' placeholder='Last name' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} onBlur={() => { if (this.state.friendLastName === '') this.setState({ lastNameError: 'Last name cannot be blank' }) }} />
+
+                                    <ShakingText style={{ fontFamily: 'DINPro-Light', fontSize: 16, width: '90%', top: '5%', color: 'red', }}>
+                                        {this.state.emailError}
+                                    </ShakingText>
+                                    <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 24, width: '90%' }} onChangeText={(text) => this.setState({ friendEmail: text })} underlineColorAndroid='rgba(0,0,0,0)' placeholder='Email address' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} onBlur={() => { if (this.state.friendEmail === '') this.setState({ emailNameError: 'Email cannot be blank' }); if (!re.test(this.state.friendEmail)) this.setState({ emailError: 'Please enter valid email' }); }} />
+
+
+                                </View>
+
+                                <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
+                                    <TouchableOpacity onPress={() => this.sendInvitation()}>
+                                        <View style={{ backgroundColor: '#4AB3E2', alignItems: 'center', justifyContent: 'center', width: 220, height: 52, borderRadius: 52 }}>
+                                            <Text style={{ fontFamily: 'DINPro-Light', fontSize: 17, color: '#FFFFFF' }}>Send Invitation</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+
                             </View>
 
                         </View>
 
                     </View>
-
                 </View>
-            </View>
+            </TouchableWithoutFeedback>
         );
     }
 }

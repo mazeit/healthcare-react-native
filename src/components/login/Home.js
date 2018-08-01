@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground, ScrollView, Dimensions } from 'react-native';
 
+const { height, width } = Dimensions.get('window');
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -12,7 +13,7 @@ export default class Home extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.homeTittleContainer}>
-                    <Image style={styles.homeTittle} source={require('../../../assets/images/homeTittle.png')} />
+                    <Image style={styles.homeTittle} source={require('../../../assets/images/homeTittle.png')} resizeMode='center'  />
                 </View>
                 <View style={styles.blankContainer}>
                 </View>
@@ -43,8 +44,8 @@ const styles = StyleSheet.create({
     },
     homeTittle: {
         resizeMode: 'center',
-        height: '100%',
-        width: '100%',
+        flex: 1,
+        width: width - 50
     },
     subTittle: {
         flex: 1,

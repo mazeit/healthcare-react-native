@@ -110,7 +110,7 @@ class ProfileInformation extends React.Component {
                 <View style={styles.container}>
                     {!this.state.loader && <View style={styles.profilePicture}>
                         <ImageBackground style={styles.profilePictureBlur} source={this.props.user.img_dir ? { uri: this.props.user.img_dir, cache: 'reload' } : require('../../../assets/images/profilePicture.png')} blurRadius={15}>
-                            <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20 }}>
+                            <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20, marginTop: 20 }}>
                                 <Image source={this.props.user.img_dir ? { uri: this.props.user.img_dir, cache: 'reload' } : require('../../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }} />
                             </View>
                             

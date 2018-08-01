@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const { height, width } = Dimensions.get('window');
 import Header from '../Header';
 
-import { getTermsOfConditions } from '../../actions/index';
+import { getTermOfConditions } from '../../actions/index';
 import HTML from 'react-native-render-html';
 class TermsOfUse extends React.Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class TermsOfUse extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getTermsOfConditions().then((result)=>{
+        this.props.getTermOfConditions().then((result)=>{
             this.setState({termsOfUse: result.cms});
         });
     }
@@ -43,7 +43,7 @@ class TermsOfUse extends React.Component {
                         </ScrollView>*/}
                         <ScrollView style={styles.termsOfUseBlock}>
 
-                            <HTML html={`<div style="font-family: DINPro-Light; ">` + this.state.termsOfUse.textContent + "</div>"} />
+                            <HTML html={`<div style="font-family: DINPro-Light; ">` + this.state.termsOfUse.content + "</div>"} />
                                                           
 
                         </ScrollView>
@@ -95,5 +95,5 @@ const styles = StyleSheet.create({
 export default connect(state => {
     return {};
 }, dispatch => {
-    return bindActionCreators({ getTermsOfConditions }, dispatch)
+    return bindActionCreators({ getTermOfConditions }, dispatch)
 })(TermsOfUse);
