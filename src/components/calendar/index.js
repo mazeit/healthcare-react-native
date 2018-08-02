@@ -218,7 +218,6 @@ class CalendarView extends React.Component {
     render() {
         const eventData = this.state.eventData;
         const markedData = this.state.markedData;
-        console.log(this.state.eventData);
 
         let startDate = moment();
         let endDate = moment();
@@ -228,7 +227,7 @@ class CalendarView extends React.Component {
             else if (moment(key).isAfter(endDate))
                 endDate = moment(key);
         } 
-        console.log(startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD'));
+        
         return (
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')}>
                 {
@@ -281,11 +280,11 @@ class CalendarView extends React.Component {
                                     onDayChange={(day) => { console.log('day changed');  }}
                                     // initially selected day
                                     current={new Date()}
-                                    // selected={this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0]}
+                                    selected={moment().format('YYYY-MM-DD')}
                                     // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-                                    // minDate={this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0]}
+                                    minDate={startDate.format('YYYY-MM-DD')}
                                     // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-                                    // maxDate={this.state.calendarData.event_end_date && this.state.calendarData.event_end_date.split(' ')[0]}
+                                    maxDate={endDate.format('YYYY-MM-DD')}
                                     // Max amount of months allowed to scroll to the past. Default = 50
                                     pastScrollRange={50}
                                     // Max amount of months allowed to scroll to the future. Default = 50

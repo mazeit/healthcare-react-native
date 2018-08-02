@@ -68,7 +68,7 @@ class ProfileInformation extends React.Component {
     saveProfile() {
         let {firstname, lastname, id_gender, id_lang, email, weight, goal, birthday, id_country, id_state, address1, address2, postcode} = this.state.userEditData;
         this.setState({loader: true});
-        birthday = birthday ? moment(birthday).format('YYYY-MM-DD HH:mm:SS') : '';
+        birthday = (birthday && birthday != '0000-00-00') ? moment(birthday).format('YYYY-MM-DD') : '';
         this.props.updateProfileInfo({firstname, lastname, id_gender, id_lang, email, weight, goal, birthday})
         .then(res=>{
             if (res.hasError) {

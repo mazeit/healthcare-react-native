@@ -59,7 +59,7 @@ export default class Tracker extends React.Component {
             let d = new Date();
             let options = {
                 date: d.toISOString(),
-                // startDate: d.toISOString()
+                startDate: d.toISOString()
             };
 
             AppleHealthKit.getStepCount(options: Object, (err: Object, results: Object) => {

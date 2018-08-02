@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from 'react-native-banner-carousel';
-import { StyleSheet, View, Dimensions, Text, ImageBackground } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, ImageBackground, Platform } from 'react-native';
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Home from './Home.js';
 import Loader from '../Loader';
 
-import { autoSignin, getActivity, getRecipe, getCurrentUser, getNotificationInfo } from '../../actions/index';
+import { autoSignin, getActivity, getRecipe, getCurrentUser, getNotificationInfo, setNotificationData } from '../../actions/index';
 
 import Header from '../Header';
 const BannerWidth = Dimensions.get('window').width;
@@ -18,6 +18,7 @@ const images = [
     "http://xxx.com/2.png",
     "http://xxx.com/3.png"
 ];
+var DeviceInformation = require('react-native-device-info');
 
 let backGround = '';
 import * as auth from "../../utils/auth";
@@ -92,6 +93,9 @@ class HomeInitial extends React.Component {
                     .then(res=>{
                         this.props.navigation.navigate('ImportantNotification', {});   
                         this.setState({loader: false});
+
+                        const uniqueId = DeviceInformation.getUniqueID();
+                        this.props.setNotificationData(uniqueId, Platform.OS);
                     });
                 } else {
                     this.setState({loader: false});
@@ -128,6 +132,9 @@ class HomeInitial extends React.Component {
                     .then(res=>{
                         this.props.navigation.navigate('WelcomeScreen', {});   
                         this.setState({loader: false});
+
+                        const uniqueId = DeviceInfo.getUniqueID();
+                        this.props.setNotificationData(uniqueId, Platform.OS);
                     });
                 } else {
                     this.props.navigation.navigate('SignInEmail', {});   
@@ -189,6 +196,6 @@ export default connect(state => {
     return {
     }
 }, dispatch => {
-    return bindActionCreators({ autoSignin: autoSignin, getActivity, getRecipe, getCurrentUser, getNotificationInfo }, dispatch)
+    return bindActionCreators({ autoSignin: autoSignin, getActivity, getRecipe, getCurrentUser, getNotificationInfo, setNotificationData }, dispatch)
 }
 )(HomeInitial);

@@ -585,7 +585,7 @@ export const updateProfileInfo = (info) => {
             str += `${key}=${info[key]}&`;
     }
     if (str)
-        str.splice(str.length - 1, 1);
+        str = str.slice(0, str.length - 1);
     return async (dispatch, getState) => {
         return ApiManager('customerupdate?' + str, {
             method: 'POST',
@@ -643,7 +643,7 @@ export const updateNotificationInfo = (info) => {
         str += `${key}=${info[key]}&`;
     }
     if (str)
-        str.splice(str.length - 1, 1);
+        str = str.slice(0, str.length - 1);
     return async (dispatch, getState) => {
         return ApiManager('updatenotifications?'+str, {
             method: 'POST',
@@ -673,6 +673,37 @@ export const getNotificationInfo = () => {
     }
 }
 
+export const getMyChallenge = () => {
+    return async (dispatch, getState) => {
+        return ApiManager('mychallenge?', {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'GET_MY_CHALLENGE',
+                payload: json
+            });
+            return json;
+        })
+
+    }
+}
+
+export const setNotificationData = (id, device) => {
+    return async (dispatch, getState) => {
+        return ApiManager('notificationsdata?device_type='+device+'&device_id='+id, {
+            method: 'POST',
+        }).then((json) => {
+            dispatch({
+                type: 'SET_NOTIFICATION_DATA',
+                payload: json
+            });
+            return json;
+        })
+
+    }
+}
+
+setNotificationData
 export const updateProfileimage = (imageBase64) => {
 
     return async (dispatch, getState) => {

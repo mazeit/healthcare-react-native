@@ -56,7 +56,7 @@ export default class Recipe extends React.Component {
                             </View>
 
                             <View style={styles.content}>
-                                <View style={[styles.contentSubBlock, { marginTop: -50, }]}>
+                                <View style={[styles.contentSubBlock, { marginTop: -50,  alignSelf: 'stretch'}]}>
                                     <View style={[styles.details, { margin: 10 }]}>
                                         <Text style={{ fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', textAlign: 'center' }}>{activityData.name}</Text>
                                     </View>
@@ -146,12 +146,12 @@ export default class Recipe extends React.Component {
                                     </View>
                                 </View>
 
-                                <View style={styles.contentSubBlock}>
+                                <View style={[styles.contentSubBlock, {alignSelf: 'stretch'}]}>
                                     <View style={[styles.details, { margin: 10 }]}>
                                         <Text style={{ alignSelf: 'center', fontFamily: 'DINPro-Light', fontSize: 22, color: '#454545', textAlign: 'center' }}>Directions</Text>
                                     </View>
-                                    <View style={[styles.details, { margin: 10 }]}>
-                                        <HTML html={"<div style='font-family: DINPro-Light'>" + activityData.instructions + "</div>"} imagesMaxWidth={width - 20} />
+                                    <View style={[styles.details, { margin: 10, alignSelf: 'stretch'}]}>
+                                        <HTML html={"<div style='font-family: DINPro-Light'>" + activityData.instructions + "</div>"} imagesMaxWidth={width - 20} containerStyle={{width: width - 20}}/>
                                     </View>
                                 </View>
 
