@@ -275,7 +275,7 @@ class CalendarView extends React.Component {
                                     // callback that fires when the calendar is opened or closed
                                     onCalendarToggled={(calendarOpened) => { console.log(calendarOpened) }}
                                     // callback that gets called on day press
-                                    onDayPress={(day) => {console.log('day pressed'); }}
+                                    onDayPress={(day) => {console.log('day pressed'); this.dateSelected(day); }}
                                     // callback that gets called when day changes while scrolling agenda list
                                     onDayChange={(day) => { console.log('day changed');  }}
                                     // initially selected day

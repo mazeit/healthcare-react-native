@@ -265,6 +265,7 @@ global.storage = storage;
 // };
 
 
+// distributionUrl=https\://services.gradle.org/distributions/gradle-4.3-rc-2-all.zip
 // distributionUrl=https\://services.gradle.org/distributions/gradle-2.14.1-all.zip
 // gralde-wapper-properties
 
@@ -276,3 +277,7 @@ global.storage = storage;
 
   // react-native link react-native-jwplayer
   // react-native link
+
+  // Change the file react-native-calendars/reservations / index.js
+  // getReservations method
+  // comment line 162 and 163
