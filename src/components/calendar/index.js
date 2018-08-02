@@ -10,7 +10,7 @@ const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 import LoaderWait from '../LoaderWait';
 
-
+import moment from 'moment';
 
 import Header from '../Header';
 import Footer from './Footer';
@@ -66,7 +66,7 @@ class CalendarView extends React.Component {
             'mindfulness': { key: 'mindfulness', color: '#D4B870' },
             'coach': { key: 'coach', color: '#454545' },
         }
-        if (calendarData) {
+        if (calendarData && calendarData.events) {
             calendarData.events.forEach((item) => {
                 let key = (item.start.split(' ')[0]).toString()
 
@@ -89,6 +89,8 @@ class CalendarView extends React.Component {
                 })
             }
             this.setState({ eventData: eventData, markedData: markedData, calendarData: calendarData, loader: false, selectedDate: this.state.calendarData.event_start_date && this.state.calendarData.event_start_date.split(' ')[0] });
+        } else {
+            this.setState({ loader: false });
         }
     }
 
@@ -216,8 +218,17 @@ class CalendarView extends React.Component {
     render() {
         const eventData = this.state.eventData;
         const markedData = this.state.markedData;
-        console.log(this.state.calendarData);
-        // console.log(this.state.calendarData.event_start_date.split(' ')[0], 'ggg');
+        console.log(this.state.eventData);
+
+        let startDate = moment();
+        let endDate = moment();
+        for ( let key in eventData ){
+            if (moment(key).isBefore(startDate))
+                startDate = moment(key);
+            else if (moment(key).isAfter(endDate))
+                endDate = moment(key);
+        } 
+        console.log(startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD'));
         return (
             <ImageBackground style={styles.homeImage} source={require('../../../assets/images/homeBlur.png')}>
                 {

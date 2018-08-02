@@ -33,33 +33,34 @@ class ContentOverview extends React.Component {
 
         this.tabSelected = this.tabSelected.bind(this);
         this.animated = new Animated.Value(0);
+
     }
 
 
     componentWillMount() {
         this._panResponder = PanResponder.create({
 
-            onMoveShouldSetResponderCapture: () => true,
+        //     onMoveShouldSetResponderCapture: () => true,
 
-            onMoveShouldSetPanResponderCapture: () => true,
-            onPanResponderGrant: (e, gestureState) => {
-            },
+        //     onMoveShouldSetPanResponderCapture: () => true,
+        //     onPanResponderGrant: (e, gestureState) => {
+        //     },
 
-            onPanResponderMove: () => {
-                //code during Move
-            },
+        //     onPanResponderMove: () => {
+        //         //code during Move
+        //     },
 
-            onPanResponderRelease: (e, { dx, dy }) => {
+        //     onPanResponderRelease: (e, { dx, dy }) => {
 
-                if (dy > dx && dy > 0) {
+        //         if (dy > dx && dy > 0) {
 
-                    this.showSearch()
-                }
-                if (-(dy) > dx && dy < 0) {
+        //             this.showSearch()
+        //         }
+        //         if (-(dy) > dx && dy < 0) {
 
-                    this.hideSearch()
-                }
-            }
+        //             this.hideSearch()
+        //         }
+        //     }
         });
     }
 
@@ -81,19 +82,19 @@ class ContentOverview extends React.Component {
 
     showSearch() {
 
-        this.setState({ openSearch: true })
-        Animated.timing(this.animated, {
-            toValue: 1,
-            duration: 100,
-        }).start();
+        // this.setState({ openSearch: true })
+        // Animated.timing(this.animated, {
+        //     toValue: 1,
+        //     duration: 100,
+        // }).start();
     }
 
     hideSearch() {
-        this.setState({ openSearch: true })
-        Animated.timing(this.animated, {
-            toValue: 0,
-            duration: 100,
-        }).start();
+        // this.setState({ openSearch: true })
+        // Animated.timing(this.animated, {
+        //     toValue: 0,
+        //     duration: 100,
+        // }).start();
     }
 
     tabSelected( input) {
@@ -121,7 +122,7 @@ class ContentOverview extends React.Component {
                             <View style={{ flex: 1 }}>
                                 <Header goBack={this.props.navigation.goBack} backgroundcolor={'#FFFFFF'} headerTitle={'SELECT YOUR TOPIC'} leftButton={false} leftButtonName={'arrow'} leftButtonColor={'#454545'} showNext={false} rightButton={true} notificationButton={true} headColor={'#454545'} navigation={this.props.navigation} />
                             </View>
-                            <View style={styles.container} {...this._panResponder.panHandlers}>
+                            <View style={styles.container}  {...this._panResponder.panHandlers}>
 
 
 
@@ -151,13 +152,13 @@ class ContentOverview extends React.Component {
                                 </View>
                                 {/* HEADER ENDS*/}
 
-                                <Animated.View style={[styles.search, { height }, { opacity }]}>
+                                <View style={[styles.search]}>
                                     <TextInput style={{ fontFamily: 'DINPro-Light', fontSize: 16, backgroundColor: '#FFFFFF', width: width - 40, height: 44, paddingLeft: 20 }} placeholder='Search' placeholderTextColor={'#454545'} autoCapitalize='none' autoCorrect={false} value={this.state.searchKey} onChangeText={(text)=>this.setState({searchKey: text}) } />
                                     <Icon name="magnifyer" onPress={()=>{ this.state.searchKey && this.props.navigation.navigate('CategoryList', {viewType: 'search', searchKey: this.state.searchKey}) }} size={50} style={{ marginLeft: -10 }} color="#454545" />
-                                </Animated.View>
+                                </View>
                                 <View style={[styles.section, { marginBottom: 5 }]}>
 
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('CategoryList', { pillarName: 'nutrition', viewType: 'pillar'})} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
+                                    <TouchableOpacity onPress={() => {console.log('hey'); this.props.navigation.navigate('CategoryList', { pillarName: 'nutrition', viewType: 'pillar'}) }} style={[styles.subContent, { marginRight: 10, marginLeft: 10 }]}>
                                         <View style={styles.image}>
                                             <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: this.state.nutritionImage }} >
 

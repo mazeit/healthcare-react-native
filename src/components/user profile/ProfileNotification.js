@@ -78,13 +78,13 @@ class ProfileNotification extends React.Component {
                                 <View style={{ flex: 3, alignItems: 'flex-end' }}>
 
                                     <DateTimePicker
-                                        date={notifiInfo.morning_reminder_time ? new Date(notifiInfo.morning_reminder_time) : new Date()}
+                                        date={notifiInfo.morning_reminder_time != '0000-00-00 00:00:00' ? new Date(notifiInfo.morning_reminder_time) : new Date()}
                                         mode={'time'}
                                         isVisible={this.state.isMorningActivityVisible}
                                         onConfirm={(value)=>{this.updateNotificationInfo({morning_reminder_time: moment(value).format('YYYY-MM-DD HH:mm:ss')}); this.setState({isMorningActivityVisible: false}); }}
                                         onCancel={()=>this.setState({isMorningActivityVisible: false})}
                                     />
-                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: (notifiInfo.reminder == 0 ? '#838383' : '#4AB3E2') }} onPress={()=>{ if (notifiInfo.reminder == 1) this.setState({isMorningActivityVisible: true}); }}>{notifiInfo.morning_reminder_time ? moment(notifiInfo.morning_reminder_time).format('HH:mm') : moment().format('HH:mm')}</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: (notifiInfo.reminder == 0 ? '#838383' : '#4AB3E2') }} onPress={()=>{ if (notifiInfo.reminder == 1) this.setState({isMorningActivityVisible: true}); }}>{notifiInfo.morning_reminder_time != '0000-00-00 00:00:00' ? moment(notifiInfo.morning_reminder_time).format('HH:mm') : moment().format('HH:mm')}</Text>
                                 </View>
                             </View>
 
@@ -96,13 +96,13 @@ class ProfileNotification extends React.Component {
                                     
 
                                     <DateTimePicker
-                                        date={notifiInfo.evening_reminder_time ? new Date(notifiInfo.evening_reminder_time) : new Date()}
+                                        date={notifiInfo.evening_reminder_time != '0000-00-00 00:00:00' ? new Date(notifiInfo.evening_reminder_time) : new Date()}
                                         mode={'time'}
                                         isVisible={this.state.isAfternoonActivityVisible}
                                         onConfirm={(value)=>{this.updateNotificationInfo({evening_reminder_time:  moment(value).format('YYYY-MM-DD HH:mm:ss')}); this.setState({isAfternoonActivityVisible: false}); }}
                                         onCancel={()=>this.setState({isAfternoonActivityVisible: false})}
                                     />
-                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: (notifiInfo.reminder == 0 ? '#838383' : '#4AB3E2') }} onPress={()=>{ if (notifiInfo.reminder == 1) this.setState({isAfternoonActivityVisible: true}) }}>{notifiInfo.evening_reminder_time ? moment(notifiInfo.evening_reminder_time).format('hh:mm') : moment().format('hh:mm')}</Text>
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: (notifiInfo.reminder == 0 ? '#838383' : '#4AB3E2') }} onPress={()=>{ if (notifiInfo.reminder == 1) this.setState({isAfternoonActivityVisible: true}) }}>{notifiInfo.evening_reminder_time != '0000-00-00 00:00:00' ? moment(notifiInfo.evening_reminder_time).format('hh:mm') : moment().format('hh:mm')}</Text>
                                 </View>
                             </View>
 

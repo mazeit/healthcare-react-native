@@ -114,9 +114,9 @@ class ProfilePage extends React.Component {
                 <View style={styles.container}>
 
                     <View style={styles.profilePicture}>
-                        <ImageBackground style={styles.profilePictureBlur} source={this.props.user.img_dir ? { uri: this.props.user.img_dir } : require('../../../assets/images/profilePicture.png')} blurRadius={15}>
+                        <ImageBackground style={styles.profilePictureBlur} source={this.props.user.img_dir != 'https://spano24.com/fitnessportal/img/customers/' ? { uri: this.props.user.img_dir } : require('../../../assets/images/profilePicture.png')} blurRadius={15}>
                             <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20, marginTop: 20 }}>
-                                <Image source={this.props.user.img_dir ? { uri: this.props.user.img_dir } : require('../../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }} />
+                                <Image source={this.props.user.img_dir != 'https://spano24.com/fitnessportal/img/customers/' ? { uri: this.props.user.img_dir } : require('../../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }} />
                             </View>
                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.firstname}</Text>
                             <Text style={{ fontFamily: 'DINPro-Light', fontSize: 18, color: '#FFFFFF' }}>{this.props.user.lastname}</Text>

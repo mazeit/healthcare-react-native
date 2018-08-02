@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, ImageBackground, Dimensions, TextInput, TouchableOpacity, Picker } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, ImageBackground, Dimensions, TextInput, TouchableOpacity, Picker, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -68,12 +68,30 @@ class ProfileInformation extends React.Component {
     saveProfile() {
         let {firstname, lastname, id_gender, id_lang, email, weight, goal, birthday, id_country, id_state, address1, address2, postcode} = this.state.userEditData;
         this.setState({loader: true});
+        birthday = birthday ? moment(birthday).format('YYYY-MM-DD HH:mm:SS') : '';
         this.props.updateProfileInfo({firstname, lastname, id_gender, id_lang, email, weight, goal, birthday})
         .then(res=>{
-            this.setState({
-                mode: 'view',
-                loader: false
-            })
+            if (res.hasError) {
+
+                Alert.alert(
+                    res.errors[0],
+                    '',
+                    [
+                      {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                );
+                this.setState({
+                    loader: false
+                })
+            } else {
+
+                this.setState({
+                    mode: 'view',
+                    loader: false
+                })
+            }
+
         });
     }
     
@@ -109,9 +127,9 @@ class ProfileInformation extends React.Component {
                 </View>
                 <View style={styles.container}>
                     {!this.state.loader && <View style={styles.profilePicture}>
-                        <ImageBackground style={styles.profilePictureBlur} source={this.props.user.img_dir ? { uri: this.props.user.img_dir, cache: 'reload' } : require('../../../assets/images/profilePicture.png')} blurRadius={15}>
+                        <ImageBackground style={styles.profilePictureBlur} source={this.props.user.img_dir != 'https://spano24.com/fitnessportal/img/customers/' ? { uri: this.props.user.img_dir, cache: 'reload' } : require('../../../assets/images/profilePicture.png')} blurRadius={15}>
                             <View style={{ width: 133, height: 133, borderWidth: 0.5, borderColor: '#FFFFFF', borderRadius: 133, overflow: 'hidden', marginBottom: 20, marginTop: 20 }}>
-                                <Image source={this.props.user.img_dir ? { uri: this.props.user.img_dir, cache: 'reload' } : require('../../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }} />
+                                <Image source={this.props.user.img_dir != 'https://spano24.com/fitnessportal/img/customers/' ? { uri: this.props.user.img_dir, cache: 'reload' } : require('../../../assets/images/profilePicture.png')} style={{ width: 133, height: 133, }} />
                             </View>
                             
                              <PhotoUpload

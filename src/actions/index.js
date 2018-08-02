@@ -584,10 +584,12 @@ export const updateProfileInfo = (info) => {
         if (info[key])
             str += `${key}=${info[key]}&`;
     }
+    if (str)
+        str.splice(str.length - 1, 1);
     return async (dispatch, getState) => {
         return ApiManager('customerupdate?' + str, {
             method: 'POST',
-        }).then((json) => {
+        }).then((json1) => {
 
             return ApiManager('customer?', {
                 method: 'POST',
@@ -597,7 +599,7 @@ export const updateProfileInfo = (info) => {
                     payload: json.customer
                 });
                 auth.onSignIn(json);
-                return json;
+                return json1;
             });
         })
 
@@ -640,6 +642,8 @@ export const updateNotificationInfo = (info) => {
     for (let key in info) {
         str += `${key}=${info[key]}&`;
     }
+    if (str)
+        str.splice(str.length - 1, 1);
     return async (dispatch, getState) => {
         return ApiManager('updatenotifications?'+str, {
             method: 'POST',

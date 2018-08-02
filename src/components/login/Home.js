@@ -36,16 +36,13 @@ const styles = StyleSheet.create({
     },
     homeTittleContainer: {
         flex: 1,
-        top: '3%',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '75%',
-        width: '75%',
+        width: width - 70,
     },
     homeTittle: {
-        resizeMode: 'center',
         flex: 1,
-        width: width - 50
+        width: width - 70
     },
     subTittle: {
         flex: 1,
