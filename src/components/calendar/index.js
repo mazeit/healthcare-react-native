@@ -147,7 +147,8 @@ class CalendarView extends React.Component {
     removeActivity(item, key) {
         this.props.removeActivity(item.id_content, (item.start.split(' ')[0]).toString())
         .then(res=>{
-            this.generateData(this.state.calendarData.filter((i)=>i.id_content!=item.id_content));
+            this.generateData({...this.state.calendarData,
+                events: this.state.calendarData.events.filter((i)=>i.id_content!=item.id_content) });
 
         })
     }
@@ -192,9 +193,9 @@ class CalendarView extends React.Component {
                             <View style={styles.challangeTab}>
                                 {/*<Icon style={{ flex: 2, left: -10 }} name={item.className.split(' ')[0].split('_')[0]} size={80} color="#838383" />*/}
                                 <Icon style={{ flex: 2, left: -15 }} name="morning" size={65} color="#838383" />
-                                <View style={{ flex: 6.5, justifyContent: 'center', marginRight: 5, marginLeft: 10 }}>
-                                    <Text style={{ flex: 1, fontFamily: 'DINPro-Light', fontSize: 16, color: '#454545', marginVertical: 10 }}>{item.title}</Text>
-                                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginLeft: -20, marginTop: -20 }}>
+                                <View style={{ flex: 6.5, justifyContent: 'center', marginRight: 5, marginLeft: -20, alignItems: 'flex-start' }}>
+                                    <Text style={{ fontFamily: 'DINPro-Light', fontSize: 16, color: '#454545', marginVertical: 10 }}>{item.title}</Text>
+                                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: -20, marginTop: -20 }}>
                                         <Icon name='time' size={50} color="#838383" />
                                         <Text style={{ fontFamily: 'DINPro-Bold', fontSize: 14, color: '#454545' }}>{item.time_length}</Text>
                                     </View>
