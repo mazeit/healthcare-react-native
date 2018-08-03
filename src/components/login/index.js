@@ -23,6 +23,7 @@ var DeviceInformation = require('react-native-device-info');
 let backGround = '';
 import * as auth from "../../utils/auth";
 
+import OneSignal from 'react-native-onesignal';
 class HomeInitial extends React.Component {
     constructor(props) {
         super(props);
@@ -33,7 +34,104 @@ class HomeInitial extends React.Component {
         this.onSkipIntro = this.onSkipIntro.bind(this);
     }
 
-    componentDidMount () {
+    async componentWillMount() {
+        OneSignal.setLogLevel(7, 0);
+
+        let requiresConsent = false;
+
+        this.setState({emailEnabled: false, 
+            animatingEmailButton : false, 
+            initialOpenFromPush : "Did NOT open from push",
+            activityWidth : 0,
+            width: 0,
+            activityMargin: 0,
+            jsonDebugText : "",
+            privacyButtonTitle : "Privacy Consent: Not Granted",
+            requirePrivacyConsent : requiresConsent
+        });
+
+        OneSignal.setRequiresUserPrivacyConsent(requiresConsent);
+
+        OneSignal.init("3030190b-a0e2-49b3-a75e-f8ac3c4c3c2d", {kOSSettingsKeyAutoPrompt : true});
+
+        var providedConsent = await OneSignal.userProvidedPrivacyConsent();
+
+        this.setState({privacyButtonTitle : `Privacy Consent: ${providedConsent ? "Granted" : "Not Granted"}`, privacyGranted : providedConsent});
+
+        OneSignal.setLocationShared(true);
+
+        OneSignal.inFocusDisplaying(2);
+    }
+
+    componentDidMount() {
+        this.onReceived = this.onReceived.bind(this);
+        this.onOpened = this.onOpened.bind(this);
+        this.onIds = this.onIds.bind(this);
+        this.onEmailRegistrationChange = this.onEmailRegistrationChange.bind(this);
+
+        OneSignal.addEventListener('received', this.onReceived);
+        OneSignal.addEventListener('opened', this.onOpened);
+        OneSignal.addEventListener('ids', this.onIds);
+        OneSignal.addEventListener('emailSubscription', this.onEmailRegistrationChange);
+
+
+        auth.isSignedIn().then(json=>{
+            try {
+
+                let obj = JSON.parse(json);
+                if (obj && !obj.hasError) {
+                    this.props.autoSignin(obj);  
+                    Promise.all([this.props.getCurrentUser(), this.props.getNotificationInfo()])
+                    .then(res=>{
+                        this.props.navigation.navigate('ImportantNotification', {});   
+                        this.setState({loader: false});
+
+                        OneSignal.sendTags({"userId" : obj.customer.id});
+                        OneSignal.configure();  // add this to trigger `ids` event
+
+                    });
+                } else {
+                    this.setState({loader: false});
+                }
+
+            } catch (e) {
+                throw e;
+            }
+            
+        });
+    }
+
+    componentWillUnmount() {
+        OneSignal.removeEventListener('received', this.onReceived);
+        OneSignal.removeEventListener('opened', this.onOpened);
+        OneSignal.removeEventListener('ids', this.onIds);
+        OneSignal.removeEventListener('emailSubscription', this.onEmailRegistrationChange);
+    }
+
+    onEmailRegistrationChange(registration) {
+        console.log("onEmailRegistrationChange: ", registration);
+    }
+
+    onReceived(notification) {
+        console.log("Notification received: ", notification);
+
+        this.setState({jsonDebugText : "RECEIVED: \n" + JSON.stringify(notification, null, 2)})
+    }
+
+    onOpened(openResult) {
+        console.log('Message: ', openResult.notification.payload.body);
+        console.log('Data: ', openResult.notification.payload.additionalData);
+        console.log('isActive: ', openResult.notification.isAppInFocus);
+        console.log('openResult: ', openResult);
+
+        this.setState({jsonDebugText : "OPENED: \n" + JSON.stringify(openResult.notification, null, 2)})
+    }
+
+    onIds(device) {
+        this.props.setNotificationData(device.userId, Platform.OS);
+    }
+
+    old () {
         // this.props.autoSignin(JSON.parse('{"customer":{"id":"99","id_shop":"1","id_shop_group":"1","secure_key":"91239ec59c1c87b67da3733709a6155c","note":null,"id_gender":"0","id_default_group":"3","id_lang":"2","lastname":"app","firstname":"test","birthday":"0000-00-00","email":"testapprocco@roccomedia.de","newsletter":"0","ip_registration_newsletter":null,"newsletter_date_add":"0000-00-00 00:00:00","optin":"0","website":null,"company":null,"siret":null,"ape":null,"outstanding_allow_amount":"0.000000","show_public_prices":"0","id_risk":"0","max_payment_days":"0","last_passwd_gen":"2018-07-11 09:56:13","active":"1","is_guest":"0","deleted":"0","date_add":"2018-07-11 15:56:13","date_upd":"2018-07-11 15:56:13","years":null,"days":null,"months":null,"geoloc_id_country":null,"geoloc_id_state":null,"geoloc_postcode":null,"logged":0,"id_guest":null,"groupBox":null,"activated":"0","image":null,"goal":null,"weight":null,"id_shop_list":null,"force_id":false,"language":"Deutsch (German)","img_dir":"https://spano24.com/fitnessportal/img/customers/"},"hasError":false,"errors":[]}'));
         // this.props.autoSignin(JSON.parse('{"customer":{"id":"91","id_shop":"1","id_shop_group":"1","secure_key":"8bef682395889d3816bbd4ef065c0a6d","note":"Spinner","id_gender":"0","id_default_group":"3","id_lang":"2","lastname":"test","firstname":"Tobias","birthday":"0000-00-00","email":"tobias@roccomedia.de","newsletter":"0","ip_registration_newsletter":null,"newsletter_date_add":"0000-00-00 00:00:00","optin":"0","website":null,"company":null,"siret":null,"ape":null,"outstanding_allow_amount":"0.000000","show_public_prices":"0","id_risk":"0","max_payment_days":"0","last_passwd_gen":"2018-07-05 05:26:43","active":"1","is_guest":"0","deleted":"0","date_add":"2018-07-05 11:26:43","date_upd":"2018-07-18 16:38:23","years":null,"days":null,"months":null,"geoloc_id_country":null,"geoloc_id_state":null,"geoloc_postcode":null,"logged":0,"id_guest":null,"groupBox":null,"activated":"0","image":null,"goal":null,"weight":null,"id_shop_list":null,"force_id":false,"language":"Deutsch (German)","img_dir":""},"hasError":false,"errors":[]}'));
 
@@ -83,29 +181,6 @@ class HomeInitial extends React.Component {
 
         // this.props.navigation.navigate('ImportantNotification', {});
         
-        auth.isSignedIn().then(json=>{
-            try {
-
-                let obj = JSON.parse(json);
-                if (obj && !obj.hasError) {
-                    this.props.autoSignin(obj);  
-                    Promise.all([this.props.getCurrentUser(), this.props.getNotificationInfo()])
-                    .then(res=>{
-                        this.props.navigation.navigate('ImportantNotification', {});   
-                        this.setState({loader: false});
-
-                        const uniqueId = DeviceInformation.getUniqueID();
-                        this.props.setNotificationData(uniqueId, Platform.OS);
-                    });
-                } else {
-                    this.setState({loader: false});
-                }
-
-            } catch (e) {
-                throw e;
-            }
-            
-        })
     }
 
     onLoad () {
@@ -133,8 +208,8 @@ class HomeInitial extends React.Component {
                         this.props.navigation.navigate('WelcomeScreen', {});   
                         this.setState({loader: false});
 
-                        const uniqueId = DeviceInfo.getUniqueID();
-                        this.props.setNotificationData(uniqueId, Platform.OS);
+                        OneSignal.sendTags({"userId" : obj.customer.id});
+                        OneSignal.configure();  // add this to trigger `ids` event
                     });
                 } else {
                     this.props.navigation.navigate('SignInEmail', {});   

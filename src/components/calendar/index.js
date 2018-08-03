@@ -168,7 +168,7 @@ class CalendarView extends React.Component {
 
     renderItem(item, key) {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
+            <View style={{ justifyContent: 'center', alignItems: 'flex-end' , height: 100}}>
 
                 <Swipeout 
                     autoClose={true}
@@ -351,13 +351,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF80',
     },
     challangeTab: {
-        flex: 1,
         opacity: 0.8,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         width: width - 100,
-        height: 70,
+        height: 100,
     },
     item: {
         backgroundColor: 'white',

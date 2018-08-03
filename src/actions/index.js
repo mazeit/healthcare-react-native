@@ -703,7 +703,6 @@ export const setNotificationData = (id, device) => {
     }
 }
 
-setNotificationData
 export const updateProfileimage = (imageBase64) => {
 
     return async (dispatch, getState) => {

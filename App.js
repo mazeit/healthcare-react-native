@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 // import { TabNavigator } from 'react-navigation';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
@@ -60,6 +60,9 @@ import WebShop from './src/components/WebShop';
 
 import Storage from 'react-native-storage';
 import { AsyncStorage } from 'react-native';
+
+import OneSignal from 'react-native-onesignal';
+
 const store = createStore(userReducer, compose(applyMiddleware(thunk)));
 
 export default class App extends React.Component {
